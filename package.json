@@ -1,0 +1,34 @@
+{
+  "name": "react-phone-input",
+  "version": "1.0.0",
+  "description": "A react component to format phone numbers",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "babel --modules common src --out-dir dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/razagill/react-phone-input.git"
+  },
+  "keywords": [
+    "react",
+    "phone",
+    "format",
+    "telephone"
+  ],
+  "author": "Raza Gill <raza.gill@outlook.com> (http://github.com/razagill)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/razagill/react-phone-input/issues"
+  },
+  "homepage": "https://github.com/razagill/react-phone-input",
+  "devDependencies": {
+    "babel": "^5.1.11"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "lodash": "^3.6.0",
+    "react": "^0.13.2"
+  }
+}
