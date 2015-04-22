@@ -199,26 +199,6 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
-  // memoize results based on the first 5/6 characters. That is all that matters
-
-
-  //guessSelectedCountry(inputNumber) {
-  //  return _.memoize(function(inputNumber) {
-  //    return _.reduce(this.props.onlyCountries, function(selectedCountry, country) {
-  //      if(startsWith(inputNumber, country.dialCode)) {
-  //        if(country.dialCode.length > selectedCountry.dialCode.length) {
-  //          return country;
-  //        }
-  //        if(country.dialCode === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
-  //          return country;
-  //        }
-  //      }
-  //
-  //      return selectedCountry;
-  //    }, {dialCode: '', priority: 10001}, this);
-  //  });
-  //}
-
   getElement(index) {
     console.log('index of country to jump to: ', index);
     return this.refs['flag_no_'+index].getDOMNode();
@@ -512,8 +492,6 @@ ReactPhoneInput.prototype._searchCountry = _.memoize(function(queryString){
   var self = this;
 });
 
-
-
 ReactPhoneInput.prototype.guessSelectedCountry = _.memoize(function(inputNumber) {
   _.reduce(this.props.onlyCountries, function(selectedCountry, country) {
     if(startsWith(inputNumber, country.dialCode)) {
@@ -530,7 +508,6 @@ ReactPhoneInput.prototype.guessSelectedCountry = _.memoize(function(inputNumber)
   }, {dialCode: '', priority: 10001}, this);
 });
 
-
 ReactPhoneInput.defaultProps = {
   value: '',
   autoFormat: true,
@@ -545,7 +522,7 @@ ReactPhoneInput.propTypes = {
     defaultCountry: React.PropTypes.string,
     onlyCountries: React.PropTypes.arrayOf(React.PropTypes.string),
     preferredCountries: React.PropTypes.arrayOf(React.PropTypes.string),
-    onChange: React.PropTypes.func,
+    onChange: React.PropTypes.func
 };
 
 export default ReactPhoneInput;
