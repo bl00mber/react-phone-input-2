@@ -501,16 +501,16 @@ class ReactPhoneInput extends React.Component {
   }
 }
 ReactPhoneInput.prototype._searchCountry = _.memoize(function(queryString){
-    if(!queryString || queryString.length === 0) {
-      return null;
-    }
-    // don't include the preferred countries in search
-    var probableCountries = _.filter(this.props.onlyCountries, function(country) {
-      return startsWith(country.name.toLowerCase(), queryString.toLowerCase());
-    }, this);
-    return probableCountries[0];
-    var self = this;
-  });
+  if(!queryString || queryString.length === 0) {
+    return null;
+  }
+  // don't include the preferred countries in search
+  var probableCountries = _.filter(this.props.onlyCountries, function(country) {
+    return startsWith(country.name.toLowerCase(), queryString.toLowerCase());
+  }, this);
+  return probableCountries[0];
+  var self = this;
+});
 
 
 
@@ -550,6 +550,6 @@ ReactPhoneInput.propTypes = {
 
 export default ReactPhoneInput;
 React.render(
-  <ReactPhoneInput />,
+  <ReactPhoneInput defaultCountry="us"/>,
   document.getElementById('content')
 );
