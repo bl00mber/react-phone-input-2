@@ -200,22 +200,24 @@ class ReactPhoneInput extends React.Component {
   }
 
   // memoize results based on the first 5/6 characters. That is all that matters
-  guessSelectedCountry(inputNumber) {
-    return _.memoize(function(inputNumber) {
-      return _.reduce(this.props.onlyCountries, function(selectedCountry, country) {
-        if(startsWith(inputNumber, country.dialCode)) {
-          if(country.dialCode.length > selectedCountry.dialCode.length) {
-            return country;
-          }
-          if(country.dialCode === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
-            return country;
-          }
-        }
 
-        return selectedCountry;
-      }, {dialCode: '', priority: 10001}, this);
-    });
-  }
+
+  //guessSelectedCountry(inputNumber) {
+  //  return _.memoize(function(inputNumber) {
+  //    return _.reduce(this.props.onlyCountries, function(selectedCountry, country) {
+  //      if(startsWith(inputNumber, country.dialCode)) {
+  //        if(country.dialCode.length > selectedCountry.dialCode.length) {
+  //          return country;
+  //        }
+  //        if(country.dialCode === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
+  //          return country;
+  //        }
+  //      }
+  //
+  //      return selectedCountry;
+  //    }, {dialCode: '', priority: 10001}, this);
+  //  });
+  //}
 
   getElement(index) {
     console.log('index of country to jump to: ', index);
@@ -257,6 +259,7 @@ class ReactPhoneInput extends React.Component {
         newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6));
         freezeSelection = false;
       }
+      console.log(newSelectedCountry);
       // let us remove all non numerals from the input
       formattedNumber = this.formatNumber(inputNumber, newSelectedCountry.format);
     }
@@ -336,21 +339,6 @@ class ReactPhoneInput extends React.Component {
     }
 
     return highlightCountryIndex;
-  }
-
-  // memoize search results... caching all the way
-  _searchCountry(queryString) {
-    return _.memoize(function(queryString){
-      if(!queryString || queryString.length === 0) {
-        return null;
-      }
-      // don't include the preferred countries in search
-      var probableCountries = _.filter(this.props.onlyCountries, function(country) {
-        return startsWith(country.name.toLowerCase(), queryString.toLowerCase());
-      }, this);
-      return probableCountries[0];
-      var self = this;
-    });
   }
 
   searchCountry() {
@@ -512,6 +500,37 @@ class ReactPhoneInput extends React.Component {
     );
   }
 }
+ReactPhoneInput.prototype._searchCountry = _.memoize(function(queryString){
+    if(!queryString || queryString.length === 0) {
+      return null;
+    }
+    // don't include the preferred countries in search
+    var probableCountries = _.filter(this.props.onlyCountries, function(country) {
+      return startsWith(country.name.toLowerCase(), queryString.toLowerCase());
+    }, this);
+    return probableCountries[0];
+    var self = this;
+  });
+
+
+
+ReactPhoneInput.prototype.guessSelectedCountry = _.memoize(function(inputNumber) {
+  _.reduce(this.props.onlyCountries, function(selectedCountry, country) {
+    if(startsWith(inputNumber, country.dialCode)) {
+      if(country.dialCode.length > selectedCountry.dialCode.length) {
+        console.log(country);
+        return country;
+      }
+      if(country.dialCode === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
+        return country;
+      }
+    }
+
+    return selectedCountry;
+  }, {dialCode: '', priority: 10001}, this);
+});
+
+
 ReactPhoneInput.defaultProps = {
   value: '',
   autoFormat: true,
