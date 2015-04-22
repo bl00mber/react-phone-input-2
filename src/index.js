@@ -549,6 +549,7 @@ ReactPhoneInput.propTypes = {
 };
 
 export default ReactPhoneInput;
+//Will be removed once everything is working
 React.render(
   <ReactPhoneInput defaultCountry="us"/>,
   document.getElementById('content')
