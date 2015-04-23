@@ -2,7 +2,7 @@
   "name": "react-phone-input",
   "version": "0.1.0",
   "description": "A react component to format phone numbers",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --devtool eval --reload --progress --colors --content-base dist"
