@@ -595,6 +595,6 @@ ReactPhoneInput.propTypes = {
   onChange: _React2['default'].PropTypes.func
 };
 
-exports['default'] = react - phone - input;
+exports['default'] = ReactPhoneInput;
 module.exports = exports['default'];
 
