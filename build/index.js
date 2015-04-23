@@ -29,8 +29,6 @@ var _countryData2 = _interopRequireWildcard(_countryData);
 
 var allCountries = _countryData2['default'].allCountries;
 
-require('./style.less');
-
 var isModernBrowser = Boolean(document.createElement('input').setSelectionRange);
 
 var keys = {
