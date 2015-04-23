@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --devtool eval --reload --progress --colors --content-base dist"
+    "dev": "webpack-dev-server --devtool eval --reload --progress --colors --content-base dist",
+    "build": "NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
   "repository": {
     "type": "git",
