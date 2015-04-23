@@ -498,9 +498,10 @@ ReactPhoneInput.prototype.guessSelectedCountry = _.memoize(function(inputNumber)
       if(country.dialCode.length > selectedCountry.dialCode.length) {
         return country;
       }
-      if(country.dialCode === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
+      if(country.dialCode.length === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
         return country;
       }
+
     }
     return selectedCountry;
   }, {dialCode: '', priority: 10001}, this);
@@ -525,3 +526,6 @@ ReactPhoneInput.propTypes = {
 
 export default ReactPhoneInput;
 
+React.render(
+  <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']}/>,
+  document.getElementById('content'));
