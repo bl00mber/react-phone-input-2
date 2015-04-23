@@ -523,5 +523,5 @@ ReactPhoneInput.propTypes = {
     onChange: React.PropTypes.func
 };
 
-export default react-phone-input;
+export default ReactPhoneInput;
 
