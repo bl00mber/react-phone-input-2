@@ -48,6 +48,7 @@ class ReactPhoneInput extends React.Component {
 
     if (trim(inputNumber) !== '') {
       selectedCountryGuess = this.guessSelectedCountry(inputNumber.replace(/\D/g, ''));
+
       if (!selectedCountryGuess || !selectedCountryGuess.name) {
         selectedCountryGuess = _.findWhere(allCountries, {iso2: this.props.defaultCountry})  || this.props.onlyCountries[0];
       }
@@ -63,18 +64,6 @@ class ReactPhoneInput extends React.Component {
         return preferredCountry === country.iso2;
       });
     }, this);
-
-    this.state = {
-      preferredCountries: preferredCountries,
-      selectedCountry: selectedCountryGuess,
-      // highlightCountry: selectedCountryGuess,
-      highlightCountryIndex: selectedCountryGuessIndex,
-      formattedNumber: formattedNumber,
-      showDropDown: false,
-      queryString: "",
-      freezeSelection: false,
-      debouncedQueryStingSearcher: _.debounce(this.searchCountry, 300)
-    };
 
     this.getNumber = this.getNumber.bind(this);
     this.getValue = this.getValue.bind(this);
@@ -97,6 +86,18 @@ class ReactPhoneInput extends React.Component {
     this.isFlagDropDownButtonClicked = this.isFlagDropDownButtonClicked.bind(this);
     this.isFlagItemClicked = this.isFlagItemClicked.bind(this);
     this.handleDocumentClick = this.handleDocumentClick.bind(this);
+
+    this.state = {
+      preferredCountries: preferredCountries,
+      selectedCountry: selectedCountryGuess,
+      // highlightCountry: selectedCountryGuess,
+      highlightCountryIndex: selectedCountryGuessIndex,
+      formattedNumber: formattedNumber,
+      showDropDown: false,
+      queryString: "",
+      freezeSelection: false,
+      debouncedQueryStingSearcher: _.debounce(this.searchCountry, 300)
+    };
 
   }
 
@@ -221,6 +222,7 @@ class ReactPhoneInput extends React.Component {
 
     var formattedNumber = '+', newSelectedCountry = this.state.selectedCountry, freezeSelection = this.state.freezeSelection;
 
+
     // if the input is the same as before, must be some special key like enter etc.
     if(event.target.value === this.state.formattedNumber) {
       return;
@@ -239,7 +241,6 @@ class ReactPhoneInput extends React.Component {
         newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6));
         freezeSelection = false;
       }
-      console.log(newSelectedCountry);
       // let us remove all non numerals from the input
       formattedNumber = this.formatNumber(inputNumber, newSelectedCountry.format);
     }
@@ -493,17 +494,15 @@ ReactPhoneInput.prototype._searchCountry = _.memoize(function(queryString){
 });
 
 ReactPhoneInput.prototype.guessSelectedCountry = _.memoize(function(inputNumber) {
-  _.reduce(this.props.onlyCountries, function(selectedCountry, country) {
+  return _.reduce(this.props.onlyCountries, function(selectedCountry, country) {
     if(startsWith(inputNumber, country.dialCode)) {
       if(country.dialCode.length > selectedCountry.dialCode.length) {
-        console.log(country);
         return country;
       }
       if(country.dialCode === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
         return country;
       }
     }
-
     return selectedCountry;
   }, {dialCode: '', priority: 10001}, this);
 });
@@ -528,6 +527,6 @@ ReactPhoneInput.propTypes = {
 export default ReactPhoneInput;
 //Will be removed once everything is working
 React.render(
-  <ReactPhoneInput defaultCountry="us"/>,
+  <ReactPhoneInput value='+1 (650) 788 8097' preferredCountries={['us', 'de']} defaultCountry={'us'}/>,
   document.getElementById('content')
 );
