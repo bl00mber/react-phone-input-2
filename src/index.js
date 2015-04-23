@@ -22,11 +22,6 @@ let keys = {
   SPACE: 32
 };
 
-
-function trim(str) {
-  return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-}
-
 // function to check if string s1 starts with s2
 function startsWith(s1, s2) {
   // could have done with s1.indexOf(s2) === 0. But indexOf is O(n)
@@ -46,7 +41,7 @@ class ReactPhoneInput extends React.Component {
     super(props);
     let selectedCountryGuess, selectedCountryGuessIndex, inputNumber = this.props.value || '';
 
-    if (trim(inputNumber) !== '') {
+    if (this.trim(inputNumber) !== '') {
       selectedCountryGuess = this.guessSelectedCountry(inputNumber.replace(/\D/g, ''));
 
       if (!selectedCountryGuess || !selectedCountryGuess.name) {
@@ -99,6 +94,10 @@ class ReactPhoneInput extends React.Component {
       debouncedQueryStingSearcher: _.debounce(this.searchCountry, 300)
     };
 
+  }
+
+  trim(str) {
+    return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
   }
 
   getNumber() {
@@ -525,8 +524,4 @@ ReactPhoneInput.propTypes = {
 };
 
 export default ReactPhoneInput;
-//Will be removed once everything is working
-React.render(
-  <ReactPhoneInput value='+1 (650) 788 8097' preferredCountries={['us', 'de']} defaultCountry={'us'}/>,
-  document.getElementById('content')
-);
+
