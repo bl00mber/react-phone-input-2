@@ -5,8 +5,6 @@ import React from 'react/addons.js';
 import countryData from './country_data.js';
 let allCountries = countryData.allCountries;
 
-require('./style.less');
-
 var isModernBrowser = Boolean(document.createElement('input').setSelectionRange);
 
 let keys = {
