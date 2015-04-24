@@ -19,7 +19,7 @@
     "telephone"
   ],
   "author": "Raza Gill <raza.gill@outlook.com> (http://github.com/razagill)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/razagill/react-phone-input/issues"
   },
