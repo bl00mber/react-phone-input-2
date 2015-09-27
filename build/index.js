@@ -1,33 +1,34 @@
+// TODO - fix the onlyContries props. Currently expects that as an array of country object, but users should be able to send in array of country isos
+
 'use strict';
-
-var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
-
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(object, property, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-// TODO - fix the onlyContries props. Currently expects that as an array of country object, but users should be able to send in array of country isos
 
-var _import = require('lodash');
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _import2 = _interopRequireWildcard(_import);
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-var _React = require('react/addons.js');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _React2 = _interopRequireWildcard(_React);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var _countryData = require('./country_data.js');
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _countryData2 = _interopRequireWildcard(_countryData);
+var _lodash = require('lodash');
 
-var allCountries = _countryData2['default'].allCountries;
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _reactAddonsJs = require('react/addons.js');
+
+var _reactAddonsJs2 = _interopRequireDefault(_reactAddonsJs);
+
+var _country_dataJs = require('./country_data.js');
+
+var _country_dataJs2 = _interopRequireDefault(_country_dataJs);
+
+var allCountries = _country_dataJs2['default'].allCountries;
 
 var isModernBrowser = Boolean(document.createElement('input').setSelectionRange);
 
@@ -51,13 +52,15 @@ function startsWith(s1, s2) {
 }
 
 function isNumberValid(inputNumber) {
-  var countries = _countryData2['default'].allCountries;
-  return _import2['default'].some(countries, function (country) {
+  var countries = _country_dataJs2['default'].allCountries;
+  return _lodash2['default'].some(countries, function (country) {
     return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
   });
 }
 
 var ReactPhoneInput = (function (_React$Component) {
+  _inherits(ReactPhoneInput, _React$Component);
+
   function ReactPhoneInput(props) {
     _classCallCheck(this, ReactPhoneInput);
 
@@ -70,17 +73,17 @@ var ReactPhoneInput = (function (_React$Component) {
       selectedCountryGuess = this.guessSelectedCountry(inputNumber.replace(/\D/g, ''));
 
       if (!selectedCountryGuess || !selectedCountryGuess.name) {
-        selectedCountryGuess = _import2['default'].findWhere(allCountries, { iso2: this.props.defaultCountry }) || this.props.onlyCountries[0];
+        selectedCountryGuess = _lodash2['default'].findWhere(allCountries, { iso2: this.props.defaultCountry }) || this.props.onlyCountries[0];
       }
     } else {
-      selectedCountryGuess = _import2['default'].findWhere(allCountries, { iso2: this.props.defaultCountry }) || this.props.onlyCountries[0];
+      selectedCountryGuess = _lodash2['default'].findWhere(allCountries, { iso2: this.props.defaultCountry }) || this.props.onlyCountries[0];
     }
 
-    selectedCountryGuessIndex = _import2['default'].findIndex(allCountries, selectedCountryGuess);
+    selectedCountryGuessIndex = _lodash2['default'].findIndex(allCountries, selectedCountryGuess);
     var formattedNumber = this.formatNumber(inputNumber.replace(/\D/g, ''), selectedCountryGuess ? selectedCountryGuess.format : null);
 
-    var preferredCountries = _import2['default'].filter(allCountries, function (country) {
-      return _import2['default'].any(this.props.preferredCountries, function (preferredCountry) {
+    var preferredCountries = _lodash2['default'].filter(allCountries, function (country) {
+      return _lodash2['default'].any(this.props.preferredCountries, function (preferredCountry) {
         return preferredCountry === country.iso2;
       });
     }, this);
@@ -114,13 +117,11 @@ var ReactPhoneInput = (function (_React$Component) {
       highlightCountryIndex: selectedCountryGuessIndex,
       formattedNumber: formattedNumber,
       showDropDown: false,
-      queryString: '',
+      queryString: "",
       freezeSelection: false,
-      debouncedQueryStingSearcher: _import2['default'].debounce(this.searchCountry, 300)
+      debouncedQueryStingSearcher: _lodash2['default'].debounce(this.searchCountry, 300)
     };
   }
-
-  _inherits(ReactPhoneInput, _React$Component);
 
   _createClass(ReactPhoneInput, [{
     key: 'trim',
@@ -155,13 +156,13 @@ var ReactPhoneInput = (function (_React$Component) {
   }, {
     key: 'scrollTo',
     value: function scrollTo(country, middle) {
-      if (!country) {
-        return;
-      }var container = this.refs.flagDropdownList.getDOMNode();
+      if (!country) return;
 
-      if (!container) {
-        return;
-      }var containerHeight = container.offsetHeight;
+      var container = this.refs.flagDropdownList.getDOMNode();
+
+      if (!container) return;
+
+      var containerHeight = container.offsetHeight;
       var containerOffset = container.getBoundingClientRect();
       var containerTop = containerOffset.top + document.body.scrollTop;
       var containerBottom = containerTop + containerHeight;
@@ -203,7 +204,7 @@ var ReactPhoneInput = (function (_React$Component) {
         return '+' + text;
       }
 
-      var formattedObject = _import2['default'].reduce(pattern, function (formattedObject, character, key) {
+      var formattedObject = _lodash2['default'].reduce(pattern, function (formattedObject, character, key) {
         if (formattedObject.remainingText.length === 0) {
           return formattedObject;
         }
@@ -216,16 +217,16 @@ var ReactPhoneInput = (function (_React$Component) {
         }
 
         return {
-          formattedText: formattedObject.formattedText + _import2['default'].first(formattedObject.remainingText),
-          remainingText: _import2['default'].rest(formattedObject.remainingText)
+          formattedText: formattedObject.formattedText + _lodash2['default'].first(formattedObject.remainingText),
+          remainingText: _lodash2['default'].rest(formattedObject.remainingText)
         };
-      }, { formattedText: '', remainingText: text.split('') });
-      return formattedObject.formattedText + formattedObject.remainingText.join('');
+      }, { formattedText: "", remainingText: text.split('') });
+      return formattedObject.formattedText + formattedObject.remainingText.join("");
     }
-  }, {
-    key: '_cursorToEnd',
 
     // put the cursor to the end of the input (usually after a focus event)
+  }, {
+    key: '_cursorToEnd',
     value: function _cursorToEnd() {
       var input = this.refs.numberInput.getDOMNode();
       input.focus();
@@ -247,16 +248,16 @@ var ReactPhoneInput = (function (_React$Component) {
       var self = this;
       this.setState({
         showDropDown: !this.state.showDropDown,
-        highlightCountry: _import2['default'].findWhere(this.props.onlyCountries, this.state.selectedCountry),
-        highlightCountryIndex: _import2['default'].findIndex(this.props.onlyCountries, this.state.selectedCountry)
+        highlightCountry: _lodash2['default'].findWhere(this.props.onlyCountries, this.state.selectedCountry),
+        highlightCountryIndex: _lodash2['default'].findIndex(this.props.onlyCountries, this.state.selectedCountry)
       }, function () {
         self.scrollTo(self.getElement(self.state.highlightCountryIndex + self.state.preferredCountries.length));
       });
     }
-  }, {
-    key: 'handleInput',
 
     // TODO: handle
+  }, {
+    key: 'handleInput',
     value: function handleInput(event) {
 
       var formattedNumber = '+',
@@ -319,7 +320,7 @@ var ReactPhoneInput = (function (_React$Component) {
     value: function handleFlagItemClick(country, event) {
       var currentSelectedCountry = this.state.selectedCountry;
       // var nextSelectedCountry = this.props.onlyCountries[countryIndex];
-      var nextSelectedCountry = _import2['default'].findWhere(this.props.onlyCountries, country);
+      var nextSelectedCountry = _lodash2['default'].findWhere(this.props.onlyCountries, country);
       var newNumber = this.state.formattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode);
       var formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), nextSelectedCountry.format);
 
@@ -368,13 +369,13 @@ var ReactPhoneInput = (function (_React$Component) {
     key: 'searchCountry',
     value: function searchCountry() {
       var probableCandidate = this._searchCountry(this.state.queryString) || this.props.onlyCountries[0];
-      var probableCandidateIndex = _import2['default'].findIndex(this.props.onlyCountries, probableCandidate) + this.state.preferredCountries.length;
+      var probableCandidateIndex = _lodash2['default'].findIndex(this.props.onlyCountries, probableCandidate) + this.state.preferredCountries.length;
       console.log('probable candidate index: ', probableCandidateIndex);
       console.log('preferred country length: ', this.state.preferredCountries.length);
       this.scrollTo(this.getElement(probableCandidateIndex), true);
 
       this.setState({
-        queryString: '',
+        queryString: "",
         highlightCountryIndex: probableCandidateIndex
       });
     }
@@ -431,17 +432,17 @@ var ReactPhoneInput = (function (_React$Component) {
   }, {
     key: 'isFlagDropDownButtonClicked',
     value: function isFlagDropDownButtonClicked(target) {
-      if (!this.refs.flagDropDownButton) {
-        return false;
-      }var flagDropDownButton = this.refs.flagDropDownButton.getDOMNode();
+      if (!this.refs.flagDropDownButton) return false;
+
+      var flagDropDownButton = this.refs.flagDropDownButton.getDOMNode();
       return flagDropDownButton == target || target.parentNode == flagDropDownButton;
     }
   }, {
     key: 'isFlagItemClicked',
     value: function isFlagItemClicked(target) {
-      if (!this.refs.flagDropdownList) {
-        return false;
-      }var dropDownList = this.refs.flagDropdownList.getDOMNode();
+      if (!this.refs.flagDropdownList) return false;
+
+      var dropDownList = this.refs.flagDropdownList.getDOMNode();
       return dropDownList == target || target.parentNode == dropDownList;
     }
   }, {
@@ -456,47 +457,47 @@ var ReactPhoneInput = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var cx = _React2['default'].addons.classSet;
+      var cx = _reactAddonsJs2['default'].addons.classSet;
       var dropDownClasses = cx({
-        'country-list': true,
-        hide: !this.state.showDropDown
+        "country-list": true,
+        "hide": !this.state.showDropDown
       });
       var arrowClasses = cx({
-        arrow: true,
-        up: this.state.showDropDown
+        "arrow": true,
+        "up": this.state.showDropDown
       });
       var inputClasses = cx({
-        'form-control': true,
-        'invalid-number': !this.props.isValid(this.state.formattedNumber.replace(/\D/g, ''))
+        "form-control": true,
+        "invalid-number": !this.props.isValid(this.state.formattedNumber.replace(/\D/g, ''))
       });
 
-      var dashedLi = _React2['default'].createElement('li', { key: 'dashes', className: 'divider' });
+      var dashedLi = _reactAddonsJs2['default'].createElement('li', { key: "dashes", className: 'divider' });
 
-      var countryDropDownList = _import2['default'].map(this.state.preferredCountries.concat(this.props.onlyCountries), function (country, index) {
+      var countryDropDownList = _lodash2['default'].map(this.state.preferredCountries.concat(this.props.onlyCountries), function (country, index) {
         var itemClasses = cx({
-          country: true,
-          preferred: country.iso2 === 'us' || country.iso2 === 'gb',
-          active: country.iso2 === 'us',
-          highlight: this.state.highlightCountryIndex === index
+          "country": true,
+          "preferred": country.iso2 === 'us' || country.iso2 === 'gb',
+          "active": country.iso2 === 'us',
+          "highlight": this.state.highlightCountryIndex === index
         });
 
-        return _React2['default'].createElement(
+        return _reactAddonsJs2['default'].createElement(
           'li',
           {
-            ref: 'flag_no_' + index,
-            key: 'flag_no_' + index,
-            'data-flag-key': 'flag_no_' + index,
+            ref: "flag_no_" + index,
+            key: "flag_no_" + index,
+            'data-flag-key': "flag_no_" + index,
             className: itemClasses,
             'data-dial-code': '1',
             'data-country-code': country.iso2,
             onClick: this.handleFlagItemClick.bind(this, country) },
-          _React2['default'].createElement('div', { className: 'flag ' + country.iso2 }),
-          _React2['default'].createElement(
+          _reactAddonsJs2['default'].createElement('div', { className: "flag " + country.iso2 }),
+          _reactAddonsJs2['default'].createElement(
             'span',
             { className: 'country-name' },
             country.name
           ),
-          _React2['default'].createElement(
+          _reactAddonsJs2['default'].createElement(
             'span',
             { className: 'dial-code' },
             '+' + country.dialCode
@@ -508,14 +509,14 @@ var ReactPhoneInput = (function (_React$Component) {
       countryDropDownList.splice(this.state.preferredCountries.length, 0, dashedLi);
 
       var flagViewClasses = cx({
-        'flag-dropdown': true,
-        'open-dropdown': this.state.showDropDown
+        "flag-dropdown": true,
+        "open-dropdown": this.state.showDropDown
       });
 
-      return _React2['default'].createElement(
+      return _reactAddonsJs2['default'].createElement(
         'div',
         { className: 'react-tel-input' },
-        _React2['default'].createElement('input', {
+        _reactAddonsJs2['default'].createElement('input', {
           onChange: this.handleInput,
           onClick: this.handleInputClick,
           onFocus: this.handleInputFocus,
@@ -525,19 +526,19 @@ var ReactPhoneInput = (function (_React$Component) {
           type: 'tel',
           className: inputClasses,
           placeholder: '+1 (702) 123-4567' }),
-        _React2['default'].createElement(
+        _reactAddonsJs2['default'].createElement(
           'div',
           { ref: 'flagDropDownButton', className: flagViewClasses, onKeyDown: this.handleKeydown },
-          _React2['default'].createElement(
+          _reactAddonsJs2['default'].createElement(
             'div',
-            { ref: 'selectedFlag', onClick: this.handleFlagDropdownClick, className: 'selected-flag', title: this.state.selectedCountry.name + ': +' + this.state.selectedCountry.dialCode },
-            _React2['default'].createElement(
+            { ref: 'selectedFlag', onClick: this.handleFlagDropdownClick, className: 'selected-flag', title: this.state.selectedCountry.name + ": +" + this.state.selectedCountry.dialCode },
+            _reactAddonsJs2['default'].createElement(
               'div',
-              { className: 'flag ' + this.state.selectedCountry.iso2 },
-              _React2['default'].createElement('div', { className: arrowClasses })
+              { className: "flag " + this.state.selectedCountry.iso2 },
+              _reactAddonsJs2['default'].createElement('div', { className: arrowClasses })
             )
           ),
-          _React2['default'].createElement(
+          _reactAddonsJs2['default'].createElement(
             'ul',
             { ref: 'flagDropdownList', className: dropDownClasses },
             countryDropDownList
@@ -548,22 +549,22 @@ var ReactPhoneInput = (function (_React$Component) {
   }]);
 
   return ReactPhoneInput;
-})(_React2['default'].Component);
+})(_reactAddonsJs2['default'].Component);
 
-ReactPhoneInput.prototype._searchCountry = _import2['default'].memoize(function (queryString) {
+ReactPhoneInput.prototype._searchCountry = _lodash2['default'].memoize(function (queryString) {
   if (!queryString || queryString.length === 0) {
     return null;
   }
   // don't include the preferred countries in search
-  var probableCountries = _import2['default'].filter(this.props.onlyCountries, function (country) {
+  var probableCountries = _lodash2['default'].filter(this.props.onlyCountries, function (country) {
     return startsWith(country.name.toLowerCase(), queryString.toLowerCase());
   }, this);
   return probableCountries[0];
   var self = this;
 });
 
-ReactPhoneInput.prototype.guessSelectedCountry = _import2['default'].memoize(function (inputNumber) {
-  return _import2['default'].reduce(this.props.onlyCountries, function (selectedCountry, country) {
+ReactPhoneInput.prototype.guessSelectedCountry = _lodash2['default'].memoize(function (inputNumber) {
+  return _lodash2['default'].reduce(this.props.onlyCountries, function (selectedCountry, country) {
     if (startsWith(inputNumber, country.dialCode)) {
       if (country.dialCode.length > selectedCountry.dialCode.length) {
         return country;
@@ -585,16 +586,14 @@ ReactPhoneInput.defaultProps = {
 };
 
 ReactPhoneInput.propTypes = {
-  value: _React2['default'].PropTypes.string,
-  autoFormat: _React2['default'].PropTypes.bool,
-  defaultCountry: _React2['default'].PropTypes.string,
-  onlyCountries: _React2['default'].PropTypes.arrayOf(_React2['default'].PropTypes.string),
-  preferredCountries: _React2['default'].PropTypes.arrayOf(_React2['default'].PropTypes.string),
-  onChange: _React2['default'].PropTypes.func
+  value: _reactAddonsJs2['default'].PropTypes.string,
+  autoFormat: _reactAddonsJs2['default'].PropTypes.bool,
+  defaultCountry: _reactAddonsJs2['default'].PropTypes.string,
+  onlyCountries: _reactAddonsJs2['default'].PropTypes.arrayOf(_reactAddonsJs2['default'].PropTypes.string),
+  preferredCountries: _reactAddonsJs2['default'].PropTypes.arrayOf(_reactAddonsJs2['default'].PropTypes.string),
+  onChange: _reactAddonsJs2['default'].PropTypes.func
 };
 
 exports['default'] = ReactPhoneInput;
-
-_React2['default'].render(_React2['default'].createElement(ReactPhoneInput, { defaultCountry: 'us', preferredCountries: ['us', 'de'] }), document.getElementById('content'));
 module.exports = exports['default'];
 

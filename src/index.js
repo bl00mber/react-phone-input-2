@@ -523,7 +523,3 @@ ReactPhoneInput.propTypes = {
 };
 
 export default ReactPhoneInput;
-
-React.render(
-  <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']}/>,
-  document.getElementById('content'));
