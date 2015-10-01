@@ -1,13 +1,14 @@
 // TODO - fix the onlyContries props. Currently expects that as an array of country object, but users should be able to send in array of country isos
 
 import _ from 'lodash';
-import React from 'react/addons.js';
+import React from 'react';
 import countryData from './country_data.js';
+import classNames from 'classnames';
 let allCountries = countryData.allCountries;
 
-var style = require('./react-phone-input-style.less');
-
 var isModernBrowser = Boolean(document.createElement('input').setSelectionRange);
+
+var style = require('./react-phone-input-style.less');
 
 let keys = {
   UP: 38,
@@ -405,7 +406,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   render() {
-    var cx = React.addons.classSet;
+    var cx = classNames;
     var dropDownClasses = cx({
       "country-list": true,
       "hide": !this.state.showDropDown

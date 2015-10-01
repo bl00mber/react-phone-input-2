@@ -2,8 +2,6 @@ var path = require('path');
 var webpack = require('webpack');
 var merge = require('webpack-merge');
 
-var pkg = require('./package.json');
-
 var TARGET = process.env.TARGET;
 var ROOT_PATH = path.resolve(__dirname);
 var nodeModulesDir = path.join(ROOT_PATH, 'node_modules');
@@ -23,7 +21,7 @@ var common = {
     loaders: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        loader: 'babel',
         include: path.resolve(ROOT_PATH, 'src')
       },
       {
@@ -48,7 +46,7 @@ if (TARGET === 'dev') {
         {
           test: /\.jsx?$/,
           loaders: ['react-hot', 'babel?stage=1'],
-          include: path.resolve(ROOT_PATH, 'app')
+          include: path.resolve(ROOT_PATH, 'src')
         }
       ]
     },
@@ -69,22 +67,29 @@ if (TARGET === 'dev') {
   });
 }
 
+
 //Production configuration settings
 if (TARGET === 'build') {
   module.exports = merge(common, {
     entry: {
-      app: path.resolve(ROOT_PATH, 'src/index.js'),
-      vendor: Object.keys(pkg.dependencies)
+      'react-phone-input': path.resolve(ROOT_PATH, 'src/index.js')
     },
     output: {
       path: path.resolve(ROOT_PATH, 'dist'),
-      filename: 'index.js'
+      filename: 'index.js',
+      library: 'ReactPhoneInput',
+      libraryTarget: 'umd'
     },
+    externals: [{
+      "lodash": "lodash",
+      "react": {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react'
+      }
+    }],
     plugins: [
-      new webpack.optimize.CommonsChunkPlugin(
-        'vendor',
-        'vendors.js'
-      ),
       new webpack.DefinePlugin({
         'process.env': {
           'NODE_ENV': JSON.stringify('production')
