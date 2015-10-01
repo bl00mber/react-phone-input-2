@@ -5,8 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --devtool eval --reload --progress --colors --content-base dist",
-    "build": "babel src/index.js > build/index.js"
+    "dev": "TARGET=dev webpack-dev-server --progress",
+    "build": "TARGET=build webpack -p --progress"
   },
   "repository": {
     "type": "git",
@@ -25,15 +25,16 @@
   },
   "homepage": "https://github.com/razagill/react-phone-input",
   "devDependencies": {
-    "babel-core": "^5.1.11",
-    "babel-loader": "^5.0.0",
-    "css-loader": "^0.11.0",
-    "file-loader": "^0.8.1",
-    "jsx-loader": "^0.13.1",
-    "less": "^2.5.0",
-    "less-loader": "^2.2.0",
-    "style-loader": "^0.11.0",
-    "webpack": "^1.8.9"
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
+    "babel-runtime": "^5.8.25",
+    "css-loader": "^0.19.0",
+    "file-loader": "^0.8.4",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.1",
+    "style-loader": "^0.12.4",
+    "webpack": "^1.12.2",
+    "webpack-merge": "^0.2.0"
   },
   "dependencies": {},
   "peerDependencies": {
