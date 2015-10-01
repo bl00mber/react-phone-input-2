@@ -5,6 +5,8 @@ import React from 'react/addons.js';
 import countryData from './country_data.js';
 let allCountries = countryData.allCountries;
 
+var style = require('./react-phone-input-style.less');
+
 var isModernBrowser = Boolean(document.createElement('input').setSelectionRange);
 
 let keys = {
@@ -523,3 +525,7 @@ ReactPhoneInput.propTypes = {
 };
 
 export default ReactPhoneInput;
+
+// React.render(
+//   <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']}/>,
+//   document.getElementById('content'));

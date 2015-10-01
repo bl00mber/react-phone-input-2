@@ -17,13 +17,13 @@ var common = {
   },
   output: {
     path: path.resolve(ROOT_PATH, 'dist'),
-    filename: 'bundle.js'
+    filename: 'index.js'
   },
   module: {
     loaders: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel?optional[]=runtime&stage=0',
+        loader: 'babel-loader',
         include: path.resolve(ROOT_PATH, 'src')
       },
       {
@@ -78,7 +78,7 @@ if (TARGET === 'build') {
     },
     output: {
       path: path.resolve(ROOT_PATH, 'dist'),
-      filename: 'bundle.js'
+      filename: 'index.js'
     },
     plugins: [
       new webpack.optimize.CommonsChunkPlugin(
