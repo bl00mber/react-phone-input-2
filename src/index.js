@@ -34,6 +34,22 @@ function isNumberValid(inputNumber) {
   });
 }
 
+function getOnlyCountries(onlyCountriesArray) {
+  if (onlyCountriesArray.length === 0) {
+    return allCountries;
+  } else {
+    let selectedCountries = [];
+    allCountries.map(function(country) {
+      onlyCountriesArray.map(function(selCountry){
+        if (country.iso2 === selCountry) {
+          selectedCountries.push(country);
+        }
+      });
+    });
+    return selectedCountries;
+  }
+}
+
 class ReactPhoneInput extends React.Component {
 
   constructor(props) {
@@ -75,7 +91,8 @@ class ReactPhoneInput extends React.Component {
       showDropDown: false,
       queryString: '',
       freezeSelection: false,
-      debouncedQueryStingSearcher: debounce(this.searchCountry, 100)
+      debouncedQueryStingSearcher: debounce(this.searchCountry, 100),
+      onlyCountries: getOnlyCountries(this.props.onlyCountries)
     };
   }
 
@@ -186,8 +203,8 @@ class ReactPhoneInput extends React.Component {
     // need to put the highlight on the current selected country if the dropdown is going to open up
     this.setState({
       showDropDown: !this.state.showDropDown,
-      highlightCountry: findWhere(this.props.onlyCountries, this.state.selectedCountry),
-      highlightCountryIndex: findIndex(this.props.onlyCountries, this.state.selectedCountry)
+      highlightCountry: findWhere(this.state.onlyCountries, this.state.selectedCountry),
+      highlightCountryIndex: findIndex(this.state.onlyCountries, this.state.selectedCountry)
     }, () => {
       if(this.state.showDropDown) {
         this.scrollTo(this.getElement(this.state.highlightCountryIndex + this.state.preferredCountries.length));
@@ -261,7 +278,7 @@ class ReactPhoneInput extends React.Component {
 
   handleFlagItemClick(country) {
     let currentSelectedCountry = this.state.selectedCountry;
-    let nextSelectedCountry = findWhere(this.props.onlyCountries, country);
+    let nextSelectedCountry = findWhere(this.state.onlyCountries, country);
 
     if(currentSelectedCountry.iso2 !== nextSelectedCountry.iso2) {
         // TODO - the below replacement is a bug. It will replace stuff from middle too
@@ -294,7 +311,7 @@ class ReactPhoneInput extends React.Component {
     var highlightCountryIndex = this.state.highlightCountryIndex + direction;
 
     if(highlightCountryIndex < 0
-      || highlightCountryIndex >= (this.props.onlyCountries.length  + this.state.preferredCountries.length)) {
+      || highlightCountryIndex >= (this.state.onlyCountries.length  + this.state.preferredCountries.length)) {
       return highlightCountryIndex - direction;
     }
 
@@ -302,8 +319,8 @@ class ReactPhoneInput extends React.Component {
   }
 
   searchCountry() {
-    const probableCandidate = this._searchCountry(this.state.queryString) || this.props.onlyCountries[0];
-    const probableCandidateIndex = findIndex(this.props.onlyCountries, probableCandidate) + this.state.preferredCountries.length;
+    const probableCandidate = this._searchCountry(this.state.queryString) || this.state.onlyCountries[0];
+    const probableCandidateIndex = findIndex(this.state.onlyCountries, probableCandidate) + this.state.preferredCountries.length;
 
     this.scrollTo(this.getElement(probableCandidateIndex), true);
 
@@ -341,7 +358,7 @@ class ReactPhoneInput extends React.Component {
         _moveHighlight(-1);
         break;
       case keys.ENTER:
-        this.handleFlagItemClick(this.props.onlyCountries[this.state.highlightCountryIndex], event);
+        this.handleFlagItemClick(this.state.onlyCountries[this.state.highlightCountryIndex], event);
         break;
       case keys.ESC:
         this.setState({showDropDown: false}, this._cursorToEnd);
@@ -370,7 +387,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   getCountryDropDownList() {
-    let countryDropDownList = map(this.state.preferredCountries.concat(this.props.onlyCountries), function(country, index) {
+    let countryDropDownList = map(this.state.preferredCountries.concat(this.state.onlyCountries), function(country, index) {
       let itemClasses = classNames({
         country: true,
         preferred: country.iso2 === 'us' || country.iso2 === 'gb',
@@ -458,16 +475,16 @@ ReactPhoneInput.prototype._searchCountry = memoize(function(queryString){
     return null;
   }
   // don't include the preferred countries in search
-  let probableCountries = filter(this.props.onlyCountries, function(country) {
+  let probableCountries = filter(this.state.onlyCountries, function(country) {
     return startsWith(country.name.toLowerCase(), queryString.toLowerCase());
   }, this);
   return probableCountries[0];
 });
 
 ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber) {
-  var secondBestGuess = findWhere(allCountries, {iso2: this.props.defaultCountry}) || this.props.onlyCountries[0];
+  var secondBestGuess = findWhere(allCountries, {iso2: this.props.defaultCountry}) || this.state.onlyCountries[0];
   if(trim(inputNumber) !== '') {
-      var bestGuess = reduce(this.props.onlyCountries, function(selectedCountry, country) {
+      var bestGuess = reduce(this.state.onlyCountries, function(selectedCountry, country) {
                       if(startsWith(inputNumber, country.dialCode)) {
                           if(country.dialCode.length > selectedCountry.dialCode.length) {
                               return country;
@@ -493,7 +510,7 @@ ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber) {
 ReactPhoneInput.defaultProps = {
   value: '',
   autoFormat: true,
-  onlyCountries: allCountries,
+  onlyCountries: [],
   defaultCountry: allCountries[0].iso2,
   isValid: isNumberValid,
   flagsImagePath: './flags.png',
@@ -512,5 +529,5 @@ ReactPhoneInput.propTypes = {
 export default ReactPhoneInput;
 
 // React.render(
-//   <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']}/>,
+//   <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']} onlyCountries={['us','de','in']}/>,
 //   document.getElementById('content'));
