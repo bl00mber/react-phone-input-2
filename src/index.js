@@ -1,6 +1,6 @@
 // TODO - fix the onlyContries props. Currently expects that as an array of country object, but users should be able to send in array of country isos
 
-import { some, findWhere, reduce, map, filter, any } from 'lodash/collection';
+import { some, findWhere, reduce, map, filter, any, includes } from 'lodash/collection';
 import { findIndex, first, rest } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
@@ -50,6 +50,17 @@ function getOnlyCountries(onlyCountriesArray) {
   }
 }
 
+function excludeCountries(selectedCountries, excludedCountries) {
+  if(excludedCountries.length === 0) {
+    return selectedCountries;
+  } else {
+    let newSelectedCountries = filter(selectedCountries, function(selCountry) {
+      return !includes(excludedCountries, selCountry.iso2);
+    });
+    return newSelectedCountries;
+  }
+}
+
 class ReactPhoneInput extends React.Component {
 
   constructor(props) {
@@ -92,7 +103,7 @@ class ReactPhoneInput extends React.Component {
       queryString: '',
       freezeSelection: false,
       debouncedQueryStingSearcher: debounce(this.searchCountry, 100),
-      onlyCountries: getOnlyCountries(this.props.onlyCountries)
+      onlyCountries: excludeCountries(getOnlyCountries(this.props.onlyCountries), this.props.excludeCountries)
     };
   }
 
@@ -511,6 +522,7 @@ ReactPhoneInput.defaultProps = {
   value: '',
   autoFormat: true,
   onlyCountries: [],
+  excludeCountries: [],
   defaultCountry: allCountries[0].iso2,
   isValid: isNumberValid,
   flagsImagePath: './flags.png',
@@ -529,5 +541,5 @@ ReactPhoneInput.propTypes = {
 export default ReactPhoneInput;
 
 // React.render(
-//   <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']} onlyCountries={['us','de','in']}/>,
+//   <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']} excludeCountries={'in'}/>,
 //   document.getElementById('content'));
