@@ -17,6 +17,9 @@ React.render(
 | Name | Description          |
 | :------------- | :----------- |
 | defaultCountry | country code to initialize the component|
+| excludeCountries | array of country codes to be excluded e.g. ['cu','cw','kz']|
+| onlyCountries | array of country codes to be included e.g. ['cu','cw','kz']|
+| preferredCountries | array of country codes to be preferred (highlighted at the top) e.g. ['cu','cw','kz']|
 
 ##License
 MIT
