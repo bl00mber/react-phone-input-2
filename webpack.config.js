@@ -41,15 +41,15 @@ var common = {
 if (TARGET === 'dev') {
   module.exports = merge(common, {
     devtool: 'eval',
-    module: {
-      loaders: [
-        {
-          test: /\.jsx?$/,
-          loaders: ['react-hot', 'babel?stage=1'],
-          include: path.resolve(ROOT_PATH, 'src')
-        }
-      ]
-    },
+    // module: {
+    //   loaders: [
+    //     {
+    //       test: /\.jsx?$/,
+    //       loaders: ['react-hot', 'babel?stage=1'],
+    //       include: path.resolve(ROOT_PATH, 'src')
+    //     }
+    //   ]
+    // },
     devServer: {
       publicPath: 'http://localhost:8181/',
       port: '8181',
