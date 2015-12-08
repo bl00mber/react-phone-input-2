@@ -42,7 +42,7 @@
     "classnames": "^2.1.5"
   },
   "peerDependencies": {
-    "lodash": "^3.6.0",
-    "react": "^0.13.2"
+    "lodash": ">=3.6.0",
+    "react": ">=0.13.2"
   }
 }
