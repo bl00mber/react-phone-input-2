@@ -5,6 +5,7 @@ import { findIndex, first, rest } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import countryData from './country_data.js';
 import classNames from 'classnames';
 
@@ -118,7 +119,6 @@ class ReactPhoneInput extends React.Component {
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeydown);
 
-    this._cursorToEnd();
     if(typeof this.props.onChange === 'function') {
       this.props.onChange(this.state.formattedNumber);
     }
@@ -131,7 +131,7 @@ class ReactPhoneInput extends React.Component {
   scrollTo(country, middle) {
     if(!country) return;
 
-    let container = this.refs.flagDropdownList.getDOMNode();
+    let container = ReactDOM.findDOMNode(this.refs.flagDropdownList);
 
     if(!container) return;
 
@@ -198,7 +198,7 @@ class ReactPhoneInput extends React.Component {
 
   // put the cursor to the end of the input (usually after a focus event)
   _cursorToEnd() {
-    let input = this.refs.numberInput.getDOMNode();
+    let input = ReactDOM.findDOMNode(this.refs.numberInput);
     input.focus();
     if (isModernBrowser) {
       let len = input.value.length;
@@ -207,7 +207,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   getElement(index) {
-    return this.refs[`flag_no_${index}`].getDOMNode();
+    return ReactDOM.findDOMNode(this.refs[`flag_no_${index}`]);
   }
 
   handleFlagDropdownClick() {
@@ -273,7 +273,7 @@ class ReactPhoneInput extends React.Component {
         }
 
         if(caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
-          this.refs.numberInput.getDOMNode().setSelectionRange(caretPosition, caretPosition);
+          ReactDOM.findDOMNode(this.refs.numberInput).setSelectionRange(caretPosition, caretPosition);
         }
       }
 
@@ -312,7 +312,7 @@ class ReactPhoneInput extends React.Component {
 
   handleInputFocus() {
     // if the input is blank, insert dial code of the selected country
-    if(this.refs.numberInput.getDOMNode().value === '+') {
+    if(ReactDOM.findDOMNode(this.refs.numberInput).value === '+') {
       this.setState({formattedNumber: '+' + this.state.selectedCountry.dialCode});
     }
   }
