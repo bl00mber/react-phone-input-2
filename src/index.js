@@ -67,7 +67,8 @@ class ReactPhoneInput extends React.Component {
   constructor(props) {
     super(props);
     let inputNumber = this.props.value || '';
-    let selectedCountryGuess = this.guessSelectedCountry(inputNumber.replace(/\D/g, ''));
+    let onlyCountries = excludeCountries(getOnlyCountries(props.onlyCountries), props.excludeCountries);
+    let selectedCountryGuess = this.guessSelectedCountry(inputNumber.replace(/\D/g, ''), onlyCountries);
     let selectedCountryGuessIndex = findIndex(allCountries, selectedCountryGuess);
     let formattedNumber = this.formatNumber(inputNumber.replace(/\D/g, ''), selectedCountryGuess ? selectedCountryGuess.format : null);
     let preferredCountries = filter(allCountries, function(country) {
@@ -104,7 +105,7 @@ class ReactPhoneInput extends React.Component {
       queryString: '',
       freezeSelection: false,
       debouncedQueryStingSearcher: debounce(this.searchCountry, 100),
-      onlyCountries: excludeCountries(getOnlyCountries(this.props.onlyCountries), this.props.excludeCountries)
+      onlyCountries: onlyCountries
     };
   }
 
@@ -118,10 +119,6 @@ class ReactPhoneInput extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeydown);
-
-    if(typeof this.props.onChange === 'function') {
-      this.props.onChange(this.state.formattedNumber);
-    }
   }
 
   componentWillUnmount() {
@@ -251,7 +248,7 @@ class ReactPhoneInput extends React.Component {
       // we don't need to send the whole number to guess the country... only the first 6 characters are enough
       // the guess country function can then use memoization much more effectively since the set of input it gets has drastically reduced
       if(!this.state.freezeSelection || this.state.selectedCountry.dialCode.length > inputNumber.length) {
-        newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6));
+        newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), this.state.onlyCountries);
         freezeSelection = false;
       }
       // let us remove all non numerals from the input
@@ -492,10 +489,10 @@ ReactPhoneInput.prototype._searchCountry = memoize(function(queryString){
   return probableCountries[0];
 });
 
-ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber) {
-  var secondBestGuess = findWhere(allCountries, {iso2: this.props.defaultCountry}) || this.state.onlyCountries[0];
+ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, onlyCountries) {
+  var secondBestGuess = findWhere(allCountries, {iso2: this.props.defaultCountry}) || onlyCountries[0];
   if(trim(inputNumber) !== '') {
-      var bestGuess = reduce(this.state.onlyCountries, function(selectedCountry, country) {
+      var bestGuess = reduce(onlyCountries, function(selectedCountry, country) {
                       if(startsWith(inputNumber, country.dialCode)) {
                           if(country.dialCode.length > selectedCountry.dialCode.length) {
                               return country;
