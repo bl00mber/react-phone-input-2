@@ -545,7 +545,10 @@ ReactPhoneInput.propTypes = {
     defaultCountry: React.PropTypes.string,
     onlyCountries: React.PropTypes.arrayOf(React.PropTypes.string),
     preferredCountries: React.PropTypes.arrayOf(React.PropTypes.string),
-    onChange: React.PropTypes.func
+    onChange: React.PropTypes.func,
+    onFocus: React.PropTypes.func,
+    onClick: React.PropTypes.func,
+    onKeyDown: React.PropTypes.func
 };
 
 export default ReactPhoneInput;
