@@ -468,6 +468,8 @@ class ReactPhoneInput extends React.Component {
     return (
       <div className="react-tel-input">
         <input
+          placeholder="+1 (702) 123-4567"
+          {...this.props}
           onChange={this.handleInput}
           onClick={this.handleInputClick}
           onFocus={this.handleInputFocus}
@@ -476,7 +478,7 @@ class ReactPhoneInput extends React.Component {
           ref="numberInput"
           type="tel"
           className={inputClasses}
-          placeholder="+1 (702) 123-4567"/>
+        />
         <div ref="flagDropDownButton" className={flagViewClasses} onKeyDown={this.handleKeydown} >
           <div ref='selectedFlag' onClick={this.handleFlagDropdownClick} className='selected-flag' title={`${this.state.selectedCountry.name}: + ${this.state.selectedCountry.dialCode}`}>
             <div className={inputFlagClasses}>
