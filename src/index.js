@@ -391,6 +391,10 @@ class ReactPhoneInput extends React.Component {
     if(event.which === keys.ENTER) {
       this.props.onEnterKeyPress(event);
     }
+
+    if (this.props.onKeyDown) {
+      this.props.onKeyDown(event)
+    }
   }
 
   handleClickOutside() {
