@@ -310,10 +310,14 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
-  handleInputFocus() {
+  handleInputFocus(evt) {
     // if the input is blank, insert dial code of the selected country
     if(ReactDOM.findDOMNode(this.refs.numberInput).value === '+') {
       this.setState({formattedNumber: '+' + this.state.selectedCountry.dialCode});
+    }
+
+    if (this.props.onFocus) {
+      this.props.onFocus(evt)
     }
   }
 
