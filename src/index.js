@@ -280,8 +280,11 @@ class ReactPhoneInput extends React.Component {
     });
   }
 
-  handleInputClick() {
+  handleInputClick(evt) {
     this.setState({showDropDown: false});
+    if (this.props.onClick) {
+      this.props.onClick(evt)
+    }
   }
 
   handleFlagItemClick(country) {
