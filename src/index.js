@@ -55,10 +55,9 @@ function excludeCountries(selectedCountries, excludedCountries) {
   if(excludedCountries.length === 0) {
     return selectedCountries;
   } else {
-    let newSelectedCountries = filter(selectedCountries, function(selCountry) {
+    return filter(selectedCountries, function(selCountry) {
       return !includes(excludedCountries, selCountry.iso2);
     });
-    return newSelectedCountries;
   }
 }
 
