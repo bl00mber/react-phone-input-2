@@ -70,7 +70,8 @@ class ReactPhoneInput extends React.Component {
     let onlyCountries = excludeCountries(getOnlyCountries(props.onlyCountries), props.excludeCountries);
     let selectedCountryGuess = this.guessSelectedCountry(inputNumber.replace(/\D/g, ''), onlyCountries);
     let selectedCountryGuessIndex = findIndex(allCountries, selectedCountryGuess);
-    let formattedNumber = this.formatNumber(inputNumber.replace(/\D/g, ''), selectedCountryGuess ? selectedCountryGuess.format : null);
+    let dialCode = selectedCountryGuess && !startsWith(inputNumber, selectedCountryGuess.dialCode) ? selectedCountryGuess.dialCode : '';
+    let formattedNumber = this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), selectedCountryGuess ? selectedCountryGuess.format : null);
     let preferredCountries = filter(allCountries, function(country) {
       return any(this.props.preferredCountries, function(preferredCountry) {
         return preferredCountry === country.iso2;
@@ -280,8 +281,11 @@ class ReactPhoneInput extends React.Component {
     });
   }
 
-  handleInputClick() {
+  handleInputClick(evt) {
     this.setState({showDropDown: false});
+    if (this.props.onClick) {
+      this.props.onClick(evt)
+    }
   }
 
   handleFlagItemClick(country) {
@@ -307,10 +311,14 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
-  handleInputFocus() {
+  handleInputFocus(evt) {
     // if the input is blank, insert dial code of the selected country
     if(ReactDOM.findDOMNode(this.refs.numberInput).value === '+') {
-      this.setState({formattedNumber: '+' + this.state.selectedCountry.dialCode});
+      this.setState({formattedNumber: '+' + this.state.selectedCountry.dialCode}, () => setTimeout(this._cursorToEnd, 10));
+    }
+
+    if (this.props.onFocus) {
+      this.props.onFocus(evt)
     }
   }
 
@@ -383,6 +391,10 @@ class ReactPhoneInput extends React.Component {
   handleInputKeyDown(event) {
     if(event.which === keys.ENTER) {
       this.props.onEnterKeyPress(event);
+    }
+
+    if (this.props.onKeyDown) {
+      this.props.onKeyDown(event)
     }
   }
 
@@ -457,6 +469,8 @@ class ReactPhoneInput extends React.Component {
     return (
       <div className="react-tel-input">
         <input
+          placeholder="+1 (702) 123-4567"
+          {...this.props}
           onChange={this.handleInput}
           onClick={this.handleInputClick}
           onFocus={this.handleInputFocus}
@@ -465,7 +479,7 @@ class ReactPhoneInput extends React.Component {
           ref="numberInput"
           type="tel"
           className={inputClasses}
-          placeholder="+1 (702) 123-4567"/>
+        />
         <div ref="flagDropDownButton" className={flagViewClasses} onKeyDown={this.handleKeydown} >
           <div ref='selectedFlag' onClick={this.handleFlagDropdownClick} className='selected-flag' title={`${this.state.selectedCountry.name}: + ${this.state.selectedCountry.dialCode}`}>
             <div className={inputFlagClasses}>
@@ -532,7 +546,10 @@ ReactPhoneInput.propTypes = {
     defaultCountry: React.PropTypes.string,
     onlyCountries: React.PropTypes.arrayOf(React.PropTypes.string),
     preferredCountries: React.PropTypes.arrayOf(React.PropTypes.string),
-    onChange: React.PropTypes.func
+    onChange: React.PropTypes.func,
+    onFocus: React.PropTypes.func,
+    onClick: React.PropTypes.func,
+    onKeyDown: React.PropTypes.func
 };
 
 export default ReactPhoneInput;
