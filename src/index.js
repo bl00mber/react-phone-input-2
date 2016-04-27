@@ -528,11 +528,11 @@ ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, o
 			return selectedCountry;
 		}, {dialCode: '', priority: 10001}, this);
   } else {
-      return secondBestGuess;
+		return secondBestGuess;
   }
 
   if(!bestGuess.name) {
-      return secondBestGuess;
+		return secondBestGuess;
   }
 
   return bestGuess;
