@@ -1,7 +1,7 @@
 // TODO - fix the onlyContries props. Currently expects that as an array of country object, but users should be able to send in array of country isos
 
 import { some, find, reduce, map, filter, includes } from 'lodash/collection';
-import { findIndex, first, rest } from 'lodash/array';
+import { findIndex, head, tail } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
 import React from 'react';
@@ -186,8 +186,8 @@ class ReactPhoneInput extends React.Component {
       }
 
       return {
-        formattedText: acc.formattedText + first(acc.remainingText),
-        remainingText: rest(acc.remainingText)
+        formattedText: acc.formattedText + head(acc.remainingText),
+        remainingText: tail(acc.remainingText)
       };
     }, {formattedText: '', remainingText: text.split('')});
     return formattedObject.formattedText + formattedObject.remainingText.join('');
