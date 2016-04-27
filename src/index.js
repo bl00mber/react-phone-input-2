@@ -406,31 +406,31 @@ class ReactPhoneInput extends React.Component {
   }
 
   getCountryDropDownList() {
-    let countryDropDownList = map(this.state.preferredCountries.concat(this.state.onlyCountries), function(country, index) {
-      let itemClasses = classNames({
-        country: true,
-        preferred: country.iso2 === 'us' || country.iso2 === 'gb',
-        active: country.iso2 === 'us',
-        highlight: this.state.highlightCountryIndex === index
-      });
+		let countryDropDownList = map(this.state.preferredCountries.concat(this.state.onlyCountries), (country, index) => {
+			let itemClasses = classNames({
+				country: true,
+				preferred: country.iso2 === 'us' || country.iso2 === 'gb',
+				active: country.iso2 === 'us',
+				highlight: this.state.highlightCountryIndex === index
+			});
 
-      let inputFlagClasses = `flag ${country.iso2}`;
+			let inputFlagClasses = `flag ${country.iso2}`;
 
-      return (
-        <li
-          ref={`flag_no_${index}`}
-          key={`flag_no_${index}`}
-          data-flag-key={`flag_no_${index}`}
-          className={itemClasses}
-          data-dial-code="1"
-          data-country-code={country.iso2}
-          onClick={this.handleFlagItemClick.bind(this, country)}>
-          <div className={inputFlagClasses} />
-          <span className='country-name'>{country.name}</span>
-          <span className='dial-code'>{'+' + country.dialCode}</span>
-        </li>
-      );
-    }, this);
+			return (
+				<li
+					ref={`flag_no_${index}`}
+					key={`flag_no_${index}`}
+					data-flag-key={`flag_no_${index}`}
+					className={itemClasses}
+					data-dial-code="1"
+					data-country-code={country.iso2}
+					onClick={this.handleFlagItemClick.bind(this, country)}>
+					<div className={inputFlagClasses} />
+					<span className='country-name'>{country.name}</span>
+					<span className='dial-code'>{'+' + country.dialCode}</span>
+				</li>
+			);
+		});
 
     const dashedLi = (<li key={'dashes'} className='divider' />);
     // let's insert a dashed line in between preffered countries and the rest
