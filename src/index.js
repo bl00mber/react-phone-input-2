@@ -1,6 +1,6 @@
 // TODO - fix the onlyContries props. Currently expects that as an array of country object, but users should be able to send in array of country isos
 
-import { some, findWhere, reduce, map, filter, any, includes } from 'lodash/collection';
+import { some, find, reduce, map, filter, includes } from 'lodash/collection';
 import { findIndex, first, rest } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
@@ -72,12 +72,11 @@ class ReactPhoneInput extends React.Component {
     let selectedCountryGuessIndex = findIndex(allCountries, selectedCountryGuess);
     let dialCode = selectedCountryGuess && !startsWith(inputNumber, selectedCountryGuess.dialCode) ? selectedCountryGuess.dialCode : '';
     let formattedNumber = this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), selectedCountryGuess ? selectedCountryGuess.format : null);
-    let preferredCountries = filter(allCountries, function(country) {
-      return any(this.props.preferredCountries, function(preferredCountry) {
-        return preferredCountry === country.iso2;
-      });
-    }, this);
-
+		let preferredCountries = filter(allCountries, (country) => {
+			return some(this.props.preferredCountries, (preferredCountry) => {
+				return preferredCountry === country.iso2;
+			});
+		});
     this.getNumber = this.getNumber.bind(this);
     this.getValue = this.getValue.bind(this);
     this.scrollTo = this.scrollTo.bind(this);
@@ -212,7 +211,7 @@ class ReactPhoneInput extends React.Component {
     // need to put the highlight on the current selected country if the dropdown is going to open up
     this.setState({
       showDropDown: !this.state.showDropDown,
-      highlightCountry: findWhere(this.state.onlyCountries, this.state.selectedCountry),
+      highlightCountry: find(this.state.onlyCountries, this.state.selectedCountry),
       highlightCountryIndex: findIndex(this.state.onlyCountries, this.state.selectedCountry)
     }, () => {
       if(this.state.showDropDown) {
@@ -290,7 +289,7 @@ class ReactPhoneInput extends React.Component {
 
   handleFlagItemClick(country) {
     let currentSelectedCountry = this.state.selectedCountry;
-    let nextSelectedCountry = findWhere(this.state.onlyCountries, country);
+    let nextSelectedCountry = find(this.state.onlyCountries, country);
 
     if(currentSelectedCountry.iso2 !== nextSelectedCountry.iso2) {
         // TODO - the below replacement is a bug. It will replace stuff from middle too
@@ -504,7 +503,7 @@ ReactPhoneInput.prototype._searchCountry = memoize(function(queryString){
 });
 
 ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, onlyCountries) {
-  var secondBestGuess = findWhere(allCountries, {iso2: this.props.defaultCountry}) || onlyCountries[0];
+  var secondBestGuess = find(allCountries, {iso2: this.props.defaultCountry}) || onlyCountries[0];
   if(trim(inputNumber) !== '') {
       var bestGuess = reduce(onlyCountries, function(selectedCountry, country) {
                       if(startsWith(inputNumber, country.dialCode)) {
@@ -554,6 +553,6 @@ ReactPhoneInput.propTypes = {
 
 export default ReactPhoneInput;
 
-// React.render(
-//   <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']} excludeCountries={'in'}/>,
-//   document.getElementById('content'));
+ReactDOM.render(
+  <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']} excludeCountries={'in'}/>,
+  document.getElementById('content'));
