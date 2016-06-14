@@ -47,6 +47,6 @@
   },
   "peerDependencies": {
     "lodash": "^4.11.1",
-    "react": "^15.0.1"
+    "react": "^0.14.8 || ^15.0.1"
   }
 }
