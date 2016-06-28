@@ -80,6 +80,7 @@ class ReactPhoneInput extends React.Component {
 		});
     this.getNumber = this.getNumber.bind(this);
     this.getValue = this.getValue.bind(this);
+    this.resetNumber = this.resetNumber.bind(this);
     this.scrollTo = this.scrollTo.bind(this);
     this.formatNumber = this.formatNumber.bind(this);
     this._cursorToEnd = this._cursorToEnd.bind(this);
@@ -118,6 +119,13 @@ class ReactPhoneInput extends React.Component {
     return this.getNumber();
   }
 
+  resetNumber() {
+    let formattedNumber = this.formatNumber(this.state.selectedCountry.dialCode, this.state.selectedCountry.format);
+    this.setState({
+      formattedNumber: formattedNumber
+    })
+  }
+  
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeydown);
   }
