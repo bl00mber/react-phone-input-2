@@ -483,7 +483,6 @@ class ReactPhoneInput extends React.Component {
       <div className="react-tel-input">
         <input
           placeholder="+1 (702) 123-4567"
-          {...this.props}
           onChange={this.handleInput}
           onClick={this.handleInputClick}
           onFocus={this.handleInputFocus}
@@ -571,6 +570,8 @@ ReactPhoneInput.propTypes = {
 
 export default ReactPhoneInput;
 
-// ReactDOM.render(
-//   <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']} excludeCountries={'in'}/>,
-//   document.getElementById('content'));
+if (__DEV__) {
+  ReactDOM.render(
+    <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']} excludeCountries={'in'}/>,
+    document.getElementById('content'));
+}
