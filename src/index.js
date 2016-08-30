@@ -5,7 +5,6 @@ import { findIndex, head, tail } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import countryData from './country_data.js';
 import classNames from 'classnames';
 
@@ -125,7 +124,7 @@ class ReactPhoneInput extends React.Component {
       formattedNumber: formattedNumber
     })
   }
-  
+
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeydown);
   }
@@ -571,6 +570,8 @@ ReactPhoneInput.propTypes = {
 export default ReactPhoneInput;
 
 if (__DEV__) {
+  const ReactDOM = require('react-dom');
+  
   ReactDOM.render(
     <ReactPhoneInput defaultCountry={'us'} preferredCountries={['us', 'de']} excludeCountries={'in'}/>,
     document.getElementById('content'));
