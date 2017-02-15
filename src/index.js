@@ -125,9 +125,11 @@ class ReactPhoneInput extends React.Component {
   }
 
   updateDefaultCountry(country) {
+    let guessedCountry = this.guessSelectedCountry(0, this.state.onlyCountries, country);
     this.setState({
-      defaultCountry: country,
-      selectedCountry: this.guessSelectedCountry(0, this.state.onlyCountries, country)
+        defaultCountry: country,
+        selectedCountry: guessedCountry,
+        formattedNumber: '+' + guessedCountry.dialCode
     });
   }
 
@@ -335,9 +337,7 @@ class ReactPhoneInput extends React.Component {
   handleInputFocus(evt) {
     // if the input is blank, insert dial code of the selected country
     if(ReactDOM.findDOMNode(this.refs.numberInput).value === '+') {
-      this.setState(
-				{formattedNumber: '+' + this.state.selectedCountry.dialCode}, () => setTimeout(this._cursorToEnd, 10)
-			);
+      this.setState({formattedNumber: '+' + this.state.selectedCountry.dialCode}, () => setTimeout(this._cursorToEnd, 10));
     }
 
     if (this.props.onFocus) {
@@ -584,5 +584,8 @@ if (__DEV__) {
   const ReactDOM = require('react-dom');
   ReactDOM.render(
     <ReactPhoneInput defaultCountry='us' preferredCountries={['us', 'de']} excludeCountries={'in'}/>,
+    document.getElementById('content'));
+  ReactDOM.render(
+    <ReactPhoneInput defaultCountry='de' preferredCountries={['us', 'de']} />,
     document.getElementById('content'));
 }
