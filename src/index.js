@@ -585,7 +585,4 @@ if (__DEV__) {
   ReactDOM.render(
     <ReactPhoneInput defaultCountry='us' preferredCountries={['us', 'de']} excludeCountries={'in'}/>,
     document.getElementById('content'));
-  ReactDOM.render(
-    <ReactPhoneInput defaultCountry='de' preferredCountries={['us', 'de']} />,
-    document.getElementById('content'));
 }
