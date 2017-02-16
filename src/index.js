@@ -7,6 +7,7 @@ import { trim, startsWith } from 'lodash/string';
 import React from 'react';
 import countryData from './country_data.js';
 import classNames from 'classnames';
+import ReactDOM from 'react-dom';
 
 let allCountries = countryData.allCountries;
 
