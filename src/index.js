@@ -126,11 +126,11 @@ class ReactPhoneInput extends React.Component {
   }
 
   updateDefaultCountry(country) {
-    let selectedCountry = find(allCountries, {iso2: country});
+    const newSelectedCountry = find(this.state.onlyCountries, {iso2: country});
     this.setState({
         defaultCountry: country,
-        selectedCountry: selectedCountry,
-        formattedNumber: '+' + selectedCountry.dialCode
+        selectedCountry: newSelectedCountry,
+        formattedNumber: '+' + newSelectedCountry.dialCode
     });
   }
 
@@ -476,6 +476,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   render() {
+    console.log(this.state.selectedCountry.iso2);
     let arrowClasses = classNames({
       "arrow": true,
       "up": this.state.showDropDown
