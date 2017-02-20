@@ -148,6 +148,12 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
+  componentWillUpdate(nextProps) {
+    if (nextProps.defaultCountry && nextProps.defaultCountry !== this.state.defaultCountry) {
+      this.updateDefaultCountry(nextProps.defaultCountry);
+    }
+  }
+
   scrollTo(country, middle) {
     if(!country) return;
 
@@ -586,4 +592,7 @@ if (__DEV__) {
   ReactDOM.render(
     <ReactPhoneInput defaultCountry='us' preferredCountries={['us', 'de']} excludeCountries={'in'}/>,
     document.getElementById('content'));
+  ReactDOM.render(
+      <ReactPhoneInput defaultCountry='de' preferredCountries={['it']}/>,
+      document.getElementById('content'));
 }
