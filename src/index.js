@@ -67,7 +67,7 @@ class ReactPhoneInput extends React.Component {
     super(props);
     let inputNumber = this.props.value || '';
     let onlyCountries = excludeCountries(getOnlyCountries(props.onlyCountries), props.excludeCountries);
-    let selectedCountryGuess = this.guessSelectedCountry(inputNumber.replace(/\D/g, ''), onlyCountries, this.props.defaultCountry);
+    let selectedCountryGuess = find(onlyCountries, {iso2: this.props.defaultCountry});
     let selectedCountryGuessIndex = findIndex(allCountries, selectedCountryGuess);
     let dialCode = selectedCountryGuess && !startsWith(inputNumber.replace(/\D/g, ''), selectedCountryGuess.dialCode) ? selectedCountryGuess.dialCode : '';
     let formattedNumber = this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), selectedCountryGuess ? selectedCountryGuess.format : null);
@@ -476,7 +476,6 @@ class ReactPhoneInput extends React.Component {
   }
 
   render() {
-    console.log(this.state.selectedCountry.iso2);
     let arrowClasses = classNames({
       "arrow": true,
       "up": this.state.showDropDown
