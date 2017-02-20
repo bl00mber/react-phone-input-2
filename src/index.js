@@ -126,11 +126,11 @@ class ReactPhoneInput extends React.Component {
   }
 
   updateDefaultCountry(country) {
-    let guessedCountry = this.guessSelectedCountry(0, this.state.onlyCountries, country);
+    let selectedCountry = find(allCountries, {iso2: country});
     this.setState({
         defaultCountry: country,
-        selectedCountry: guessedCountry,
-        formattedNumber: '+' + guessedCountry.dialCode
+        selectedCountry: selectedCountry,
+        formattedNumber: '+' + selectedCountry.dialCode
     });
   }
 
@@ -142,12 +142,12 @@ class ReactPhoneInput extends React.Component {
     document.removeEventListener('keydown', this.handleKeydown);
   }
 
-  componentWillUpdate(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.defaultCountry &&
-        nextProps.defaultCountry !== this.state.selectedCountry.iso2) {
+        nextProps.defaultCountry !== this.state.defaultCountry) {
           this.updateDefaultCountry(nextProps.defaultCountry);
-      }
     }
+  }
 
   scrollTo(country, middle) {
     if(!country) return;
