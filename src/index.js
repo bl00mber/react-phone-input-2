@@ -142,14 +142,7 @@ class ReactPhoneInput extends React.Component {
     document.removeEventListener('keydown', this.handleKeydown);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.defaultCountry &&
-        nextProps.defaultCountry !== this.state.selectedCountry.iso2) {
-          this.updateDefaultCountry(nextProps.defaultCountry);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
+  componentWillUpdate(nextProps) {
     if (nextProps.defaultCountry &&
         nextProps.defaultCountry !== this.state.selectedCountry.iso2) {
           this.updateDefaultCountry(nextProps.defaultCountry);
