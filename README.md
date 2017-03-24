@@ -18,8 +18,15 @@ React.render(
 ```
 
 Your handler for the ``onChange`` event should expect a string as
-parameter, where the value is that of the entered phone number.
+parameter, where the value is that of the entered phone number. For example:
 
+```
+function handeOnChange(value) {
+   this.setState({
+      phone: value
+   });
+}
+```
 ## Options:
 
 | Name | Description          |
