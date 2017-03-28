@@ -3,17 +3,32 @@ A simple react component to format a phone number as the user types.
 
 ![alt tag](http://i.giphy.com/l41m24L5YTSOifyW4.gif)
 
-##Installation:
-  ```npm install react-phone-input --save```
+## Installation:
+
+```shell-script
+npm install react-phone-input --save
+```
   
-##Usage:
+## Usage:
+
 ```jsx
 React.render(
-  <ReactPhoneInput defaultCountry={'us'} />,
+  <ReactPhoneInput defaultCountry={'us'} onChange{handleOnChange)/>,
   document.getElementById('content'));
 ```
 
-##Options:
+Your handler for the ``onChange`` event should expect a string as
+parameter, where the value is that of the entered phone number. For example:
+
+```jsx
+function handeOnChange(value) {
+   this.setState({
+      phone: value
+   });
+}
+```
+## Options:
+
 | Name | Description          |
 | :------------- | :----------- |
 | defaultCountry | country code to initialize the component|
@@ -21,5 +36,6 @@ React.render(
 | onlyCountries | array of country codes to be included e.g. ['cu','cw','kz']|
 | preferredCountries | array of country codes to be preferred (highlighted at the top) e.g. ['cu','cw','kz']|
 
-##License
-MIT
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
