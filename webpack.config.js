@@ -1,13 +1,13 @@
-var path = require('path');
-var webpack = require('webpack');
-var merge = require('webpack-merge');
+const path = require('path');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
 
-var TARGET = process.env.TARGET;
-var ROOT_PATH = path.resolve(__dirname);
-var nodeModulesDir = path.join(ROOT_PATH, 'node_modules');
+const TARGET = process.env.TARGET;
+const ROOT_PATH = path.resolve(__dirname);
+const nodeModulesDir = path.join(ROOT_PATH, 'node_modules');
 
 //Common configuration settings
-var common = {
+const common = {
   entry: path.resolve(ROOT_PATH, 'src/index.js'),
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -41,15 +41,6 @@ var common = {
 if (TARGET === 'dev') {
   module.exports = merge(common, {
     devtool: 'eval',
-    // module: {
-    //   loaders: [
-    //     {
-    //       test: /\.jsx?$/,
-    //       loaders: ['react-hot', 'babel?stage=1'],
-    //       include: path.resolve(ROOT_PATH, 'src')
-    //     }
-    //   ]
-    // },
     devServer: {
       publicPath: 'http://localhost:8181/',
       port: '8181',
@@ -72,7 +63,6 @@ if (TARGET === 'dev') {
     ]
   });
 }
-
 
 //Production configuration settings
 if (TARGET === 'build') {
@@ -111,4 +101,3 @@ if (TARGET === 'build') {
     ]
   });
 }
-

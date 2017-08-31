@@ -1,6 +1,6 @@
 {
-  "name": "react-phone-input",
-  "version": "1.2.1",
+  "name": "react-phone-input-2",
+  "version": "2.0.0",
   "description": "A react component to format phone numbers",
   "main": "dist/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/razagill/react-phone-input.git"
+    "url": "https://github.com/bl00mber/react-phone-input"
   },
   "keywords": [
     "react",
@@ -18,23 +18,21 @@
     "format",
     "telephone"
   ],
-  "author": "Raza Gill <raza.gill@outlook.com> (http://github.com/razagill)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/razagill/react-phone-input/issues"
+    "url": "https://github.com/bl00mber/react-phone-input/issues"
   },
-  "homepage": "https://github.com/razagill/react-phone-input",
+  "homepage": "https://github.com/bl00mber/react-phone-input",
   "devDependencies": {
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
-    "classnames": "^2.2.5",
+    "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
-    "react-dom": "^15.1.0",
     "react-hot-loader": "^1.3.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
@@ -43,10 +41,9 @@
     "webpack-merge": "^0.13.0"
   },
   "dependencies": {
-    "classnames": "^2.1.5"
-  },
-  "peerDependencies": {
-    "lodash": "^4.11.1",
-    "react": "^0.14.8 || ^15.0.1"
+    "classnames": "^2.2.5",
+    "lodash": "^4.17.4",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   }
 }
