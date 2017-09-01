@@ -368,11 +368,13 @@ class ReactPhoneInput extends React.Component {
       event.returnValue = false;
     }
 
-    function moveHighlight(direction) {
+    const moveHighlight = (direction) => {
       this.setState({
         highlightCountryIndex: this.getHighlightCountryIndex(direction)
       }, () => {
-        this.scrollTo(this.getElement(this.state.highlightCountryIndex), true);
+        this.scrollTo(this.getElement(
+          this.state.highlightCountryIndex + this.state.preferredCountries.length
+        ), true);
       });
     }
 
@@ -422,7 +424,7 @@ class ReactPhoneInput extends React.Component {
         country: true,
         preferred: country.iso2 === 'us' || country.iso2 === 'gb',
         active: country.iso2 === 'us',
-        highlight: this.state.highlightCountryIndex === index
+        highlight: this.state.highlightCountryIndex === index - this.state.preferredCountries.length
       });
 
       let inputFlagClasses = `flag ${country.iso2}`;
