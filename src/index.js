@@ -14,7 +14,7 @@ import { trim, startsWith } from 'lodash/string';
 import React from 'react';
 import countryData from './country_data.js';
 import classNames from 'classnames';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 
 import './react-phone-input-style.less';
 
@@ -150,7 +150,7 @@ class ReactPhoneInput extends React.Component {
     if (!country)
       return;
 
-    let container = ReactDOM.findDOMNode(this.refs.flagDropdownList);
+    let container = this.flagDropdownList;
 
     if (!container)
       return;
@@ -222,7 +222,7 @@ class ReactPhoneInput extends React.Component {
 
   // put the cursor to the end of the input (usually after a focus event)
   cursorToEnd = () => {
-    let input = ReactDOM.findDOMNode(this.refs.numberInput);
+    let input = this.numberInput;
     input.focus();
     if (isModernBrowser) {
       let len = input.value.length;
@@ -231,7 +231,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   getElement = (index) => {
-    return ReactDOM.findDOMNode(this.refs[`flag_no_${index}`]);
+    return this[`flag_no_${index}`];
   }
 
   handleFlagDropdownClick = () => {
@@ -301,7 +301,7 @@ class ReactPhoneInput extends React.Component {
         }
 
         if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
-          ReactDOM.findDOMNode(this.refs.numberInput).setSelectionRange(caretPosition, caretPosition);
+          this.numberInput.setSelectionRange(caretPosition, caretPosition);
         }
       }
 
@@ -343,7 +343,7 @@ class ReactPhoneInput extends React.Component {
 
   handleInputFocus = (e) => {
     // if the input is blank, insert dial code of the selected country
-    if (ReactDOM.findDOMNode(this.refs.numberInput).value === '+' && this.state.selectedCountry) {
+    if (this.numberInput.value === '+' && this.state.selectedCountry) {
       this.setState({
         formattedNumber: '+' + this.state.selectedCountry.dialCode
       }, () => setTimeout(this.cursorToEnd, 10));
@@ -456,7 +456,7 @@ class ReactPhoneInput extends React.Component {
 
       return (
         <li
-          ref={`flag_no_${index}`}
+          ref={el => this[`flag_no_${index}`] = el}
           key={`flag_no_${index}`}
           data-flag-key={`flag_no_${index}`}
           className={itemClasses}
@@ -481,7 +481,9 @@ class ReactPhoneInput extends React.Component {
     });
 
     return (
-      <ul ref="flagDropdownList" className={dropDownClasses}>
+      <ul
+        ref={el => this.flagDropdownList = el}
+        className={dropDownClasses}>
         {countryDropDownList}
       </ul>
     );
@@ -509,12 +511,16 @@ class ReactPhoneInput extends React.Component {
           onBlur={this.handleInputBlur}
           onKeyDown={this.handleInputKeyDown}
           value={formattedNumber}
-          ref="numberInput" type="tel"
+          ref={el => this.numberInput = el}
+          type="tel"
           className={inputClasses}
         />
 
-        <div ref="flagDropDownButton" className={flagViewClasses} onKeyDown={this.handleKeydown}>
-          <div ref='selectedFlag'
+        <div
+          className={flagViewClasses}
+          onKeyDown={this.handleKeydown}
+        >
+          <div
             onClick={this.handleFlagDropdownClick}
             className='selected-flag'
             title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
@@ -600,7 +606,7 @@ ReactPhoneInput.propTypes = {
 export default ReactPhoneInput;
 
 if (__DEV__) {
-  ReactDOM.render(
+  render(
     <div>
       <p>Exclude countries (usa, canada)</p>
       <ReactPhoneInput
