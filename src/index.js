@@ -86,9 +86,17 @@ class ReactPhoneInput extends React.Component {
       });
     });
 
-    let selectedCountryGuess = (inputNumber.length > 1) ?
-      this.guessSelectedCountry(inputNumber.substring(1, 6), onlyCountries, this.props.defaultCountry) :
-      find(onlyCountries, {iso2: this.props.defaultCountry});
+    let selectedCountryGuess;
+    if (inputNumber.length > 1) {
+      // Country detect by value field
+      selectedCountryGuess = this.guessSelectedCountry(inputNumber.substring(1, 6), onlyCountries, this.props.defaultCountry);
+    } else if (this.props.defaultCountry) {
+      // Default country
+      selectedCountryGuess = find(onlyCountries, {iso2: this.props.defaultCountry});
+    } else {
+      // Empty params
+      selectedCountryGuess = 0;
+    }
 
     let selectedCountryGuessIndex = findIndex(allCountries, selectedCountryGuess);
     let dialCode = (
@@ -97,12 +105,14 @@ class ReactPhoneInput extends React.Component {
       !startsWith(inputNumber.replace(/\D/g, ''), selectedCountryGuess.dialCode)
     ) ? selectedCountryGuess.dialCode : '';
 
-    let formattedNumber = this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), selectedCountryGuess ? selectedCountryGuess.format : null);
+    let formattedNumber = (inputNumber === '' && selectedCountryGuess === 0) ? '' :
+      this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), selectedCountryGuess ? selectedCountryGuess.format : null);
 
     this.state = {
+      formattedNumber,
+      placeholder: this.props.placeholder,
       preferredCountries,
       onlyCountries,
-      formattedNumber,
       defaultCountry: props.defaultCountry,
       selectedCountry: selectedCountryGuess,
       highlightCountryIndex: selectedCountryGuessIndex,
@@ -281,10 +291,10 @@ class ReactPhoneInput extends React.Component {
     this.setState({
       formattedNumber: formattedNumber,
       freezeSelection: freezeSelection,
-      selectedCountry: newSelectedCountry.dialCode.length > 0
+      selectedCountry: newSelectedCountry.dialCode
         ? newSelectedCountry
         : this.state.selectedCountry
-    }, function() {
+    }, () => {
       if (isModernBrowser) {
         if (diff > 0) {
           caretPosition = caretPosition - diff;
@@ -301,10 +311,10 @@ class ReactPhoneInput extends React.Component {
     });
   }
 
-  handleInputClick = (evt) => {
+  handleInputClick = (e) => {
     this.setState({showDropDown: false});
     if (this.props.onClick) {
-      this.props.onClick(evt)
+      this.props.onClick(e)
     }
   }
 
@@ -331,19 +341,23 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
-  handleInputFocus = (evt) => {
+  handleInputFocus = (e) => {
     // if the input is blank, insert dial code of the selected country
-    if (ReactDOM.findDOMNode(this.refs.numberInput).value === '+') {
+    if (ReactDOM.findDOMNode(this.refs.numberInput).value === '+' && this.state.selectedCountry) {
       this.setState({
         formattedNumber: '+' + this.state.selectedCountry.dialCode
       }, () => setTimeout(this.cursorToEnd, 10));
     }
 
-    if (this.props.onFocus) {
-      this.props.onFocus(evt);
-    }
-    else {
-      setTimeout(this.cursorToEnd, 10)
+    this.setState({ placeholder: '' });
+
+    this.props.onFocus && this.props.onFocus(e);
+    setTimeout(this.cursorToEnd, 10);
+  }
+
+  handleInputBlur = (e) => {
+    if (!e.target.value) {
+      this.setState({ placeholder: this.props.placeholder });
     }
   }
 
@@ -474,24 +488,27 @@ class ReactPhoneInput extends React.Component {
   }
 
   render() {
-    let arrowClasses = classNames({"arrow": true, "up": this.state.showDropDown});
+    const { selectedCountry, showDropDown, formattedNumber } = this.state;
+
+    let arrowClasses = classNames({"arrow": true, "up": showDropDown});
     let inputClasses = classNames({
       "form-control": true,
-      "invalid-number": !this.props.isValid(this.state.formattedNumber.replace(/\D/g, ''))
+      "invalid-number": !this.props.isValid(formattedNumber.replace(/\D/g, ''))
     });
 
-    let flagViewClasses = classNames({"flag-dropdown": true, "open-dropdown": this.state.showDropDown});
-    let inputFlagClasses = `flag ${this.state.selectedCountry.iso2}`;
+    let flagViewClasses = classNames({"flag-dropdown": true, "open-dropdown": showDropDown});
+    let inputFlagClasses = `flag ${selectedCountry.iso2}`;
 
     return (
       <div className="react-tel-input">
         <input
-          placeholder="+1 (702) 123-4567"
+          placeholder={this.state.placeholder}
           onChange={this.handleInput}
           onClick={this.handleInputClick}
           onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
           onKeyDown={this.handleInputKeyDown}
-          value={this.state.formattedNumber}
+          value={formattedNumber}
           ref="numberInput" type="tel"
           className={inputClasses}
         />
@@ -500,14 +517,14 @@ class ReactPhoneInput extends React.Component {
           <div ref='selectedFlag'
             onClick={this.handleFlagDropdownClick}
             className='selected-flag'
-            title={`${this.state.selectedCountry.name}: + ${this.state.selectedCountry.dialCode}`}
+            title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
           >
             <div className={inputFlagClasses}>
               <div className={arrowClasses}></div>
             </div>
           </div>
 
-          {this.state.showDropDown && this.getCountryDropDownList()}
+          {showDropDown && this.getCountryDropDownList()}
         </div>
       </div>
     );
@@ -526,7 +543,7 @@ ReactPhoneInput.prototype.searchCountry = memoize(function(queryString) {
 });
 
 ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, onlyCountries, defaultCountry) {
-  let secondBestGuess = find(allCountries, {iso2: defaultCountry}) || onlyCountries[0];
+  let secondBestGuess = find(allCountries, {iso2: defaultCountry}) || {};
   let bestGuess;
 
   if (trim(inputNumber) !== '') {
@@ -555,11 +572,12 @@ ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, o
 
 ReactPhoneInput.defaultProps = {
   value: '',
+  placeholder: '+1 (702) 123-4567',
   autoFormat: true,
   disableAreaCodes: false,
   onlyCountries: [],
   excludeCountries: [],
-  defaultCountry: allCountries[0].iso2,
+  defaultCountry: '',
   isValid: isNumberValid,
   flagsImagePath: './flags.png',
   onEnterKeyPress: function() {}
@@ -567,6 +585,7 @@ ReactPhoneInput.defaultProps = {
 
 ReactPhoneInput.propTypes = {
   value: React.PropTypes.string,
+  placeholder: React.PropTypes.string,
   autoFormat: React.PropTypes.bool,
   disableAreaCodes: React.PropTypes.bool,
   defaultCountry: React.PropTypes.string,
@@ -603,10 +622,16 @@ if (__DEV__) {
       <ReactPhoneInput
         value='+3802343252'
       />
-    <p>Disabled area codes</p>
+    <p>Disabled area codes with disableAreaCodes</p>
       <ReactPhoneInput
         defaultCountry='us'
         disableAreaCodes={true}
+      />
+    <p>Disabled flag by default</p>
+    <p>Custom placeholder</p>
+      <ReactPhoneInput
+        disableAreaCodes={true}
+        placeholder='Type your phone here'
       />
     </div>, document.getElementById('content')
   );
