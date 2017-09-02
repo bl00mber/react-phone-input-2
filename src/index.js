@@ -18,7 +18,7 @@ import ReactDOM from 'react-dom';
 
 import './react-phone-input-style.less';
 
-const allCountries = countryData.allCountries;
+let allCountries = countryData.allCountries;
 const isModernBrowser = Boolean(document.createElement('input').setSelectionRange);
 const keys = {
   UP: 38,
@@ -33,6 +33,12 @@ const keys = {
   SPACE: 32
 };
 
+function deleteAreaCodes() {
+  allCountries = allCountries.filter((country) => {
+    return country.isAreaCode !== true;
+  });
+}
+
 function isNumberValid(inputNumber) {
   return some(allCountries, function(country) {
     return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
@@ -42,13 +48,12 @@ function isNumberValid(inputNumber) {
 function getOnlyCountries(onlyCountriesArray) {
   if (onlyCountriesArray.length === 0) {
     return allCountries;
-  } else {
+  }
+  else {
     let selectedCountries = [];
     allCountries.map(function(country) {
       onlyCountriesArray.map(function(selCountry) {
-        if (country.iso2 === selCountry) {
-          selectedCountries.push(country);
-        }
+        country.iso2 === selCountry && selectedCountries.push(country);
       });
     });
     return selectedCountries;
@@ -69,7 +74,18 @@ class ReactPhoneInput extends React.Component {
   constructor(props) {
     super(props);
     let inputNumber = this.props.value || '';
+
+    const isAreaCodeDisabled = this.props.disableAreaCodes;
+    isAreaCodeDisabled && deleteAreaCodes();
+
     let onlyCountries = excludeCountries(getOnlyCountries(props.onlyCountries), props.excludeCountries);
+
+    let preferredCountries = filter(allCountries, (country) => {
+      return some(this.props.preferredCountries, (preferredCountry) => {
+        return preferredCountry === country.iso2;
+      });
+    });
+
     let selectedCountryGuess = (inputNumber.length > 1) ?
       this.guessSelectedCountry(inputNumber.substring(1, 6), onlyCountries, this.props.defaultCountry) :
       find(onlyCountries, {iso2: this.props.defaultCountry});
@@ -82,11 +98,6 @@ class ReactPhoneInput extends React.Component {
     ) ? selectedCountryGuess.dialCode : '';
 
     let formattedNumber = this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), selectedCountryGuess ? selectedCountryGuess.format : null);
-    let preferredCountries = filter(allCountries, (country) => {
-      return some(this.props.preferredCountries, (preferredCountry) => {
-        return preferredCountry === country.iso2;
-      });
-    });
 
     this.state = {
       preferredCountries,
@@ -545,6 +556,7 @@ ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, o
 ReactPhoneInput.defaultProps = {
   value: '',
   autoFormat: true,
+  disableAreaCodes: false,
   onlyCountries: [],
   excludeCountries: [],
   defaultCountry: allCountries[0].iso2,
@@ -556,6 +568,7 @@ ReactPhoneInput.defaultProps = {
 ReactPhoneInput.propTypes = {
   value: React.PropTypes.string,
   autoFormat: React.PropTypes.bool,
+  disableAreaCodes: React.PropTypes.bool,
   defaultCountry: React.PropTypes.string,
   onlyCountries: React.PropTypes.arrayOf(React.PropTypes.string),
   preferredCountries: React.PropTypes.arrayOf(React.PropTypes.string),
@@ -589,6 +602,11 @@ if (__DEV__) {
     <p>Auto detect through value field</p>
       <ReactPhoneInput
         value='+3802343252'
+      />
+    <p>Disabled area codes</p>
+      <ReactPhoneInput
+        defaultCountry='us'
+        disableAreaCodes={true}
       />
     </div>, document.getElementById('content')
   );

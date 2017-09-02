@@ -1256,6 +1256,7 @@ const allCountries = [].concat(...rawAllCountries.map((country) => {
   country[5] && country[5].map((areaCode) => {
     const areaItem = {...countryItem};
     areaItem.dialCode = country[2] + areaCode;
+    areaItem.isAreaCode = true;
 
     areaItems.push(areaItem);
 
