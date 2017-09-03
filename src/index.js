@@ -238,6 +238,8 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleFlagDropdownClick = () => {
+    if (!this.state.showDropdown && this.props.disabled) return;
+
     this.setState({
       showDropdown: !this.state.showDropdown,
       highlightCountry: find(this.state.onlyCountries, this.state.selectedCountry),
@@ -315,9 +317,7 @@ class ReactPhoneInput extends React.Component {
 
   handleInputClick = (e) => {
     this.setState({ showDropdown: false });
-    if (this.props.onClick) {
-      this.props.onClick(e)
-    }
+    if (this.props.onClick) this.props.onClick(e);
   }
 
   handleFlagItemClick = (country) => {
@@ -358,6 +358,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleInputBlur = (e) => {
+    if (!e.target.value) this.setState({ placeholder: this.props.placeholder });
     this.props.onBlur && this.props.onBlur(e);
   }
 
@@ -382,9 +383,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleKeydown = (event) => {
-    if (!this.state.showDropdown) {
-      return;
-    }
+    if (!this.state.showDropdown || this.props.disabled) return;
 
     // ie hack
     if (event.preventDefault) {
@@ -519,6 +518,7 @@ class ReactPhoneInput extends React.Component {
           ref={el => this.numberInputRef = el}
           type="tel"
           className={inputClasses}
+          disabled={this.props.disabled}
           style={this.props.inputStyle}
         />
 
@@ -591,6 +591,7 @@ ReactPhoneInput.defaultProps = {
   dropdownButtonStyle: {},
   dropdownStyle: {},
   autoFormat: true,
+  disabled: false,
   disableAreaCodes: false,
   onlyCountries: [],
   excludeCountries: [],
@@ -607,6 +608,7 @@ ReactPhoneInput.propTypes = {
   dropdownButtonStyle: PropTypes.object,
   dropdownStyle: PropTypes.object,
   autoFormat: PropTypes.bool,
+  disabled: PropTypes.bool,
   disableAreaCodes: PropTypes.bool,
   defaultCountry: PropTypes.string,
   onlyCountries: PropTypes.arrayOf(PropTypes.string),

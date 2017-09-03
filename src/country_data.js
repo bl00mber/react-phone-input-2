@@ -149,7 +149,8 @@ const rawAllCountries = [
   [
     "Brazil",
     "br",
-    "55"
+    "55",
+    "+.. (..) .........",
   ],
   [
     "British Indian Ocean Territory",
@@ -897,7 +898,7 @@ const rawAllCountries = [
     "Russia",
     "ru",
     "7",
-    "+. ... ...-..-..",
+    "+. (...) ...-..-..",
     0
   ],
   [
