@@ -358,9 +358,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleInputBlur = (e) => {
-    if (!e.target.value) {
-      this.setState({ placeholder: this.props.placeholder });
-    }
+    this.props.onBlur && this.props.onBlur(e);
   }
 
   getHighlightCountryIndex = (direction) => {
@@ -615,6 +613,7 @@ ReactPhoneInput.propTypes = {
   preferredCountries: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func
 };
