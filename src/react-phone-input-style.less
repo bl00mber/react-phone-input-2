@@ -1,4 +1,6 @@
 .react-tel-input {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
   position: relative;
   width: 100%;
   :disabled {
@@ -713,22 +715,20 @@
   input[type=text],
   input[type=tel] {
     position: relative;
+    font-size: 14px;
+    letter-spacing: .01rem;
     z-index: 0;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
-    padding-left: 44px;
+    padding-left: 48px;
     margin-left: 0;
     background: #FFFFFF;
     border: 1px solid #CACACA;
-    border-radius: 3px;
-    box-shadow: 0 1px 2px #E3E3E3 inset;
+    border-radius: 5px;
     line-height: 25px;
-    height: 28px;
-    width: 100%;
-    &:focus {
-      border-color: #42bdff;
-      border-left-color: #cacaca;
-    }
+    height: 35px;
+    width: 300px;
+    outline: none;
     &.invalid-number {
       border: 1px solid #d79f9f;
       background-color: #FAF0F0;
@@ -806,11 +806,10 @@
     position: absolute;
     z-index: 15;
     padding: 0;
-    margin: 0 0 0 -1px;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    margin: 10px 0 0 -1px;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.35);
     background-color: white;
-    border: 1px solid #ccc;
-    width: 400px;
+    width: 300px;
     max-height: 200px;
     overflow-y: scroll;
     border-radius: 0 0 3px 3px;
@@ -823,15 +822,15 @@
       border-bottom: 1px solid #ccc;
     }
     .country {
-      padding: 5px 10px;
+      padding: 7px 10px;
       .dial-code {
-        color: #999;
+        color: #6b6b6b;
       }
       &:hover {
-        background-color: #e8f7fe;
+        background-color: #f1f1f1;
       }
       &.highlight {
-        background-color: #c7e2f1;
+        background-color: #e8e8e8;
       }
     }
     .flag {

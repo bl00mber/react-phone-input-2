@@ -660,7 +660,7 @@ export default ReactPhoneInput;
 
 if (__DEV__) {
   render(
-    <div>
+    <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px' }}>
       <p>Exclude countries (usa, canada)</p>
       <ReactPhoneInput
         defaultCountry='no'
