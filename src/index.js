@@ -74,14 +74,14 @@ function excludeCountries(selectedCountries, excludedCountries) {
 class ReactPhoneInput extends React.Component {
   constructor(props) {
     super(props);
-    let inputNumber = this.props.value || '';
+    const inputNumber = this.props.value || '';
 
     const isAreaCodeDisabled = this.props.disableAreaCodes;
     isAreaCodeDisabled && deleteAreaCodes();
 
-    let onlyCountries = excludeCountries(getOnlyCountries(props.onlyCountries), props.excludeCountries);
+    const onlyCountries = excludeCountries(getOnlyCountries(props.onlyCountries), props.excludeCountries);
 
-    let preferredCountries = filter(allCountries, (country) => {
+    const preferredCountries = filter(allCountries, (country) => {
       return some(this.props.preferredCountries, (preferredCountry) => {
         return preferredCountry === country.iso2;
       });
@@ -99,14 +99,14 @@ class ReactPhoneInput extends React.Component {
       countryGuess = 0;
     }
 
-    let countryGuessIndex = findIndex(allCountries, countryGuess);
-    let dialCode = (
+    const countryGuessIndex = findIndex(allCountries, countryGuess);
+    const dialCode = (
       inputNumber.length < 2 &&
       countryGuess &&
       !startsWith(inputNumber.replace(/\D/g, ''), countryGuess.dialCode)
     ) ? countryGuess.dialCode : '';
 
-    let formattedNumber = (inputNumber === '' && countryGuess === 0) ? '' :
+    const formattedNumber = (inputNumber === '' && countryGuess === 0) ? '' :
       this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), countryGuess ? countryGuess.format : null);
 
     this.state = {
@@ -161,7 +161,7 @@ class ReactPhoneInput extends React.Component {
     // if inputNumber does not start with '+', then use default country's dialing prefix,
     // otherwise use logic for finding country based on country prefix.
     if (!inputNumber.startsWith('+')) {
-      const countryGuess = find(this.state.onlyCountries, {iso2: this.state.defaultCountry});
+      countryGuess = find(this.state.onlyCountries, {iso2: this.state.defaultCountry});
       const dialCode = countryGuess && !startsWith(inputNumber.replace(/\D/g, ''), countryGuess.dialCode) ? countryGuess.dialCode : '';
       formattedNumber = this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), countryGuess ? countryGuess.format : null);
     }
@@ -178,24 +178,25 @@ class ReactPhoneInput extends React.Component {
     if (!country)
       return;
 
-    let container = this.dropdownRef;
+    const container = this.dropdownRef;
 
     if (!container)
       return;
 
-    let containerHeight = container.offsetHeight;
-    let containerOffset = container.getBoundingClientRect();
-    let containerTop = containerOffset.top + document.body.scrollTop;
-    let containerBottom = containerTop + containerHeight;
+    const containerHeight = container.offsetHeight;
+    const containerOffset = container.getBoundingClientRect();
+    const containerTop = containerOffset.top + document.body.scrollTop;
+    const containerBottom = containerTop + containerHeight;
 
-    let element = country;
-    let elementOffset = element.getBoundingClientRect();
+    const element = country;
+    const elementOffset = element.getBoundingClientRect();
 
-    let elementHeight = element.offsetHeight;
-    let elementTop = elementOffset.top + document.body.scrollTop;
-    let elementBottom = elementTop + elementHeight;
+    const elementHeight = element.offsetHeight;
+    const elementTop = elementOffset.top + document.body.scrollTop;
+    const elementBottom = elementTop + elementHeight;
+
     let newScrollTop = elementTop - containerTop + container.scrollTop;
-    let middleOffset = (containerHeight / 2) - (elementHeight / 2);
+    const middleOffset = (containerHeight / 2) - (elementHeight / 2);
 
     if (elementTop < containerTop) {
       // scroll up
@@ -209,7 +210,7 @@ class ReactPhoneInput extends React.Component {
       if (middle) {
         newScrollTop += middleOffset;
       }
-      let heightDifference = containerHeight - elementHeight;
+      const heightDifference = containerHeight - elementHeight;
       container.scrollTop = newScrollTop - heightDifference;
     }
   }
@@ -225,7 +226,7 @@ class ReactPhoneInput extends React.Component {
       return `+${text}`;
     }
 
-    let formattedObject = reduce(pattern, function(acc, character) {
+    const formattedObject = reduce(pattern, function(acc, character) {
       if (acc.remainingText.length === 0) {
         return acc;
       }
@@ -250,10 +251,10 @@ class ReactPhoneInput extends React.Component {
 
   // put the cursor to the end of the input (usually after a focus event)
   cursorToEnd = () => {
-    let input = this.numberInputRef;
+    const input = this.numberInputRef;
     input.focus();
     if (isModernBrowser) {
-      let len = input.value.length;
+      const len = input.value.length;
       input.setSelectionRange(len, len);
     }
   }
@@ -277,9 +278,9 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleInput = (event) => {
-    let formattedNumber = '+',
-      newSelectedCountry = this.state.selectedCountry,
-      freezeSelection = this.state.freezeSelection;
+    let formattedNumber = '+';
+    let newSelectedCountry = this.state.selectedCountry;
+    let freezeSelection = this.state.freezeSelection;
 
     //Does not exceed 16 digit phone number limit
     if (event.target.value.replace(/\D/g, '').length > 16) {
@@ -300,7 +301,7 @@ class ReactPhoneInput extends React.Component {
 
     if (event.target.value.length > 0) {
       // before entering the number in new format, lets check if the dial code now matches some other country
-      let inputNumber = event.target.value.replace(/\D/g, '');
+      const inputNumber = event.target.value.replace(/\D/g, '');
 
       // we don't need to send the whole number to guess the country... only the first 6 characters are enough
       // the guess country function can then use memoization much more effectively since the set of input it
@@ -314,8 +315,8 @@ class ReactPhoneInput extends React.Component {
     }
 
     let caretPosition = event.target.selectionStart;
-    let oldFormattedText = this.state.formattedNumber;
-    let diff = formattedNumber.length - oldFormattedText.length;
+    const oldFormattedText = this.state.formattedNumber;
+    const diff = formattedNumber.length - oldFormattedText.length;
 
     this.setState({
       formattedNumber: formattedNumber,
@@ -346,19 +347,19 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleFlagItemClick = (country) => {
-    let currentSelectedCountry = this.state.selectedCountry;
-    let nextSelectedCountry = find(this.state.onlyCountries, country);
+    const currentSelectedCountry = this.state.selectedCountry;
+    const nextSelectedCountry = find(this.state.onlyCountries, country);
 
     if (currentSelectedCountry.iso2 !== nextSelectedCountry.iso2) {
       // TODO - the below replacement is a bug. It will replace stuff from middle too
-      let newNumber = this.state.formattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode);
-      let formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), nextSelectedCountry.format);
+      const newNumber = this.state.formattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode);
+      const formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), nextSelectedCountry.format);
 
       this.setState({
         showDropdown: false,
         selectedCountry: nextSelectedCountry,
         freezeSelection: true,
-        formattedNumber: formattedNumber
+        formattedNumber
       }, function() {
         this.cursorToEnd();
         if (this.props.onChange) {
@@ -389,7 +390,7 @@ class ReactPhoneInput extends React.Component {
 
   getHighlightCountryIndex = (direction) => {
     // had to write own function because underscore does not have findIndex. lodash has it
-    let highlightCountryIndex = this.state.highlightCountryIndex + direction;
+    const highlightCountryIndex = this.state.highlightCountryIndex + direction;
 
     if (highlightCountryIndex < 0 || highlightCountryIndex >= (this.state.onlyCountries.length + this.state.preferredCountries.length)) {
       return highlightCountryIndex - direction;
@@ -467,18 +468,18 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
-  getCountryDropDownList = () => {
+  getCountryDropdownList = () => {
     const { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown } = this.state;
 
-    let countryDropDownList = map(preferredCountries.concat(onlyCountries), (country, index) => {
-      let itemClasses = classNames({
+    let countryDropdownList = map(preferredCountries.concat(onlyCountries), (country, index) => {
+      const itemClasses = classNames({
         country: true,
         preferred: country.iso2 === 'us' || country.iso2 === 'gb',
         active: country.iso2 === 'us',
         highlight: highlightCountryIndex === index - preferredCountries.length
       });
 
-      let inputFlagClasses = `flag ${country.iso2}`;
+      const inputFlagClasses = `flag ${country.iso2}`;
 
       return (
         <li
@@ -500,7 +501,7 @@ class ReactPhoneInput extends React.Component {
     const dashedLi = (<li key={'dashes'} className='divider'/>);
     // let's insert a dashed line in between preffered countries and the rest
     (preferredCountries.length > 0) &&
-    countryDropDownList.splice(preferredCountries.length, 0, dashedLi);
+    countryDropdownList.splice(preferredCountries.length, 0, dashedLi);
 
     const dropDownClasses = classNames({
       'country-list': true,
@@ -513,7 +514,7 @@ class ReactPhoneInput extends React.Component {
         className={dropDownClasses}
         style={this.props.dropdownStyle}
       >
-        {countryDropDownList}
+        {countryDropdownList}
       </ul>
     );
   }
@@ -521,14 +522,14 @@ class ReactPhoneInput extends React.Component {
   render() {
     const { selectedCountry, showDropdown, formattedNumber } = this.state;
 
-    let arrowClasses = classNames({"arrow": true, "up": showDropdown});
-    let inputClasses = classNames({
+    const arrowClasses = classNames({"arrow": true, "up": showDropdown});
+    const inputClasses = classNames({
       "form-control": true,
       "invalid-number": !this.props.isValid(formattedNumber.replace(/\D/g, ''))
     });
 
-    let flagViewClasses = classNames({"flag-dropdown": true, "open-dropdown": showDropdown});
-    let inputFlagClasses = `flag ${selectedCountry.iso2}`;
+    const flagViewClasses = classNames({"flag-dropdown": true, "open-dropdown": showDropdown});
+    const inputFlagClasses = `flag ${selectedCountry.iso2}`;
 
     return (
       <div className="react-tel-input">
@@ -563,7 +564,7 @@ class ReactPhoneInput extends React.Component {
             </div>
           </div>
 
-          {showDropdown && this.getCountryDropDownList()}
+          {showDropdown && this.getCountryDropdownList()}
         </div>
       </div>
     );
@@ -575,14 +576,14 @@ ReactPhoneInput.prototype.searchCountry = memoize(function(queryString) {
     return null;
   }
   // don't include the preferred countries in search
-  let probableCountries = filter(this.state.onlyCountries, function(country) {
+  const probableCountries = filter(this.state.onlyCountries, function(country) {
     return startsWith(country.name.toLowerCase(), queryString.toLowerCase());
   }, this);
   return probableCountries[0];
 });
 
 ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, onlyCountries, defaultCountry) {
-  let secondBestGuess = find(allCountries, {iso2: defaultCountry}) || {};
+  const secondBestGuess = find(allCountries, {iso2: defaultCountry}) || {};
   let bestGuess;
 
   if (trim(inputNumber) !== '') {
