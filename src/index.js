@@ -486,6 +486,7 @@ class ReactPhoneInput extends React.Component {
       <ul
         ref={el => this.dropdownRef = el}
         className={dropDownClasses}
+        style={this.props.dropdownStyle}
       >
         {countryDropDownList}
       </ul>
@@ -517,10 +518,12 @@ class ReactPhoneInput extends React.Component {
           ref={el => this.numberInputRef = el}
           type="tel"
           className={inputClasses}
+          style={this.props.inputStyle}
         />
 
         <div
           className={flagViewClasses}
+          style={this.props.dropdownButtonStyle}
           onKeyDown={this.handleKeydown}
           ref={el => this.dropdownContainerRef = el}
         >
@@ -583,6 +586,9 @@ ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, o
 ReactPhoneInput.defaultProps = {
   value: '',
   placeholder: '+1 (702) 123-4567',
+  inputStyle: {},
+  dropdownButtonStyle: {},
+  dropdownStyle: {},
   autoFormat: true,
   disableAreaCodes: false,
   onlyCountries: [],
@@ -596,6 +602,9 @@ ReactPhoneInput.defaultProps = {
 ReactPhoneInput.propTypes = {
   value: PropTypes.string,
   placeholder: PropTypes.string,
+  inputStyle: PropTypes.object,
+  dropdownButtonStyle: PropTypes.object,
+  dropdownStyle: PropTypes.object,
   autoFormat: PropTypes.bool,
   disableAreaCodes: PropTypes.bool,
   defaultCountry: PropTypes.string,
@@ -639,9 +648,19 @@ if (__DEV__) {
       />
     <p>Disabled flag by default</p>
     <p>Custom placeholder</p>
+    <p>Custom styles</p>
       <ReactPhoneInput
         disableAreaCodes={true}
         placeholder='Type your phone here'
+        inputStyle={{
+          width: '300px',
+          height: '35px',
+          fontSize: '13px',
+          paddingLeft: '48px',
+          borderRadius: '5px'
+        }}
+        dropdownButtonStyle={{ borderRadius: '5px 0 0 5px' }}
+        dropdownStyle={{ width: '300px' }}
       />
     </div>, document.getElementById('content')
   );

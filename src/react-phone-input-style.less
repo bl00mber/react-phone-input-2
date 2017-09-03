@@ -747,7 +747,6 @@
     border-radius: 3px 0 0 3px;
     &.open-dropdown {
       background: #fff;
-      border-bottom: 0;
       border-radius: 3px 0 0 0;
       .selected-flag {
         background: #fff;
@@ -775,7 +774,7 @@
     z-index: 13;
     position: relative;
     width: 38px;
-    height: 26px;
+    height: 100%;
     padding: 0 0 0 8px;
     border-radius: 3px 0 0 3px;
     .flag {
@@ -804,7 +803,7 @@
     position: absolute;
     z-index: 15;
     padding: 0;
-    margin: -1px 0 0 -1px;
+    margin: 0 0 0 -1px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     background-color: white;
     border: 1px solid #ccc;
@@ -812,7 +811,6 @@
     max-height: 200px;
     overflow-y: scroll;
     border-radius: 0 0 3px 3px;
-    top: 26px;
     .flag {
       display: inline-block;
     }
