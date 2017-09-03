@@ -524,7 +524,7 @@ class ReactPhoneInput extends React.Component {
 
         <div
           className={flagViewClasses}
-          style={this.props.dropdownButtonStyle}
+          style={this.props.buttonStyle}
           onKeyDown={this.handleKeydown}
           ref={el => this.dropdownContainerRef = el}
         >
@@ -585,34 +585,44 @@ ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, o
 });
 
 ReactPhoneInput.defaultProps = {
+  excludeCountries: [],
+  onlyCountries: [],
+  preferredCountries: [],
+
+  defaultCountry: '',
   value: '',
   placeholder: '+1 (702) 123-4567',
+  flagsImagePath: './flags.png',
+
   inputStyle: {},
-  dropdownButtonStyle: {},
+  buttonStyle: {},
   dropdownStyle: {},
+
   autoFormat: true,
   disabled: false,
   disableAreaCodes: false,
-  onlyCountries: [],
-  excludeCountries: [],
-  defaultCountry: '',
   isValid: isNumberValid,
-  flagsImagePath: './flags.png',
+
   onEnterKeyPress: function() {}
 };
 
 ReactPhoneInput.propTypes = {
+  excludeCountries: PropTypes.arrayOf(PropTypes.string),
+  onlyCountries: PropTypes.arrayOf(PropTypes.string),
+  preferredCountries: PropTypes.arrayOf(PropTypes.string),
+
+  defaultCountry: PropTypes.string,
   value: PropTypes.string,
   placeholder: PropTypes.string,
+
   inputStyle: PropTypes.object,
-  dropdownButtonStyle: PropTypes.object,
+  buttonStyle: PropTypes.object,
   dropdownStyle: PropTypes.object,
+
   autoFormat: PropTypes.bool,
   disabled: PropTypes.bool,
   disableAreaCodes: PropTypes.bool,
-  defaultCountry: PropTypes.string,
-  onlyCountries: PropTypes.arrayOf(PropTypes.string),
-  preferredCountries: PropTypes.arrayOf(PropTypes.string),
+
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
@@ -663,7 +673,7 @@ if (__DEV__) {
           paddingLeft: '48px',
           borderRadius: '5px'
         }}
-        dropdownButtonStyle={{ borderRadius: '5px 0 0 5px' }}
+        buttonStyle={{ borderRadius: '5px 0 0 5px' }}
         dropdownStyle={{ width: '300px' }}
       />
     </div>, document.getElementById('content')
