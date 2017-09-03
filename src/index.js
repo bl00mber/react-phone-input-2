@@ -12,6 +12,7 @@ import { findIndex, head, tail } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
 import React from 'react';
+import PropTypes from 'prop-types';
 import countryData from './country_data.js';
 import classNames from 'classnames';
 import { render } from 'react-dom';
@@ -593,17 +594,17 @@ ReactPhoneInput.defaultProps = {
 };
 
 ReactPhoneInput.propTypes = {
-  value: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
-  autoFormat: React.PropTypes.bool,
-  disableAreaCodes: React.PropTypes.bool,
-  defaultCountry: React.PropTypes.string,
-  onlyCountries: React.PropTypes.arrayOf(React.PropTypes.string),
-  preferredCountries: React.PropTypes.arrayOf(React.PropTypes.string),
-  onChange: React.PropTypes.func,
-  onFocus: React.PropTypes.func,
-  onClick: React.PropTypes.func,
-  onKeyDown: React.PropTypes.func
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  autoFormat: PropTypes.bool,
+  disableAreaCodes: PropTypes.bool,
+  defaultCountry: PropTypes.string,
+  onlyCountries: PropTypes.arrayOf(PropTypes.string),
+  preferredCountries: PropTypes.arrayOf(PropTypes.string),
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onClick: PropTypes.func,
+  onKeyDown: PropTypes.func
 };
 
 export default ReactPhoneInput;
