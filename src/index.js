@@ -446,12 +446,14 @@ class ReactPhoneInput extends React.Component {
   }
 
   getCountryDropDownList = () => {
-    let countryDropDownList = map(this.state.preferredCountries.concat(this.state.onlyCountries), (country, index) => {
+    const { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown } = this.state;
+
+    let countryDropDownList = map(preferredCountries.concat(onlyCountries), (country, index) => {
       let itemClasses = classNames({
         country: true,
         preferred: country.iso2 === 'us' || country.iso2 === 'gb',
         active: country.iso2 === 'us',
-        highlight: this.state.highlightCountryIndex === index - this.state.preferredCountries.length
+        highlight: highlightCountryIndex === index - preferredCountries.length
       });
 
       let inputFlagClasses = `flag ${country.iso2}`;
@@ -475,11 +477,12 @@ class ReactPhoneInput extends React.Component {
 
     const dashedLi = (<li key={'dashes'} className='divider'/>);
     // let's insert a dashed line in between preffered countries and the rest
-    countryDropDownList.splice(this.state.preferredCountries.length, 0, dashedLi);
+    (preferredCountries.length > 0) &&
+    countryDropDownList.splice(preferredCountries.length, 0, dashedLi);
 
     const dropDownClasses = classNames({
       'country-list': true,
-      'hide': !this.state.showDropdown
+      'hide': !showDropdown
     });
 
     return (
