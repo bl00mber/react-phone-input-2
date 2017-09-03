@@ -117,24 +117,26 @@ class ReactPhoneInput extends React.Component {
       selectedCountry: selectedCountryGuess,
       highlightCountryIndex: selectedCountryGuessIndex,
       queryString: '',
-      showDropDown: false,
+      showDropdown: false,
       freezeSelection: false,
       debouncedQueryStingSearcher: debounce(this.searchCountry, 100)
     };
   }
 
   componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
     document.addEventListener('keydown', this.handleKeydown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+    document.removeEventListener('keydown', this.handleKeydown);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.defaultCountry && nextProps.defaultCountry !== this.state.defaultCountry) {
       this.updateDefaultCountry(nextProps.defaultCountry);
     }
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeydown);
   }
 
   updateDefaultCountry = (country) => {
@@ -150,7 +152,7 @@ class ReactPhoneInput extends React.Component {
     if (!country)
       return;
 
-    let container = this.flagDropdownList;
+    let container = this.dropdownRef;
 
     if (!container)
       return;
@@ -222,7 +224,7 @@ class ReactPhoneInput extends React.Component {
 
   // put the cursor to the end of the input (usually after a focus event)
   cursorToEnd = () => {
-    let input = this.numberInput;
+    let input = this.numberInputRef;
     input.focus();
     if (isModernBrowser) {
       let len = input.value.length;
@@ -235,13 +237,12 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleFlagDropdownClick = () => {
-    // need to put the highlight on the current selected country if the dropdown is going to open up
     this.setState({
-      showDropDown: !this.state.showDropDown,
+      showDropdown: !this.state.showDropdown,
       highlightCountry: find(this.state.onlyCountries, this.state.selectedCountry),
       highlightCountryIndex: findIndex(this.state.onlyCountries, this.state.selectedCountry)
     }, () => {
-      if (this.state.showDropDown) {
+      if (this.state.showDropdown) {
         this.scrollTo(this.getElement(this.state.highlightCountryIndex + this.state.preferredCountries.length));
       }
     });
@@ -301,7 +302,7 @@ class ReactPhoneInput extends React.Component {
         }
 
         if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
-          this.numberInput.setSelectionRange(caretPosition, caretPosition);
+          this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
         }
       }
 
@@ -312,7 +313,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleInputClick = (e) => {
-    this.setState({showDropDown: false});
+    this.setState({ showDropdown: false });
     if (this.props.onClick) {
       this.props.onClick(e)
     }
@@ -328,7 +329,7 @@ class ReactPhoneInput extends React.Component {
       let formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), nextSelectedCountry.format);
 
       this.setState({
-        showDropDown: false,
+        showDropdown: false,
         selectedCountry: nextSelectedCountry,
         freezeSelection: true,
         formattedNumber: formattedNumber
@@ -343,7 +344,7 @@ class ReactPhoneInput extends React.Component {
 
   handleInputFocus = (e) => {
     // if the input is blank, insert dial code of the selected country
-    if (this.numberInput.value === '+' && this.state.selectedCountry) {
+    if (this.numberInputRef.value === '+' && this.state.selectedCountry) {
       this.setState({
         formattedNumber: '+' + this.state.selectedCountry.dialCode
       }, () => setTimeout(this.cursorToEnd, 10));
@@ -382,7 +383,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleKeydown = (event) => {
-    if (!this.state.showDropDown) {
+    if (!this.state.showDropdown) {
       return;
     }
 
@@ -415,7 +416,7 @@ class ReactPhoneInput extends React.Component {
         break;
       case keys.ESC:
         this.setState({
-          showDropDown: false
+          showDropdown: false
         }, this.cursorToEnd);
         break;
       default:
@@ -437,9 +438,9 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
-  handleClickOutside = () => {
-    if (this.state.showDropDown) {
-      this.setState({showDropDown: false});
+  handleClickOutside = (e) => {
+    if (this.dropdownRef && !this.dropdownContainerRef.contains(e.target)) {
+      this.state.showDropdown && this.setState({ showDropdown: false });
     }
   }
 
@@ -477,28 +478,29 @@ class ReactPhoneInput extends React.Component {
 
     const dropDownClasses = classNames({
       'country-list': true,
-      'hide': !this.state.showDropDown
+      'hide': !this.state.showDropdown
     });
 
     return (
       <ul
-        ref={el => this.flagDropdownList = el}
-        className={dropDownClasses}>
+        ref={el => this.dropdownRef = el}
+        className={dropDownClasses}
+      >
         {countryDropDownList}
       </ul>
     );
   }
 
   render() {
-    const { selectedCountry, showDropDown, formattedNumber } = this.state;
+    const { selectedCountry, showDropdown, formattedNumber } = this.state;
 
-    let arrowClasses = classNames({"arrow": true, "up": showDropDown});
+    let arrowClasses = classNames({"arrow": true, "up": showDropdown});
     let inputClasses = classNames({
       "form-control": true,
       "invalid-number": !this.props.isValid(formattedNumber.replace(/\D/g, ''))
     });
 
-    let flagViewClasses = classNames({"flag-dropdown": true, "open-dropdown": showDropDown});
+    let flagViewClasses = classNames({"flag-dropdown": true, "open-dropdown": showDropdown});
     let inputFlagClasses = `flag ${selectedCountry.iso2}`;
 
     return (
@@ -511,7 +513,7 @@ class ReactPhoneInput extends React.Component {
           onBlur={this.handleInputBlur}
           onKeyDown={this.handleInputKeyDown}
           value={formattedNumber}
-          ref={el => this.numberInput = el}
+          ref={el => this.numberInputRef = el}
           type="tel"
           className={inputClasses}
         />
@@ -519,6 +521,7 @@ class ReactPhoneInput extends React.Component {
         <div
           className={flagViewClasses}
           onKeyDown={this.handleKeydown}
+          ref={el => this.dropdownContainerRef = el}
         >
           <div
             onClick={this.handleFlagDropdownClick}
@@ -530,7 +533,7 @@ class ReactPhoneInput extends React.Component {
             </div>
           </div>
 
-          {showDropDown && this.getCountryDropDownList()}
+          {showDropdown && this.getCountryDropDownList()}
         </div>
       </div>
     );
