@@ -15,7 +15,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import countryData from './country_data.js';
 import classNames from 'classnames';
-import { render } from 'react-dom';
 
 import './react-phone-input-style.less';
 
@@ -50,8 +49,6 @@ class ReactPhoneInput extends React.Component {
   }
 
   static defaultProps = {
-    allCountries: countryData.allCountries,
-
     excludeCountries: [],
     onlyCountries: [],
     preferredCountries: [],
@@ -87,7 +84,7 @@ class ReactPhoneInput extends React.Component {
 
   constructor(props) {
     super(props);
-    let filteredCountries = this.props.allCountries;
+    let filteredCountries = countryData.allCountries;
 
     if (props.disableAreaCodes) filteredCountries = this.deleteAreaCodes(filteredCountries);
     if (props.regions) filteredCountries = this.filterRegions(props.regions, filteredCountries);
@@ -95,7 +92,7 @@ class ReactPhoneInput extends React.Component {
     const onlyCountries = this.excludeCountries(
       this.getOnlyCountries(props.onlyCountries, filteredCountries), props.excludeCountries);
 
-    const preferredCountries = filter(this.allCountries, (country) => {
+    const preferredCountries = filter(countryData.allCountries, (country) => {
       return some(props.preferredCountries, (preferredCountry) => {
         return preferredCountry === country.iso2;
       });
@@ -647,7 +644,7 @@ ReactPhoneInput.prototype.searchCountry = memoize(function(queryString) {
 });
 
 ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, onlyCountries, defaultCountry) {
-  const secondBestGuess = find(this.props.allCountries, {iso2: defaultCountry}) || {};
+  const secondBestGuess = find(onlyCountries, {iso2: defaultCountry}) || {};
   let bestGuess;
 
   if (trim(inputNumber) !== '') {
@@ -676,66 +673,4 @@ ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, o
 
 export default ReactPhoneInput;
 
-if (__DEV__) {
-  render(
-    <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px' }}>
-      <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
-        <p>v1.2.1</p>
-        <p>Exclude countries (usa, canada)</p>
-        <ReactPhoneInput
-          defaultCountry='no'
-          excludeCountries={['us', 'ca']}
-        />
-        <p>Only countries</p>
-        <ReactPhoneInput
-          defaultCountry='gb'
-          onlyCountries={['gb', 'es']}
-        />
-        <p>Preferred countries</p>
-        <ReactPhoneInput
-          defaultCountry='it'
-          preferredCountries={['it', 'se']}
-        />
-      </div>
-
-      <div style={{ display: 'inline-block', marginLeft: '30px' }}>
-        <p>v2.0.0</p>
-        <p>Auto detect through value field</p>
-        <ReactPhoneInput
-          value='+3802343252'
-        />
-        <p>Disabled area codes with disableAreaCodes</p>
-        <ReactPhoneInput
-          defaultCountry='us'
-          disableAreaCodes={true}
-        />
-        <p>Disabled flag by default</p>
-        <p>Customizable placeholder</p>
-        <p>Customizable styles</p>
-        <ReactPhoneInput
-          disableAreaCodes={true}
-          placeholder='Type your phone here'
-          inputStyle={{
-            width: '300px',
-            height: '35px',
-            fontSize: '13px',
-            paddingLeft: '48px',
-            borderRadius: '5px'
-          }}
-          buttonStyle={{ borderRadius: '5px 0 0 5px' }}
-          dropdownStyle={{ width: '300px' }}
-        />
-        <p>Custom regions selected: {`{'europe'}`}</p>
-        <ReactPhoneInput
-          defaultCountry='it'
-          regions={'europe'}
-        />
-        <p>Custom regions selected: {`{['north-america', 'carribean']}`}</p>
-        <ReactPhoneInput
-          defaultCountry='ca'
-          regions={['north-america', 'carribean']}
-        />
-      </div>
-    </div>, document.getElementById('root')
-  );
-}
+if (__DEV__) require('./demo.js');
