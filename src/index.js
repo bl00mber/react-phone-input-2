@@ -29,6 +29,11 @@ class ReactPhoneInput extends React.Component {
     value: PropTypes.string,
     placeholder: PropTypes.string,
 
+    regions: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array
+    ]),
+
     inputStyle: PropTypes.object,
     buttonStyle: PropTypes.object,
     dropdownStyle: PropTypes.object,
@@ -45,6 +50,8 @@ class ReactPhoneInput extends React.Component {
   }
 
   static defaultProps = {
+    allCountries: countryData.allCountries,
+
     excludeCountries: [],
     onlyCountries: [],
     preferredCountries: [],
@@ -53,6 +60,8 @@ class ReactPhoneInput extends React.Component {
     value: '',
     placeholder: '+1 (702) 123-4567',
     flagsImagePath: './flags.png',
+
+    regions: '',
 
     inputStyle: {},
     buttonStyle: {},
@@ -78,28 +87,29 @@ class ReactPhoneInput extends React.Component {
 
   constructor(props) {
     super(props);
-    this.allCountries = countryData.allCountries;
+    let filteredCountries = this.props.allCountries;
 
-    const inputNumber = this.props.value || '';
+    if (props.disableAreaCodes) filteredCountries = this.deleteAreaCodes(filteredCountries);
+    if (props.regions) filteredCountries = this.filterRegions(props.regions, filteredCountries);
 
-    const isAreaCodeDisabled = this.props.disableAreaCodes;
-    if (isAreaCodeDisabled) this.allCountries = this.deleteAreaCodes();
-
-    const onlyCountries = this.excludeCountries(this.getOnlyCountries(props.onlyCountries), props.excludeCountries);
+    const onlyCountries = this.excludeCountries(
+      this.getOnlyCountries(props.onlyCountries, filteredCountries), props.excludeCountries);
 
     const preferredCountries = filter(this.allCountries, (country) => {
-      return some(this.props.preferredCountries, (preferredCountry) => {
+      return some(props.preferredCountries, (preferredCountry) => {
         return preferredCountry === country.iso2;
       });
     });
 
+    const inputNumber = props.value || '';
+
     let countryGuess;
     if (inputNumber.length > 1) {
       // Country detect by value field
-      countryGuess = this.guessSelectedCountry(inputNumber.substring(1, 6), onlyCountries, this.props.defaultCountry);
-    } else if (this.props.defaultCountry) {
+      countryGuess = this.guessSelectedCountry(inputNumber.substring(1, 6), onlyCountries, props.defaultCountry) || 0;
+    } else if (props.defaultCountry) {
       // Default country
-      countryGuess = find(onlyCountries, {iso2: this.props.defaultCountry});
+      countryGuess = find(onlyCountries, {iso2: props.defaultCountry}) || 0;
     } else {
       // Empty params
       countryGuess = 0;
@@ -117,7 +127,7 @@ class ReactPhoneInput extends React.Component {
 
     this.state = {
       formattedNumber,
-      placeholder: this.props.placeholder,
+      placeholder: props.placeholder,
       onlyCountries,
       preferredCountries,
       defaultCountry: props.defaultCountry,
@@ -579,25 +589,40 @@ class ReactPhoneInput extends React.Component {
   }
 }
 
-ReactPhoneInput.prototype.deleteAreaCodes = function() {
-  return this.allCountries.filter((country) => {
+ReactPhoneInput.prototype.deleteAreaCodes = function(filteredCountries) {
+  return filteredCountries.filter((country) => {
     return country.isAreaCode !== true;
   });
 };
 
-ReactPhoneInput.prototype.getOnlyCountries = function(onlyCountriesArray) {
-  if (onlyCountriesArray.length === 0) {
-    return this.allCountries;
-  }
-  else {
-    let selectedCountries = [];
-    this.allCountries.map(function(country) {
-      onlyCountriesArray.map(function(selCountry) {
-        country.iso2 === selCountry && selectedCountries.push(country);
+ReactPhoneInput.prototype.filterRegions = function(regions, filteredCountries) {
+  if (typeof regions === 'string') {
+    const region = regions;
+    return filteredCountries.filter((country) => {
+      return country.regions.some((element) => {
+        return element === region;
       });
     });
-    return selectedCountries;
   }
+
+  return filteredCountries.filter((country) => {
+    const matches = regions.map((region) => {
+      return country.regions.some((element) => {
+        return element === region;
+      });
+    });
+    return matches.some(el => el);
+  });
+};
+
+ReactPhoneInput.prototype.getOnlyCountries = function(onlyCountriesArray, filteredCountries) {
+  if (onlyCountriesArray.length === 0) return filteredCountries;
+
+  return filteredCountries.filter((country) => {
+    return onlyCountriesArray.some((element) => {
+      return element === country.iso2;
+    });
+  });
 };
 
 ReactPhoneInput.prototype.excludeCountries = function(selectedCountries, excludedCountries) {
@@ -622,7 +647,7 @@ ReactPhoneInput.prototype.searchCountry = memoize(function(queryString) {
 });
 
 ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, onlyCountries, defaultCountry) {
-  const secondBestGuess = find(this.allCountries, {iso2: defaultCountry}) || {};
+  const secondBestGuess = find(this.props.allCountries, {iso2: defaultCountry}) || {};
   let bestGuess;
 
   if (trim(inputNumber) !== '') {
@@ -700,10 +725,15 @@ if (__DEV__) {
           buttonStyle={{ borderRadius: '5px 0 0 5px' }}
           dropdownStyle={{ width: '300px' }}
         />
-        <p>Custom regions: (europe selected)</p>
+        <p>Custom regions selected: {`{'europe'}`}</p>
         <ReactPhoneInput
           defaultCountry='it'
-          regions={['europe']}
+          regions={'europe'}
+        />
+        <p>Custom regions selected: {`{['north-america', 'carribean']}`}</p>
+        <ReactPhoneInput
+          defaultCountry='ca'
+          regions={['north-america', 'carribean']}
         />
       </div>
     </div>, document.getElementById('root')
