@@ -31,7 +31,7 @@ const rawAllCountries = [
   ],
   [
     "Algeria",
-    ['africa'],
+    ['africa', 'north-africa'],
     "dz",
     "213"
   ],
@@ -1230,7 +1230,7 @@ const rawAllCountries = [
   ],
   [
     "South Sudan",
-    ['africa'],
+    ['africa', 'north-africa'],
     "ss",
     "211"
   ],

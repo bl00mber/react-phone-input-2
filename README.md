@@ -107,6 +107,40 @@ function handleOnChange(value) {
   </tr>
 </table>
 
+### Regions
+
+You can specify custom regions use string or array of strings.
+
+<table>
+  <tr>
+    <th> Regions </th>
+  </tr>
+  <tr>
+    <td> ['america', 'europe', 'asia', 'oceania', 'africa'] </td>
+  </tr>
+  <tr>
+    <th> Subregions (used region property too) </th>
+  </tr>
+  <tr>
+    <td> ['north-america', 'south-america', 'central-america', 'carribean', 'european-union', 'ex-ussr', 'middle-east', 'north-africa'] </td>
+  </tr>
+</table>
+
+Region selected: {'europe'}
+```jsx
+<ReactPhoneInput
+  defaultCountry='it'
+  regions={'europe'}
+/>
+```
+
+Regions selected: {['north-america', 'carribean']}
+```jsx
+<ReactPhoneInput
+  defaultCountry='ca'
+  regions={['north-america', 'carribean']}
+/>
+```
 ### Supported events
 
 <table>
