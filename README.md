@@ -1,7 +1,7 @@
 # react-phone-input-2
 Highly customizable phone input component with auto formatting.
 
-<!-- ![alt tag](http://i.giphy.com/l41m24L5YTSOifyW4.gif) -->
+![alt tag](https://media.giphy.com/media/l378A8qFNzgiuPUre/giphy.gif)
 
 ## Installation
 

@@ -1,13 +1,6 @@
 // TODO - fix the onlyContries props. Currently expects that as an array of country object, but users should be able to send in array of country isos
 
-import {
-  some,
-  find,
-  reduce,
-  map,
-  filter,
-  includes
-} from 'lodash/collection';
+import { some, find, reduce, map, filter, includes } from 'lodash/collection';
 import { findIndex, head, tail } from 'lodash/array';
 import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
