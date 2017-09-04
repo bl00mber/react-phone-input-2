@@ -19,69 +19,75 @@ import { render } from 'react-dom';
 
 import './react-phone-input-style.less';
 
-let allCountries = countryData.allCountries;
-const isModernBrowser = Boolean(document.createElement('input').setSelectionRange);
-const keys = {
-  UP: 38,
-  DOWN: 40,
-  RIGHT: 39,
-  LEFT: 37,
-  ENTER: 13,
-  ESC: 27,
-  PLUS: 43,
-  A: 65,
-  Z: 90,
-  SPACE: 32
-};
-
-function deleteAreaCodes() {
-  allCountries = allCountries.filter((country) => {
-    return country.isAreaCode !== true;
-  });
-}
-
-function isNumberValid(inputNumber) {
-  return some(allCountries, function(country) {
-    return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
-  });
-}
-
-function getOnlyCountries(onlyCountriesArray) {
-  if (onlyCountriesArray.length === 0) {
-    return allCountries;
-  }
-  else {
-    let selectedCountries = [];
-    allCountries.map(function(country) {
-      onlyCountriesArray.map(function(selCountry) {
-        country.iso2 === selCountry && selectedCountries.push(country);
-      });
-    });
-    return selectedCountries;
-  }
-}
-
-function excludeCountries(selectedCountries, excludedCountries) {
-  if (excludedCountries.length === 0) {
-    return selectedCountries;
-  } else {
-    return filter(selectedCountries, function(selCountry) {
-      return !includes(excludedCountries, selCountry.iso2);
-    });
-  }
-}
-
 class ReactPhoneInput extends React.Component {
+  static propTypes = {
+    excludeCountries: PropTypes.arrayOf(PropTypes.string),
+    onlyCountries: PropTypes.arrayOf(PropTypes.string),
+    preferredCountries: PropTypes.arrayOf(PropTypes.string),
+
+    defaultCountry: PropTypes.string,
+    value: PropTypes.string,
+    placeholder: PropTypes.string,
+
+    inputStyle: PropTypes.object,
+    buttonStyle: PropTypes.object,
+    dropdownStyle: PropTypes.object,
+
+    autoFormat: PropTypes.bool,
+    disabled: PropTypes.bool,
+    disableAreaCodes: PropTypes.bool,
+
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onClick: PropTypes.func,
+    onKeyDown: PropTypes.func
+  }
+
+  static defaultProps = {
+    excludeCountries: [],
+    onlyCountries: [],
+    preferredCountries: [],
+
+    defaultCountry: '',
+    value: '',
+    placeholder: '+1 (702) 123-4567',
+    flagsImagePath: './flags.png',
+
+    inputStyle: {},
+    buttonStyle: {},
+    dropdownStyle: {},
+
+    autoFormat: true,
+    disabled: false,
+    disableAreaCodes: false,
+    isValid: function(inputNumber) {
+      return some(countryData.allCountries, function(country) {
+        return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
+      });
+    },
+
+    onEnterKeyPress: function() {},
+
+    isModernBrowser: Boolean(document.createElement('input').setSelectionRange),
+    keys: {
+      UP: 38, DOWN: 40, RIGHT: 39, LEFT: 37, ENTER: 13,
+      ESC: 27, PLUS: 43, A: 65, Z: 90, SPACE: 32
+    }
+  }
+
   constructor(props) {
     super(props);
+    this.allCountries = countryData.allCountries;
+
     const inputNumber = this.props.value || '';
 
     const isAreaCodeDisabled = this.props.disableAreaCodes;
-    isAreaCodeDisabled && deleteAreaCodes();
+    if (isAreaCodeDisabled) this.allCountries = this.deleteAreaCodes();
 
-    const onlyCountries = excludeCountries(getOnlyCountries(props.onlyCountries), props.excludeCountries);
+    const onlyCountries = this.excludeCountries(this.getOnlyCountries(props.onlyCountries), props.excludeCountries);
 
-    const preferredCountries = filter(allCountries, (country) => {
+    const preferredCountries = filter(this.allCountries, (country) => {
       return some(this.props.preferredCountries, (preferredCountry) => {
         return preferredCountry === country.iso2;
       });
@@ -99,7 +105,7 @@ class ReactPhoneInput extends React.Component {
       countryGuess = 0;
     }
 
-    const countryGuessIndex = findIndex(allCountries, countryGuess);
+    const countryGuessIndex = findIndex(this.allCountries, countryGuess);
     const dialCode = (
       inputNumber.length < 2 &&
       countryGuess &&
@@ -112,8 +118,8 @@ class ReactPhoneInput extends React.Component {
     this.state = {
       formattedNumber,
       placeholder: this.props.placeholder,
-      preferredCountries,
       onlyCountries,
+      preferredCountries,
       defaultCountry: props.defaultCountry,
       selectedCountry: countryGuess,
       highlightCountryIndex: countryGuessIndex,
@@ -253,7 +259,7 @@ class ReactPhoneInput extends React.Component {
   cursorToEnd = () => {
     const input = this.numberInputRef;
     input.focus();
-    if (isModernBrowser) {
+    if (this.props.isModernBrowser) {
       const len = input.value.length;
       input.setSelectionRange(len, len);
     }
@@ -325,7 +331,7 @@ class ReactPhoneInput extends React.Component {
         ? newSelectedCountry
         : this.state.selectedCountry
     }, () => {
-      if (isModernBrowser) {
+      if (this.props.isModernBrowser) {
         if (diff > 0) {
           caretPosition = caretPosition - diff;
         }
@@ -409,6 +415,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleKeydown = (event) => {
+    const { keys } = this.props;
     if (!this.state.showDropdown || this.props.disabled) return;
 
     // ie hack
@@ -453,6 +460,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleInputKeyDown = (event) => {
+    const { keys } = this.props;
     if (event.which === keys.ENTER) {
       this.props.onEnterKeyPress(event);
     }
@@ -571,6 +579,37 @@ class ReactPhoneInput extends React.Component {
   }
 }
 
+ReactPhoneInput.prototype.deleteAreaCodes = function() {
+  return this.allCountries.filter((country) => {
+    return country.isAreaCode !== true;
+  });
+};
+
+ReactPhoneInput.prototype.getOnlyCountries = function(onlyCountriesArray) {
+  if (onlyCountriesArray.length === 0) {
+    return this.allCountries;
+  }
+  else {
+    let selectedCountries = [];
+    this.allCountries.map(function(country) {
+      onlyCountriesArray.map(function(selCountry) {
+        country.iso2 === selCountry && selectedCountries.push(country);
+      });
+    });
+    return selectedCountries;
+  }
+};
+
+ReactPhoneInput.prototype.excludeCountries = function(selectedCountries, excludedCountries) {
+  if (excludedCountries.length === 0) {
+    return selectedCountries;
+  } else {
+    return filter(selectedCountries, function(selCountry) {
+      return !includes(excludedCountries, selCountry.iso2);
+    });
+  }
+};
+
 ReactPhoneInput.prototype.searchCountry = memoize(function(queryString) {
   if (!queryString || queryString.length === 0) {
     return null;
@@ -583,7 +622,7 @@ ReactPhoneInput.prototype.searchCountry = memoize(function(queryString) {
 });
 
 ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, onlyCountries, defaultCountry) {
-  const secondBestGuess = find(allCountries, {iso2: defaultCountry}) || {};
+  const secondBestGuess = find(this.allCountries, {iso2: defaultCountry}) || {};
   let bestGuess;
 
   if (trim(inputNumber) !== '') {
@@ -610,98 +649,63 @@ ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, o
   return bestGuess;
 });
 
-ReactPhoneInput.defaultProps = {
-  excludeCountries: [],
-  onlyCountries: [],
-  preferredCountries: [],
-
-  defaultCountry: '',
-  value: '',
-  placeholder: '+1 (702) 123-4567',
-  flagsImagePath: './flags.png',
-
-  inputStyle: {},
-  buttonStyle: {},
-  dropdownStyle: {},
-
-  autoFormat: true,
-  disabled: false,
-  disableAreaCodes: false,
-  isValid: isNumberValid,
-
-  onEnterKeyPress: function() {}
-};
-
-ReactPhoneInput.propTypes = {
-  excludeCountries: PropTypes.arrayOf(PropTypes.string),
-  onlyCountries: PropTypes.arrayOf(PropTypes.string),
-  preferredCountries: PropTypes.arrayOf(PropTypes.string),
-
-  defaultCountry: PropTypes.string,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-
-  inputStyle: PropTypes.object,
-  buttonStyle: PropTypes.object,
-  dropdownStyle: PropTypes.object,
-
-  autoFormat: PropTypes.bool,
-  disabled: PropTypes.bool,
-  disableAreaCodes: PropTypes.bool,
-
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onClick: PropTypes.func,
-  onKeyDown: PropTypes.func
-};
-
 export default ReactPhoneInput;
 
 if (__DEV__) {
   render(
     <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px' }}>
-      <p>Exclude countries (usa, canada)</p>
-      <ReactPhoneInput
-        defaultCountry='no'
-        excludeCountries={['us', 'ca']}
-      />
-      <p>Only countries</p>
-      <ReactPhoneInput
-        defaultCountry='gb'
-        onlyCountries={['gb', 'es']}
-      />
-      <p>Preferred countries</p>
-      <ReactPhoneInput
-        defaultCountry='it'
-        preferredCountries={['it', 'se']}
-      />
-      <p>v2.0.0</p>
-      <p>Auto detect through value field</p>
-      <ReactPhoneInput
-        value='+3802343252'
-      />
-      <p>Disabled area codes with disableAreaCodes</p>
-      <ReactPhoneInput
-        defaultCountry='us'
-        disableAreaCodes={true}
-      />
-      <p>Disabled flag by default</p>
-      <p>Custom placeholder</p>
-      <p>Custom styles</p>
-      <ReactPhoneInput
-        disableAreaCodes={true}
-        placeholder='Type your phone here'
-        inputStyle={{
-          width: '300px',
-          height: '35px',
-          fontSize: '13px',
-          paddingLeft: '48px',
-          borderRadius: '5px'
-        }}
-        buttonStyle={{ borderRadius: '5px 0 0 5px' }}
-        dropdownStyle={{ width: '300px' }}
-      />
+      <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
+        <p>v1.2.1</p>
+        <p>Exclude countries (usa, canada)</p>
+        <ReactPhoneInput
+          defaultCountry='no'
+          excludeCountries={['us', 'ca']}
+        />
+        <p>Only countries</p>
+        <ReactPhoneInput
+          defaultCountry='gb'
+          onlyCountries={['gb', 'es']}
+        />
+        <p>Preferred countries</p>
+        <ReactPhoneInput
+          defaultCountry='it'
+          preferredCountries={['it', 'se']}
+        />
+      </div>
+
+      <div style={{ display: 'inline-block', marginLeft: '30px' }}>
+        <p>v2.0.0</p>
+        <p>Auto detect through value field</p>
+        <ReactPhoneInput
+          value='+3802343252'
+        />
+        <p>Disabled area codes with disableAreaCodes</p>
+        <ReactPhoneInput
+          defaultCountry='us'
+          disableAreaCodes={true}
+        />
+        <p>Disabled flag by default</p>
+        <p>Customizable placeholder</p>
+        <p>Customizable styles</p>
+        <ReactPhoneInput
+          disableAreaCodes={true}
+          placeholder='Type your phone here'
+          inputStyle={{
+            width: '300px',
+            height: '35px',
+            fontSize: '13px',
+            paddingLeft: '48px',
+            borderRadius: '5px'
+          }}
+          buttonStyle={{ borderRadius: '5px 0 0 5px' }}
+          dropdownStyle={{ width: '300px' }}
+        />
+        <p>Custom regions: (europe selected)</p>
+        <ReactPhoneInput
+          defaultCountry='it'
+          regions={['europe']}
+        />
+      </div>
     </div>, document.getElementById('root')
   );
 }

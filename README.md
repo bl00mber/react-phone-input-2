@@ -1,7 +1,7 @@
 # react-phone-input-2
 Highly customizable phone input component with auto formatting.
 
-![alt tag](http://i.giphy.com/l41m24L5YTSOifyW4.gif)
+<!-- ![alt tag](http://i.giphy.com/l41m24L5YTSOifyW4.gif) -->
 
 ## Installation
 
@@ -121,4 +121,5 @@ function handleOnChange(value) {
 
 ## License
 
+Based on [react-phone-input](https://github.com/razagill/react-phone-input) using
 [MIT](https://opensource.org/licenses/MIT)

@@ -1,199 +1,244 @@
-// Country array model:
+// Country model:
 // [
 //    Country name,
+//    Regions,
 //    iso2 code,
 //    International dial code,
 //    Format (if available),
 //    Order (if >1 country with same dial code),
 //    Area codes (if >1 country with same dial code)
 // ]
+//
+// Regions:
+// ['america', 'europe', 'asia', 'oceania', 'africa']
+//
+// Sub-regions:
+// ['north-america', 'south-america', 'central-america', 'carribean',
+//  'european-union', 'ex-ussr', 'middle-east', 'north-africa']
 
 const rawAllCountries = [
   [
     "Afghanistan",
+    ['asia'],
     "af",
     "93"
   ],
   [
     "Albania",
+    ['europe'],
     "al",
     "355"
   ],
   [
-    "Algeria ",
+    "Algeria",
+    ['africa'],
     "dz",
     "213"
   ],
   [
     "American Samoa",
+    ['oceania'],
     "as",
     "1684"
   ],
   [
     "Andorra",
+    ['europe'],
     "ad",
     "376"
   ],
   [
     "Angola",
+    ['africa'],
     "ao",
     "244"
   ],
   [
     "Anguilla",
+    ['america', 'carribean'],
     "ai",
     "1264"
   ],
   [
     "Antigua and Barbuda",
+    ['america', 'carribean'],
     "ag",
     "1268"
   ],
   [
     "Argentina",
+    ['america', 'south-america'],
     "ar",
     "54"
   ],
   [
     "Armenia",
+    ['asia', 'ex-ussr'],
     "am",
     "374"
   ],
   [
     "Aruba",
+    ['america', 'carribean'],
     "aw",
     "297"
   ],
   [
     "Australia",
+    ['oceania'],
     "au",
     "61",
     "+.. ... ... ..."
   ],
   [
     "Austria",
+    ['europe', 'european-union'],
     "at",
     "43"
   ],
   [
     "Azerbaijan",
+    ['asia', 'ex-ussr'],
     "az",
     "994"
   ],
   [
     "Bahamas",
+    ['america', 'carribean'],
     "bs",
     "1242"
   ],
   [
     "Bahrain",
+    ['middle-east'],
     "bh",
     "973"
   ],
   [
     "Bangladesh",
+    ['asia'],
     "bd",
     "880"
   ],
   [
     "Barbados",
+    ['america', 'carribean'],
     "bb",
     "1246"
   ],
   [
     "Belarus",
+    ['europe', 'ex-ussr'],
     "by",
     "375"
   ],
   [
     "Belgium",
+    ['europe', 'european-union'],
     "be",
     "32",
     "+.. ... .. .. .."
   ],
   [
     "Belize",
+    ['america', 'central-america'],
     "bz",
     "501"
   ],
   [
     "Benin",
+    ['africa'],
     "bj",
     "229"
   ],
   [
     "Bermuda",
+    ['america', 'north-america'],
     "bm",
     "1441"
   ],
   [
     "Bhutan",
+    ['asia'],
     "bt",
     "975"
   ],
   [
     "Bolivia",
+    ['america', 'south-america'],
     "bo",
     "591"
   ],
   [
     "Bosnia and Herzegovina",
+    ['europe'],
     "ba",
     "387"
   ],
   [
     "Botswana",
+    ['africa'],
     "bw",
     "267"
   ],
   [
     "Brazil",
+    ['america', 'south-america'],
     "br",
     "55",
     "+.. (..) .........",
   ],
   [
     "British Indian Ocean Territory",
+    ['asia'],
     "io",
     "246"
   ],
   [
     "British Virgin Islands",
+    ['america', 'carribean'],
     "vg",
     "1284"
   ],
   [
     "Brunei",
+    ['asia'],
     "bn",
     "673"
   ],
   [
     "Bulgaria",
+    ['europe', 'european-union'],
     "bg",
     "359"
   ],
   [
     "Burkina Faso",
+    ['africa'],
     "bf",
     "226"
   ],
   [
     "Burundi",
+    ['africa'],
     "bi",
     "257"
   ],
   [
     "Cambodia",
+    ['asia'],
     "kh",
     "855"
   ],
   [
     "Cameroon",
+    ['africa'],
     "cm",
     "237"
   ],
   [
     "Canada",
+    ['america', 'north-america'],
     "ca",
     "1",
     "+. (...) ...-....",
@@ -201,11 +246,13 @@ const rawAllCountries = [
   ],
   [
     "Cape Verde",
+    ['africa'],
     "cv",
     "238"
   ],
   [
     "Caribbean Netherlands",
+    ['america', 'carribean'],
     "bq",
     "599",
     "",
@@ -213,78 +260,93 @@ const rawAllCountries = [
   ],
   [
     "Cayman Islands",
+    ['america', 'carribean'],
     "ky",
     "1345"
   ],
   [
     "Central African Republic",
+    ['africa'],
     "cf",
     "236"
   ],
   [
     "Chad",
+    ['africa'],
     "td",
     "235"
   ],
   [
     "Chile",
+    ['america', 'south-america'],
     "cl",
     "56"
   ],
   [
     "China",
+    ['asia'],
     "cn",
     "86",
     "+.. ..-........"
   ],
   [
     "Colombia",
+    ['america', 'south-america'],
     "co",
     "57"
   ],
   [
     "Comoros",
+    ['africa'],
     "km",
     "269"
   ],
   [
     "Congo",
+    ['africa'],
     "cd",
     "243"
   ],
   [
     "Congo",
+    ['africa'],
     "cg",
     "242"
   ],
   [
     "Cook Islands",
+    ['oceania'],
     "ck",
     "682"
   ],
   [
     "Costa Rica",
+    ['america', 'central-america'],
     "cr",
     "506",
     "+... ....-...."
   ],
   [
     "Côte d’Ivoire",
+    ['africa'],
     "ci",
     "225"
   ],
   [
     "Croatia",
+    ['europe', 'european-union'],
     "hr",
     "385"
   ],
   [
     "Cuba",
+    ['america', 'carribean'],
     "cu",
     "53"
   ],
   [
     "Curaçao",
+    ['america', 'carribean'],
     "cw",
     "599",
     "",
@@ -292,32 +354,38 @@ const rawAllCountries = [
   ],
   [
     "Cyprus",
+    ['europe', 'european-union'],
     "cy",
     "357"
   ],
   [
     "Czech Republic",
+    ['europe', 'european-union'],
     "cz",
     "420"
   ],
   [
     "Denmark",
+    ['europe', 'european-union'],
     "dk",
     "45",
     "+.. .. .. .. .."
   ],
   [
     "Djibouti",
+    ['africa'],
     "dj",
     "253"
   ],
   [
     "Dominica",
+    ['america', 'carribean'],
     "dm",
     "1767"
   ],
   [
     "Dominican Republic",
+    ['america', 'carribean'],
     "do",
     "1",
     "",
@@ -325,125 +393,149 @@ const rawAllCountries = [
   ],
   [
     "Ecuador",
+    ['america', 'south-america'],
     "ec",
     "593"
   ],
   [
     "Egypt",
+    ['africa', 'north-africa'],
     "eg",
     "20"
   ],
   [
     "El Salvador",
+    ['america', 'central-america'],
     "sv",
     "503",
     "+... ....-...."
   ],
   [
     "Equatorial Guinea",
+    ['africa'],
     "gq",
     "240"
   ],
   [
     "Eritrea",
+    ['africa'],
     "er",
     "291"
   ],
   [
     "Estonia",
+    ['europe', 'european-union', 'ex-ussr'],
     "ee",
     "372"
   ],
   [
     "Ethiopia",
+    ['africa'],
     "et",
     "251"
   ],
   [
     "Falkland Islands",
+    ['america', 'south-america'],
     "fk",
     "500"
   ],
   [
     "Faroe Islands",
+    ['europe'],
     "fo",
     "298"
   ],
   [
     "Fiji",
+    ['oceania'],
     "fj",
     "679"
   ],
   [
     "Finland",
+    ['europe', 'european-union'],
     "fi",
     "358",
     "+... .. ... .. .."
   ],
   [
     "France",
+    ['europe', 'european-union'],
     "fr",
     "33",
     "+.. . .. .. .. .."
   ],
   [
     "French Guiana",
+    ['america', 'south-america'],
     "gf",
     "594"
   ],
   [
     "French Polynesia",
+    ['oceania'],
     "pf",
     "689"
   ],
   [
     "Gabon",
+    ['africa'],
     "ga",
     "241"
   ],
   [
     "Gambia",
+    ['africa'],
     "gm",
     "220"
   ],
   [
     "Georgia",
+    ['asia', 'ex-ussr'],
     "ge",
     "995"
   ],
   [
     "Germany",
+    ['europe', 'european-union'],
     "de",
     "49",
     "+.. ... ......."
   ],
   [
     "Ghana",
+    ['africa'],
     "gh",
     "233"
   ],
   [
     "Gibraltar",
+    ['europe'],
     "gi",
     "350"
   ],
   [
     "Greece",
+    ['europe', 'european-union'],
     "gr",
     "30"
   ],
   [
     "Greenland",
+    ['america'],
     "gl",
     "299"
   ],
   [
     "Grenada",
+    ['america', 'carribean'],
     "gd",
     "1473"
   ],
   [
     "Guadeloupe",
+    ['america', 'carribean'],
     "gp",
     "590",
     "",
@@ -451,92 +543,109 @@ const rawAllCountries = [
   ],
   [
     "Guam",
+    ['oceania'],
     "gu",
     "1671"
   ],
   [
     "Guatemala",
+    ['america', 'central-america'],
     "gt",
     "502",
     "+... ....-...."
   ],
   [
     "Guinea",
+    ['africa'],
     "gn",
     "224"
   ],
   [
     "Guinea-Bissau",
+    ['africa'],
     "gw",
     "245"
   ],
   [
     "Guyana",
+    ['america', 'south-america'],
     "gy",
     "592"
   ],
   [
     "Haiti",
+    ['america', 'carribean'],
     "ht",
     "509",
     "+... ....-...."
   ],
   [
     "Honduras",
+    ['america', 'central-america'],
     "hn",
     "504"
   ],
   [
     "Hong Kong",
+    ['asia'],
     "hk",
     "852",
     "+... .... ...."
   ],
   [
     "Hungary",
+    ['europe', 'european-union'],
     "hu",
     "36"
   ],
   [
     "Iceland",
+    ['europe'],
     "is",
     "354",
     "+... ... ...."
   ],
   [
     "India",
+    ['asia'],
     "in",
     "91",
     "+.. .....-....."
   ],
   [
     "Indonesia",
+    ['asia'],
     "id",
     "62"
   ],
   [
     "Iran",
+    ['middle-east'],
     "ir",
     "98"
   ],
   [
     "Iraq",
+    ['middle-east'],
     "iq",
     "964"
   ],
   [
     "Ireland",
+    ['europe', 'european-union'],
     "ie",
     "353",
     "+... .. ......."
   ],
   [
     "Israel",
+    ['middle-east'],
     "il",
     "972"
   ],
   [
     "Italy",
+    ['europe', 'european-union'],
     "it",
     "39",
     "+.. ... ......",
@@ -544,22 +653,26 @@ const rawAllCountries = [
   ],
   [
     "Jamaica",
+    ['america', 'carribean'],
     "jm",
     "1876"
   ],
   [
     "Japan",
+    ['asia'],
     "jp",
     "81",
     "+.. ... .. ...."
   ],
   [
     "Jordan",
+    ['middle-east'],
     "jo",
     "962"
   ],
   [
     "Kazakhstan",
+    ['asia', 'ex-ussr'],
     "kz",
     "7",
     "+. ... ...-..-..",
@@ -567,313 +680,374 @@ const rawAllCountries = [
   ],
   [
     "Kenya",
+    ['africa'],
     "ke",
     "254"
   ],
   [
     "Kiribati",
+    ['oceania'],
     "ki",
     "686"
   ],
   [
     "Kuwait",
+    ['middle-east'],
     "kw",
     "965"
   ],
   [
     "Kyrgyzstan",
+    ['asia', 'ex-ussr'],
     "kg",
     "996"
   ],
   [
     "Laos",
+    ['asia'],
     "la",
     "856"
   ],
   [
     "Latvia",
+    ['europe', 'european-union', 'ex-ussr'],
     "lv",
     "371"
   ],
   [
     "Lebanon",
+    ['middle-east'],
     "lb",
     "961"
   ],
   [
     "Lesotho",
+    ['africa'],
     "ls",
     "266"
   ],
   [
     "Liberia",
+    ['africa'],
     "lr",
     "231"
   ],
   [
     "Libya",
+    ['africa', 'north-africa'],
     "ly",
     "218"
   ],
   [
     "Liechtenstein",
+    ['europe'],
     "li",
     "423"
   ],
   [
     "Lithuania",
+    ['europe', 'european-union', 'ex-ussr'],
     "lt",
     "370"
   ],
   [
     "Luxembourg",
+    ['europe', 'european-union'],
     "lu",
     "352"
   ],
   [
     "Macau",
+    ['asia'],
     "mo",
     "853"
   ],
   [
     "Macedonia",
+    ['europe'],
     "mk",
     "389"
   ],
   [
     "Madagascar",
+    ['africa'],
     "mg",
     "261"
   ],
   [
     "Malawi",
+    ['africa'],
     "mw",
     "265"
   ],
   [
     "Malaysia",
+    ['asia'],
     "my",
     "60",
     "+.. ..-....-...."
   ],
   [
     "Maldives",
+    ['asia'],
     "mv",
     "960"
   ],
   [
     "Mali",
+    ['africa'],
     "ml",
     "223"
   ],
   [
     "Malta",
+    ['europe', 'european-union'],
     "mt",
     "356"
   ],
   [
     "Marshall Islands",
+    ['oceania'],
     "mh",
     "692"
   ],
   [
     "Martinique",
+    ['america', 'carribean'],
     "mq",
     "596"
   ],
   [
     "Mauritania",
+    ['africa'],
     "mr",
     "222"
   ],
   [
     "Mauritius",
+    ['africa'],
     "mu",
     "230"
   ],
   [
     "Mexico",
+    ['america', 'central-america'],
     "mx",
     "52"
   ],
   [
     "Micronesia",
+    ['oceania'],
     "fm",
     "691"
   ],
   [
     "Moldova",
+    ['europe'],
     "md",
     "373"
   ],
   [
     "Monaco",
+    ['europe'],
     "mc",
     "377"
   ],
   [
     "Mongolia",
+    ['asia'],
     "mn",
     "976"
   ],
   [
     "Montenegro",
+    ['europe'],
     "me",
     "382"
   ],
   [
     "Montserrat",
+    ['america', 'carribean'],
     "ms",
     "1664"
   ],
   [
     "Morocco",
+    ['africa', 'north-africa'],
     "ma",
     "212"
   ],
   [
     "Mozambique",
+    ['africa'],
     "mz",
     "258"
   ],
   [
     "Myanmar",
+    ['asia'],
     "mm",
     "95"
   ],
   [
     "Namibia",
+    ['africa'],
     "na",
     "264"
   ],
   [
     "Nauru",
+    ['africa'],
     "nr",
     "674"
   ],
   [
     "Nepal",
+    ['asia'],
     "np",
     "977"
   ],
   [
     "Netherlands",
+    ['europe', 'european-union'],
     "nl",
     "31",
     "+.. .. ........"
   ],
   [
     "New Caledonia",
+    ['oceania'],
     "nc",
     "687"
   ],
   [
     "New Zealand",
+    ['oceania'],
     "nz",
     "64",
     "+.. ...-...-...."
   ],
   [
     "Nicaragua",
+    ['america', 'central-america'],
     "ni",
     "505"
   ],
   [
     "Niger",
+    ['africa'],
     "ne",
     "227"
   ],
   [
     "Nigeria",
+    ['africa'],
     "ng",
     "234"
   ],
   [
     "Niue",
+    ['asia'],
     "nu",
     "683"
   ],
   [
     "Norfolk Island",
+    ['oceania'],
     "nf",
     "672"
   ],
   [
     "North Korea",
+    ['asia'],
     "kp",
     "850"
   ],
   [
     "Northern Mariana Islands",
+    ['oceania'],
     "mp",
     "1670"
   ],
   [
     "Norway",
+    ['europe'],
     "no",
     "47",
     "+.. ... .. ..."
   ],
   [
     "Oman",
+    ['middle-east'],
     "om",
     "968"
   ],
   [
     "Pakistan",
+    ['asia'],
     "pk",
     "92",
     "+.. ...-......."
   ],
   [
     "Palau",
+    ['oceania'],
     "pw",
     "680"
   ],
   [
     "Palestine",
+    ['middle-east'],
     "ps",
     "970"
   ],
   [
     "Panama",
+    ['america', 'central-america'],
     "pa",
     "507"
   ],
   [
     "Papua New Guinea",
+    ['oceania'],
     "pg",
     "675"
   ],
   [
     "Paraguay",
+    ['america', 'south-america'],
     "py",
     "595"
   ],
   [
     "Peru",
+    ['america', 'south-america'],
     "pe",
     "51"
   ],
   [
     "Philippines",
+    ['asia'],
     "ph",
     "63",
     "+.. ... ...."
   ],
   [
     "Poland",
+    ['europe', 'european-union'],
     "pl",
     "48",
     "+.. ...-...-..."
   ],
   [
     "Portugal",
+    ['europe', 'european-union'],
     "pt",
     "351"
   ],
   [
     "Puerto Rico",
+    ['america', 'carribean'],
     "pr",
     "1",
     "",
@@ -881,21 +1055,25 @@ const rawAllCountries = [
   ],
   [
     "Qatar",
+    ['middle-east'],
     "qa",
     "974"
   ],
   [
     "Réunion",
+    ['africa'],
     "re",
     "262"
   ],
   [
     "Romania",
+    ['europe', 'european-union'],
     "ro",
     "40"
   ],
   [
     "Russia",
+    ['europe', 'asia', 'ex-ussr'],
     "ru",
     "7",
     "+. (...) ...-..-..",
@@ -903,11 +1081,13 @@ const rawAllCountries = [
   ],
   [
     "Rwanda",
+    ['africa'],
     "rw",
     "250"
   ],
   [
     "Saint Barthélemy",
+    ['america', 'carribean'],
     "bl",
     "590",
     "",
@@ -915,21 +1095,25 @@ const rawAllCountries = [
   ],
   [
     "Saint Helena",
+    ['africa'],
     "sh",
     "290"
   ],
   [
     "Saint Kitts and Nevis",
+    ['america', 'carribean'],
     "kn",
     "1869"
   ],
   [
     "Saint Lucia",
+    ['america', 'carribean'],
     "lc",
     "1758"
   ],
   [
     "Saint Martin",
+    ['america', 'carribean'],
     "mf",
     "590",
     "",
@@ -937,242 +1121,289 @@ const rawAllCountries = [
   ],
   [
     "Saint Pierre and Miquelon",
+    ['america', 'north-america'],
     "pm",
     "508"
   ],
   [
     "Saint Vincent and the Grenadines",
+    ['america', 'carribean'],
     "vc",
     "1784"
   ],
   [
     "Samoa",
+    ['oceania'],
     "ws",
     "685"
   ],
   [
     "San Marino",
+    ['europe'],
     "sm",
     "378"
   ],
   [
     "São Tomé and Príncipe",
+    ['africa'],
     "st",
     "239"
   ],
   [
     "Saudi Arabia",
+    ['middle-east'],
     "sa",
     "966"
   ],
   [
     "Senegal",
+    ['africa'],
     "sn",
     "221"
   ],
   [
     "Serbia",
+    ['europe'],
     "rs",
     "381"
   ],
   [
     "Seychelles",
+    ['africa'],
     "sc",
     "248"
   ],
   [
     "Sierra Leone",
+    ['africa'],
     "sl",
     "232"
   ],
   [
     "Singapore",
+    ['asia'],
     "sg",
     "65",
     "+.. ....-...."
   ],
   [
     "Sint Maarten",
+    ['america', 'carribean'],
     "sx",
     "1721"
   ],
   [
     "Slovakia",
+    ['europe', 'european-union'],
     "sk",
     "421"
   ],
   [
     "Slovenia",
+    ['europe', 'european-union'],
     "si",
     "386"
   ],
   [
     "Solomon Islands",
+    ['oceania'],
     "sb",
     "677"
   ],
   [
     "Somalia",
+    ['africa'],
     "so",
     "252"
   ],
   [
     "South Africa",
+    ['africa'],
     "za",
     "27"
   ],
   [
     "South Korea",
+    ['asia'],
     "kr",
     "82"
   ],
   [
     "South Sudan",
+    ['africa'],
     "ss",
     "211"
   ],
   [
     "Spain",
+    ['europe', 'european-union'],
     "es",
     "34",
     "+.. ... ... ..."
   ],
   [
     "Sri Lanka",
+    ['asia'],
     "lk",
     "94"
   ],
   [
     "Sudan",
+    ['africa'],
     "sd",
     "249"
   ],
   [
     "Suriname",
+    ['america', 'south-america'],
     "sr",
     "597"
   ],
   [
     "Swaziland",
+    ['africa'],
     "sz",
     "268"
   ],
   [
     "Sweden",
+    ['europe', 'european-union'],
     "se",
     "46",
     "+.. .. ... .. .."
   ],
   [
     "Switzerland",
+    ['europe'],
     "ch",
     "41",
     "+.. .. ... .. .."
   ],
   [
     "Syria",
+    ['middle-east'],
     "sy",
     "963"
   ],
   [
     "Taiwan",
+    ['asia'],
     "tw",
     "886"
   ],
   [
     "Tajikistan",
+    ['asia', 'ex-ussr'],
     "tj",
     "992"
   ],
   [
     "Tanzania",
+    ['africa'],
     "tz",
     "255"
   ],
   [
     "Thailand",
+    ['asia'],
     "th",
     "66"
   ],
   [
     "Timor-Leste",
+    ['asia'],
     "tl",
     "670"
   ],
   [
     "Togo",
+    ['africa'],
     "tg",
     "228"
   ],
   [
     "Tokelau",
+    ['oceania'],
     "tk",
     "690"
   ],
   [
     "Tonga",
+    ['oceania'],
     "to",
     "676"
   ],
   [
     "Trinidad and Tobago",
+    ['america', 'carribean'],
     "tt",
     "1868"
   ],
   [
     "Tunisia",
+    ['africa', 'north-africa'],
     "tn",
     "216"
   ],
   [
     "Turkey",
+    ['europe'],
     "tr",
     "90",
     "+.. ... ... .. .."
   ],
   [
     "Turkmenistan",
+    ['asia', 'ex-ussr'],
     "tm",
     "993"
   ],
   [
     "Turks and Caicos Islands",
+    ['america', 'carribean'],
     "tc",
     "1649"
   ],
   [
     "Tuvalu",
+    ['asia'],
     "tv",
     "688"
   ],
   [
     "U.S. Virgin Islands",
+    ['america', 'carribean'],
     "vi",
     "1340"
   ],
   [
     "Uganda",
+    ['africa'],
     "ug",
     "256"
   ],
   [
     "Ukraine",
+    ['europe'],
     "ua",
     "380"
   ],
   [
     "United Arab Emirates",
+    ['middle-east'],
     "ae",
     "971"
   ],
   [
     "United Kingdom",
+    ['europe', 'european-union'],
     "gb",
     "44",
     "+.. .... ......"
   ],
   [
     "United States",
+    ['america', 'north-america'],
     "us",
     "1",
     "+. (...) ...-....",
@@ -1180,21 +1411,25 @@ const rawAllCountries = [
   ],
   [
     "Uruguay",
+    ['america', 'south-america'],
     "uy",
     "598"
   ],
   [
     "Uzbekistan",
+    ['asia'],
     "uz",
     "998"
   ],
   [
     "Vanuatu",
+    ['oceania'],
     "vu",
     "678"
   ],
   [
     "Vatican City",
+    ['europe'],
     "va",
     "39",
     "+.. .. .... ....",
@@ -1202,31 +1437,37 @@ const rawAllCountries = [
   ],
   [
     "Venezuela",
+    ['america', 'south-america'],
     "ve",
     "58"
   ],
   [
     "Vietnam",
+    ['asia'],
     "vn",
     "84"
   ],
   [
     "Wallis and Futuna",
+    ['oceania'],
     "wf",
     "681"
   ],
   [
     "Yemen",
+    ['middle-east'],
     "ye",
     "967"
   ],
   [
     "Zambia",
+    ['africa'],
     "zm",
     "260"
   ],
   [
     "Zimbabwe",
+    ['africa'],
     "zw",
     "263"
   ]
@@ -1245,23 +1486,25 @@ function addCountryCode(iso2, dialCode, priority) {
 const allCountries = [].concat(...rawAllCountries.map((country) => {
   const countryItem = {
     name: country[0],
-    iso2: country[1],
-    dialCode: country[2],
-    priority: country[4] || 0,
-    format: country[3] || undefined,
-    hasAreaCodes: country[5] ? true : false,
+    regions: country[1],
+    iso2: country[2],
+    dialCode: country[3],
+    format: country[4] || undefined,
+    priority: country[5] || 0,
+    hasAreaCodes: country[6] ? true : false,
   };
 
   const areaItems = [];
 
-  country[5] && country[5].map((areaCode) => {
+  country[6] && country[6].map((areaCode) => {
     const areaItem = {...countryItem};
-    areaItem.dialCode = country[2] + areaCode;
+    areaItem.regions = country[1];
+    areaItem.dialCode = country[3] + areaCode;
     areaItem.isAreaCode = true;
 
     areaItems.push(areaItem);
 
-    addCountryCode(country[1], areaItem.dialCode);
+    addCountryCode(country[2], areaItem.dialCode);
   });
 
   addCountryCode(
