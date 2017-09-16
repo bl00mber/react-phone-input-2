@@ -23,7 +23,7 @@ class ReactPhoneInput extends React.Component {
 
     regions: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.array
+      PropTypes.arrayOf(PropTypes.string)
     ]),
 
     inputStyle: PropTypes.object,
@@ -60,13 +60,13 @@ class ReactPhoneInput extends React.Component {
     autoFormat: true,
     disabled: false,
     disableAreaCodes: false,
-    isValid: function(inputNumber) {
-      return some(countryData.allCountries, function(country) {
+    isValid: (inputNumber) => {
+      return some(countryData.allCountries, (country) => {
         return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
       });
     },
 
-    onEnterKeyPress: function() {},
+    onEnterKeyPress: () => {},
 
     isModernBrowser: Boolean(document.createElement('input').setSelectionRange),
     keys: {
@@ -150,6 +150,85 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
+  // Countries array methods
+  deleteAreaCodes = (filteredCountries) => {
+    return filteredCountries.filter((country) => {
+      return country.isAreaCode !== true;
+    });
+  }
+
+  filterRegions = (regions, filteredCountries) => {
+    if (typeof regions === 'string') {
+      const region = regions;
+      return filteredCountries.filter((country) => {
+        return country.regions.some((element) => {
+          return element === region;
+        });
+      });
+    }
+
+    return filteredCountries.filter((country) => {
+      const matches = regions.map((region) => {
+        return country.regions.some((element) => {
+          return element === region;
+        });
+      });
+      return matches.some(el => el);
+    });
+  }
+
+  getOnlyCountries = (onlyCountriesArray, filteredCountries) => {
+    if (onlyCountriesArray.length === 0) return filteredCountries;
+
+    return filteredCountries.filter((country) => {
+      return onlyCountriesArray.some((element) => {
+        return element === country.iso2;
+      });
+    });
+  }
+
+  excludeCountries = (selectedCountries, excludedCountries) => {
+    if (excludedCountries.length === 0) {
+      return selectedCountries;
+    } else {
+      return filter(selectedCountries, (selCountry) => {
+        return !includes(excludedCountries, selCountry.iso2);
+      });
+    }
+  }
+
+  searchCountry = memoize((queryString) => {
+    if (!queryString || queryString.length === 0) {
+      return null;
+    }
+    // don't include the preferred countries in search
+    const probableCountries = filter(this.state.onlyCountries, (country) => {
+      return startsWith(country.name.toLowerCase(), queryString.toLowerCase());
+    }, this);
+    return probableCountries[0];
+  });
+
+  guessSelectedCountry = memoize((inputNumber, onlyCountries, defaultCountry) => {
+    const secondBestGuess = find(onlyCountries, {iso2: defaultCountry}) || {};
+    if (trim(inputNumber) === '') return secondBestGuess;
+
+    const bestGuess = reduce(onlyCountries, (selectedCountry, country) => {
+      if (startsWith(inputNumber, country.dialCode)) {
+        if (country.dialCode.length > selectedCountry.dialCode.length) {
+          return country;
+        }
+        if (country.dialCode.length === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
+          return country;
+        }
+      }
+      return selectedCountry;
+    }, {dialCode: '', priority: 10001}, this);
+
+    if (!bestGuess.name) return secondBestGuess;
+    return bestGuess;
+  });
+
+  // Hooks for updated props
   updateDefaultCountry = (country) => {
     const newSelectedCountry = find(this.state.onlyCountries, {iso2: country});
     this.setState({
@@ -180,6 +259,7 @@ class ReactPhoneInput extends React.Component {
     this.setState({ selectedCountry: countryGuess, formattedNumber });
   }
 
+  // View methods
   scrollTo = (country, middle) => {
     if (!country)
       return;
@@ -232,7 +312,7 @@ class ReactPhoneInput extends React.Component {
       return `+${text}`;
     }
 
-    const formattedObject = reduce(pattern, function(acc, character) {
+    const formattedObject = reduce(pattern, (acc, character) => {
       if (acc.remainingText.length === 0) {
         return acc;
       }
@@ -255,7 +335,7 @@ class ReactPhoneInput extends React.Component {
     return formattedObject.formattedText + formattedObject.remainingText.join('');
   }
 
-  // put the cursor to the end of the input (usually after a focus event)
+  // Put the cursor to the end of the input (usually after a focus event)
   cursorToEnd = () => {
     const input = this.numberInputRef;
     input.focus();
@@ -366,7 +446,7 @@ class ReactPhoneInput extends React.Component {
         selectedCountry: nextSelectedCountry,
         freezeSelection: true,
         formattedNumber
-      }, function() {
+      }, () => {
         this.cursorToEnd();
         if (this.props.onChange) {
           this.props.onChange(formattedNumber);
@@ -465,9 +545,7 @@ class ReactPhoneInput extends React.Component {
       this.props.onEnterKeyPress(event);
     }
 
-    if (this.props.onKeyDown) {
-      this.props.onKeyDown(event)
-    }
+    if (this.props.onKeyDown) this.props.onKeyDown(event);
   }
 
   handleClickOutside = (e) => {
@@ -578,91 +656,6 @@ class ReactPhoneInput extends React.Component {
     );
   }
 }
-
-ReactPhoneInput.prototype.deleteAreaCodes = function(filteredCountries) {
-  return filteredCountries.filter((country) => {
-    return country.isAreaCode !== true;
-  });
-};
-
-ReactPhoneInput.prototype.filterRegions = function(regions, filteredCountries) {
-  if (typeof regions === 'string') {
-    const region = regions;
-    return filteredCountries.filter((country) => {
-      return country.regions.some((element) => {
-        return element === region;
-      });
-    });
-  }
-
-  return filteredCountries.filter((country) => {
-    const matches = regions.map((region) => {
-      return country.regions.some((element) => {
-        return element === region;
-      });
-    });
-    return matches.some(el => el);
-  });
-};
-
-ReactPhoneInput.prototype.getOnlyCountries = function(onlyCountriesArray, filteredCountries) {
-  if (onlyCountriesArray.length === 0) return filteredCountries;
-
-  return filteredCountries.filter((country) => {
-    return onlyCountriesArray.some((element) => {
-      return element === country.iso2;
-    });
-  });
-};
-
-ReactPhoneInput.prototype.excludeCountries = function(selectedCountries, excludedCountries) {
-  if (excludedCountries.length === 0) {
-    return selectedCountries;
-  } else {
-    return filter(selectedCountries, function(selCountry) {
-      return !includes(excludedCountries, selCountry.iso2);
-    });
-  }
-};
-
-ReactPhoneInput.prototype.searchCountry = memoize(function(queryString) {
-  if (!queryString || queryString.length === 0) {
-    return null;
-  }
-  // don't include the preferred countries in search
-  const probableCountries = filter(this.state.onlyCountries, function(country) {
-    return startsWith(country.name.toLowerCase(), queryString.toLowerCase());
-  }, this);
-  return probableCountries[0];
-});
-
-ReactPhoneInput.prototype.guessSelectedCountry = memoize(function(inputNumber, onlyCountries, defaultCountry) {
-  const secondBestGuess = find(onlyCountries, {iso2: defaultCountry}) || {};
-  let bestGuess;
-
-  if (trim(inputNumber) !== '') {
-    bestGuess = reduce(onlyCountries, function(selectedCountry, country) {
-      if (startsWith(inputNumber, country.dialCode)) {
-        if (country.dialCode.length > selectedCountry.dialCode.length) {
-          return country;
-        }
-        if (country.dialCode.length === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
-          return country;
-        }
-      }
-
-      return selectedCountry;
-    }, {dialCode: '', priority: 10001}, this);
-  } else {
-    return secondBestGuess;
-  }
-
-  if (!bestGuess.name) {
-    return secondBestGuess;
-  }
-
-  return bestGuess;
-});
 
 export default ReactPhoneInput;
 
