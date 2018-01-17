@@ -60,6 +60,15 @@ export default render(
         defaultCountry='ca'
         regions={['north-america', 'carribean']}
       />
+      <p>Disabled dropdown and country code</p>
+      <ReactPhoneInput
+        onlyCountries={['us']}
+        defaultCountry='us'
+        disableAreaCodes={true}
+        disableCountryCode={true}
+        disableDropdown={true}
+        placeholder='(702) 123-4567'
+      />
     </div>
   </div>, document.getElementById('root')
 );

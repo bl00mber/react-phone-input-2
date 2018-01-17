@@ -87,7 +87,7 @@ function handleOnChange(value) {
   <tr>
     <td> dropdownStyle </td>
     <td> object </td>
-    <td colspan="2"> styles for countries container </td>
+    <td colspan="2"> styles for dropdown container </td>
   </tr>
 
   <tr>
@@ -104,6 +104,16 @@ function handleOnChange(value) {
     <td> disableAreaCodes </td>
     <td> bool </td>
     <td colspan="2"> disable local codes for all countries </td>
+  </tr>
+  <tr>
+    <td> disableCountryCode </td>
+    <td> bool </td>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
+    <td> disableDropdown </td>
+    <td> bool </td>
+    <td colspan="2"></td>
   </tr>
 </table>
 

@@ -33,6 +33,8 @@ class ReactPhoneInput extends React.Component {
     autoFormat: PropTypes.bool,
     disabled: PropTypes.bool,
     disableAreaCodes: PropTypes.bool,
+    disableCountryCode: PropTypes.bool,
+    disableDropdown: PropTypes.bool,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -65,6 +67,8 @@ class ReactPhoneInput extends React.Component {
         return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
       });
     },
+    disableCountryCode: false,
+    disableDropdown: false,
 
     onEnterKeyPress: () => {},
 
@@ -112,8 +116,14 @@ class ReactPhoneInput extends React.Component {
       !startsWith(inputNumber.replace(/\D/g, ''), countryGuess.dialCode)
     ) ? countryGuess.dialCode : '';
 
-    const formattedNumber = (inputNumber === '' && countryGuess === 0) ? '' :
+    let formattedNumber;
+
+    if (!this.props.disableCountryCode) {
+      formattedNumber = (inputNumber === '' && countryGuess === 0) ? '' :
       this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), countryGuess ? countryGuess.format : null);
+    } else {
+      formattedNumber = inputNumber.replace(/\D/g, '');
+    }
 
     this.state = {
       formattedNumber,
@@ -234,7 +244,7 @@ class ReactPhoneInput extends React.Component {
     this.setState({
       defaultCountry: country,
       selectedCountry: newSelectedCountry,
-      formattedNumber: '+' + newSelectedCountry.dialCode
+      formattedNumber: this.props.disableCountryCode ? '' : '+' + newSelectedCountry.dialCode
     });
   }
 
@@ -302,14 +312,16 @@ class ReactPhoneInput extends React.Component {
   }
 
   formatNumber = (text, pattern) => {
+    const disableCountryCode = this.props.disableCountryCode;
+
     if (!text || text.length === 0) {
-      return '+';
+      return disableCountryCode ? '' : '+';
     }
 
     // for all strings with length less than 3, just return it (1, 2 etc.)
     // also return the same text if the selected country has no fixed format
     if ((text && text.length < 2) || !pattern || !this.props.autoFormat) {
-      return `+${text}`;
+      return disableCountryCode ? text : `+${text}`;
     }
 
     const formattedObject = reduce(pattern, (acc, character) => {
@@ -364,7 +376,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleInput = (event) => {
-    let formattedNumber = '+';
+    let formattedNumber = this.props.disableCountryCode ? '' : '+';
     let newSelectedCountry = this.state.selectedCountry;
     let freezeSelection = this.state.freezeSelection;
 
@@ -397,7 +409,11 @@ class ReactPhoneInput extends React.Component {
         freezeSelection = false;
       }
       // let us remove all non numerals from the input
-      formattedNumber = this.formatNumber(inputNumber, newSelectedCountry.format);
+      if (this.props.disableCountryCode) {
+        formattedNumber = inputNumber;
+      } else {
+        formattedNumber = this.formatNumber(inputNumber, newSelectedCountry.format);
+      }
     }
 
     let caretPosition = event.target.selectionStart;
@@ -457,7 +473,7 @@ class ReactPhoneInput extends React.Component {
 
   handleInputFocus = (e) => {
     // if the input is blank, insert dial code of the selected country
-    if (this.numberInputRef.value === '+' && this.state.selectedCountry) {
+    if (this.numberInputRef.value === '+' && this.state.selectedCountry && !this.props.disableCountryCode) {
       this.setState({
         formattedNumber: '+' + this.state.selectedCountry.dialCode
       }, () => setTimeout(this.cursorToEnd, 10));
@@ -607,6 +623,7 @@ class ReactPhoneInput extends React.Component {
 
   render() {
     const { selectedCountry, showDropdown, formattedNumber } = this.state;
+    const disableDropdown = this.props.disableDropdown;
 
     const arrowClasses = classNames({"arrow": true, "up": showDropdown});
     const inputClasses = classNames({
@@ -641,12 +658,12 @@ class ReactPhoneInput extends React.Component {
           ref={el => this.dropdownContainerRef = el}
         >
           <div
-            onClick={this.handleFlagDropdownClick}
+            onClick={!disableDropdown && this.handleFlagDropdownClick}
             className='selected-flag'
             title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
           >
             <div className={inputFlagClasses}>
-              <div className={arrowClasses}></div>
+              {!disableDropdown && <div className={arrowClasses}></div>}
             </div>
           </div>
 
