@@ -207,7 +207,7 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
-  searchCountry = memoize((queryString) => {
+  getProbableCandidate = memoize((queryString) => {
     if (!queryString || queryString.length === 0) {
       return null;
     }
@@ -502,7 +502,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   searchCountry = () => {
-    const probableCandidate = this.searchCountry(this.state.queryString) || this.state.onlyCountries[0];
+    const probableCandidate = this.getProbableCandidate(this.state.queryString) || this.state.onlyCountries[0];
     const probableCandidateIndex = findIndex(this.state.onlyCountries, probableCandidate) + this.state.preferredCountries.length;
 
     this.scrollTo(this.getElement(probableCandidateIndex), true);
