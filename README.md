@@ -155,11 +155,23 @@ Regions selected: {['north-america', 'carribean']}
 
 <table>
   <tr>
-    <td> onChange </td>
-    <td> onFocus </td>
-    <td> onBlur </td>
-    <td> onClick </td>
-    <td> onKeyDown </td>
+    <th>argument number</th>
+    <th>name</th>
+    <th>Description</th>
+    <th>type</th>
+  </tr>
+
+  <tr>
+    <td>1</td>
+    <td>value/event</td>
+    <td>the phone number or the event (onClick)</td>
+    <td>string/object</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>country</td>
+    <td>the country object { name, dialCode, country code (iso2 format)}</td>
+    <td>object</td>
   </tr>
 </table>
 
