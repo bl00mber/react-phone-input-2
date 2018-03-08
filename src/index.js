@@ -344,7 +344,7 @@ class ReactPhoneInput extends React.Component {
       formattedText: '',
       remainingText: text.split('')
     });
-    return formattedObject.formattedText + formattedObject.remainingText.join('');
+    return formattedObject.formattedText;
   }
 
   // Put the cursor to the end of the input (usually after a focus event)
@@ -380,8 +380,8 @@ class ReactPhoneInput extends React.Component {
     let newSelectedCountry = this.state.selectedCountry;
     let freezeSelection = this.state.freezeSelection;
 
-    //Does not exceed 16 digit phone number limit
-    if (event.target.value.replace(/\D/g, '').length > 16) {
+    //Does not exceed 15 digit phone number limit
+    if (event.target.value.replace(/\D/g, '').length > 15) {
       return;
     }
 
@@ -591,7 +591,7 @@ class ReactPhoneInput extends React.Component {
           className={itemClasses}
           data-dial-code="1"
           data-country-code={country.iso2}
-          onClick={this.handleFlagItemClick.bind(this, country)}
+          onClick={() => this.handleFlagItemClick(country)}
         >
           <div className={inputFlagClasses}/>
           <span className='country-name'>{country.name}</span>
@@ -658,7 +658,7 @@ class ReactPhoneInput extends React.Component {
           ref={el => this.dropdownContainerRef = el}
         >
           <div
-            onClick={!disableDropdown && this.handleFlagDropdownClick}
+            onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
             className='selected-flag'
             title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
           >
