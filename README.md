@@ -28,6 +28,7 @@ function handleOnChange(value) {
    });
 }
 ```
+
 ## Options
 
 <table>
@@ -124,7 +125,19 @@ function handleOnChange(value) {
 
 ### Regions
 
-You can specify custom regions use string or array of strings.
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Type </th>
+    <th> Description </th>
+  </tr>
+
+  <tr>
+    <td> regions </td>
+    <td> array/string </td>
+    <td> to only show codes from selected regions </td>
+  </tr>
+</table>
 
 <table>
   <tr>
@@ -134,14 +147,14 @@ You can specify custom regions use string or array of strings.
     <td> ['america', 'europe', 'asia', 'oceania', 'africa'] </td>
   </tr>
   <tr>
-    <th> Subregions (used region property too) </th>
+    <th> Subregions </th>
   </tr>
   <tr>
     <td> ['north-america', 'south-america', 'central-america', 'carribean', 'european-union', 'ex-ussr', 'middle-east', 'north-africa'] </td>
   </tr>
 </table>
 
-Region selected: {'europe'}
+Regions selected: {'europe'}
 ```jsx
 <ReactPhoneInput
   defaultCountry='it'
@@ -156,27 +169,41 @@ Regions selected: {['north-america', 'carribean']}
   regions={['north-america', 'carribean']}
 />
 ```
+
 ### Supported events
 
 <table>
   <tr>
-    <th>argument number</th>
-    <th>name</th>
-    <th>Description</th>
-    <th>type</th>
+    <td> onChange </td>
+    <td> onFocus </td>
+    <td> onBlur </td>
+    <td> onClick </td>
+    <td> onKeyDown </td>
+  </tr>
+</table>
+
+Returned data
+Country data not returned from onKeyDown event
+
+<table>
+  <tr>
+    <th> Data </th>
+    <th> Type </th>
+    <th> Description </th>
+    <th> № </th>
   </tr>
 
   <tr>
-    <td>1</td>
-    <td>value/event</td>
-    <td>the phone number or the event (onClick)</td>
-    <td>string/object</td>
+    <td> value/event </td>
+    <td> string/object </td>
+    <td> the phone number or the event </td>
+    <td> 1 </td>
   </tr>
   <tr>
-    <td>2</td>
-    <td>country</td>
-    <td>the country object { name, dialCode, country code (iso2 format)}</td>
-    <td>object</td>
+    <td> country data </td>
+    <td> object </td>
+    <td> the country object { name, dialCode, country code (iso2 format) } </td>
+    <td> 2 </td>
   </tr>
 </table>
 

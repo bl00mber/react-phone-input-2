@@ -122,7 +122,7 @@ class ReactPhoneInput extends React.Component {
 
     if (!this.props.disableCountryCode) {
       formattedNumber = (inputNumber === '' && countryGuess === 0) ? '' :
-        this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), countryGuess ? countryGuess.format : null);
+      this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), countryGuess ? countryGuess.format : null);
     } else {
       formattedNumber = inputNumber.replace(/\D/g, '');
     }
@@ -572,13 +572,13 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
-  handleInputKeyDown = (event) => {
+  handleInputKeyDown = (e) => {
     const { keys } = this.props;
     if (event.which === keys.ENTER) {
-      this.props.onEnterKeyPress(event);
+      this.props.onEnterKeyPress(e);
     }
 
-    if (this.props.onKeyDown) this.props.onKeyDown(event);
+    if (this.props.onKeyDown) this.props.onKeyDown(e);
   }
 
   handleClickOutside = (e) => {
