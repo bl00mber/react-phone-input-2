@@ -182,28 +182,24 @@ Regions selected: {['north-america', 'carribean']}
   </tr>
 </table>
 
-Returned data
-Country data not returned from onKeyDown event
+Country data object not returned from onKeyDown event
 
 <table>
   <tr>
     <th> Data </th>
     <th> Type </th>
     <th> Description </th>
-    <th> № </th>
   </tr>
 
   <tr>
     <td> value/event </td>
     <td> string/object </td>
-    <td> the phone number or the event </td>
-    <td> 1 </td>
+    <td> the event or the phone number </td>
   </tr>
   <tr>
     <td> country data </td>
     <td> object </td>
     <td> the country object { name, dialCode, country code (iso2 format) } </td>
-    <td> 2 </td>
   </tr>
 </table>
 

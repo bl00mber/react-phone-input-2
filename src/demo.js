@@ -24,7 +24,7 @@ export default render(
     </div>
 
     <div style={{ display: 'inline-block', marginLeft: '30px' }}>
-      <p>v2.0.0</p>
+      <p>v2</p>
       <p>Auto detect through value field</p>
       <ReactPhoneInput
         value='+3802343252'
