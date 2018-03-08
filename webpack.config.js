@@ -31,7 +31,7 @@ const common = {
       },
       {
         test: /\.less$/,
-        loader: "style!css!less"
+        loader: 'style!css!less'
       }
     ]
   }
@@ -40,7 +40,7 @@ const common = {
 //Development configuration settings
 if (TARGET === 'dev') {
   module.exports = merge(common, {
-    devtool: 'eval',
+    devtool: 'inline-source-map',
     devServer: {
       publicPath: 'http://localhost:8181/',
       port: '8181',
@@ -77,8 +77,8 @@ if (TARGET === 'build') {
       libraryTarget: 'umd'
     },
     externals: [{
-      "lodash": "lodash",
-      "react": {
+      'lodash': 'lodash',
+      'react': {
         root: 'React',
         commonjs2: 'react',
         commonjs: 'react',
