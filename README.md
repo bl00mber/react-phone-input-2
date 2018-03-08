@@ -93,7 +93,7 @@ function handleOnChange(value) {
   <tr>
     <td> autoFormat </td>
     <td> bool </td>
-    <td colspan="2"> on/off auto formatting (on by default) </td>
+    <td colspan="2"> on/off auto formatting, true by default </td>
   </tr>
   <tr>
     <td> disabled </td>
@@ -108,12 +108,17 @@ function handleOnChange(value) {
   <tr>
     <td> disableCountryCode </td>
     <td> bool </td>
-    <td colspan="2"></td>
+    <td colspan="2"> false by default </td>
   </tr>
   <tr>
     <td> disableDropdown </td>
     <td> bool </td>
-    <td colspan="2"></td>
+    <td colspan="2"> false by default </td>
+  </tr>
+  <tr>
+    <td> enableLongNumbers </td>
+    <td> bool </td>
+    <td colspan="2"> false by default </td>
   </tr>
 </table>
 

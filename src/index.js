@@ -35,6 +35,7 @@ class ReactPhoneInput extends React.Component {
     disableAreaCodes: PropTypes.bool,
     disableCountryCode: PropTypes.bool,
     disableDropdown: PropTypes.bool,
+    enableLongNumbers: PropTypes.bool,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -69,6 +70,7 @@ class ReactPhoneInput extends React.Component {
     },
     disableCountryCode: false,
     disableDropdown: false,
+    enableLongNumbers: false,
 
     onEnterKeyPress: () => {},
 
@@ -312,7 +314,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   formatNumber = (text, pattern) => {
-    const disableCountryCode = this.props.disableCountryCode;
+    const { disableCountryCode, enableLongNumbers } = this.props;
 
     if (!text || text.length === 0) {
       return disableCountryCode ? '' : '+';
@@ -344,7 +346,12 @@ class ReactPhoneInput extends React.Component {
       formattedText: '',
       remainingText: text.split('')
     });
-    return formattedObject.formattedText;
+
+    if (enableLongNumbers) {
+      return formattedObject.formattedText + formattedObject.remainingText.join('');
+    } else {
+      return formattedObject.formattedText;
+    }
   }
 
   // Put the cursor to the end of the input (usually after a focus event)
