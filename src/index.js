@@ -122,7 +122,7 @@ class ReactPhoneInput extends React.Component {
 
     if (!this.props.disableCountryCode) {
       formattedNumber = (inputNumber === '' && countryGuess === 0) ? '' :
-      this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), countryGuess ? countryGuess.format : null);
+        this.formatNumber(dialCode + inputNumber.replace(/\D/g, ''), countryGuess ? countryGuess.format : null);
     } else {
       formattedNumber = inputNumber.replace(/\D/g, '');
     }
@@ -368,6 +368,16 @@ class ReactPhoneInput extends React.Component {
     return this[`flag_no_${index}`];
   }
 
+  // return country data from state
+  getCountryData = () => {
+    if (!this.state.selectedCountry) return {}
+    return {
+      name: this.state.selectedCountry.name || '',
+      dialCode: this.state.selectedCountry.dialCode || '',
+      countryCode: this.state.selectedCountry.iso2 || ''
+    }
+  }
+
   handleFlagDropdownClick = () => {
     if (!this.state.showDropdown && this.props.disabled) return;
 
@@ -445,14 +455,14 @@ class ReactPhoneInput extends React.Component {
       }
 
       if (this.props.onChange) {
-        this.props.onChange(this.state.formattedNumber);
+        this.props.onChange(this.state.formattedNumber, this.getCountryData());
       }
     });
   }
 
   handleInputClick = (e) => {
     this.setState({ showDropdown: false });
-    if (this.props.onClick) this.props.onClick(e);
+    if (this.props.onClick) this.props.onClick(e, this.getCountryData());
   }
 
   handleFlagItemClick = (country) => {
@@ -472,7 +482,7 @@ class ReactPhoneInput extends React.Component {
       }, () => {
         this.cursorToEnd();
         if (this.props.onChange) {
-          this.props.onChange(formattedNumber);
+          this.props.onChange(formattedNumber, this.getCountryData());
         }
       });
     }
@@ -488,13 +498,13 @@ class ReactPhoneInput extends React.Component {
 
     this.setState({ placeholder: '' });
 
-    this.props.onFocus && this.props.onFocus(e);
+    this.props.onFocus && this.props.onFocus(e, this.getCountryData());
     setTimeout(this.cursorToEnd, 10);
   }
 
   handleInputBlur = (e) => {
     if (!e.target.value) this.setState({ placeholder: this.props.placeholder });
-    this.props.onBlur && this.props.onBlur(e);
+    this.props.onBlur && this.props.onBlur(e, this.getCountryData());
   }
 
   getHighlightCountryIndex = (direction) => {
