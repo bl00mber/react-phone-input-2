@@ -403,31 +403,31 @@ class ReactPhoneInput extends React.Component {
     });
   }
 
-  handleInput = (event) => {
+  handleInput = (e) => {
     let formattedNumber = this.props.disableCountryCode ? '' : '+';
     let newSelectedCountry = this.state.selectedCountry;
     let freezeSelection = this.state.freezeSelection;
 
     //Does not exceed 15 digit phone number limit
-    if (event.target.value.replace(/\D/g, '').length > 15) {
+    if (e.target.value.replace(/\D/g, '').length > 15) {
       return;
     }
 
     // if the input is the same as before, must be some special key like enter etc.
-    if (event.target.value === this.state.formattedNumber) {
+    if (e.target.value === this.state.formattedNumber) {
       return;
     }
 
     // ie hack
-    if (event.preventDefault) {
-      event.preventDefault();
+    if (e.preventDefault) {
+      e.preventDefault();
     } else {
-      event.returnValue = false;
+      e.returnValue = false;
     }
 
-    if (event.target.value.length > 0) {
+    if (e.target.value.length > 0) {
       // before entering the number in new format, lets check if the dial code now matches some other country
-      const inputNumber = event.target.value.replace(/\D/g, '');
+      const inputNumber = e.target.value.replace(/\D/g, '');
 
       // we don't need to send the whole number to guess the country... only the first 6 characters are enough
       // the guess country function can then use memoization much more effectively since the set of input it
@@ -440,7 +440,7 @@ class ReactPhoneInput extends React.Component {
       formattedNumber = this.formatNumber(inputNumber, newSelectedCountry.format);
     }
 
-    let caretPosition = event.target.selectionStart;
+    let caretPosition = e.target.selectionStart;
     const oldFormattedText = this.state.formattedNumber;
     const diff = formattedNumber.length - oldFormattedText.length;
 
@@ -534,15 +534,15 @@ class ReactPhoneInput extends React.Component {
     this.setState({queryString: '', highlightCountryIndex: probableCandidateIndex});
   }
 
-  handleKeydown = (event) => {
+  handleKeydown = (e) => {
     const { keys } = this.props;
     if (!this.state.showDropdown || this.props.disabled) return;
 
     // ie hack
-    if (event.preventDefault) {
-      event.preventDefault();
+    if (e.preventDefault) {
+      e.preventDefault();
     } else {
-      event.returnValue = false;
+      e.returnValue = false;
     }
 
     const moveHighlight = (direction) => {
@@ -555,7 +555,7 @@ class ReactPhoneInput extends React.Component {
       });
     }
 
-    switch (event.which) {
+    switch (e.which) {
       case keys.DOWN:
         moveHighlight(1);
         break;
@@ -563,7 +563,7 @@ class ReactPhoneInput extends React.Component {
         moveHighlight(-1);
         break;
       case keys.ENTER:
-        this.handleFlagItemClick(this.state.onlyCountries[this.state.highlightCountryIndex], event);
+        this.handleFlagItemClick(this.state.onlyCountries[this.state.highlightCountryIndex], e);
         break;
       case keys.ESC:
         this.setState({
@@ -571,9 +571,9 @@ class ReactPhoneInput extends React.Component {
         }, this.cursorToEnd);
         break;
       default:
-        if ((event.which >= keys.A && event.which <= keys.Z) || event.which === keys.SPACE) {
+        if ((e.which >= keys.A && e.which <= keys.Z) || e.which === keys.SPACE) {
           this.setState({
-            queryString: this.state.queryString + String.fromCharCode(event.which)
+            queryString: this.state.queryString + String.fromCharCode(e.which)
           }, this.state.debouncedQueryStingSearcher);
         }
     }
@@ -581,7 +581,7 @@ class ReactPhoneInput extends React.Component {
 
   handleInputKeyDown = (e) => {
     const { keys } = this.props;
-    if (event.which === keys.ENTER) {
+    if (e.which === keys.ENTER) {
       this.props.onEnterKeyPress(e);
     }
 
