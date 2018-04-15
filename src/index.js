@@ -154,8 +154,7 @@ class ReactPhoneInput extends React.Component {
     if (nextProps.defaultCountry && nextProps.defaultCountry !== this.state.defaultCountry) {
       this.updateDefaultCountry(nextProps.defaultCountry);
     }
-    if (nextProps.value &&
-      nextProps.value !== this.state.formattedNumber) {
+    if (nextProps.value !== this.state.formattedNumber) {
       this.updateFormattedNumber(nextProps.value);
     }
   }
