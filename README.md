@@ -38,7 +38,6 @@ function handleOnChange(value) {
     <th> Description </th>
     <th> Example </th>
   </tr>
-
   <tr>
     <td> excludeCountries </td>
     <td> array </td>
@@ -57,7 +56,6 @@ function handleOnChange(value) {
     <td> country codes to be at the top </td>
     <td> ['cu','cw','kz'] </td>
   </tr>
-
   <tr>
     <td> defaultCountry </td>
     <td> string </td>
@@ -74,7 +72,6 @@ function handleOnChange(value) {
     <td> string </td>
     <td colspan="2"> custom placeholder </td>
   </tr>
-
   <tr>
     <td> inputStyle </td>
     <td> object </td>
@@ -90,7 +87,21 @@ function handleOnChange(value) {
     <td> object </td>
     <td colspan="2"> styles for dropdown container </td>
   </tr>
-
+  <tr>
+    <td> inputClass </td>
+    <td> string </td>
+    <td colspan="2"> class selectors for input </td>
+  </tr>
+  <tr>
+    <td> buttonClass </td>
+    <td> string </td>
+    <td colspan="2"> class selectors for dropdown button </td>
+  </tr>
+  <tr>
+    <td> dropdownClass </td>
+    <td> string </td>
+    <td colspan="2"> class selectors for dropdown container </td>
+  </tr>
   <tr>
     <td> autoFormat </td>
     <td> bool </td>
