@@ -4,6 +4,21 @@ import ReactPhoneInput from './index';
 
 export default render(
   <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px' }}>
+    <style dangerouslySetInnerHTML={{__html: `
+      input[type="tel"].custom-phone-input {
+        font-size: 18px;
+        border-color: black;
+      }
+
+      .custom-phone-button {
+        background: rgb(200, 215, 225) !important;
+        border-color: black !important;
+      }
+
+      .custom-dropdown {
+        margin-top: 0 !important;
+      }
+    `}} />
     <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
       <p>v1.2.1</p>
       <p>Exclude countries (usa, canada)</p>
@@ -49,6 +64,12 @@ export default render(
         }}
         buttonStyle={{ borderRadius: '5px 0 0 5px' }}
         dropdownStyle={{ width: '300px' }}
+      />
+      <p>Customizable classes</p>
+      <ReactPhoneInput
+        inputClass={'custom-phone-input'}
+        buttonClass={'custom-phone-button'}
+        dropdownClass={'custom-dropdown'}
       />
       <p>Custom regions selected: {`{'europe'}`}</p>
       <ReactPhoneInput
