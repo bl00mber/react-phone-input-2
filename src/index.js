@@ -30,6 +30,10 @@ class ReactPhoneInput extends React.Component {
     buttonStyle: PropTypes.object,
     dropdownStyle: PropTypes.object,
 
+    inputClass: PropTypes.string,
+    buttonClass: PropTypes.string,
+    dropdownClass: PropTypes.string,
+
     autoFormat: PropTypes.bool,
     disabled: PropTypes.bool,
     disableAreaCodes: PropTypes.bool,
@@ -59,6 +63,10 @@ class ReactPhoneInput extends React.Component {
     inputStyle: {},
     buttonStyle: {},
     dropdownStyle: {},
+
+    inputClass: '',
+    buttonClass: '',
+    dropdownClass: '',
 
     autoFormat: true,
     disabled: false,
@@ -629,6 +637,7 @@ class ReactPhoneInput extends React.Component {
     countryDropdownList.splice(preferredCountries.length, 0, dashedLi);
 
     const dropDownClasses = classNames({
+      [this.props.dropdownClass]: true,
       'country-list': true,
       'hide': !showDropdown
     });
@@ -650,11 +659,16 @@ class ReactPhoneInput extends React.Component {
 
     const arrowClasses = classNames({"arrow": true, "up": showDropdown});
     const inputClasses = classNames({
+      [this.props.inputClass]: true,
       "form-control": true,
       "invalid-number": !this.props.isValid(formattedNumber.replace(/\D/g, ''))
     });
 
-    const flagViewClasses = classNames({"flag-dropdown": true, "open-dropdown": showDropdown});
+    const flagViewClasses = classNames({
+      [this.props.buttonClass]: true,
+      "flag-dropdown": true,
+      "open-dropdown": showDropdown
+    });
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
 
     return (
