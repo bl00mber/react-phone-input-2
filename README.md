@@ -106,6 +106,11 @@ function handleOnChange(value) {
   </tr>
 
   <tr style="border-top-width:medium;">
+    <td> containerClass </td>
+    <td> string </td>
+    <td colspan="2"> class for container </td>
+  </tr>
+  <tr style="border-top-width:medium;">
     <td> inputClass </td>
     <td> string </td>
     <td colspan="2"> class for input </td>

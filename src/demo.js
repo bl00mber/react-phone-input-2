@@ -67,6 +67,7 @@ export default render(
       />
       <p>Customizable classes</p>
       <ReactPhoneInput
+        containerClass={'react-tel-input'}
         inputClass={'custom-phone-input'}
         buttonClass={'custom-phone-button'}
         dropdownClass={'custom-dropdown'}

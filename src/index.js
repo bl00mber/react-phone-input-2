@@ -28,6 +28,7 @@ class ReactPhoneInput extends React.Component {
     buttonStyle: PropTypes.object,
     dropdownStyle: PropTypes.object,
 
+    containerClass: PropTypes.string,
     inputClass: PropTypes.string,
     buttonClass: PropTypes.string,
     dropdownClass: PropTypes.string,
@@ -67,6 +68,7 @@ class ReactPhoneInput extends React.Component {
     buttonStyle: {},
     dropdownStyle: {},
 
+    containerClass: 'react-tel-input',
     inputClass: '',
     buttonClass: '',
     dropdownClass: '',
@@ -676,7 +678,7 @@ class ReactPhoneInput extends React.Component {
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
 
     return (
-      <div className="react-tel-input">
+      <div className={this.props.containerClass}>
         <input
           placeholder={this.state.placeholder}
           onChange={this.handleInput}
