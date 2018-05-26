@@ -44,6 +44,8 @@ class ReactPhoneInput extends React.Component {
       PropTypes.arrayOf(PropTypes.string)
     ]),
 
+    localization: PropTypes.object,
+
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -85,6 +87,8 @@ class ReactPhoneInput extends React.Component {
     enableLongNumbers: false,
 
     regions: '',
+
+    localization: {},
 
     onEnterKeyPress: () => {},
 
@@ -631,7 +635,10 @@ class ReactPhoneInput extends React.Component {
           onClick={() => this.handleFlagItemClick(country)}
         >
           <div className={inputFlagClasses}/>
-          <span className='country-name'>{country.name}</span>
+          <span className='country-name'>{
+              this.props.localization[country.name] != undefined ?
+              this.props.localization[country.name] : country.name
+          }</span>
           <span className='dial-code'>{'+' + country.dialCode}</span>
         </li>
       );

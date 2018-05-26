@@ -199,6 +199,26 @@ Regions selected: {['north-america', 'carribean']}
 />
 ```
 
+### Localization
+
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Type </th>
+  </tr>
+  <tr>
+    <td> localization </td>
+    <td> object </td>
+  </tr>
+</table>
+
+```jsx
+<ReactPhoneInput
+  onlyCountries=['de', 'es']
+  localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
+/>
+```
+
 ### Supported events
 
 <table>

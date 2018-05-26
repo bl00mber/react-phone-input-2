@@ -38,7 +38,7 @@ export default render(
       />
     </div>
 
-    <div style={{ display: 'inline-block', marginLeft: '30px' }}>
+    <div style={{ display: 'inline-block', marginLeft: '40px' }}>
       <p>v2</p>
       <p>Auto detect through value field</p>
       <ReactPhoneInput
@@ -72,6 +72,9 @@ export default render(
         buttonClass={'custom-phone-button'}
         dropdownClass={'custom-dropdown'}
       />
+    </div>
+
+    <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
       <p>Custom regions selected: {`{'europe'}`}</p>
       <ReactPhoneInput
         defaultCountry='it'
@@ -90,6 +93,12 @@ export default render(
         disableCountryCode={true}
         disableDropdown={true}
         placeholder='(702) 123-4567'
+      />
+      <p>Localization</p>
+      <ReactPhoneInput
+        defaultCountry='de'
+        onlyCountries={['de', 'es']}
+        localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
       />
     </div>
   </div>, document.getElementById('root')
