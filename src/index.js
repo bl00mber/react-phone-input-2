@@ -685,6 +685,8 @@ class ReactPhoneInput extends React.Component {
           type="tel"
           className={inputClasses}
           disabled={this.props.disabled}
+          required={this.props.required}
+          name={this.props.name}
           style={this.props.inputStyle}
         />
 
