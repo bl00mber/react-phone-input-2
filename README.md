@@ -63,7 +63,7 @@ function handleOnChange(value) {
     <td> 'us' </td>
   </tr>
 
-  <tr style="border-top-width:medium;">
+  <tr>
     <td> value </td>
     <td> string </td>
     <td colspan="2"> initial phone value </td>
@@ -89,7 +89,7 @@ function handleOnChange(value) {
     <td colspan="2"> disable input and dropdown </td>
   </tr>
 
-  <tr style="border-top-width:medium;">
+  <tr>
     <td> inputStyle </td>
     <td> object </td>
     <td colspan="2"> styles for input </td>
@@ -105,12 +105,12 @@ function handleOnChange(value) {
     <td colspan="2"> styles for dropdown container </td>
   </tr>
 
-  <tr style="border-top-width:medium;">
+  <tr>
     <td> containerClass </td>
     <td> string </td>
     <td colspan="2"> class for container </td>
   </tr>
-  <tr style="border-top-width:medium;">
+  <tr>
     <td> inputClass </td>
     <td> string </td>
     <td colspan="2"> class for input </td>
@@ -126,7 +126,7 @@ function handleOnChange(value) {
     <td colspan="2"> class for dropdown container </td>
   </tr>
 
-  <tr style="border-top-width:medium;">
+  <tr>
     <td> autoFormat </td>
     <td> bool </td>
     <td colspan="2"> on/off auto formatting, true by default </td>
