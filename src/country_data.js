@@ -287,7 +287,7 @@ const rawAllCountries = [
     ['asia'],
     "cn",
     "86",
-    "+.. ..-........"
+    "+.. ..-.........."
   ],
   [
     "Colombia",
