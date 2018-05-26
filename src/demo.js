@@ -6,13 +6,13 @@ export default render(
   <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px' }}>
     <style dangerouslySetInnerHTML={{__html: `
       input[type="tel"].custom-phone-input {
-        font-size: 18px;
-        border-color: black;
+        font-size: 14px;
+        border-color: #a0a0a0;
       }
 
       .custom-phone-button {
         background: rgb(200, 215, 225) !important;
-        border-color: black !important;
+        border-color: #a0a0a0 !important;
       }
 
       .custom-dropdown {

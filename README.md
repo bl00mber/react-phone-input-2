@@ -62,7 +62,8 @@ function handleOnChange(value) {
     <td> initial country </td>
     <td> 'us' </td>
   </tr>
-  <tr>
+
+  <tr style="border-top-width:medium;">
     <td> value </td>
     <td> string </td>
     <td colspan="2"> initial phone value </td>
@@ -73,6 +74,22 @@ function handleOnChange(value) {
     <td colspan="2"> custom placeholder </td>
   </tr>
   <tr>
+    <td> name </td>
+    <td> string </td>
+    <td colspan="2"> input name </td>
+  </tr>
+  <tr>
+    <td> required </td>
+    <td> bool </td>
+    <td colspan="2"> false by default, used in input </td>
+  </tr>
+  <tr>
+    <td> disabled </td>
+    <td> bool </td>
+    <td colspan="2"> disable input and dropdown </td>
+  </tr>
+
+  <tr style="border-top-width:medium;">
     <td> inputStyle </td>
     <td> object </td>
     <td colspan="2"> styles for input </td>
@@ -87,30 +104,27 @@ function handleOnChange(value) {
     <td> object </td>
     <td colspan="2"> styles for dropdown container </td>
   </tr>
-  <tr>
+
+  <tr style="border-top-width:medium;">
     <td> inputClass </td>
     <td> string </td>
-    <td colspan="2"> class selectors for input </td>
+    <td colspan="2"> class for input </td>
   </tr>
   <tr>
     <td> buttonClass </td>
     <td> string </td>
-    <td colspan="2"> class selectors for dropdown button </td>
+    <td colspan="2"> class for dropdown button </td>
   </tr>
   <tr>
     <td> dropdownClass </td>
     <td> string </td>
-    <td colspan="2"> class selectors for dropdown container </td>
+    <td colspan="2"> class for dropdown container </td>
   </tr>
-  <tr>
+
+  <tr style="border-top-width:medium;">
     <td> autoFormat </td>
     <td> bool </td>
     <td colspan="2"> on/off auto formatting, true by default </td>
-  </tr>
-  <tr>
-    <td> disabled </td>
-    <td> bool </td>
-    <td colspan="2"> disable input and dropdown </td>
   </tr>
   <tr>
     <td> disableAreaCodes </td>
@@ -142,7 +156,6 @@ function handleOnChange(value) {
     <th> Type </th>
     <th> Description </th>
   </tr>
-
   <tr>
     <td> regions </td>
     <td> array/string </td>
@@ -193,7 +206,7 @@ Regions selected: {['north-america', 'carribean']}
   </tr>
 </table>
 
-Country data object not returned from onKeyDown event
+Country data object not returns from onKeyDown event
 
 <table>
   <tr>
@@ -201,7 +214,6 @@ Country data object not returned from onKeyDown event
     <th> Type </th>
     <th> Description </th>
   </tr>
-
   <tr>
     <td> value/event </td>
     <td> string/object </td>
@@ -216,5 +228,4 @@ Country data object not returned from onKeyDown event
 
 ## License
 
-Based on [react-phone-input](https://github.com/razagill/react-phone-input) using
-[MIT](https://opensource.org/licenses/MIT)
+Based on [react-phone-input](https://github.com/razagill/react-phone-input) using [MIT](https://opensource.org/licenses/MIT)

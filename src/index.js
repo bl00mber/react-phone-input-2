@@ -16,15 +16,13 @@ class ReactPhoneInput extends React.Component {
     excludeCountries: PropTypes.arrayOf(PropTypes.string),
     onlyCountries: PropTypes.arrayOf(PropTypes.string),
     preferredCountries: PropTypes.arrayOf(PropTypes.string),
-
     defaultCountry: PropTypes.string,
+
     value: PropTypes.string,
     placeholder: PropTypes.string,
-
-    regions: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string)
-    ]),
+    name: PropTypes.string,
+    required: PropTypes.bool,
+    disabled: PropTypes.bool,
 
     inputStyle: PropTypes.object,
     buttonStyle: PropTypes.object,
@@ -35,11 +33,15 @@ class ReactPhoneInput extends React.Component {
     dropdownClass: PropTypes.string,
 
     autoFormat: PropTypes.bool,
-    disabled: PropTypes.bool,
     disableAreaCodes: PropTypes.bool,
     disableCountryCode: PropTypes.bool,
     disableDropdown: PropTypes.bool,
     enableLongNumbers: PropTypes.bool,
+
+    regions: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -52,13 +54,14 @@ class ReactPhoneInput extends React.Component {
     excludeCountries: [],
     onlyCountries: [],
     preferredCountries: [],
-
     defaultCountry: '',
+
     value: '',
     placeholder: '+1 (702) 123-4567',
     flagsImagePath: './flags.png',
-
-    regions: '',
+    name: '',
+    required: false,
+    disabled: false,
 
     inputStyle: {},
     buttonStyle: {},
@@ -69,7 +72,6 @@ class ReactPhoneInput extends React.Component {
     dropdownClass: '',
 
     autoFormat: true,
-    disabled: false,
     disableAreaCodes: false,
     isValid: (inputNumber) => {
       return some(countryData.allCountries, (country) => {
@@ -79,6 +81,8 @@ class ReactPhoneInput extends React.Component {
     disableCountryCode: false,
     disableDropdown: false,
     enableLongNumbers: false,
+
+    regions: '',
 
     onEnterKeyPress: () => {},
 
