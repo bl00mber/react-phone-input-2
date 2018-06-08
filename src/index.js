@@ -380,11 +380,16 @@ class ReactPhoneInput extends React.Component {
       remainingText: text.split('')
     });
 
+    let formattedNumber;
     if (enableLongNumbers) {
-      return formattedObject.formattedText + formattedObject.remainingText.join('');
+      formattedNumber = formattedObject.formattedText + formattedObject.remainingText.join('');
     } else {
-      return formattedObject.formattedText;
+      formattedNumber = formattedObject.formattedText;
     }
+
+    // Always close brackets
+    if (formattedNumber.includes('(') && !formattedNumber.includes(')')) formattedNumber += ')';
+    return formattedNumber;
   }
 
   // Put the cursor to the end of the input (usually after a focus event)
@@ -506,7 +511,7 @@ class ReactPhoneInput extends React.Component {
     const nextSelectedCountry = find(this.state.onlyCountries, country);
 
     const unformattedNumber = this.state.formattedNumber.replace(' ', '').replace('(', '').replace(')', '').replace('-', '');
-    const newNumber = unformattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode);
+    const newNumber = unformattedNumber.length > 1 ? unformattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode) : nextSelectedCountry.dialCode;
     const formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), nextSelectedCountry.format);
 
     this.setState({
