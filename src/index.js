@@ -24,6 +24,7 @@ class ReactPhoneInput extends React.Component {
     required: PropTypes.bool,
     disabled: PropTypes.bool,
 
+    containerStyle: PropTypes.object,
     inputStyle: PropTypes.object,
     buttonStyle: PropTypes.object,
     dropdownStyle: PropTypes.object,
@@ -68,6 +69,7 @@ class ReactPhoneInput extends React.Component {
     required: false,
     disabled: false,
 
+    containerStyle: {},
     inputStyle: {},
     buttonStyle: {},
     dropdownStyle: {},
@@ -693,7 +695,9 @@ class ReactPhoneInput extends React.Component {
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
 
     return (
-      <div className={this.props.containerClass}>
+      <div
+        className={this.props.containerClass}
+        style={this.props.containerStyle}>
         <input
           placeholder={this.state.placeholder}
           onChange={this.handleInput}

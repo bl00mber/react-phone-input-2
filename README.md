@@ -66,7 +66,7 @@ function handleOnChange(value) {
   <tr>
     <td> value </td>
     <td> string </td>
-    <td colspan="2"> state controllable value </td>
+    <td colspan="2"> input state value </td>
   </tr>
   <tr>
     <td> placeholder </td>
@@ -81,7 +81,7 @@ function handleOnChange(value) {
   <tr>
     <td> required </td>
     <td> bool </td>
-    <td colspan="2"> false by default, used in input </td>
+    <td colspan="2"> false by default </td>
   </tr>
   <tr>
     <td> disabled </td>
@@ -89,6 +89,11 @@ function handleOnChange(value) {
     <td colspan="2"> disable input and dropdown </td>
   </tr>
 
+  <tr>
+    <td> containerStyle </td>
+    <td> object </td>
+    <td colspan="2"> styles for container </td>
+  </tr>
   <tr>
     <td> inputStyle </td>
     <td> object </td>
