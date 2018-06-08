@@ -46,6 +46,8 @@ class ReactPhoneInput extends React.Component {
 
     localization: PropTypes.object,
 
+    countryCodeEditable: PropTypes.bool,
+
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -89,6 +91,8 @@ class ReactPhoneInput extends React.Component {
     regions: '',
 
     localization: {},
+
+    countryCodeEditable: true,
 
     onEnterKeyPress: () => {},
 
@@ -154,7 +158,7 @@ class ReactPhoneInput extends React.Component {
       queryString: '',
       showDropdown: false,
       freezeSelection: false,
-      debouncedQueryStingSearcher: debounce(this.searchCountry, 100)
+      debouncedQueryStingSearcher: debounce(this.searchCountry, 100),
     };
   }
 
@@ -424,6 +428,13 @@ class ReactPhoneInput extends React.Component {
     let formattedNumber = this.props.disableCountryCode ? '' : '+';
     let newSelectedCountry = this.state.selectedCountry;
     let freezeSelection = this.state.freezeSelection;
+
+    if(!this.props.countryCodeEditable) {
+        const updatedInput = '+' + newSelectedCountry.dialCode;
+        if (e.target.value.length < updatedInput.length) {
+            return;
+        }
+    }
 
     //Does not exceed 15 digit phone number limit
     if (e.target.value.replace(/\D/g, '').length > 15) {
