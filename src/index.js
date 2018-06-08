@@ -38,6 +38,7 @@ class ReactPhoneInput extends React.Component {
     disableCountryCode: PropTypes.bool,
     disableDropdown: PropTypes.bool,
     enableLongNumbers: PropTypes.bool,
+    countryCodeEditable: PropTypes.bool,
 
     regions: PropTypes.oneOfType([
       PropTypes.string,
@@ -46,7 +47,6 @@ class ReactPhoneInput extends React.Component {
 
     localization: PropTypes.object,
 
-    countryCodeEditable: PropTypes.bool,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -87,12 +87,11 @@ class ReactPhoneInput extends React.Component {
     disableCountryCode: false,
     disableDropdown: false,
     enableLongNumbers: false,
+    countryCodeEditable: true,
 
     regions: '',
 
     localization: {},
-
-    countryCodeEditable: true,
 
     onEnterKeyPress: () => {},
 
@@ -158,7 +157,7 @@ class ReactPhoneInput extends React.Component {
       queryString: '',
       showDropdown: false,
       freezeSelection: false,
-      debouncedQueryStingSearcher: debounce(this.searchCountry, 100),
+      debouncedQueryStingSearcher: debounce(this.searchCountry, 100)
     };
   }
 

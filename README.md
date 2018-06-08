@@ -66,7 +66,7 @@ function handleOnChange(value) {
   <tr>
     <td> value </td>
     <td> string </td>
-    <td colspan="2"> initial phone value </td>
+    <td colspan="2"> state controllable value </td>
   </tr>
   <tr>
     <td> placeholder </td>
@@ -150,6 +150,11 @@ function handleOnChange(value) {
     <td> enableLongNumbers </td>
     <td> bool </td>
     <td colspan="2"> false by default </td>
+  </tr>
+  <tr>
+    <td> countryCodeEditable </td>
+    <td> bool </td>
+    <td colspan="2"> true by default </td>
   </tr>
 </table>
 

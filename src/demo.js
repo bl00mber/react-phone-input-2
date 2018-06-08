@@ -95,10 +95,12 @@ export default render(
         placeholder='(702) 123-4567'
       />
       <p>Localization</p>
+      <p>Non-editable country code</p>
       <ReactPhoneInput
         defaultCountry='de'
         onlyCountries={['de', 'es']}
         localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
+        countryCodeEditable={false}
       />
     </div>
   </div>, document.getElementById('root')
