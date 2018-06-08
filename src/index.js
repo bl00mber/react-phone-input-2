@@ -503,23 +503,21 @@ class ReactPhoneInput extends React.Component {
     const currentSelectedCountry = this.state.selectedCountry;
     const nextSelectedCountry = find(this.state.onlyCountries, country);
 
-    if (currentSelectedCountry.iso2 !== nextSelectedCountry.iso2) {
-      // TODO - the below replacement is a bug. It will replace stuff from middle too
-      const newNumber = this.state.formattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode);
-      const formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), nextSelectedCountry.format);
+    const unformattedNumber = this.state.formattedNumber.replace(' ', '').replace('(', '').replace(')', '').replace('-', '');
+    const newNumber = unformattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode);
+    const formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), nextSelectedCountry.format);
 
-      this.setState({
-        showDropdown: false,
-        selectedCountry: nextSelectedCountry,
-        freezeSelection: true,
-        formattedNumber
-      }, () => {
-        this.cursorToEnd();
-        if (this.props.onChange) {
-          this.props.onChange(formattedNumber, this.getCountryData());
-        }
-      });
-    }
+    this.setState({
+      showDropdown: false,
+      selectedCountry: nextSelectedCountry,
+      freezeSelection: true,
+      formattedNumber
+    }, () => {
+      this.cursorToEnd();
+      if (this.props.onChange) {
+        this.props.onChange(formattedNumber, this.getCountryData());
+      }
+    });
   }
 
   handleInputFocus = (e) => {
