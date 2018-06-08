@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import countryData from './country_data.js';
 import classNames from 'classnames';
 
-import './react-phone-input-style.less';
+import './styles.less';
 
 class ReactPhoneInput extends React.Component {
   static propTypes = {
@@ -112,7 +112,7 @@ class ReactPhoneInput extends React.Component {
     const onlyCountries = this.excludeCountries(
       this.getOnlyCountries(props.onlyCountries, filteredCountries), props.excludeCountries);
 
-    const preferredCountries = filter(countryData.allCountries, (country) => {
+    const preferredCountries = filter(filteredCountries, (country) => {
       return some(props.preferredCountries, (preferredCountry) => {
         return preferredCountry === country.iso2;
       });

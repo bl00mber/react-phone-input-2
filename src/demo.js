@@ -40,7 +40,7 @@ export default render(
 
     <div style={{ display: 'inline-block', marginLeft: '40px' }}>
       <p>v2</p>
-      <p>Auto detect through value field</p>
+      <p>Auto country detect by value</p>
       <ReactPhoneInput
         value='+3802343252'
       />
