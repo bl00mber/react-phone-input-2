@@ -490,7 +490,12 @@ class ReactPhoneInput extends React.Component {
           caretPosition = caretPosition - diff;
         }
 
-        if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
+        const lastChar = formattedNumber.charAt(formattedNumber.length - 1);
+
+        if (lastChar == ')') {
+          this.numberInputRef.setSelectionRange(formattedNumber.length - 1, formattedNumber.length - 1);
+        }
+        else if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
           this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
         }
       }
