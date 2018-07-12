@@ -6,10 +6,16 @@ import { debounce, memoize } from 'lodash/function';
 import { trim, startsWith } from 'lodash/string';
 import React from 'react';
 import PropTypes from 'prop-types';
-import countryData from './country_data.js';
 import classNames from 'classnames';
+import { document } from './global.js';
+
+import countryData from './country_data.js';
 
 import './styles.less';
+
+const isModernBrowser = document.createElement ? (
+  Boolean(document.createElement('input').setSelectionRange)
+) : false
 
 class ReactPhoneInput extends React.Component {
   static propTypes = {
@@ -97,7 +103,7 @@ class ReactPhoneInput extends React.Component {
 
     onEnterKeyPress: () => {},
 
-    isModernBrowser: Boolean(document.createElement('input').setSelectionRange),
+    isModernBrowser: isModernBrowser,
     keys: {
       UP: 38, DOWN: 40, RIGHT: 39, LEFT: 37, ENTER: 13,
       ESC: 27, PLUS: 43, A: 65, Z: 90, SPACE: 32
@@ -164,13 +170,17 @@ class ReactPhoneInput extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
-    document.addEventListener('keydown', this.handleKeydown);
+    if (document.addEventListener) {
+      document.addEventListener('mousedown', this.handleClickOutside);
+      document.addEventListener('keydown', this.handleKeydown);
+    }
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-    document.removeEventListener('keydown', this.handleKeydown);
+    if (document.removeEventListener) {
+      document.removeEventListener('mousedown', this.handleClickOutside);
+      document.removeEventListener('keydown', this.handleKeydown);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -302,7 +312,7 @@ class ReactPhoneInput extends React.Component {
 
     const container = this.dropdownRef;
 
-    if (!container)
+    if (!container || !document.body)
       return;
 
     const containerHeight = container.offsetHeight;
