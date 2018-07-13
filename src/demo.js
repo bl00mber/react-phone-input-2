@@ -75,7 +75,7 @@ export default render(
     </div>
 
     <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
-      <p>Custom regions selected: {`{'europe'}`}</p>
+      <p>Custom region selected: {`{'europe'}`}</p>
       <ReactPhoneInput
         defaultCountry='it'
         regions={'europe'}

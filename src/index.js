@@ -13,10 +13,6 @@ import countryData from './country_data.js';
 
 import './styles.less';
 
-const isModernBrowser = document.createElement ? (
-  Boolean(document.createElement('input').setSelectionRange)
-) : false
-
 class ReactPhoneInput extends React.Component {
   static propTypes = {
     excludeCountries: PropTypes.arrayOf(PropTypes.string),
@@ -53,7 +49,6 @@ class ReactPhoneInput extends React.Component {
     ]),
 
     localization: PropTypes.object,
-
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -103,7 +98,10 @@ class ReactPhoneInput extends React.Component {
 
     onEnterKeyPress: () => {},
 
-    isModernBrowser: isModernBrowser,
+    isModernBrowser: document.createElement ? (
+      Boolean(document.createElement('input').setSelectionRange)
+    ) : false,
+
     keys: {
       UP: 38, DOWN: 40, RIGHT: 39, LEFT: 37, ENTER: 13,
       ESC: 27, PLUS: 43, A: 65, Z: 90, SPACE: 32
@@ -429,15 +427,26 @@ class ReactPhoneInput extends React.Component {
   handleFlagDropdownClick = () => {
     if (!this.state.showDropdown && this.props.disabled) return;
 
-    this.setState({
-      showDropdown: !this.state.showDropdown,
-      highlightCountry: find(this.state.onlyCountries, this.state.selectedCountry),
-      highlightCountryIndex: findIndex(this.state.onlyCountries, this.state.selectedCountry)
-    }, () => {
-      if (this.state.showDropdown) {
-        this.scrollTo(this.getElement(this.state.highlightCountryIndex + this.state.preferredCountries.length));
-      }
-    });
+    if (this.state.preferredCountries.includes(this.state.selectedCountry)) {
+      this.setState({
+        showDropdown: !this.state.showDropdown,
+        highlightCountryIndex: findIndex(this.state.preferredCountries, this.state.selectedCountry)
+      }, () => {
+        if (this.state.showDropdown) {
+          this.scrollTo(this.getElement(this.state.highlightCountryIndex));
+        }
+      });
+    }
+    else {
+      this.setState({
+        showDropdown: !this.state.showDropdown,
+        highlightCountryIndex: findIndex(this.state.onlyCountries, this.state.selectedCountry)
+      }, () => {
+        if (this.state.showDropdown) {
+          this.scrollTo(this.getElement(this.state.highlightCountryIndex + this.state.preferredCountries.length));
+        }
+      });
+    }
   }
 
   handleInput = (e) => {
@@ -644,12 +653,14 @@ class ReactPhoneInput extends React.Component {
   getCountryDropdownList = () => {
     const { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown } = this.state;
 
+    const countryIsPreferred = this.state.preferredCountries.includes(this.state.selectedCountry);
+
     let countryDropdownList = map(preferredCountries.concat(onlyCountries), (country, index) => {
       const itemClasses = classNames({
         country: true,
         preferred: country.iso2 === 'us' || country.iso2 === 'gb',
         active: country.iso2 === 'us',
-        highlight: highlightCountryIndex === index - preferredCountries.length
+        highlight: countryIsPreferred ? highlightCountryIndex === index : highlightCountryIndex === index - preferredCountries.length
       });
 
       const inputFlagClasses = `flag ${country.iso2}`;
