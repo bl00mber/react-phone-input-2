@@ -25,6 +25,7 @@ class ReactPhoneInput extends React.Component {
     name: PropTypes.string,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
+    autofocus: PropTypes.bool,
 
     containerStyle: PropTypes.object,
     inputStyle: PropTypes.object,
@@ -69,6 +70,7 @@ class ReactPhoneInput extends React.Component {
     name: '',
     required: false,
     disabled: false,
+    autofocus: false,
 
     containerStyle: {},
     inputStyle: {},
@@ -741,6 +743,7 @@ class ReactPhoneInput extends React.Component {
           type="tel"
           className={inputClasses}
           disabled={this.props.disabled}
+          autofocus={this.props.autofocus}
           required={this.props.required}
           name={this.props.name}
           style={this.props.inputStyle}
