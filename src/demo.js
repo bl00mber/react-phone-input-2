@@ -96,11 +96,13 @@ export default render(
       />
       <p>Localization</p>
       <p>Non-editable country code</p>
+      <p>Autofocus</p>
       <ReactPhoneInput
         defaultCountry='de'
         onlyCountries={['de', 'es']}
         localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
         countryCodeEditable={false}
+        autoFocus={true}
       />
     </div>
   </div>, document.getElementById('root')

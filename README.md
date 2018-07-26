@@ -89,9 +89,9 @@ function handleOnChange(value) {
     <td colspan="2"> disable input and dropdown </td>
   </tr>
   <tr>
-    <td> autofocus </td>
+    <td> autoFocus </td>
     <td> bool </td>
-    <td colspan="2"> autofocus input </td>
+    <td colspan="2"> autoFocus input </td>
   </tr>
   <tr>
     <td> containerStyle </td>

@@ -25,7 +25,7 @@ class ReactPhoneInput extends React.Component {
     name: PropTypes.string,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
-    autofocus: PropTypes.bool,
+    autoFocus: PropTypes.bool,
 
     containerStyle: PropTypes.object,
     inputStyle: PropTypes.object,
@@ -70,7 +70,7 @@ class ReactPhoneInput extends React.Component {
     name: '',
     required: false,
     disabled: false,
-    autofocus: false,
+    autoFocus: false,
 
     containerStyle: {},
     inputStyle: {},
@@ -555,10 +555,12 @@ class ReactPhoneInput extends React.Component {
 
   handleInputFocus = (e) => {
     // if the input is blank, insert dial code of the selected country
-    if (this.numberInputRef.value === '+' && this.state.selectedCountry && !this.props.disableCountryCode) {
-      this.setState({
-        formattedNumber: '+' + this.state.selectedCountry.dialCode
-      }, () => setTimeout(this.cursorToEnd, 10));
+    if (this.numberInputRef) {
+      if (this.numberInputRef.value === '+' && this.state.selectedCountry && !this.props.disableCountryCode) {
+        this.setState({
+          formattedNumber: '+' + this.state.selectedCountry.dialCode
+        }, () => setTimeout(this.cursorToEnd, 10));
+      }
     }
 
     this.setState({ placeholder: '' });
@@ -742,9 +744,9 @@ class ReactPhoneInput extends React.Component {
           ref={el => this.numberInputRef = el}
           type="tel"
           className={inputClasses}
-          disabled={this.props.disabled}
-          autofocus={this.props.autofocus}
           required={this.props.required}
+          disabled={this.props.disabled}
+          autoFocus={this.props.autoFocus}
           name={this.props.name}
           style={this.props.inputStyle}
         />
