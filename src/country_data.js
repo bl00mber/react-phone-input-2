@@ -501,7 +501,7 @@ const rawAllCountries = [
     ['europe', 'european-union'],
     "de",
     "49",
-    "+.. ... ........."
+    "+.. .... ........"
   ],
   [
     "Ghana",

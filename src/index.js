@@ -22,10 +22,7 @@ class ReactPhoneInput extends React.Component {
 
     value: PropTypes.string,
     placeholder: PropTypes.string,
-    name: PropTypes.string,
-    required: PropTypes.bool,
     disabled: PropTypes.bool,
-    autoFocus: PropTypes.bool,
 
     containerStyle: PropTypes.object,
     inputStyle: PropTypes.object,
@@ -49,6 +46,7 @@ class ReactPhoneInput extends React.Component {
       PropTypes.arrayOf(PropTypes.string)
     ]),
 
+    inputExtraProps: PropTypes.object,
     localization: PropTypes.object,
 
     onChange: PropTypes.func,
@@ -67,10 +65,7 @@ class ReactPhoneInput extends React.Component {
     value: '',
     placeholder: '+1 (702) 123-4567',
     flagsImagePath: './flags.png',
-    name: '',
-    required: false,
     disabled: false,
-    autoFocus: false,
 
     containerStyle: {},
     inputStyle: {},
@@ -96,6 +91,7 @@ class ReactPhoneInput extends React.Component {
 
     regions: '',
 
+    inputExtraProps: {},
     localization: {},
 
     onEnterKeyPress: () => {},
@@ -734,21 +730,19 @@ class ReactPhoneInput extends React.Component {
         className={this.props.containerClass}
         style={this.props.containerStyle}>
         <input
-          placeholder={this.state.placeholder}
+          className={inputClasses}
+          style={this.props.inputStyle}
           onChange={this.handleInput}
           onClick={this.handleInputClick}
           onFocus={this.handleInputFocus}
           onBlur={this.handleInputBlur}
-          onKeyDown={this.handleInputKeyDown}
           value={formattedNumber}
           ref={el => this.numberInputRef = el}
-          type="tel"
-          className={inputClasses}
-          required={this.props.required}
+          onKeyDown={this.handleInputKeyDown}
+          placeholder={this.state.placeholder}
           disabled={this.props.disabled}
-          autoFocus={this.props.autoFocus}
-          name={this.props.name}
-          style={this.props.inputStyle}
+          type="tel"
+          {...this.props.inputExtraProps}
         />
 
         <div

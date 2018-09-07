@@ -102,7 +102,11 @@ export default render(
         onlyCountries={['de', 'es']}
         localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
         countryCodeEditable={false}
-        autoFocus={true}
+        inputExtraProps={{
+          name: 'tel',
+          required: true,
+          autoFocus: true
+        }}
       />
     </div>
   </div>, document.getElementById('root')

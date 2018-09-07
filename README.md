@@ -73,46 +73,6 @@ function handleOnChange(value) {
     <td> string </td>
     <td colspan="2"> custom placeholder </td>
   </tr>
-  <tr>
-    <td> name </td>
-    <td> string </td>
-    <td colspan="2"> input name </td>
-  </tr>
-  <tr>
-    <td> required </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> disabled </td>
-    <td> bool </td>
-    <td colspan="2"> disable input and dropdown </td>
-  </tr>
-  <tr>
-    <td> autoFocus </td>
-    <td> bool </td>
-    <td colspan="2"> autoFocus input </td>
-  </tr>
-  <tr>
-    <td> containerStyle </td>
-    <td> object </td>
-    <td colspan="2"> styles for container </td>
-  </tr>
-  <tr>
-    <td> inputStyle </td>
-    <td> object </td>
-    <td colspan="2"> styles for input </td>
-  </tr>
-  <tr>
-    <td> buttonStyle </td>
-    <td> object </td>
-    <td colspan="2"> styles for dropdown button </td>
-  </tr>
-  <tr>
-    <td> dropdownStyle </td>
-    <td> object </td>
-    <td colspan="2"> styles for dropdown container </td>
-  </tr>
 
   <tr>
     <td> containerClass </td>
@@ -136,9 +96,36 @@ function handleOnChange(value) {
   </tr>
 
   <tr>
+    <td> containerStyle </td>
+    <td> object </td>
+    <td colspan="2"> styles for container </td>
+  </tr>
+  <tr>
+    <td> inputStyle </td>
+    <td> object </td>
+    <td colspan="2"> styles for input </td>
+  </tr>
+  <tr>
+    <td> buttonStyle </td>
+    <td> object </td>
+    <td colspan="2"> styles for dropdown button </td>
+  </tr>
+  <tr>
+    <td> dropdownStyle </td>
+    <td> object </td>
+    <td colspan="2"> styles for dropdown container </td>
+  </tr>
+
+  <tr>
+    <td> inputExtraProps </td>
+    <td> object </td>
+    <td colspan="2"> props to pass into the input </td>
+  </tr>
+
+  <tr>
     <td> autoFormat </td>
     <td> bool </td>
-    <td colspan="2"> on/off auto formatting, true by default </td>
+    <td colspan="2"> on/off phone formatting, true by default </td>
   </tr>
   <tr>
     <td> disableAreaCodes </td>
@@ -146,12 +133,17 @@ function handleOnChange(value) {
     <td colspan="2"> disable local codes for all countries </td>
   </tr>
   <tr>
-    <td> disableCountryCode </td>
+    <td> disabled </td>
     <td> bool </td>
-    <td colspan="2"> false by default </td>
+    <td colspan="2"> disable input and dropdown </td>
   </tr>
   <tr>
     <td> disableDropdown </td>
+    <td> bool </td>
+    <td colspan="2"> disable dropdown only, false by default </td>
+  </tr>
+  <tr>
+    <td> disableCountryCode </td>
     <td> bool </td>
     <td colspan="2"> false by default </td>
   </tr>
@@ -166,6 +158,16 @@ function handleOnChange(value) {
     <td colspan="2"> true by default </td>
   </tr>
 </table>
+
+```jsx
+<ReactPhoneInput
+  inputExtraProps={{
+    name: 'phone',
+    required: true,
+    autoFocus: true
+  }}
+/>
+```
 
 ### Regions
 
