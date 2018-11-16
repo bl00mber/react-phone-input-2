@@ -717,7 +717,13 @@ class ReactPhoneInput extends React.Component {
             </label>
           </li>
         )}
-        {countryDropdownList}
+        {countryDropdownList.length > 0
+          ? countryDropdownList
+          : (
+            <li className="no-entries-message">
+              <span>No entries to show.</span>
+            </li>
+          )}
       </ul>
     );
   }
