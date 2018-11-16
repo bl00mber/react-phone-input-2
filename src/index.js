@@ -702,7 +702,7 @@ class ReactPhoneInput extends React.Component {
                 aria-label="Magnifying glass"
               >
                 &#128270;
-            </span>
+              </span>
               <input
                 className={classNames({
                   'search-box': true,
