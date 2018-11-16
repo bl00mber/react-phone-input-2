@@ -114,7 +114,6 @@ export default render(
       <ReactPhoneInput
         defaultCountry="nl"
         withSearch
-        searchClass="foo"
       />
     </div>
   </div>, document.getElementById('root')
