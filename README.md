@@ -122,11 +122,6 @@ function handleOnChange(value) {
     <td> object </td>
     <td colspan="2"> props to pass into the input </td>
   </tr>
-    <tr>
-    <td> withSearch </td>
-    <td> bool </td>
-    <td colspan="2"> enables search field in the dropdown </td>
-  </tr>
   <tr>
     <td> autoFormat </td>
     <td> bool </td>
@@ -161,6 +156,11 @@ function handleOnChange(value) {
     <td> countryCodeEditable </td>
     <td> bool </td>
     <td colspan="2"> true by default </td>
+  </tr>
+  <tr>
+    <td> enableSearchField </td>
+    <td> bool </td>
+    <td colspan="2"> enables search field in the dropdown </td>
   </tr>
 </table>
 

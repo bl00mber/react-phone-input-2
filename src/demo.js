@@ -113,7 +113,7 @@ export default render(
       <p>With search field</p>
       <ReactPhoneInput
         defaultCountry="nl"
-        withSearch
+        enableSearchField
       />
     </div>
   </div>, document.getElementById('root')
