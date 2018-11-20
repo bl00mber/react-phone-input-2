@@ -458,10 +458,10 @@ class ReactPhoneInput extends React.Component {
     let newSelectedCountry = this.state.selectedCountry;
     let freezeSelection = this.state.freezeSelection;
 
-    if (!this.props.countryCodeEditable) {
+    if(!this.props.countryCodeEditable) {
         const updatedInput = '+' + newSelectedCountry.dialCode;
         if (e.target.value.length < updatedInput.length) {
-          return;
+           return;
         }
     }
 
