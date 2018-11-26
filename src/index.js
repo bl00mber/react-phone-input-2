@@ -33,6 +33,7 @@ class ReactPhoneInput extends React.Component {
     inputClass: PropTypes.string,
     buttonClass: PropTypes.string,
     dropdownClass: PropTypes.string,
+    searchClass: PropTypes.string,
 
     autoFormat: PropTypes.bool,
     disableAreaCodes: PropTypes.bool,
@@ -40,6 +41,7 @@ class ReactPhoneInput extends React.Component {
     disableDropdown: PropTypes.bool,
     enableLongNumbers: PropTypes.bool,
     countryCodeEditable: PropTypes.bool,
+    enableSearchField: PropTypes.bool,
 
     regions: PropTypes.oneOfType([
       PropTypes.string,
@@ -53,7 +55,8 @@ class ReactPhoneInput extends React.Component {
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onClick: PropTypes.func,
-    onKeyDown: PropTypes.func
+    onKeyDown: PropTypes.func,
+    isValid: PropTypes.func,
   }
 
   static defaultProps = {
@@ -76,6 +79,7 @@ class ReactPhoneInput extends React.Component {
     inputClass: '',
     buttonClass: '',
     dropdownClass: '',
+    searchClass: '',
 
     autoFormat: true,
     disableAreaCodes: false,
@@ -88,6 +92,7 @@ class ReactPhoneInput extends React.Component {
     disableDropdown: false,
     enableLongNumbers: false,
     countryCodeEditable: true,
+    enableSearchField: false,
 
     regions: '',
 
@@ -161,7 +166,8 @@ class ReactPhoneInput extends React.Component {
       queryString: '',
       showDropdown: false,
       freezeSelection: false,
-      debouncedQueryStingSearcher: debounce(this.searchCountry, 100)
+      debouncedQueryStingSearcher: debounce(this.searchCountry, 250),
+      searchValue: '',
     };
   }
 
@@ -593,6 +599,8 @@ class ReactPhoneInput extends React.Component {
   handleKeydown = (e) => {
     const { keys } = this.props;
     if (!this.state.showDropdown || this.props.disabled) return;
+    const { target: { id } } = e;
+    if (id === 'search-box') return; // don't process events coming from the search field
 
     // ie hack
     if (e.preventDefault) {
@@ -650,12 +658,28 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
+  handleSearchChange = (e) => {
+    const { currentTarget: { value: searchValue } } = e;
+    this.setState({ searchValue });
+  }
+
   getCountryDropdownList = () => {
-    const { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown } = this.state;
+    const {
+      props: { enableSearchField, searchClass },
+      state: { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown, searchValue },
+    } = this;
 
     const countryIsPreferred = this.state.preferredCountries.includes(this.state.selectedCountry);
+    const allCountries = preferredCountries.concat(onlyCountries);
 
-    let countryDropdownList = map(preferredCountries.concat(onlyCountries), (country, index) => {
+    const sanitizedSearchValue = searchValue.trim().toLowerCase();
+    const filteredCountries = (enableSearchField && sanitizedSearchValue)
+      // using [...new Set()] here to get rid of duplicates
+      ? [...new Set(allCountries.filter(({ name, iso2, dialCode }) =>
+        [`${name}`, `${iso2}`, `+${dialCode}`].some(field => field.toLowerCase().includes(sanitizedSearchValue))))]
+      : allCountries;
+
+    let countryDropdownList = map(filteredCountries, (country, index) => {
       const itemClasses = classNames({
         country: true,
         preferred: country.iso2 === 'us' || country.iso2 === 'gb',
@@ -702,7 +726,45 @@ class ReactPhoneInput extends React.Component {
         className={dropDownClasses}
         style={this.props.dropdownStyle}
       >
-        {countryDropdownList}
+        {enableSearchField && (
+          <li
+            className={classNames({
+              search: true,
+              [searchClass]: searchClass,
+            })}
+          >
+            <label>
+              <span
+                className={classNames({
+                  'search-emoji': true,
+                  [`${searchClass}-emoji`]: searchClass,
+                })}
+                role="img"
+                aria-label="Magnifying glass"
+              >
+                &#128270;
+              </span>
+              <input
+                className={classNames({
+                  'search-box': true,
+                  [`${searchClass}-box`]: searchClass,
+                })}
+                id="search-box"
+                type="search"
+                placeholder="search"
+                value={searchValue}
+                onChange={this.handleSearchChange}
+              />
+            </label>
+          </li>
+        )}
+        {countryDropdownList.length > 0
+          ? countryDropdownList
+          : (
+            <li className="no-entries-message">
+              <span>No entries to show.</span>
+            </li>
+          )}
       </ul>
     );
   }

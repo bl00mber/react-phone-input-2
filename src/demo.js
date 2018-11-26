@@ -109,5 +109,12 @@ export default render(
         }}
       />
     </div>
+    <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
+      <p>With search field</p>
+      <ReactPhoneInput
+        defaultCountry="nl"
+        enableSearchField
+      />
+    </div>
   </div>, document.getElementById('root')
 );
