@@ -56,6 +56,7 @@ function handleOnChange(value) {
     <td> country codes to be at the top </td>
     <td> ['cu','cw','kz'] </td>
   </tr>
+
   <tr>
     <td> defaultCountry </td>
     <td> string </td>
@@ -72,6 +73,7 @@ function handleOnChange(value) {
     <td> string </td>
     <td colspan="2"> custom placeholder </td>
   </tr>
+
   <tr>
     <td> containerClass </td>
     <td> string </td>
@@ -97,6 +99,7 @@ function handleOnChange(value) {
     <td> string </td>
     <td colspan="2"> class for search field </td>
   </tr>
+
   <tr>
     <td> containerStyle </td>
     <td> object </td>
@@ -117,11 +120,13 @@ function handleOnChange(value) {
     <td> object </td>
     <td colspan="2"> styles for dropdown container </td>
   </tr>
+
   <tr>
     <td> inputExtraProps </td>
     <td> object </td>
     <td colspan="2"> props to pass into the input </td>
   </tr>
+
   <tr>
     <td> autoFormat </td>
     <td> bool </td>
