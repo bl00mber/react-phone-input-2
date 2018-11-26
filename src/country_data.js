@@ -1030,7 +1030,7 @@ const rawAllCountries = [
     ['asia'],
     "ph",
     "63",
-    "+.. ... ...."
+    "+.. ... ......."
   ],
   [
     "Poland",
