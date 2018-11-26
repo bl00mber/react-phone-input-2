@@ -1,6 +1,6 @@
 {
   "name": "react-phone-input-2",
-  "version": "2.6.1",
+  "version": "2.7.0",
   "description": "A react component to format phone numbers",
   "main": "dist/index.js",
   "scripts": {
@@ -43,8 +43,8 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
-    "prop-types": "^15.6.1",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   }
 }
