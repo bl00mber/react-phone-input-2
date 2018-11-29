@@ -752,7 +752,7 @@ class ReactPhoneInput extends React.Component {
                 id="search-box"
                 type="search"
                 placeholder="search"
-                autofocus="true"
+                autoFocus="true"
                 value={searchValue}
                 onChange={this.handleSearchChange}
               />
