@@ -50,7 +50,6 @@
     "prop-types": "^15.6.2"
   },
   "peerDependencies": {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react": "^16.6.3"
   }
 }
