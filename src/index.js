@@ -202,15 +202,6 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.defaultCountry && nextProps.defaultCountry !== this.state.defaultCountry) {
-      this.updateDefaultCountry(nextProps.defaultCountry);
-    }
-    if (nextProps.value !== this.state.formattedNumber) {
-      this.updateFormattedNumber(nextProps.value);
-    }
-  }
-
   // Countries array methods
   deleteAreaCodes = filteredCountries => {
     return filteredCountries.filter(country => {
@@ -303,44 +294,13 @@ class ReactPhoneInput extends React.Component {
 
   // Hooks for updated props
   updateDefaultCountry = country => {
-    const newSelectedCountry = find(this.state.onlyCountries, { iso2: country });
+    const newSelectedCountry = find(state.onlyCountries, { iso2: country });
     this.setState({
       defaultCountry: country,
       selectedCountry: newSelectedCountry,
       formattedNumber: this.props.disableCountryCode ? '' : '+' + newSelectedCountry.dialCode
     });
   };
-
-  updateFormattedNumber(number) {
-    const { onlyCountries, defaultCountry } = this.state;
-    let countryGuess;
-    let inputNumber = number;
-    let formattedNumber = number;
-
-    // if inputNumber does not start with '+', then use default country's dialing prefix,
-    // otherwise use logic for finding country based on country prefix.
-    if (!inputNumber.startsWith('+')) {
-      countryGuess = find(onlyCountries, { iso2: defaultCountry });
-      const dialCode =
-        countryGuess && !startsWith(inputNumber.replace(/\D/g, ''), countryGuess.dialCode)
-          ? countryGuess.dialCode
-          : '';
-      formattedNumber = this.formatNumber(
-        (this.props.disableCountryCode ? '' : dialCode) + inputNumber.replace(/\D/g, ''),
-        countryGuess ? countryGuess.format : undefined
-      );
-    } else {
-      inputNumber = inputNumber.replace(/\D/g, '');
-      countryGuess = this.guessSelectedCountry(
-        inputNumber.substring(0, 6),
-        onlyCountries,
-        defaultCountry
-      );
-      formattedNumber = this.formatNumber(inputNumber, countryGuess.format);
-    }
-
-    this.setState({ selectedCountry: countryGuess, formattedNumber });
-  }
 
   // View methods
   scrollTo = (country, middle) => {
@@ -865,7 +825,7 @@ class ReactPhoneInput extends React.Component {
                 id="search-box"
                 type="search"
                 placeholder="search"
-                autoFocus="true"
+                autoFocus
                 value={searchValue}
                 onChange={this.handleSearchChange}
               />

@@ -45,15 +45,10 @@ if (TARGET === 'dev') {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-      publicPath: 'http://localhost:8181/',
-      port: '8181',
-      host: '0.0.0.0',
-      colors: true,
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      progress: true,
-      contentBase: 'dist'
+      contentBase: path.join(__dirname, 'dist'),
+      compress: true,
+      port: 8181,
+      hot: true
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
