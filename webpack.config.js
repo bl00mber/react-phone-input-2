@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const TARGET = process.env.TARGET;
 const ROOT_PATH = path.resolve(__dirname);
 const nodeModulesDir = path.join(ROOT_PATH, 'node_modules');
@@ -10,18 +12,18 @@ const nodeModulesDir = path.join(ROOT_PATH, 'node_modules');
 const common = {
   entry: path.resolve(ROOT_PATH, 'src/index.js'),
   resolve: {
-    extensions: ['', '.js', '.jsx'],
-    modulesDirectories: ['node_modules']
+    extensions: ['.js', '.jsx'],
+    modules: ['node_modules']
   },
   output: {
     path: path.resolve(ROOT_PATH, 'dist'),
     filename: 'index.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         include: path.resolve(ROOT_PATH, 'src')
       },
       {
@@ -31,7 +33,7 @@ const common = {
       },
       {
         test: /\.less$/,
-        loader: 'style!css!less'
+        loader: 'style-loader!css-loader!less-loader'
       }
     ]
   }
@@ -40,6 +42,7 @@ const common = {
 //Development configuration settings
 if (TARGET === 'dev') {
   module.exports = merge(common, {
+    mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
       publicPath: 'http://localhost:8181/',
@@ -56,48 +59,49 @@ if (TARGET === 'dev') {
       new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
-          'NODE_ENV': JSON.stringify('development')
+          NODE_ENV: JSON.stringify('development')
         },
-        '__DEV__': true
+        __DEV__: true
       })
     ]
   });
 }
 
 //Production configuration settings
-if (TARGET === 'build') {
+if (TARGET === 'build' || TARGET === 'analyze') {
+  let plugins = [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      },
+      __DEV__: false
+    })
+  ];
+  if (TARGET === 'analyze') {
+    plugins.push(new BundleAnalyzerPlugin());
+  }
   module.exports = merge(common, {
+    mode: 'production',
     entry: {
       'react-phone-input': path.resolve(ROOT_PATH, 'src/index.js')
     },
+    optimization: {},
     output: {
       path: path.resolve(ROOT_PATH, 'dist'),
       filename: 'index.js',
       library: 'ReactPhoneInput',
       libraryTarget: 'umd'
     },
-    externals: [{
-      'lodash': 'lodash',
-      'react': {
-        root: 'React',
-        commonjs2: 'react',
-        commonjs: 'react',
-        amd: 'react'
-      }
-    }],
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {
-          'NODE_ENV': JSON.stringify('production')
-        },
-        '__DEV__': false
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
+    externals: [
+      {
+        react: {
+          root: 'React',
+          commonjs2: 'react',
+          commonjs: 'react',
+          amd: 'react'
         }
-      }),
-      new webpack.optimize.DedupePlugin()
-    ]
+      }
+    ],
+    plugins
   });
 }
