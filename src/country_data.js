@@ -662,7 +662,7 @@ const rawAllCountries = [
     ['asia'],
     "jp",
     "81",
-    "+.. ... .. ...."
+    "+.. .. .... ...."
   ],
   [
     "Jordan",
