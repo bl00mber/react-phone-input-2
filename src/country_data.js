@@ -130,7 +130,8 @@ const rawAllCountries = [
     "Belarus",
     ['europe', 'ex-ussr'],
     "by",
-    "375"
+    "375",
+    "+... (..) ... .. .."
   ],
   [
     "Belgium",
