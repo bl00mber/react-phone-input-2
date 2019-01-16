@@ -1387,7 +1387,8 @@ const rawAllCountries = [
     "Ukraine",
     ['europe'],
     "ua",
-    "380"
+    "380",
+    "+... (..) ... .. .."
   ],
   [
     "United Arab Emirates",
