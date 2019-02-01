@@ -11,8 +11,6 @@ import { document } from './global.js';
 
 import countryData from './country_data.js';
 
-import './styles.less';
-
 class ReactPhoneInput extends React.Component {
   static propTypes = {
     excludeCountries: PropTypes.arrayOf(PropTypes.string),
@@ -42,6 +40,7 @@ class ReactPhoneInput extends React.Component {
     enableLongNumbers: PropTypes.bool,
     countryCodeEditable: PropTypes.bool,
     enableSearchField: PropTypes.bool,
+    useDefaultStyles: PropTypes.bool,
 
     regions: PropTypes.oneOfType([
       PropTypes.string,
@@ -93,6 +92,7 @@ class ReactPhoneInput extends React.Component {
     enableLongNumbers: false,
     countryCodeEditable: true,
     enableSearchField: false,
+    useDefaultStyles: true,
 
     regions: '',
 
@@ -172,6 +172,10 @@ class ReactPhoneInput extends React.Component {
   }
 
   componentDidMount() {
+    const { useDefaultStyles } = this.props;
+    if(useDefaultStyles) {
+      require('./styles.less');
+    } 
     if (document.addEventListener) {
       document.addEventListener('mousedown', this.handleClickOutside);
       document.addEventListener('keydown', this.handleKeydown);

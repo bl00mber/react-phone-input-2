@@ -120,7 +120,11 @@ function handleOnChange(value) {
     <td> object </td>
     <td colspan="2"> styles for dropdown container </td>
   </tr>
-
+  <tr>
+    <td> useDefaultStyles </td>
+    <td> bool </td>
+    <td colspan="2"> on/off default styles, true by default</td>
+  </tr>
   <tr>
     <td> inputExtraProps </td>
     <td> object </td>
