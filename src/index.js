@@ -132,7 +132,7 @@ class ReactPhoneInput extends React.Component {
     let countryGuess;
     if (inputNumber.length > 1) {
       // Country detect by value field
-      countryGuess = this.guessSelectedCountry(inputNumber.substring(1, 6), onlyCountries, props.defaultCountry) || 0;
+      countryGuess = this.guessSelectedCountry(inputNumber.substring(0, 6), onlyCountries, props.defaultCountry) || 0;
     } else if (props.defaultCountry) {
       // Default country
       countryGuess = find(onlyCountries, {iso2: props.defaultCountry}) || 0;
@@ -465,15 +465,11 @@ class ReactPhoneInput extends React.Component {
         }
     }
 
-    //Does not exceed 15 digit phone number limit
-    if (e.target.value.replace(/\D/g, '').length > 15) {
-      return;
-    }
+    // Does not exceed 15 digit phone number limit
+    if (e.target.value.replace(/\D/g, '').length > 15) return;
 
     // if the input is the same as before, must be some special key like enter etc.
-    if (e.target.value === this.state.formattedNumber) {
-      return;
-    }
+    if (e.target.value === this.state.formattedNumber) return;
 
     // ie hack
     if (e.preventDefault) {
