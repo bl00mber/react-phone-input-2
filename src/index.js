@@ -103,10 +103,6 @@ class ReactPhoneInput extends React.Component {
 
     onEnterKeyPress: () => {},
 
-    isModernBrowser: document.createElement ? (
-      Boolean(document.createElement('input').setSelectionRange)
-    ) : false,
-
     keys: {
       UP: 38, DOWN: 40, RIGHT: 39, LEFT: 37, ENTER: 13,
       ESC: 27, PLUS: 43, A: 65, Z: 90, SPACE: 32
@@ -409,10 +405,8 @@ class ReactPhoneInput extends React.Component {
   cursorToEnd = () => {
     const input = this.numberInputRef;
     input.focus();
-    if (this.props.isModernBrowser) {
-      const len = input.value.length;
-      input.setSelectionRange(len, len);
-    }
+    const len = input.value.length;
+    input.setSelectionRange(len, len);
   }
 
   getElement = (index) => {
@@ -505,19 +499,17 @@ class ReactPhoneInput extends React.Component {
         ? newSelectedCountry
         : this.state.selectedCountry
     }, () => {
-      if (this.props.isModernBrowser) {
-        if (diff > 0) {
-          caretPosition = caretPosition - diff;
-        }
+      if (diff > 0) {
+        caretPosition = caretPosition - diff;
+      }
 
-        const lastChar = formattedNumber.charAt(formattedNumber.length - 1);
+      const lastChar = formattedNumber.charAt(formattedNumber.length - 1);
 
-        if (lastChar == ')') {
-          this.numberInputRef.setSelectionRange(formattedNumber.length - 1, formattedNumber.length - 1);
-        }
-        else if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
-          this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
-        }
+      if (lastChar == ')') {
+        this.numberInputRef.setSelectionRange(formattedNumber.length - 1, formattedNumber.length - 1);
+      }
+      else if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
+        this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
       }
 
       if (this.props.onChange) {
