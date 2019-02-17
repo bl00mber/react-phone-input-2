@@ -22,6 +22,7 @@ class ReactPhoneInput extends React.Component {
 
     value: PropTypes.string,
     placeholder: PropTypes.string,
+    searchPlaceholder: PropTypes.string,
     disabled: PropTypes.bool,
 
     containerStyle: PropTypes.object,
@@ -67,6 +68,7 @@ class ReactPhoneInput extends React.Component {
 
     value: '',
     placeholder: '+1 (702) 123-4567',
+    searchPlaceholder: 'search',
     flagsImagePath: './flags.png',
     disabled: false,
 
@@ -157,7 +159,6 @@ class ReactPhoneInput extends React.Component {
 
     this.state = {
       formattedNumber,
-      placeholder: props.placeholder,
       onlyCountries,
       preferredCountries,
       defaultCountry: props.defaultCountry,
@@ -747,7 +748,7 @@ class ReactPhoneInput extends React.Component {
                 })}
                 id="search-box"
                 type="search"
-                placeholder="search"
+                placeholder={this.props.searchPlaceholder}
                 autoFocus={true}
                 value={searchValue}
                 onChange={this.handleSearchChange}
@@ -798,7 +799,7 @@ class ReactPhoneInput extends React.Component {
           value={formattedNumber}
           ref={el => this.numberInputRef = el}
           onKeyDown={this.handleInputKeyDown}
-          placeholder={this.state.placeholder}
+          placeholder={this.props.placeholder}
           disabled={this.props.disabled}
           type="tel"
           {...this.props.inputExtraProps}

@@ -73,6 +73,11 @@ function handleOnChange(value) {
     <td> string </td>
     <td colspan="2"> custom placeholder </td>
   </tr>
+  <tr>
+    <td> searchPlaceholder </td>
+    <td> string </td>
+    <td colspan="2"> custom search placeholder </td>
+  </tr>
 
   <tr>
     <td> containerClass </td>
