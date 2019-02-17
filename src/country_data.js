@@ -69,7 +69,8 @@ const rawAllCountries = [
     "Argentina",
     ['america', 'south-america'],
     "ar",
-    "54"
+    "54",
+    "+.. (..) ........"
   ],
   [
     "Armenia",
@@ -130,7 +131,8 @@ const rawAllCountries = [
     "Belarus",
     ['europe', 'ex-ussr'],
     "by",
-    "375"
+    "375",
+    "+... (..) ... .. .."
   ],
   [
     "Belgium",
@@ -356,7 +358,8 @@ const rawAllCountries = [
     "Cyprus",
     ['europe', 'european-union'],
     "cy",
-    "357"
+    "357",
+    "+... .. ......"
   ],
   [
     "Czech Republic",
@@ -426,7 +429,8 @@ const rawAllCountries = [
     "Estonia",
     ['europe', 'european-union', 'ex-ussr'],
     "ee",
-    "372"
+    "372",
+    "+... .... ......"
   ],
   [
     "Ethiopia",
@@ -641,7 +645,8 @@ const rawAllCountries = [
     "Israel",
     ['middle-east'],
     "il",
-    "972"
+    "972",
+    "+... ... ... ...."
   ],
   [
     "Italy",
@@ -662,7 +667,7 @@ const rawAllCountries = [
     ['asia'],
     "jp",
     "81",
-    "+.. ... .. ...."
+    "+.. .. .... ...."
   ],
   [
     "Jordan",
@@ -845,7 +850,8 @@ const rawAllCountries = [
     "Moldova",
     ['europe'],
     "md",
-    "373"
+    "373",
+    "+... (..) ..-..-.."
   ],
   [
     "Monaco",
@@ -1030,7 +1036,7 @@ const rawAllCountries = [
     ['asia'],
     "ph",
     "63",
-    "+.. ... ......."
+    "+.. .... ......."
   ],
   [
     "Poland",
@@ -1226,7 +1232,8 @@ const rawAllCountries = [
     "South Korea",
     ['asia'],
     "kr",
-    "82"
+    "82",
+    "+.. ... .... ...."
   ],
   [
     "South Sudan",
@@ -1386,7 +1393,8 @@ const rawAllCountries = [
     "Ukraine",
     ['europe'],
     "ua",
-    "380"
+    "380",
+    "+... (..) ... .. .."
   ],
   [
     "United Arab Emirates",
