@@ -4,10 +4,9 @@ import debounce from 'lodash.debounce';
 import memoize from 'lodash.memoize';
 import reduce from 'lodash.reduce';
 import classNames from 'classnames';
+
 import { document } from './global.js';
-
 import countryData from './country_data.js';
-
 import './styles.less';
 
 class ReactPhoneInput extends React.Component {
