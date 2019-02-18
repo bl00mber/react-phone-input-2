@@ -1391,7 +1391,7 @@ const rawAllCountries = [
   ],
   [
     "Ukraine",
-    ['europe'],
+    ['europe', 'ex-ussr'],
     "ua",
     "380",
     "+... (..) ... .. .."
@@ -1425,7 +1425,7 @@ const rawAllCountries = [
   ],
   [
     "Uzbekistan",
-    ['asia'],
+    ['asia', 'ex-ussr'],
     "uz",
     "998"
   ],
