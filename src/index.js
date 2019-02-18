@@ -113,7 +113,6 @@ class ReactPhoneInput extends React.Component {
     super(props);
     let filteredCountries = countryData.allCountries;
 
-    if (props.disableAreaCodes) filteredCountries = this.deleteAreaCodes(filteredCountries);
     if (props.regions) filteredCountries = this.filterRegions(props.regions, filteredCountries);
 
     const onlyCountries = this.excludeCountries(
@@ -125,7 +124,7 @@ class ReactPhoneInput extends React.Component {
       });
     });
 
-    const inputNumber = props.value || '';
+    const inputNumber = props.value.replace(/[^0-9\.]+/g, '') || '';
 
     let countryGuess;
     if (inputNumber.length > 1) {
@@ -139,7 +138,6 @@ class ReactPhoneInput extends React.Component {
       countryGuess = 0;
     }
 
-    const countryGuessIndex = findIndex(this.allCountries, countryGuess);
     const dialCode = (
       inputNumber.length < 2 &&
       countryGuess &&
@@ -153,13 +151,15 @@ class ReactPhoneInput extends React.Component {
       countryGuess.name ? countryGuess.format : undefined
     );
 
+    const highlightCountryIndex = filteredCountries.findIndex(o => o == countryGuess);
+
     this.state = {
       formattedNumber,
       onlyCountries,
       preferredCountries,
       defaultCountry: props.defaultCountry,
       selectedCountry: countryGuess,
-      highlightCountryIndex: countryGuessIndex,
+      highlightCountryIndex,
       queryString: '',
       showDropdown: false,
       freezeSelection: false,
@@ -437,9 +437,12 @@ class ReactPhoneInput extends React.Component {
       });
     }
     else {
+      const onlyCountries = this.props.disableAreaCodes ? this.deleteAreaCodes(this.state.onlyCountries) : this.state.onlyCountries;
+
       this.setState({
         showDropdown: !this.state.showDropdown,
-        highlightCountryIndex: findIndex(this.state.onlyCountries, this.state.selectedCountry)
+        highlightCountryIndex: this.props.disableAreaCodes ? onlyCountries.findIndex(o => o.iso2 == this.state.selectedCountry.iso2) :
+          onlyCountries.findIndex(o => o == this.state.selectedCountry)
       }, () => {
         if (this.state.showDropdown) {
           this.scrollTo(this.getElement(this.state.highlightCountryIndex + this.state.preferredCountries.length));
@@ -653,20 +656,20 @@ class ReactPhoneInput extends React.Component {
   }
 
   getCountryDropdownList = () => {
-    const {
-      props: { enableSearchField, searchClass },
-      state: { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown, searchValue },
-    } = this;
+    const { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
+    const { enableSearchField, searchClass } = this.props;
 
     const countryIsPreferred = this.state.preferredCountries.includes(this.state.selectedCountry);
     const allCountries = preferredCountries.concat(onlyCountries);
 
     const sanitizedSearchValue = searchValue.trim().toLowerCase();
-    const filteredCountries = (enableSearchField && sanitizedSearchValue)
+    let filteredCountries = (enableSearchField && sanitizedSearchValue)
       // using [...new Set()] here to get rid of duplicates
       ? [...new Set(allCountries.filter(({ name, iso2, dialCode }) =>
         [`${name}`, `${iso2}`, `+${dialCode}`].some(field => field.toLowerCase().includes(sanitizedSearchValue))))]
       : allCountries;
+
+    if (this.props.disableAreaCodes) filteredCountries = this.deleteAreaCodes(filteredCountries);
 
     let countryDropdownList = map(filteredCountries, (country, index) => {
       const itemClasses = classNames({
