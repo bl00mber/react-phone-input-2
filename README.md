@@ -248,6 +248,11 @@ Regions selected: {['north-america', 'carribean']}
   onlyCountries=['de', 'es']
   localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
 />
+
+<ReactPhoneInput
+  onlyCountries={['de', 'es']}
+  localization={{'de': 'Deutschland', 'es': 'España'}}
+/>
 ```
 
 ### Supported events

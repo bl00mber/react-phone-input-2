@@ -657,6 +657,16 @@ class ReactPhoneInput extends React.Component {
     this.setState({ searchValue });
   }
 
+  getDropdownCountryName = (country) => {
+    if (this.props.localization[country.name] != undefined) {
+      return this.props.localization[country.name];
+    }
+    else if (this.props.localization[country.iso2] != undefined) {
+      return this.props.localization[country.iso2];
+    }
+    return country.name;
+  }
+
   getCountryDropdownList = () => {
     const { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
     const { enableSearchField, searchClass } = this.props;
@@ -683,6 +693,8 @@ class ReactPhoneInput extends React.Component {
 
       const inputFlagClasses = `flag ${country.iso2}`;
 
+
+
       return (
         <li
           ref={el => this[`flag_no_${index}`] = el}
@@ -694,10 +706,7 @@ class ReactPhoneInput extends React.Component {
           onClick={() => this.handleFlagItemClick(country)}
         >
           <div className={inputFlagClasses}/>
-          <span className='country-name'>{
-              this.props.localization[country.name] != undefined ?
-              this.props.localization[country.name] : country.name
-          }</span>
+          <span className='country-name'>{this.getDropdownCountryName(country)}</span>
           <span className='dial-code'>{'+' + country.dialCode}</span>
         </li>
       );
