@@ -18,1466 +18,1466 @@
 
 const rawAllCountries = [
   [
-    "Afghanistan",
+    'Afghanistan',
     ['asia'],
-    "af",
-    "93"
+    'af',
+    '93'
   ],
   [
-    "Albania",
+    'Albania',
     ['europe'],
-    "al",
-    "355"
+    'al',
+    '355'
   ],
   [
-    "Algeria",
+    'Algeria',
     ['africa', 'north-africa'],
-    "dz",
-    "213"
+    'dz',
+    '213'
   ],
   [
-    "American Samoa",
+    'American Samoa',
     ['oceania'],
-    "as",
-    "1684"
+    'as',
+    '1684'
   ],
   [
-    "Andorra",
+    'Andorra',
     ['europe'],
-    "ad",
-    "376"
+    'ad',
+    '376'
   ],
   [
-    "Angola",
+    'Angola',
     ['africa'],
-    "ao",
-    "244"
+    'ao',
+    '244'
   ],
   [
-    "Anguilla",
+    'Anguilla',
     ['america', 'carribean'],
-    "ai",
-    "1264"
+    'ai',
+    '1264'
   ],
   [
-    "Antigua and Barbuda",
+    'Antigua and Barbuda',
     ['america', 'carribean'],
-    "ag",
-    "1268"
+    'ag',
+    '1268'
   ],
   [
-    "Argentina",
+    'Argentina',
     ['america', 'south-america'],
-    "ar",
-    "54",
-    "+.. (..) ........"
+    'ar',
+    '54',
+    '+.. (..) ........'
   ],
   [
-    "Armenia",
+    'Armenia',
     ['asia', 'ex-ussr'],
-    "am",
-    "374"
+    'am',
+    '374'
   ],
   [
-    "Aruba",
+    'Aruba',
     ['america', 'carribean'],
-    "aw",
-    "297"
+    'aw',
+    '297'
   ],
   [
-    "Australia",
+    'Australia',
     ['oceania'],
-    "au",
-    "61",
-    "+.. ... ... ..."
+    'au',
+    '61',
+    '+.. ... ... ...'
   ],
   [
-    "Austria",
+    'Austria',
     ['europe', 'european-union'],
-    "at",
-    "43"
+    'at',
+    '43'
   ],
   [
-    "Azerbaijan",
+    'Azerbaijan',
     ['asia', 'ex-ussr'],
-    "az",
-    "994"
+    'az',
+    '994'
   ],
   [
-    "Bahamas",
+    'Bahamas',
     ['america', 'carribean'],
-    "bs",
-    "1242"
+    'bs',
+    '1242'
   ],
   [
-    "Bahrain",
+    'Bahrain',
     ['middle-east'],
-    "bh",
-    "973"
+    'bh',
+    '973'
   ],
   [
-    "Bangladesh",
+    'Bangladesh',
     ['asia'],
-    "bd",
-    "880"
+    'bd',
+    '880'
   ],
   [
-    "Barbados",
+    'Barbados',
     ['america', 'carribean'],
-    "bb",
-    "1246"
+    'bb',
+    '1246'
   ],
   [
-    "Belarus",
+    'Belarus',
     ['europe', 'ex-ussr'],
-    "by",
-    "375",
-    "+... (..) ... .. .."
+    'by',
+    '375',
+    '+... (..) ... .. ..'
   ],
   [
-    "Belgium",
+    'Belgium',
     ['europe', 'european-union'],
-    "be",
-    "32",
-    "+.. ... .. .. .."
+    'be',
+    '32',
+    '+.. ... .. .. ..'
   ],
   [
-    "Belize",
+    'Belize',
     ['america', 'central-america'],
-    "bz",
-    "501"
+    'bz',
+    '501'
   ],
   [
-    "Benin",
+    'Benin',
     ['africa'],
-    "bj",
-    "229"
+    'bj',
+    '229'
   ],
   [
-    "Bermuda",
+    'Bermuda',
     ['america', 'north-america'],
-    "bm",
-    "1441"
+    'bm',
+    '1441'
   ],
   [
-    "Bhutan",
+    'Bhutan',
     ['asia'],
-    "bt",
-    "975"
+    'bt',
+    '975'
   ],
   [
-    "Bolivia",
+    'Bolivia',
     ['america', 'south-america'],
-    "bo",
-    "591"
+    'bo',
+    '591'
   ],
   [
-    "Bosnia and Herzegovina",
+    'Bosnia and Herzegovina',
     ['europe'],
-    "ba",
-    "387"
+    'ba',
+    '387'
   ],
   [
-    "Botswana",
+    'Botswana',
     ['africa'],
-    "bw",
-    "267"
+    'bw',
+    '267'
   ],
   [
-    "Brazil",
+    'Brazil',
     ['america', 'south-america'],
-    "br",
-    "55",
-    "+.. (..) .........",
+    'br',
+    '55',
+    '+.. (..) .........',
   ],
   [
-    "British Indian Ocean Territory",
+    'British Indian Ocean Territory',
     ['asia'],
-    "io",
-    "246"
+    'io',
+    '246'
   ],
   [
-    "British Virgin Islands",
+    'British Virgin Islands',
     ['america', 'carribean'],
-    "vg",
-    "1284"
+    'vg',
+    '1284'
   ],
   [
-    "Brunei",
+    'Brunei',
     ['asia'],
-    "bn",
-    "673"
+    'bn',
+    '673'
   ],
   [
-    "Bulgaria",
+    'Bulgaria',
     ['europe', 'european-union'],
-    "bg",
-    "359"
+    'bg',
+    '359'
   ],
   [
-    "Burkina Faso",
+    'Burkina Faso',
     ['africa'],
-    "bf",
-    "226"
+    'bf',
+    '226'
   ],
   [
-    "Burundi",
+    'Burundi',
     ['africa'],
-    "bi",
-    "257"
+    'bi',
+    '257'
   ],
   [
-    "Cambodia",
+    'Cambodia',
     ['asia'],
-    "kh",
-    "855"
+    'kh',
+    '855'
   ],
   [
-    "Cameroon",
+    'Cameroon',
     ['africa'],
-    "cm",
-    "237"
+    'cm',
+    '237'
   ],
   [
-    "Canada",
+    'Canada',
     ['america', 'north-america'],
-    "ca",
-    "1",
-    "+. (...) ...-....",
-    1, ["204", "236", "249", "250", "289", "306", "343", "365", "387", "403", "416", "418", "431", "437", "438", "450", "506", "514", "519", "548", "579", "581", "587", "604", "613", "639", "647", "672", "705", "709", "742", "778", "780", "782", "807", "819", "825", "867", "873", "902", "905"]
+    'ca',
+    '1',
+    '+. (...) ...-....',
+    1, ['204', '236', '249', '250', '289', '306', '343', '365', '387', '403', '416', '418', '431', '437', '438', '450', '506', '514', '519', '548', '579', '581', '587', '604', '613', '639', '647', '672', '705', '709', '742', '778', '780', '782', '807', '819', '825', '867', '873', '902', '905']
   ],
   [
-    "Cape Verde",
+    'Cape Verde',
     ['africa'],
-    "cv",
-    "238"
+    'cv',
+    '238'
   ],
   [
-    "Caribbean Netherlands",
+    'Caribbean Netherlands',
     ['america', 'carribean'],
-    "bq",
-    "599",
-    "",
+    'bq',
+    '599',
+    '',
     1
   ],
   [
-    "Cayman Islands",
+    'Cayman Islands',
     ['america', 'carribean'],
-    "ky",
-    "1345"
+    'ky',
+    '1345'
   ],
   [
-    "Central African Republic",
+    'Central African Republic',
     ['africa'],
-    "cf",
-    "236"
+    'cf',
+    '236'
   ],
   [
-    "Chad",
+    'Chad',
     ['africa'],
-    "td",
-    "235"
+    'td',
+    '235'
   ],
   [
-    "Chile",
+    'Chile',
     ['america', 'south-america'],
-    "cl",
-    "56"
+    'cl',
+    '56'
   ],
   [
-    "China",
+    'China',
     ['asia'],
-    "cn",
-    "86",
-    "+.. ..-........."
+    'cn',
+    '86',
+    '+.. ..-.........'
   ],
   [
-    "Colombia",
+    'Colombia',
     ['america', 'south-america'],
-    "co",
-    "57"
+    'co',
+    '57'
   ],
   [
-    "Comoros",
+    'Comoros',
     ['africa'],
-    "km",
-    "269"
+    'km',
+    '269'
   ],
   [
-    "Congo",
+    'Congo',
     ['africa'],
-    "cd",
-    "243"
+    'cd',
+    '243'
   ],
   [
-    "Congo",
+    'Congo',
     ['africa'],
-    "cg",
-    "242"
+    'cg',
+    '242'
   ],
   [
-    "Cook Islands",
+    'Cook Islands',
     ['oceania'],
-    "ck",
-    "682"
+    'ck',
+    '682'
   ],
   [
-    "Costa Rica",
+    'Costa Rica',
     ['america', 'central-america'],
-    "cr",
-    "506",
-    "+... ....-...."
+    'cr',
+    '506',
+    '+... ....-....'
   ],
   [
-    "Côte d’Ivoire",
+    'Côte d’Ivoire',
     ['africa'],
-    "ci",
-    "225"
+    'ci',
+    '225'
   ],
   [
-    "Croatia",
+    'Croatia',
     ['europe', 'european-union'],
-    "hr",
-    "385"
+    'hr',
+    '385'
   ],
   [
-    "Cuba",
+    'Cuba',
     ['america', 'carribean'],
-    "cu",
-    "53"
+    'cu',
+    '53'
   ],
   [
-    "Curaçao",
+    'Curaçao',
     ['america', 'carribean'],
-    "cw",
-    "599",
-    "",
+    'cw',
+    '599',
+    '',
     0
   ],
   [
-    "Cyprus",
+    'Cyprus',
     ['europe', 'european-union'],
-    "cy",
-    "357",
-    "+... .. ......"
+    'cy',
+    '357',
+    '+... .. ......'
   ],
   [
-    "Czech Republic",
+    'Czech Republic',
     ['europe', 'european-union'],
-    "cz",
-    "420"
+    'cz',
+    '420'
   ],
   [
-    "Denmark",
+    'Denmark',
     ['europe', 'european-union'],
-    "dk",
-    "45",
-    "+.. .. .. .. .."
+    'dk',
+    '45',
+    '+.. .. .. .. ..'
   ],
   [
-    "Djibouti",
+    'Djibouti',
     ['africa'],
-    "dj",
-    "253"
+    'dj',
+    '253'
   ],
   [
-    "Dominica",
+    'Dominica',
     ['america', 'carribean'],
-    "dm",
-    "1767"
+    'dm',
+    '1767'
   ],
   [
-    "Dominican Republic",
+    'Dominican Republic',
     ['america', 'carribean'],
-    "do",
-    "1",
-    "",
-    2, ["809", "829", "849"]
+    'do',
+    '1',
+    '',
+    2, ['809', '829', '849']
   ],
   [
-    "Ecuador",
+    'Ecuador',
     ['america', 'south-america'],
-    "ec",
-    "593"
+    'ec',
+    '593'
   ],
   [
-    "Egypt",
+    'Egypt',
     ['africa', 'north-africa'],
-    "eg",
-    "20"
+    'eg',
+    '20'
   ],
   [
-    "El Salvador",
+    'El Salvador',
     ['america', 'central-america'],
-    "sv",
-    "503",
-    "+... ....-...."
+    'sv',
+    '503',
+    '+... ....-....'
   ],
   [
-    "Equatorial Guinea",
+    'Equatorial Guinea',
     ['africa'],
-    "gq",
-    "240"
+    'gq',
+    '240'
   ],
   [
-    "Eritrea",
+    'Eritrea',
     ['africa'],
-    "er",
-    "291"
+    'er',
+    '291'
   ],
   [
-    "Estonia",
+    'Estonia',
     ['europe', 'european-union', 'ex-ussr'],
-    "ee",
-    "372",
-    "+... .... ......"
+    'ee',
+    '372',
+    '+... .... ......'
   ],
   [
-    "Ethiopia",
+    'Ethiopia',
     ['africa'],
-    "et",
-    "251"
+    'et',
+    '251'
   ],
   [
-    "Falkland Islands",
+    'Falkland Islands',
     ['america', 'south-america'],
-    "fk",
-    "500"
+    'fk',
+    '500'
   ],
   [
-    "Faroe Islands",
+    'Faroe Islands',
     ['europe'],
-    "fo",
-    "298"
+    'fo',
+    '298'
   ],
   [
-    "Fiji",
+    'Fiji',
     ['oceania'],
-    "fj",
-    "679"
+    'fj',
+    '679'
   ],
   [
-    "Finland",
+    'Finland',
     ['europe', 'european-union'],
-    "fi",
-    "358",
-    "+... .. ... .. .."
+    'fi',
+    '358',
+    '+... .. ... .. ..'
   ],
   [
-    "France",
+    'France',
     ['europe', 'european-union'],
-    "fr",
-    "33",
-    "+.. . .. .. .. .."
+    'fr',
+    '33',
+    '+.. . .. .. .. ..'
   ],
   [
-    "French Guiana",
+    'French Guiana',
     ['america', 'south-america'],
-    "gf",
-    "594"
+    'gf',
+    '594'
   ],
   [
-    "French Polynesia",
+    'French Polynesia',
     ['oceania'],
-    "pf",
-    "689"
+    'pf',
+    '689'
   ],
   [
-    "Gabon",
+    'Gabon',
     ['africa'],
-    "ga",
-    "241"
+    'ga',
+    '241'
   ],
   [
-    "Gambia",
+    'Gambia',
     ['africa'],
-    "gm",
-    "220"
+    'gm',
+    '220'
   ],
   [
-    "Georgia",
+    'Georgia',
     ['asia', 'ex-ussr'],
-    "ge",
-    "995"
+    'ge',
+    '995'
   ],
   [
-    "Germany",
+    'Germany',
     ['europe', 'european-union'],
-    "de",
-    "49",
-    "+.. .... ........"
+    'de',
+    '49',
+    '+.. .... ........'
   ],
   [
-    "Ghana",
+    'Ghana',
     ['africa'],
-    "gh",
-    "233"
+    'gh',
+    '233'
   ],
   [
-    "Gibraltar",
+    'Gibraltar',
     ['europe'],
-    "gi",
-    "350"
+    'gi',
+    '350'
   ],
   [
-    "Greece",
+    'Greece',
     ['europe', 'european-union'],
-    "gr",
-    "30"
+    'gr',
+    '30'
   ],
   [
-    "Greenland",
+    'Greenland',
     ['america'],
-    "gl",
-    "299"
+    'gl',
+    '299'
   ],
   [
-    "Grenada",
+    'Grenada',
     ['america', 'carribean'],
-    "gd",
-    "1473"
+    'gd',
+    '1473'
   ],
   [
-    "Guadeloupe",
+    'Guadeloupe',
     ['america', 'carribean'],
-    "gp",
-    "590",
-    "",
+    'gp',
+    '590',
+    '',
     0
   ],
   [
-    "Guam",
+    'Guam',
     ['oceania'],
-    "gu",
-    "1671"
+    'gu',
+    '1671'
   ],
   [
-    "Guatemala",
+    'Guatemala',
     ['america', 'central-america'],
-    "gt",
-    "502",
-    "+... ....-...."
+    'gt',
+    '502',
+    '+... ....-....'
   ],
   [
-    "Guinea",
+    'Guinea',
     ['africa'],
-    "gn",
-    "224"
+    'gn',
+    '224'
   ],
   [
-    "Guinea-Bissau",
+    'Guinea-Bissau',
     ['africa'],
-    "gw",
-    "245"
+    'gw',
+    '245'
   ],
   [
-    "Guyana",
+    'Guyana',
     ['america', 'south-america'],
-    "gy",
-    "592"
+    'gy',
+    '592'
   ],
   [
-    "Haiti",
+    'Haiti',
     ['america', 'carribean'],
-    "ht",
-    "509",
-    "+... ....-...."
+    'ht',
+    '509',
+    '+... ....-....'
   ],
   [
-    "Honduras",
+    'Honduras',
     ['america', 'central-america'],
-    "hn",
-    "504"
+    'hn',
+    '504'
   ],
   [
-    "Hong Kong",
+    'Hong Kong',
     ['asia'],
-    "hk",
-    "852",
-    "+... .... ...."
+    'hk',
+    '852',
+    '+... .... ....'
   ],
   [
-    "Hungary",
+    'Hungary',
     ['europe', 'european-union'],
-    "hu",
-    "36"
+    'hu',
+    '36'
   ],
   [
-    "Iceland",
+    'Iceland',
     ['europe'],
-    "is",
-    "354",
-    "+... ... ...."
+    'is',
+    '354',
+    '+... ... ....'
   ],
   [
-    "India",
+    'India',
     ['asia'],
-    "in",
-    "91",
-    "+.. .....-....."
+    'in',
+    '91',
+    '+.. .....-.....'
   ],
   [
-    "Indonesia",
+    'Indonesia',
     ['asia'],
-    "id",
-    "62"
+    'id',
+    '62'
   ],
   [
-    "Iran",
+    'Iran',
     ['middle-east'],
-    "ir",
-    "98"
+    'ir',
+    '98'
   ],
   [
-    "Iraq",
+    'Iraq',
     ['middle-east'],
-    "iq",
-    "964"
+    'iq',
+    '964'
   ],
   [
-    "Ireland",
+    'Ireland',
     ['europe', 'european-union'],
-    "ie",
-    "353",
-    "+... .. ......."
+    'ie',
+    '353',
+    '+... .. .......'
   ],
   [
-    "Israel",
+    'Israel',
     ['middle-east'],
-    "il",
-    "972",
-    "+... ... ... ...."
+    'il',
+    '972',
+    '+... ... ... ....'
   ],
   [
-    "Italy",
+    'Italy',
     ['europe', 'european-union'],
-    "it",
-    "39",
-    "+.. ... .......",
+    'it',
+    '39',
+    '+.. ... .......',
     0
   ],
   [
-    "Jamaica",
+    'Jamaica',
     ['america', 'carribean'],
-    "jm",
-    "1876"
+    'jm',
+    '1876'
   ],
   [
-    "Japan",
+    'Japan',
     ['asia'],
-    "jp",
-    "81",
-    "+.. .. .... ...."
+    'jp',
+    '81',
+    '+.. .. .... ....'
   ],
   [
-    "Jordan",
+    'Jordan',
     ['middle-east'],
-    "jo",
-    "962"
+    'jo',
+    '962'
   ],
   [
-    "Kazakhstan",
+    'Kazakhstan',
     ['asia', 'ex-ussr'],
-    "kz",
-    "7",
-    "+. ... ...-..-..",
-    1, ["313", "327", "7172", "312", "73622", "321", "324", "336", "318", "315", "325", "311", "326", "310"]
+    'kz',
+    '7',
+    '+. ... ...-..-..',
+    1, ['313', '327', '7172', '312', '73622', '321', '324', '336', '318', '315', '325', '311', '326', '310']
   ],
   [
-    "Kenya",
+    'Kenya',
     ['africa'],
-    "ke",
-    "254"
+    'ke',
+    '254'
   ],
   [
-    "Kiribati",
+    'Kiribati',
     ['oceania'],
-    "ki",
-    "686"
+    'ki',
+    '686'
   ],
   [
-    "Kuwait",
+    'Kuwait',
     ['middle-east'],
-    "kw",
-    "965"
+    'kw',
+    '965'
   ],
   [
-    "Kyrgyzstan",
+    'Kyrgyzstan',
     ['asia', 'ex-ussr'],
-    "kg",
-    "996"
+    'kg',
+    '996'
   ],
   [
-    "Laos",
+    'Laos',
     ['asia'],
-    "la",
-    "856"
+    'la',
+    '856'
   ],
   [
-    "Latvia",
+    'Latvia',
     ['europe', 'european-union', 'ex-ussr'],
-    "lv",
-    "371"
+    'lv',
+    '371'
   ],
   [
-    "Lebanon",
+    'Lebanon',
     ['middle-east'],
-    "lb",
-    "961"
+    'lb',
+    '961'
   ],
   [
-    "Lesotho",
+    'Lesotho',
     ['africa'],
-    "ls",
-    "266"
+    'ls',
+    '266'
   ],
   [
-    "Liberia",
+    'Liberia',
     ['africa'],
-    "lr",
-    "231"
+    'lr',
+    '231'
   ],
   [
-    "Libya",
+    'Libya',
     ['africa', 'north-africa'],
-    "ly",
-    "218"
+    'ly',
+    '218'
   ],
   [
-    "Liechtenstein",
+    'Liechtenstein',
     ['europe'],
-    "li",
-    "423"
+    'li',
+    '423'
   ],
   [
-    "Lithuania",
+    'Lithuania',
     ['europe', 'european-union', 'ex-ussr'],
-    "lt",
-    "370"
+    'lt',
+    '370'
   ],
   [
-    "Luxembourg",
+    'Luxembourg',
     ['europe', 'european-union'],
-    "lu",
-    "352"
+    'lu',
+    '352'
   ],
   [
-    "Macau",
+    'Macau',
     ['asia'],
-    "mo",
-    "853"
+    'mo',
+    '853'
   ],
   [
-    "Macedonia",
+    'Macedonia',
     ['europe'],
-    "mk",
-    "389"
+    'mk',
+    '389'
   ],
   [
-    "Madagascar",
+    'Madagascar',
     ['africa'],
-    "mg",
-    "261"
+    'mg',
+    '261'
   ],
   [
-    "Malawi",
+    'Malawi',
     ['africa'],
-    "mw",
-    "265"
+    'mw',
+    '265'
   ],
   [
-    "Malaysia",
+    'Malaysia',
     ['asia'],
-    "my",
-    "60",
-    "+.. ..-....-...."
+    'my',
+    '60',
+    '+.. ..-....-....'
   ],
   [
-    "Maldives",
+    'Maldives',
     ['asia'],
-    "mv",
-    "960"
+    'mv',
+    '960'
   ],
   [
-    "Mali",
+    'Mali',
     ['africa'],
-    "ml",
-    "223"
+    'ml',
+    '223'
   ],
   [
-    "Malta",
+    'Malta',
     ['europe', 'european-union'],
-    "mt",
-    "356"
+    'mt',
+    '356'
   ],
   [
-    "Marshall Islands",
+    'Marshall Islands',
     ['oceania'],
-    "mh",
-    "692"
+    'mh',
+    '692'
   ],
   [
-    "Martinique",
+    'Martinique',
     ['america', 'carribean'],
-    "mq",
-    "596"
+    'mq',
+    '596'
   ],
   [
-    "Mauritania",
+    'Mauritania',
     ['africa'],
-    "mr",
-    "222"
+    'mr',
+    '222'
   ],
   [
-    "Mauritius",
+    'Mauritius',
     ['africa'],
-    "mu",
-    "230"
+    'mu',
+    '230'
   ],
   [
-    "Mexico",
+    'Mexico',
     ['america', 'central-america'],
-    "mx",
-    "52"
+    'mx',
+    '52'
   ],
   [
-    "Micronesia",
+    'Micronesia',
     ['oceania'],
-    "fm",
-    "691"
+    'fm',
+    '691'
   ],
   [
-    "Moldova",
+    'Moldova',
     ['europe'],
-    "md",
-    "373",
-    "+... (..) ..-..-.."
+    'md',
+    '373',
+    '+... (..) ..-..-..'
   ],
   [
-    "Monaco",
+    'Monaco',
     ['europe'],
-    "mc",
-    "377"
+    'mc',
+    '377'
   ],
   [
-    "Mongolia",
+    'Mongolia',
     ['asia'],
-    "mn",
-    "976"
+    'mn',
+    '976'
   ],
   [
-    "Montenegro",
+    'Montenegro',
     ['europe'],
-    "me",
-    "382"
+    'me',
+    '382'
   ],
   [
-    "Montserrat",
+    'Montserrat',
     ['america', 'carribean'],
-    "ms",
-    "1664"
+    'ms',
+    '1664'
   ],
   [
-    "Morocco",
+    'Morocco',
     ['africa', 'north-africa'],
-    "ma",
-    "212"
+    'ma',
+    '212'
   ],
   [
-    "Mozambique",
+    'Mozambique',
     ['africa'],
-    "mz",
-    "258"
+    'mz',
+    '258'
   ],
   [
-    "Myanmar",
+    'Myanmar',
     ['asia'],
-    "mm",
-    "95"
+    'mm',
+    '95'
   ],
   [
-    "Namibia",
+    'Namibia',
     ['africa'],
-    "na",
-    "264"
+    'na',
+    '264'
   ],
   [
-    "Nauru",
+    'Nauru',
     ['africa'],
-    "nr",
-    "674"
+    'nr',
+    '674'
   ],
   [
-    "Nepal",
+    'Nepal',
     ['asia'],
-    "np",
-    "977"
+    'np',
+    '977'
   ],
   [
-    "Netherlands",
+    'Netherlands',
     ['europe', 'european-union'],
-    "nl",
-    "31",
-    "+.. .. ........"
+    'nl',
+    '31',
+    '+.. .. ........'
   ],
   [
-    "New Caledonia",
+    'New Caledonia',
     ['oceania'],
-    "nc",
-    "687"
+    'nc',
+    '687'
   ],
   [
-    "New Zealand",
+    'New Zealand',
     ['oceania'],
-    "nz",
-    "64",
-    "+.. ...-...-...."
+    'nz',
+    '64',
+    '+.. ...-...-....'
   ],
   [
-    "Nicaragua",
+    'Nicaragua',
     ['america', 'central-america'],
-    "ni",
-    "505"
+    'ni',
+    '505'
   ],
   [
-    "Niger",
+    'Niger',
     ['africa'],
-    "ne",
-    "227"
+    'ne',
+    '227'
   ],
   [
-    "Nigeria",
+    'Nigeria',
     ['africa'],
-    "ng",
-    "234"
+    'ng',
+    '234'
   ],
   [
-    "Niue",
+    'Niue',
     ['asia'],
-    "nu",
-    "683"
+    'nu',
+    '683'
   ],
   [
-    "Norfolk Island",
+    'Norfolk Island',
     ['oceania'],
-    "nf",
-    "672"
+    'nf',
+    '672'
   ],
   [
-    "North Korea",
+    'North Korea',
     ['asia'],
-    "kp",
-    "850"
+    'kp',
+    '850'
   ],
   [
-    "Northern Mariana Islands",
+    'Northern Mariana Islands',
     ['oceania'],
-    "mp",
-    "1670"
+    'mp',
+    '1670'
   ],
   [
-    "Norway",
+    'Norway',
     ['europe'],
-    "no",
-    "47",
-    "+.. ... .. ..."
+    'no',
+    '47',
+    '+.. ... .. ...'
   ],
   [
-    "Oman",
+    'Oman',
     ['middle-east'],
-    "om",
-    "968"
+    'om',
+    '968'
   ],
   [
-    "Pakistan",
+    'Pakistan',
     ['asia'],
-    "pk",
-    "92",
-    "+.. ...-......."
+    'pk',
+    '92',
+    '+.. ...-.......'
   ],
   [
-    "Palau",
+    'Palau',
     ['oceania'],
-    "pw",
-    "680"
+    'pw',
+    '680'
   ],
   [
-    "Palestine",
+    'Palestine',
     ['middle-east'],
-    "ps",
-    "970"
+    'ps',
+    '970'
   ],
   [
-    "Panama",
+    'Panama',
     ['america', 'central-america'],
-    "pa",
-    "507"
+    'pa',
+    '507'
   ],
   [
-    "Papua New Guinea",
+    'Papua New Guinea',
     ['oceania'],
-    "pg",
-    "675"
+    'pg',
+    '675'
   ],
   [
-    "Paraguay",
+    'Paraguay',
     ['america', 'south-america'],
-    "py",
-    "595"
+    'py',
+    '595'
   ],
   [
-    "Peru",
+    'Peru',
     ['america', 'south-america'],
-    "pe",
-    "51"
+    'pe',
+    '51'
   ],
   [
-    "Philippines",
+    'Philippines',
     ['asia'],
-    "ph",
-    "63",
-    "+.. .... ......."
+    'ph',
+    '63',
+    '+.. .... .......'
   ],
   [
-    "Poland",
+    'Poland',
     ['europe', 'european-union'],
-    "pl",
-    "48",
-    "+.. ...-...-..."
+    'pl',
+    '48',
+    '+.. ...-...-...'
   ],
   [
-    "Portugal",
+    'Portugal',
     ['europe', 'european-union'],
-    "pt",
-    "351"
+    'pt',
+    '351'
   ],
   [
-    "Puerto Rico",
+    'Puerto Rico',
     ['america', 'carribean'],
-    "pr",
-    "1",
-    "",
-    3, ["787", "939"]
+    'pr',
+    '1',
+    '',
+    3, ['787', '939']
   ],
   [
-    "Qatar",
+    'Qatar',
     ['middle-east'],
-    "qa",
-    "974"
+    'qa',
+    '974'
   ],
   [
-    "Réunion",
+    'Réunion',
     ['africa'],
-    "re",
-    "262"
+    're',
+    '262'
   ],
   [
-    "Romania",
+    'Romania',
     ['europe', 'european-union'],
-    "ro",
-    "40"
+    'ro',
+    '40'
   ],
   [
-    "Russia",
+    'Russia',
     ['europe', 'asia', 'ex-ussr'],
-    "ru",
-    "7",
-    "+. (...) ...-..-..",
+    'ru',
+    '7',
+    '+. (...) ...-..-..',
     0
   ],
   [
-    "Rwanda",
+    'Rwanda',
     ['africa'],
-    "rw",
-    "250"
+    'rw',
+    '250'
   ],
   [
-    "Saint Barthélemy",
+    'Saint Barthélemy',
     ['america', 'carribean'],
-    "bl",
-    "590",
-    "",
+    'bl',
+    '590',
+    '',
     1
   ],
   [
-    "Saint Helena",
+    'Saint Helena',
     ['africa'],
-    "sh",
-    "290"
+    'sh',
+    '290'
   ],
   [
-    "Saint Kitts and Nevis",
+    'Saint Kitts and Nevis',
     ['america', 'carribean'],
-    "kn",
-    "1869"
+    'kn',
+    '1869'
   ],
   [
-    "Saint Lucia",
+    'Saint Lucia',
     ['america', 'carribean'],
-    "lc",
-    "1758"
+    'lc',
+    '1758'
   ],
   [
-    "Saint Martin",
+    'Saint Martin',
     ['america', 'carribean'],
-    "mf",
-    "590",
-    "",
+    'mf',
+    '590',
+    '',
     2
   ],
   [
-    "Saint Pierre and Miquelon",
+    'Saint Pierre and Miquelon',
     ['america', 'north-america'],
-    "pm",
-    "508"
+    'pm',
+    '508'
   ],
   [
-    "Saint Vincent and the Grenadines",
+    'Saint Vincent and the Grenadines',
     ['america', 'carribean'],
-    "vc",
-    "1784"
+    'vc',
+    '1784'
   ],
   [
-    "Samoa",
+    'Samoa',
     ['oceania'],
-    "ws",
-    "685"
+    'ws',
+    '685'
   ],
   [
-    "San Marino",
+    'San Marino',
     ['europe'],
-    "sm",
-    "378"
+    'sm',
+    '378'
   ],
   [
-    "São Tomé and Príncipe",
+    'São Tomé and Príncipe',
     ['africa'],
-    "st",
-    "239"
+    'st',
+    '239'
   ],
   [
-    "Saudi Arabia",
+    'Saudi Arabia',
     ['middle-east'],
-    "sa",
-    "966"
+    'sa',
+    '966'
   ],
   [
-    "Senegal",
+    'Senegal',
     ['africa'],
-    "sn",
-    "221"
+    'sn',
+    '221'
   ],
   [
-    "Serbia",
+    'Serbia',
     ['europe'],
-    "rs",
-    "381"
+    'rs',
+    '381'
   ],
   [
-    "Seychelles",
+    'Seychelles',
     ['africa'],
-    "sc",
-    "248"
+    'sc',
+    '248'
   ],
   [
-    "Sierra Leone",
+    'Sierra Leone',
     ['africa'],
-    "sl",
-    "232"
+    'sl',
+    '232'
   ],
   [
-    "Singapore",
+    'Singapore',
     ['asia'],
-    "sg",
-    "65",
-    "+.. ....-...."
+    'sg',
+    '65',
+    '+.. ....-....'
   ],
   [
-    "Sint Maarten",
+    'Sint Maarten',
     ['america', 'carribean'],
-    "sx",
-    "1721"
+    'sx',
+    '1721'
   ],
   [
-    "Slovakia",
+    'Slovakia',
     ['europe', 'european-union'],
-    "sk",
-    "421"
+    'sk',
+    '421'
   ],
   [
-    "Slovenia",
+    'Slovenia',
     ['europe', 'european-union'],
-    "si",
-    "386"
+    'si',
+    '386'
   ],
   [
-    "Solomon Islands",
+    'Solomon Islands',
     ['oceania'],
-    "sb",
-    "677"
+    'sb',
+    '677'
   ],
   [
-    "Somalia",
+    'Somalia',
     ['africa'],
-    "so",
-    "252"
+    'so',
+    '252'
   ],
   [
-    "South Africa",
+    'South Africa',
     ['africa'],
-    "za",
-    "27"
+    'za',
+    '27'
   ],
   [
-    "South Korea",
+    'South Korea',
     ['asia'],
-    "kr",
-    "82",
-    "+.. ... .... ...."
+    'kr',
+    '82',
+    '+.. ... .... ....'
   ],
   [
-    "South Sudan",
+    'South Sudan',
     ['africa', 'north-africa'],
-    "ss",
-    "211"
+    'ss',
+    '211'
   ],
   [
-    "Spain",
+    'Spain',
     ['europe', 'european-union'],
-    "es",
-    "34",
-    "+.. ... ... ..."
+    'es',
+    '34',
+    '+.. ... ... ...'
   ],
   [
-    "Sri Lanka",
+    'Sri Lanka',
     ['asia'],
-    "lk",
-    "94"
+    'lk',
+    '94'
   ],
   [
-    "Sudan",
+    'Sudan',
     ['africa'],
-    "sd",
-    "249"
+    'sd',
+    '249'
   ],
   [
-    "Suriname",
+    'Suriname',
     ['america', 'south-america'],
-    "sr",
-    "597"
+    'sr',
+    '597'
   ],
   [
-    "Swaziland",
+    'Swaziland',
     ['africa'],
-    "sz",
-    "268"
+    'sz',
+    '268'
   ],
   [
-    "Sweden",
+    'Sweden',
     ['europe', 'european-union'],
-    "se",
-    "46",
-    "+.. (...) ...-..."
+    'se',
+    '46',
+    '+.. (...) ...-...'
   ],
   [
-    "Switzerland",
+    'Switzerland',
     ['europe'],
-    "ch",
-    "41",
-    "+.. .. ... .. .."
+    'ch',
+    '41',
+    '+.. .. ... .. ..'
   ],
   [
-    "Syria",
+    'Syria',
     ['middle-east'],
-    "sy",
-    "963"
+    'sy',
+    '963'
   ],
   [
-    "Taiwan",
+    'Taiwan',
     ['asia'],
-    "tw",
-    "886"
+    'tw',
+    '886'
   ],
   [
-    "Tajikistan",
+    'Tajikistan',
     ['asia', 'ex-ussr'],
-    "tj",
-    "992"
+    'tj',
+    '992'
   ],
   [
-    "Tanzania",
+    'Tanzania',
     ['africa'],
-    "tz",
-    "255"
+    'tz',
+    '255'
   ],
   [
-    "Thailand",
+    'Thailand',
     ['asia'],
-    "th",
-    "66"
+    'th',
+    '66'
   ],
   [
-    "Timor-Leste",
+    'Timor-Leste',
     ['asia'],
-    "tl",
-    "670"
+    'tl',
+    '670'
   ],
   [
-    "Togo",
+    'Togo',
     ['africa'],
-    "tg",
-    "228"
+    'tg',
+    '228'
   ],
   [
-    "Tokelau",
+    'Tokelau',
     ['oceania'],
-    "tk",
-    "690"
+    'tk',
+    '690'
   ],
   [
-    "Tonga",
+    'Tonga',
     ['oceania'],
-    "to",
-    "676"
+    'to',
+    '676'
   ],
   [
-    "Trinidad and Tobago",
+    'Trinidad and Tobago',
     ['america', 'carribean'],
-    "tt",
-    "1868"
+    'tt',
+    '1868'
   ],
   [
-    "Tunisia",
+    'Tunisia',
     ['africa', 'north-africa'],
-    "tn",
-    "216"
+    'tn',
+    '216'
   ],
   [
-    "Turkey",
+    'Turkey',
     ['europe'],
-    "tr",
-    "90",
-    "+.. ... ... .. .."
+    'tr',
+    '90',
+    '+.. ... ... .. ..'
   ],
   [
-    "Turkmenistan",
+    'Turkmenistan',
     ['asia', 'ex-ussr'],
-    "tm",
-    "993"
+    'tm',
+    '993'
   ],
   [
-    "Turks and Caicos Islands",
+    'Turks and Caicos Islands',
     ['america', 'carribean'],
-    "tc",
-    "1649"
+    'tc',
+    '1649'
   ],
   [
-    "Tuvalu",
+    'Tuvalu',
     ['asia'],
-    "tv",
-    "688"
+    'tv',
+    '688'
   ],
   [
-    "U.S. Virgin Islands",
+    'U.S. Virgin Islands',
     ['america', 'carribean'],
-    "vi",
-    "1340"
+    'vi',
+    '1340'
   ],
   [
-    "Uganda",
+    'Uganda',
     ['africa'],
-    "ug",
-    "256"
+    'ug',
+    '256'
   ],
   [
-    "Ukraine",
+    'Ukraine',
     ['europe', 'ex-ussr'],
-    "ua",
-    "380",
-    "+... (..) ... .. .."
+    'ua',
+    '380',
+    '+... (..) ... .. ..'
   ],
   [
-    "United Arab Emirates",
+    'United Arab Emirates',
     ['middle-east'],
-    "ae",
-    "971"
+    'ae',
+    '971'
   ],
   [
-    "United Kingdom",
+    'United Kingdom',
     ['europe', 'european-union'],
-    "gb",
-    "44",
-    "+.. .... ......"
+    'gb',
+    '44',
+    '+.. .... ......'
   ],
   [
-    "United States",
+    'United States',
     ['america', 'north-america'],
-    "us",
-    "1",
-    "+. (...) ...-....",
-    0, ["907", "205", "251", "256", "334", "479", "501", "870", "480", "520", "602", "623", "928", "209", "213", "310", "323", "408", "415", "510", "530", "559", "562", "619", "626", "650", "661", "707", "714", "760", "805", "818", "831", "858", "909", "916", "925", "949", "951", "303", "719", "970", "203", "860", "202", "302", "239", "305", "321", "352", "386", "407", "561", "727", "772", "813", "850", "863", "904", "941", "954", "229", "404", "478", "706", "770", "912", "808", "319", "515", "563", "641", "712", "208", "217", "309", "312", "618", "630", "708", "773", "815", "847", "219", "260", "317", "574", "765", "812", "316", "620", "785", "913", "270", "502", "606", "859", "225", "318", "337", "504", "985", "413", "508", "617", "781", "978", "301", "410", "207", "231", "248", "269", "313", "517", "586", "616", "734", "810", "906", "989", "218", "320", "507", "612", "651", "763", "952", "314", "417", "573", "636", "660", "816", "228", "601", "662", "406", "252", "336", "704", "828", "910", "919", "701", "308", "402", "603", "201", "609", "732", "856", "908", "973", "505", "575", "702", "775", "212", "315", "516", "518", "585", "607", "631", "716", "718", "845", "914", "216", "330", "419", "440", "513", "614", "740", "937", "405", "580", "918", "503", "541", "215", "412", "570", "610", "717", "724", "814", "401", "803", "843", "864", "605", "423", "615", "731", "865", "901", "931", "210", "214", "254", "281", "325", "361", "409", "432", "512", "713", "806", "817", "830", "903", "915", "936", "940", "956", "972", "979", "435", "801", "276", "434", "540", "703", "757", "804", "802", "206", "253", "360", "425", "509", "262", "414", "608", "715", "920", "304", "307"]
+    'us',
+    '1',
+    '+. (...) ...-....',
+    0, ['907', '205', '251', '256', '334', '479', '501', '870', '480', '520', '602', '623', '928', '209', '213', '310', '323', '408', '415', '510', '530', '559', '562', '619', '626', '650', '661', '707', '714', '760', '805', '818', '831', '858', '909', '916', '925', '949', '951', '303', '719', '970', '203', '860', '202', '302', '239', '305', '321', '352', '386', '407', '561', '727', '772', '813', '850', '863', '904', '941', '954', '229', '404', '478', '706', '770', '912', '808', '319', '515', '563', '641', '712', '208', '217', '309', '312', '618', '630', '708', '773', '815', '847', '219', '260', '317', '574', '765', '812', '316', '620', '785', '913', '270', '502', '606', '859', '225', '318', '337', '504', '985', '413', '508', '617', '781', '978', '301', '410', '207', '231', '248', '269', '313', '517', '586', '616', '734', '810', '906', '989', '218', '320', '507', '612', '651', '763', '952', '314', '417', '573', '636', '660', '816', '228', '601', '662', '406', '252', '336', '704', '828', '910', '919', '701', '308', '402', '603', '201', '609', '732', '856', '908', '973', '505', '575', '702', '775', '212', '315', '516', '518', '585', '607', '631', '716', '718', '845', '914', '216', '330', '419', '440', '513', '614', '740', '937', '405', '580', '918', '503', '541', '215', '412', '570', '610', '717', '724', '814', '401', '803', '843', '864', '605', '423', '615', '731', '865', '901', '931', '210', '214', '254', '281', '325', '361', '409', '432', '512', '713', '806', '817', '830', '903', '915', '936', '940', '956', '972', '979', '435', '801', '276', '434', '540', '703', '757', '804', '802', '206', '253', '360', '425', '509', '262', '414', '608', '715', '920', '304', '307']
   ],
   [
-    "Uruguay",
+    'Uruguay',
     ['america', 'south-america'],
-    "uy",
-    "598"
+    'uy',
+    '598'
   ],
   [
-    "Uzbekistan",
+    'Uzbekistan',
     ['asia', 'ex-ussr'],
-    "uz",
-    "998"
+    'uz',
+    '998'
   ],
   [
-    "Vanuatu",
+    'Vanuatu',
     ['oceania'],
-    "vu",
-    "678"
+    'vu',
+    '678'
   ],
   [
-    "Vatican City",
+    'Vatican City',
     ['europe'],
-    "va",
-    "39",
-    "+.. .. .... ....",
+    'va',
+    '39',
+    '+.. .. .... ....',
     1
   ],
   [
-    "Venezuela",
+    'Venezuela',
     ['america', 'south-america'],
-    "ve",
-    "58"
+    've',
+    '58'
   ],
   [
-    "Vietnam",
+    'Vietnam',
     ['asia'],
-    "vn",
-    "84"
+    'vn',
+    '84'
   ],
   [
-    "Wallis and Futuna",
+    'Wallis and Futuna',
     ['oceania'],
-    "wf",
-    "681"
+    'wf',
+    '681'
   ],
   [
-    "Yemen",
+    'Yemen',
     ['middle-east'],
-    "ye",
-    "967"
+    'ye',
+    '967'
   ],
   [
-    "Zambia",
+    'Zambia',
     ['africa'],
-    "zm",
-    "260"
+    'zm',
+    '260'
   ],
   [
-    "Zimbabwe",
+    'Zimbabwe',
     ['africa'],
-    "zw",
-    "263"
+    'zw',
+    '263'
   ]
 ];
 

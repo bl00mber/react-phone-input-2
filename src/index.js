@@ -712,7 +712,7 @@ class ReactPhoneInput extends React.Component {
           key={`flag_no_${index}`}
           data-flag-key={`flag_no_${index}`}
           className={itemClasses}
-          data-dial-code="1"
+          data-dial-code='1'
           data-country-code={country.iso2}
           onClick={() => this.handleFlagItemClick(country)}
         >
@@ -753,8 +753,8 @@ class ReactPhoneInput extends React.Component {
                   'search-emoji': true,
                   [`${searchClass}-emoji`]: searchClass,
                 })}
-                role="img"
-                aria-label="Magnifying glass"
+                role='img'
+                aria-label='Magnifying glass'
               >
                 &#128270;
               </span>
@@ -763,8 +763,8 @@ class ReactPhoneInput extends React.Component {
                   'search-box': true,
                   [`${searchClass}-box`]: searchClass,
                 })}
-                id="search-box"
-                type="search"
+                id='search-box'
+                type='search'
                 placeholder={this.props.searchPlaceholder}
                 autoFocus={true}
                 value={searchValue}
@@ -776,7 +776,7 @@ class ReactPhoneInput extends React.Component {
         {countryDropdownList.length > 0
           ? countryDropdownList
           : (
-            <li className="no-entries-message">
+            <li className='no-entries-message'>
               <span>No entries to show.</span>
             </li>
           )}
@@ -788,17 +788,17 @@ class ReactPhoneInput extends React.Component {
     const { selectedCountry, showDropdown, formattedNumber } = this.state;
     const disableDropdown = this.props.disableDropdown;
 
-    const arrowClasses = classNames({"arrow": true, "up": showDropdown});
+    const arrowClasses = classNames({'arrow': true, 'up': showDropdown});
     const inputClasses = classNames({
       [this.props.inputClass]: true,
-      "form-control": true,
-      "invalid-number": !this.props.isValid(formattedNumber.replace(/\D/g, ''))
+      'form-control': true,
+      'invalid-number': !this.props.isValid(formattedNumber.replace(/\D/g, ''))
     });
 
     const flagViewClasses = classNames({
       [this.props.buttonClass]: true,
-      "flag-dropdown": true,
-      "open-dropdown": showDropdown
+      'flag-dropdown': true,
+      'open-dropdown': showDropdown
     });
     const inputFlagClasses = `flag ${selectedCountry.iso2}`;
 
@@ -818,7 +818,7 @@ class ReactPhoneInput extends React.Component {
           onKeyDown={this.handleInputKeyDown}
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
-          type="tel"
+          type='tel'
           {...this.props.inputExtraProps}
         />
 
