@@ -47,13 +47,13 @@ export default render(
       <p>Disabled area codes with disableAreaCodes</p>
       <ReactPhoneInput
         defaultCountry='us'
-        disableAreaCodes={true}
+        disableAreaCodes
       />
       <p>Disabled flag by default</p>
       <p>Customizable placeholder</p>
       <p>Customizable styles</p>
       <ReactPhoneInput
-        disableAreaCodes={true}
+        disableAreaCodes
         placeholder='Type your phone here'
         inputStyle={{
           width: '300px',
@@ -89,10 +89,10 @@ export default render(
       <ReactPhoneInput
         onlyCountries={['us']}
         defaultCountry='us'
-        disableAreaCodes={true}
-        disableCountryCode={true}
-        disableDropdown={true}
         placeholder='(702) 123-4567'
+        disableAreaCodes
+        disableCountryCode
+        disableDropdown
       />
       <p>Localization</p>
       <p>Non-editable country code</p>

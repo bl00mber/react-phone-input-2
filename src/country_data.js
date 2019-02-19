@@ -1277,7 +1277,7 @@ const rawAllCountries = [
     ['europe', 'european-union'],
     "se",
     "46",
-    "+.. .. ... .. .."
+    "+.. (...) ...-..."
   ],
   [
     "Switzerland",

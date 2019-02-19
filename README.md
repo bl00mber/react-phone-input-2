@@ -1,16 +1,16 @@
 # react-phone-input-2
 Highly customizable phone input component with auto formatting.
 
-![alt tag](https://media.giphy.com/media/l378A8qFNzgiuPUre/giphy.gif)
+[![npm version](https://img.shields.io/npm/v/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2) [![npm downloads](https://img.shields.io/npm/dm/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/bl00mber/react-phone-input-2#contributing)
+
+![alt tag](https://media.giphy.com/media/xiORAWnqoTJDsH0UOI/giphy.gif)
 
 ## Installation
-
 ```shell-script
 npm install react-phone-input-2 --save
 ```
 
 ## Usage
-
 ```jsx
 React.render(
   <ReactPhoneInput defaultCountry={'us'} onChange={handleOnChange}/>,
@@ -30,7 +30,6 @@ function handleOnChange(value) {
 ```
 
 ## Options
-
 <table>
   <tr>
     <th> Name </th>
@@ -185,7 +184,6 @@ function handleOnChange(value) {
 ```
 
 ### Regions
-
 <table>
   <tr>
     <th> Name </th>
@@ -231,7 +229,6 @@ Regions selected: {['north-america', 'carribean']}
 ```
 
 ### Localization
-
 <table>
   <tr>
     <th> Name </th>
@@ -245,7 +242,7 @@ Regions selected: {['north-america', 'carribean']}
 
 ```jsx
 <ReactPhoneInput
-  onlyCountries=['de', 'es']
+  onlyCountries={['de', 'es']}
   localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
 />
 
@@ -256,7 +253,6 @@ Regions selected: {['north-america', 'carribean']}
 ```
 
 ### Supported events
-
 <table>
   <tr>
     <td> onChange </td>
@@ -287,6 +283,10 @@ Country data object not returns from onKeyDown event
   </tr>
 </table>
 
-## License
+## Contributing
+Code style changes not allowed
 
-Based on [react-phone-input](https://github.com/razagill/react-phone-input) using [MIT](https://opensource.org/licenses/MIT)
+## License
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bl00mber/react-phone-input-2/blob/master/LICENSE)
+
+Based on [react-phone-input](https://github.com/razagill/react-phone-input)
