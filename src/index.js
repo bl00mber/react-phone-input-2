@@ -47,7 +47,7 @@ class ReactPhoneInput extends React.Component {
 
     inputExtraProps: PropTypes.object,
     localization: PropTypes.object,
-    customMasks: PropTypes.object,
+    masks: PropTypes.object,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -97,7 +97,7 @@ class ReactPhoneInput extends React.Component {
 
     inputExtraProps: {},
     localization: {},
-    customMasks: {},
+    masks: {},
 
     onEnterKeyPress: () => {},
 
@@ -112,7 +112,7 @@ class ReactPhoneInput extends React.Component {
     let filteredCountries = countryData.allCountries;
 
     if (props.regions) filteredCountries = this.filterRegions(props.regions, filteredCountries);
-    if (Object.keys(props.customMasks).length !== 0) filteredCountries = this.insertCustomMasks(props.customMasks, filteredCountries);
+    if (Object.keys(props.masks).length !== 0) filteredCountries = this.insertMasks(props.masks, filteredCountries);
 
     const onlyCountries = this.excludeCountries(
       this.getOnlyCountries(props.onlyCountries, filteredCountries), props.excludeCountries);
@@ -217,10 +217,10 @@ class ReactPhoneInput extends React.Component {
     });
   }
 
-  insertCustomMasks = (customMasks, filteredCountries) => {
-    for (let key in customMasks) {
+  insertMasks = (masks, filteredCountries) => {
+    for (let key in masks) {
       const modifiedCountryIndex = filteredCountries.findIndex(o => o.iso2 == key);
-      if (modifiedCountryIndex != -1) filteredCountries[modifiedCountryIndex].format = customMasks[key]
+      if (modifiedCountryIndex != -1) filteredCountries[modifiedCountryIndex].format = masks[key]
     }
     return filteredCountries
   }

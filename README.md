@@ -259,7 +259,7 @@ Regions selected: {['north-america', 'carribean']}
     <th> Type </th>
   </tr>
   <tr>
-    <td> customMasks </td>
+    <td> masks </td>
     <td> object </td>
   </tr>
 </table>
@@ -267,7 +267,7 @@ Regions selected: {['north-america', 'carribean']}
 ```jsx
 <ReactPhoneInput
   onlyCountries={['fr', 'at']}
-  customMasks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....'}}
+  masks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....'}}
 />
 ```
 

@@ -119,7 +119,7 @@ export default render(
       <ReactPhoneInput
         defaultCountry='at'
         onlyCountries={['fr', 'at']}
-        customMasks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....', 'zz': '+.. ... ...'}}
+        masks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....', 'zz': '+.. ... ...'}}
       />
     </div>
   </div>, document.getElementById('root')
