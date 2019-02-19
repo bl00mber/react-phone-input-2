@@ -252,6 +252,25 @@ Regions selected: {['north-america', 'carribean']}
 />
 ```
 
+### Custom masks
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Type </th>
+  </tr>
+  <tr>
+    <td> customMasks </td>
+    <td> object </td>
+  </tr>
+</table>
+
+```jsx
+<ReactPhoneInput
+  onlyCountries={['fr', 'at']}
+  customMasks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....'}}
+/>
+```
+
 ### Supported events
 <table>
   <tr>

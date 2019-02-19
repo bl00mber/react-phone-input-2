@@ -112,8 +112,14 @@ export default render(
     <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
       <p>With search field</p>
       <ReactPhoneInput
-        defaultCountry="nl"
+        defaultCountry='nl'
         enableSearchField
+      />
+      <p>Custom masks</p>
+      <ReactPhoneInput
+        defaultCountry='at'
+        onlyCountries={['fr', 'at']}
+        customMasks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....', 'zz': '+.. ... ...'}}
       />
     </div>
   </div>, document.getElementById('root')
