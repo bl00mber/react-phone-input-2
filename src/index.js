@@ -376,9 +376,6 @@ class ReactPhoneInput extends React.Component {
     }
 
     const formattedObject = reduce(pattern, (acc, character) => {
-    // const formattedObject = pattern.split().reduce((acc, character) => {
-      // console.log('PATTERN', pattern)
-      // console.log('ACC, CHARACTER', acc, character)
       if (acc.remainingText.length === 0) {
         return acc;
       }
@@ -400,7 +397,6 @@ class ReactPhoneInput extends React.Component {
       formattedText: '',
       remainingText: text.split('')
     });
-    // console.log('FORMATTEDOBJECT', formattedObject)
 
     let formattedNumber;
     if (enableLongNumbers) {
