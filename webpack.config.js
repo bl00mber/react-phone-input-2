@@ -16,7 +16,7 @@ const common = {
   },
   output: {
     path: path.resolve(ROOT_PATH, 'dist'),
-    filename: 'index.js'
+    filename: 'lib.js'
   },
   module: {
     rules: [
@@ -44,8 +44,8 @@ if (TARGET === 'dev') {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-      publicPath: 'http://localhost:8181/',
-      port: '8181',
+      publicPath: 'http://localhost:3000/',
+      port: '3000',
       host: '0.0.0.0',
       historyApiFallback: true,
       hot: true,
@@ -86,7 +86,7 @@ if (TARGET === 'build' || TARGET === 'analyze') {
     optimization: {},
     output: {
       path: path.resolve(ROOT_PATH, 'dist'),
-      filename: 'index.js',
+      filename: 'lib.js',
       library: 'ReactPhoneInput',
       libraryTarget: 'umd'
     },

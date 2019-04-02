@@ -524,9 +524,7 @@ class ReactPhoneInput extends React.Component {
         this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
       }
 
-      if (this.props.onChange) {
-        this.props.onChange(this.state.formattedNumber, this.getCountryData());
-      }
+      if (this.props.onChange) this.props.onChange(this.state.formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData());
     });
   }
 
@@ -550,9 +548,7 @@ class ReactPhoneInput extends React.Component {
       formattedNumber
     }, () => {
       this.cursorToEnd();
-      if (this.props.onChange) {
-        this.props.onChange(formattedNumber, this.getCountryData());
-      }
+      if (this.props.onChange) this.props.onChange(formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData());
     });
   }
 

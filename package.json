@@ -2,22 +2,36 @@
   "name": "react-phone-input-2",
   "version": "2.8.0",
   "description": "A react component to format phone numbers",
-  "main": "dist/index.js",
+  "main": "dist/lib.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "TARGET=dev NODE_ENV=development webpack-dev-server --progress",
+    "start": "TARGET=dev NODE_ENV=development webpack-dev-server --progress",
     "build": "TARGET=build NODE_ENV=production webpack -p --progress",
     "analyze": "TARGET=analyze NODE_ENV=production webpack -p --progress"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bl00mber/react-phone-input-2"
+    "url": "git+https://github.com/bl00mber/react-phone-input-2.git"
   },
   "keywords": [
     "react",
     "phone",
     "format",
-    "telephone"
+    "number",
+    "input",
+    "telephone",
+    "javascript",
+    "international",
+    "tel"
+  ],
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/lib.js"
+  ],
+  "author": "Nikita Lebedev <bloomber111@gmail.com> (http://github.com/bl00mber)",
+  "contributors": [
+    "Raza Gill <raza.gill@outlook.com> (http://github.com/razagill)"
   ],
   "license": "MIT",
   "bugs": {

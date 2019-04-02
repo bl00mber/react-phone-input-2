@@ -1,4 +1,4 @@
-# react-phone-input-2
+# React-Phone-Input-2
 Highly customizable phone input component with auto formatting.
 
 [![npm version](https://img.shields.io/npm/v/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2) [![npm downloads](https://img.shields.io/npm/dm/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/bl00mber/react-phone-input-2#contributing)
@@ -13,7 +13,7 @@ npm install react-phone-input-2 --save
 ## Usage
 ```jsx
 React.render(
-  <ReactPhoneInput defaultCountry={'us'} onChange={handleOnChange}/>,
+  <ReactPhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange}/>,
   document.getElementById('root')
 );
 ```
@@ -23,9 +23,7 @@ parameter, where the value is that of the entered phone number. For example:
 
 ```jsx
 function handleOnChange(value) {
-   this.setState({
-      phone: value
-   });
+  this.setState({ phone: value })
 }
 ```
 
@@ -298,9 +296,16 @@ Country data object not returns from onKeyDown event
   <tr>
     <td> country data </td>
     <td> object </td>
-    <td> the country object { name, dialCode, country code (iso2 format) } </td>
+    <td> the country object { name, dialCode, countryCode (iso2 format) } </td>
   </tr>
 </table>
+
+### Raw number
+```jsx
+function handleOnChange(value, data) {
+  this.setState({ rawPhone: value.slice(data.dialCode.length) })
+}
+```
 
 ## Contributing
 Code style changes not allowed
