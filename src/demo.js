@@ -115,6 +115,14 @@ export default render(
         defaultCountry='nl'
         enableSearchField
       />
+      <ReactPhoneInput
+        defaultCountry='pl'
+        containerStyle={{marginTop: '25px'}}
+        searchClass='search-class'
+        searchStyle={{margin: '0', width: '97%', height: '32px'}}
+        enableSearchField
+        disableSearchIcon
+      />
       <p>Custom masks</p>
       <ReactPhoneInput
         defaultCountry='at'

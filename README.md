@@ -169,6 +169,11 @@ function handleOnChange(value) {
     <td> bool </td>
     <td colspan="2"> enables search field in the dropdown </td>
   </tr>
+  <tr>
+    <td> disableSearchIcon </td>
+    <td> bool </td>
+    <td colspan="2"> hide icon for the search field </td>
+  </tr>
 </table>
 
 ```jsx

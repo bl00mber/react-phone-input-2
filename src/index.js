@@ -38,6 +38,7 @@ class ReactPhoneInput extends React.Component {
     enableLongNumbers: PropTypes.bool,
     countryCodeEditable: PropTypes.bool,
     enableSearchField: PropTypes.bool,
+    disableSearchIcon: PropTypes.bool,
 
     regions: PropTypes.oneOfType([
       PropTypes.string,
@@ -91,6 +92,7 @@ class ReactPhoneInput extends React.Component {
     enableLongNumbers: false,
     countryCodeEditable: true,
     enableSearchField: false,
+    disableSearchIcon: false,
 
     regions: '',
 
@@ -671,7 +673,7 @@ class ReactPhoneInput extends React.Component {
 
   getCountryDropdownList = () => {
     const { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
-    const { enableSearchField, searchClass } = this.props;
+    const { enableSearchField, disableSearchIcon, searchClass, searchPlaceholder } = this.props;
 
     const countryIsPreferred = this.state.preferredCountries.includes(this.state.selectedCountry);
     const allCountries = preferredCountries.concat(onlyCountries);
@@ -736,7 +738,7 @@ class ReactPhoneInput extends React.Component {
               [searchClass]: searchClass,
             })}
           >
-            <label>
+            {!disableSearchIcon &&
               <span
                 className={classNames({
                   'search-emoji': true,
@@ -746,20 +748,19 @@ class ReactPhoneInput extends React.Component {
                 aria-label='Magnifying glass'
               >
                 &#128270;
-              </span>
-              <input
-                className={classNames({
-                  'search-box': true,
-                  [`${searchClass}-box`]: searchClass,
-                })}
-                id='search-box'
-                type='search'
-                placeholder={this.props.searchPlaceholder}
-                autoFocus={true}
-                value={searchValue}
-                onChange={this.handleSearchChange}
-              />
-            </label>
+              </span>}
+            <input
+              className={classNames({
+                'search-box': true,
+                [`${searchClass}-box`]: searchClass,
+              })}
+              id='search-box'
+              type='search'
+              placeholder={searchPlaceholder}
+              autoFocus={true}
+              value={searchValue}
+              onChange={this.handleSearchChange}
+            />
           </li>
         )}
         {countryDropdownList.length > 0
