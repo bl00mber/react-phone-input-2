@@ -4,7 +4,7 @@
   "description": "A react component to format phone numbers",
   "main": "dist/lib.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "TARGET=dev NODE_ENV=development webpack-dev-server --progress",
     "build": "TARGET=build NODE_ENV=production webpack -p --progress",
     "analyze": "TARGET=analyze NODE_ENV=production webpack -p --progress"
@@ -27,7 +27,8 @@
   "files": [
     "LICENSE",
     "README.md",
-    "dist/lib.js"
+    "dist/lib.js",
+    "dist/style.js"
   ],
   "author": "Nikita Lebedev <bloomber111@gmail.com> (http://github.com/bl00mber)",
   "contributors": [
@@ -38,14 +39,24 @@
     "url": "https://github.com/bl00mber/react-phone-input-2/issues"
   },
   "homepage": "https://github.com/bl00mber/react-phone-input-2",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less|stylus|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "globals": {
+      "__DEV__": false
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "babel-loader": "^8.0.5",
     "babel-preset-react-app": "^7.0.1",
     "css-loader": "^2.1.0",
-    "file-loader": "^3.0.1",
+    "jest": "^24.7.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.5.0",
     "react-dom": "^16.8.2",
     "react-hot-loader": "^4.6.5",
     "style-loader": "^0.23.1",

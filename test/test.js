@@ -1,16 +1,13 @@
 import React from 'react'
-import { ReactPhoneInput } from '../src/index'
+import TestUtils from 'react-dom/test-utils'
+import ReactPhoneInput from '../src/index'
 
 describe('<ReactPhoneInput />', () => {
-  it('renders n <div /> components when disableAreaCodes={false}', () => {
+  // test('renders x <div /> components when disableAreaCodes={false}', () => {
+  //
+  // })
 
-  })
-
-  it('works without document/window browser objects', () => {
-
-  })
-
-  it('triggers onChange event', () => {
-
-  })
+  // test('triggers onChange event', () => {
+  //
+  // })
 })

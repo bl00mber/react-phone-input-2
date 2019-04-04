@@ -12,13 +12,13 @@ npm install react-phone-input-2 --save
 
 ## Usage
 ```jsx
-React.render(
-  <ReactPhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange}/>,
-  document.getElementById('root')
-);
+import ReactPhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/dist/style.css'
+
+<ReactPhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange}/>
 ```
 
-Your handler for the ``onChange`` event should expect a string as
+Your handler for the `onChange` event should expect a string as
 parameter, where the value is that of the entered phone number. For example:
 
 ```jsx
