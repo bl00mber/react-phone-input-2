@@ -35,6 +35,7 @@ export default render(
       <ReactPhoneInput
         defaultCountry='it'
         preferredCountries={['it', 'se']}
+        onChange={(value, data) => console.log(value, data)}
       />
     </div>
 
@@ -119,7 +120,7 @@ export default render(
         defaultCountry='pl'
         containerStyle={{marginTop: '25px'}}
         searchClass='search-class'
-        searchStyle={{margin: '0', width: '97%', height: '32px'}}
+        searchStyle={{margin: '0', width: '97%', height: '30px'}}
         enableSearchField
         disableSearchIcon
       />

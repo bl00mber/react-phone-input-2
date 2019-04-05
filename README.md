@@ -1,7 +1,10 @@
 # React-Phone-Input-2
 Highly customizable phone input component with auto formatting.
 
-[![npm version](https://img.shields.io/npm/v/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2) [![npm downloads](https://img.shields.io/npm/dm/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/bl00mber/react-phone-input-2#contributing)
+[![npm version](https://img.shields.io/npm/v/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2)
+[![npm downloads](https://img.shields.io/npm/dm/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/bl00mber/react-phone-input-2#contributing)
+[![travis build](https://travis-ci.org/bl00mber/react-phone-input-2.svg?branch=master)](https://travis-ci.org/bl00mber/react-phone-input-2)
 
 ![alt tag](https://media.giphy.com/media/xiORAWnqoTJDsH0UOI/giphy.gif)
 
@@ -121,6 +124,11 @@ function handleOnChange(value) {
     <td> dropdownStyle </td>
     <td> object </td>
     <td colspan="2"> styles for dropdown container </td>
+  </tr>
+  <tr>
+    <td> searchStyle </td>
+    <td> object </td>
+    <td colspan="2"> styles for search field </td>
   </tr>
 
   <tr>

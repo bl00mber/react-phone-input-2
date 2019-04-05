@@ -24,6 +24,7 @@ class ReactPhoneInput extends React.Component {
     inputStyle: PropTypes.object,
     buttonStyle: PropTypes.object,
     dropdownStyle: PropTypes.object,
+    searchStyle: PropTypes.object,
 
     containerClass: PropTypes.string,
     inputClass: PropTypes.string,
@@ -73,6 +74,7 @@ class ReactPhoneInput extends React.Component {
     inputStyle: {},
     buttonStyle: {},
     dropdownStyle: {},
+    searchStyle: {},
 
     containerClass: 'react-tel-input',
     inputClass: '',
@@ -673,7 +675,7 @@ class ReactPhoneInput extends React.Component {
 
   getCountryDropdownList = () => {
     const { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
-    const { enableSearchField, disableSearchIcon, searchClass, searchPlaceholder } = this.props;
+    const { enableSearchField, disableSearchIcon, searchClass, searchStyle, searchPlaceholder } = this.props;
 
     const countryIsPreferred = this.state.preferredCountries.includes(this.state.selectedCountry);
     const allCountries = preferredCountries.concat(onlyCountries);
@@ -754,6 +756,7 @@ class ReactPhoneInput extends React.Component {
                 'search-box': true,
                 [`${searchClass}-box`]: searchClass,
               })}
+              style={searchStyle}
               id='search-box'
               type='search'
               placeholder={searchPlaceholder}
