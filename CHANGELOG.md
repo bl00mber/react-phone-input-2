@@ -1,3 +1,10 @@
+## 2.9.2 (April 5, 2019)
+* SSR support (removed references to browser objects)
+* Change importing method
+* Add `disableSearchIcon`, `searchStyle` props
+* Tests
+
+
 ## 2.8.0 (February 20, 2019)
 * Custom phone `masks`
 * Localization using iso2 codes

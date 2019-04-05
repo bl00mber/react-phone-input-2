@@ -35,7 +35,6 @@ export default render(
       <ReactPhoneInput
         defaultCountry='it'
         preferredCountries={['it', 'se']}
-        onChange={(value, data) => console.log(value, data)}
       />
     </div>
 

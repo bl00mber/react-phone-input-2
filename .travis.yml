@@ -1,3 +1,7 @@
 language: node_js
 node_js:
-  - "node"
+  - 'node'
+install:
+  - npm install
+  - npm install react@^16.8.6 --save
+  - npm install react-dom@^16.8.6 --save

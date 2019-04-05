@@ -313,7 +313,7 @@ Country data object not returns from onKeyDown event
   </tr>
 </table>
 
-### Raw number
+### Phone without dialCode
 ```jsx
 function handleOnChange(value, data) {
   this.setState({ rawPhone: value.slice(data.dialCode.length) })
