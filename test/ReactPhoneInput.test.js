@@ -64,7 +64,7 @@ describe('<ReactPhoneInput /> main props', () => {
 
 
 describe('<ReactPhoneInput /> event handlers', () => {
-  test('onChange is being called with unformatted value and country object as callback arguments', () => {
+  test('onChange is being called with formatted value and country object as callback arguments', () => {
     const mockFn = jest.fn();
     const { container: phoneInput } = render(
       <ReactPhoneInput
@@ -73,7 +73,7 @@ describe('<ReactPhoneInput /> event handlers', () => {
       />)
 
     fireEvent.change(phoneInput.querySelector('.form-control'), {target: {value: '12345'}})
-    expect(mockFn).toHaveBeenCalledWith('12345', {name: 'United States', dialCode: '1', countryCode: 'us'})
+    expect(mockFn).toHaveBeenCalledWith('+1 (234) 5', {name: 'United States', dialCode: '1', countryCode: 'us'})
   })
 })
 

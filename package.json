@@ -1,6 +1,6 @@
 {
   "name": "react-phone-input-2",
-  "version": "2.9.2",
+  "version": "2.9.3",
   "description": "A react component to format phone numbers",
   "main": "dist/lib.js",
   "scripts": {

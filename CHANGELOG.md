@@ -1,6 +1,7 @@
-## 2.9.2 (April 5, 2019)
+## 2.9.3 (April 8, 2019)
 * SSR support (removed references to browser objects)
 * Change importing method
+* `defaultCountry` update fix #70
 * Add `disableSearchIcon`, `searchStyle` props
 * Tests
 
