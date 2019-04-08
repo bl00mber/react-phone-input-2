@@ -4,7 +4,7 @@ import ReactPhoneInput from './index';
 
 
 class Demo extends React.Component {
-  state = { value: '12345' }
+  state = { defaultCountry: 'br', value: '12345' }
 
   render() {
     return (
@@ -115,14 +115,14 @@ class Demo extends React.Component {
           />
         </div>
         <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
-          <p>With search field</p>
+          <p>Search field</p>
           <ReactPhoneInput
             defaultCountry='nl'
             enableSearchField
           />
           <ReactPhoneInput
             defaultCountry='pl'
-            containerStyle={{marginTop: '25px'}}
+            containerStyle={{marginTop: '15px'}}
             searchClass='search-class'
             searchStyle={{margin: '0', width: '97%', height: '30px'}}
             enableSearchField
@@ -134,11 +134,19 @@ class Demo extends React.Component {
             onlyCountries={['fr', 'at']}
             masks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....', 'zz': '+.. ... ...'}}
           />
-          <p>onChange</p>
+          <p>State manipulations</p>
           <ReactPhoneInput
             value={this.state.value}
             onChange={(value, country) => {console.log(value, country); this.setState({ value })}}
           />
+          <ReactPhoneInput
+            containerStyle={{marginTop: '15px', marginBottom: '15px'}}
+            defaultCountry={this.state.defaultCountry}
+          />
+          <button onClick={() => {
+            if (this.state.defaultCountry == 'br') {this.setState({defaultCountry: 'it'})}
+            else {this.setState({defaultCountry: 'br'})}
+          }}>Change default country</button>
         </div>
       </div>
     )
