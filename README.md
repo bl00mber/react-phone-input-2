@@ -316,7 +316,7 @@ Country data object not returns from onKeyDown event
 ### Phone without dialCode
 ```jsx
 function handleOnChange(value, data) {
-  this.setState({ rawPhone: value.slice(data.dialCode.length) })
+  this.setState({ rawPhone: value.replace(/[^0-9]+/g,'').slice(data.dialCode.length) })
 }
 ```
 
