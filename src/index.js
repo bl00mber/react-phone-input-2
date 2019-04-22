@@ -704,8 +704,11 @@ class ReactPhoneInput extends React.Component {
           data-flag-key={`flag_no_${index}`}
           className={itemClasses}
           data-dial-code='1'
+          tabIndex="0"
+          role="button"
           data-country-code={country.iso2}
           onClick={() => this.handleFlagItemClick(country)}
+          onKeyPress={() => this.handleFlagItemClick(country)}
         >
           <div className={inputFlagClasses}/>
           <span className='country-name'>{this.getDropdownCountryName(country)}</span>
@@ -726,13 +729,9 @@ class ReactPhoneInput extends React.Component {
     });
 
     return (
-      <ul
-        ref={el => this.dropdownRef = el}
-        className={dropDownClasses}
-        style={this.props.dropdownStyle}
-      >
-        {enableSearchField && (
-          <li
+      <>
+              {enableSearchField && (
+          <div
             className={classNames({
               search: true,
               [searchClass]: searchClass,
@@ -762,8 +761,13 @@ class ReactPhoneInput extends React.Component {
               value={searchValue}
               onChange={this.handleSearchChange}
             />
-          </li>
+          </div>
         )}
+      <ul
+        ref={el => this.dropdownRef = el}
+        className={dropDownClasses}
+        style={this.props.dropdownStyle}
+      >
         {countryDropdownList.length > 0
           ? countryDropdownList
           : (
@@ -772,6 +776,7 @@ class ReactPhoneInput extends React.Component {
             </li>
           )}
       </ul>
+      </>
     );
   }
 
