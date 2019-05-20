@@ -3,19 +3,12 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import memoize from 'lodash.memoize';
 import reduce from 'lodash.reduce';
+import startsWith from 'lodash.startswith';
 import classNames from 'classnames';
 
 import countryData from './country_data.js';
 import './styles.less';
 
-if (!String.prototype.startsWith) {
-  Object.defineProperty(String.prototype, 'startsWith', {
-    value: function(search, pos) {
-      pos = !pos || pos < 0 ? 0 : +pos;
-      return this.substring(pos, pos + search.length) === search;
-    }
-  });
-} // polyfill for IE as per https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith
 
 class ReactPhoneInput extends React.Component {
   static propTypes = {
@@ -95,7 +88,7 @@ class ReactPhoneInput extends React.Component {
     disableAreaCodes: false,
     isValid: (inputNumber) => {
       return countryData.allCountries.some((country) => {
-        return inputNumber.startsWith(country.dialCode) || country.dialCode.startsWith(inputNumber);
+        return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
       });
     },
     disableCountryCode: false,
@@ -152,7 +145,7 @@ class ReactPhoneInput extends React.Component {
     const dialCode = (
       inputNumber.length < 2 &&
       countryGuess &&
-      !inputNumber.replace(/\D/g, '').startsWith(countryGuess.dialCode)
+      !startsWith(inputNumber.replace(/\D/g, ''), countryGuess.dialCode)
     ) ? countryGuess.dialCode : '';
 
     let formattedNumber;
@@ -263,7 +256,7 @@ class ReactPhoneInput extends React.Component {
     }
     // don't include the preferred countries in search
     const probableCountries = this.state.onlyCountries.filter((country) => {
-      return country.name.toLowerCase().startsWith(queryString.toLowerCase());
+      return startsWith(country.name.toLowerCase(), queryString.toLowerCase());
     }, this);
     return probableCountries[0];
   });
@@ -273,7 +266,7 @@ class ReactPhoneInput extends React.Component {
     if (inputNumber.trim() === '') return secondBestGuess;
 
     const bestGuess = onlyCountries.reduce((selectedCountry, country) => {
-      if (inputNumber.startsWith(country.dialCode)) {
+      if (startsWith(inputNumber, country.dialCode)) {
         if (country.dialCode.length > selectedCountry.dialCode.length) {
           return country;
         }
@@ -306,9 +299,9 @@ class ReactPhoneInput extends React.Component {
 
     // if inputNumber does not start with '+', then use default country's dialing prefix,
     // otherwise use logic for finding country based on country prefix.
-    if (!inputNumber.startsWith('+')) {
+    if (!startsWith(inputNumber, '+')) {
       newSelectedCountry = onlyCountries.find(o => o.iso2 == defaultCountry) || this.state.selectedCountry;
-      const dialCode = newSelectedCountry && !inputNumber.replace(/\D/g, '').startsWith(newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
+      const dialCode = newSelectedCountry && !startsWith(inputNumber.replace(/\D/g, ''), newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
       formattedNumber = this.formatNumber(
         (this.props.disableCountryCode ? '' : dialCode) + inputNumber.replace(/\D/g, ''),
         newSelectedCountry ? newSelectedCountry.format : undefined
