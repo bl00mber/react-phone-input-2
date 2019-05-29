@@ -651,7 +651,8 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleClickOutside = (e) => {
-    if (this.dropdownRef && !this.dropdownContainerRef.contains(e.target)) {
+    const target = (e.composed && e.composedPath && e.composedPath().shift()) || e.target;
+    if (this.dropdownRef && !this.dropdownContainerRef.contains(target)) {
       this.state.showDropdown && this.setState({ showDropdown: false });
     }
   }
