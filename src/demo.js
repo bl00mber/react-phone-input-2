@@ -36,22 +36,10 @@ class Demo extends React.Component {
             defaultCountry='gb'
             onlyCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
           />
-          <p>Only countries (Sorted As Provided)</p>
-          <ReactPhoneInput
-            defaultCountry='gb'
-            onlyCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
-            onlyCountriesSort="AsProvided"
-          />
           <p>Preferred countries (Sorted Alphabetically - Default)</p>
           <ReactPhoneInput
             defaultCountry='it'
             preferredCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
-          />
-          <p>Preferred countries (Sorted As Provided)</p>
-          <ReactPhoneInput
-            defaultCountry='it'
-            preferredCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
-            preferredCountriesSort="AsProvided"
           />
         </div>
 
@@ -159,6 +147,23 @@ class Demo extends React.Component {
             if (this.state.defaultCountry == 'br') {this.setState({defaultCountry: 'it'})}
             else {this.setState({defaultCountry: 'br'})}
           }}>Change default country</button>
+        </div>
+
+        <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
+          <p>v2.10 - Added support to respect order of only/preferred countries lists.</p>
+          <p>Only countries (Sorted As Provided)</p>
+          <ReactPhoneInput
+            defaultCountry='gb'
+            onlyCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
+            onlyCountriesSort="AsProvided"
+          />
+          <p>Preferred countries (Sorted As Provided)</p>
+          <ReactPhoneInput
+            defaultCountry='it'
+            preferredCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
+            preferredCountriesSort="AsProvided"
+          />
+
         </div>
       </div>
     )
