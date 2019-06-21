@@ -51,10 +51,22 @@ function handleOnChange(value) {
     <td> ['cu','cw','kz'] </td>
   </tr>
   <tr>
+    <td> onlyCountriesSort </td>
+    <td> CountriesSortOption: 'Alphabetical' (default) | 'AsProvided' </td>
+    <td> how to sort the provided list of countries </td>
+    <td> 'AsProvided' </td>
+  </tr>
+  <tr>
     <td> preferredCountries </td>
     <td> array </td>
     <td> country codes to be at the top </td>
     <td> ['cu','cw','kz'] </td>
+  </tr>
+  <tr>
+    <td> preferredCountriesSort </td>
+    <td> CountriesSortOption: 'Alphabetical' (default) | 'AsProvided' </td>
+    <td> how to sort the provided list of countries </td>
+    <td> 'AsProvided' </td>
   </tr>
 
   <tr>
