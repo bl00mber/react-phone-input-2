@@ -52,9 +52,9 @@ function handleOnChange(value) {
   </tr>
   <tr>
     <td> onlyCountriesSort </td>
-    <td> CountriesSortOption: 'Alphabetical' (default) | 'AsProvided' </td>
+    <td> (string) 'Alphabetical' | 'AsProvided' </td>
     <td> how to sort the provided list of countries </td>
-    <td> 'AsProvided' </td>
+    <td> 'AsProvided' (Default: 'Alphabetical') </td>
   </tr>
   <tr>
     <td> preferredCountries </td>
@@ -64,9 +64,9 @@ function handleOnChange(value) {
   </tr>
   <tr>
     <td> preferredCountriesSort </td>
-    <td> CountriesSortOption: 'Alphabetical' (default) | 'AsProvided' </td>
+    <td> (string) 'Alphabetical' | 'AsProvided' </td>
     <td> how to sort the provided list of countries </td>
-    <td> 'AsProvided' </td>
+    <td> 'AsProvided' (Default: 'Alphabetical') </td>
   </tr>
 
   <tr>
