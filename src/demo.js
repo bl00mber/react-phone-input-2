@@ -34,12 +34,12 @@ class Demo extends React.Component {
           <p>Only countries (Sorted Alphabetically - Default)</p>
           <ReactPhoneInput
             defaultCountry='gb'
-            onlyCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
+            onlyCountries={['gb', 'fr', 'de', 'it', 'nl']}
           />
           <p>Preferred countries (Sorted Alphabetically - Default)</p>
           <ReactPhoneInput
-            defaultCountry='it'
-            preferredCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
+            defaultCountry='in'
+            preferredCountries={['us', 'gb', 'in', 'cn', 'de']}
           />
         </div>
 
@@ -154,13 +154,13 @@ class Demo extends React.Component {
           <p>Only countries (Sorted As Provided)</p>
           <ReactPhoneInput
             defaultCountry='gb'
-            onlyCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
+            onlyCountries={['gb', 'fr', 'de', 'it', 'nl']}
             onlyCountriesSort="AsProvided"
           />
           <p>Preferred countries (Sorted As Provided)</p>
           <ReactPhoneInput
-            defaultCountry='it'
-            preferredCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
+            defaultCountry='in'
+            preferredCountries={['us', 'gb', 'in', 'cn', 'de']}
             preferredCountriesSort="AsProvided"
           />
 
