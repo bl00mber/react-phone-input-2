@@ -31,15 +31,27 @@ class Demo extends React.Component {
             defaultCountry='no'
             excludeCountries={['us', 'ca']}
           />
-          <p>Only countries</p>
+          <p>Only countries (Sorted Alphabetically - Default)</p>
           <ReactPhoneInput
             defaultCountry='gb'
-            onlyCountries={['gb', 'es']}
+            onlyCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
           />
-          <p>Preferred countries</p>
+          <p>Only countries (Sorted As Provided)</p>
+          <ReactPhoneInput
+            defaultCountry='gb'
+            onlyCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
+            onlyCountriesSort="AsProvided"
+          />
+          <p>Preferred countries (Sorted Alphabetically - Default)</p>
           <ReactPhoneInput
             defaultCountry='it'
-            preferredCountries={['it', 'se']}
+            preferredCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
+          />
+          <p>Preferred countries (Sorted As Provided)</p>
+          <ReactPhoneInput
+            defaultCountry='it'
+            preferredCountries={['us', 'gb', 'in', 'cn', 'de', 'fr', 'ca', 'au', 'it', 'br', 'nl']}
+            preferredCountriesSort="AsProvided"
           />
         </div>
 

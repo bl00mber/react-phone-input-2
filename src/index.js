@@ -8,11 +8,18 @@ import classNames from 'classnames';
 import countryData from './country_data.js';
 import './styles.less';
 
+export const CountriesSortOption = {
+  Alphabetical: 'Alphabetical',
+  AsProvided: 'AsProvided',
+}
+
 class ReactPhoneInput extends React.Component {
   static propTypes = {
     excludeCountries: PropTypes.arrayOf(PropTypes.string),
     onlyCountries: PropTypes.arrayOf(PropTypes.string),
+    onlyCountriesSort: PropTypes.oneOf(Object.keys(CountriesSortOption)),
     preferredCountries: PropTypes.arrayOf(PropTypes.string),
+    preferredCountriesSort: PropTypes.oneOf(Object.keys(CountriesSortOption)),
     defaultCountry: PropTypes.string,
 
     value: PropTypes.string,
@@ -61,7 +68,9 @@ class ReactPhoneInput extends React.Component {
   static defaultProps = {
     excludeCountries: [],
     onlyCountries: [],
+    onlyCountriesSort: CountriesSortOption.Alphabetical, // keep prior behavior as default
     preferredCountries: [],
+    preferredCountriesSort: CountriesSortOption.Alphabetical, // keep prior behavior as default
     defaultCountry: '',
 
     value: '',
@@ -118,13 +127,10 @@ class ReactPhoneInput extends React.Component {
     if (Object.keys(props.masks).length !== 0) filteredCountries = this.insertMasks(props.masks, filteredCountries);
 
     const onlyCountries = this.excludeCountries(
-      this.getOnlyCountries(props.onlyCountries, filteredCountries), props.excludeCountries);
+      this.getFilteredCountryList(props.onlyCountries, filteredCountries, props.onlyCountriesSort), props.excludeCountries);
 
-    const preferredCountries = filteredCountries.filter((country) => {
-      return props.preferredCountries.some((preferredCountry) => {
-        return preferredCountry === country.iso2;
-      });
-    });
+    const preferredCountries = this.getFilteredCountryList(props.preferredCountries, filteredCountries, props.preferredCountriesSort);
+
 
     const inputNumber = props.value.replace(/[^0-9\.]+/g, '') || '';
 
@@ -228,14 +234,30 @@ class ReactPhoneInput extends React.Component {
     return filteredCountries
   }
 
-  getOnlyCountries = (onlyCountriesArray, filteredCountries) => {
-    if (onlyCountriesArray.length === 0) return filteredCountries;
+  getFilteredCountryList = (countryCodes, sourceCountryList, sortOption) => {
+    if (countryCodes.length === 0) return sourceCountryList;
 
-    return filteredCountries.filter((country) => {
-      return onlyCountriesArray.some((element) => {
-        return element === country.iso2;
-      });
-    });
+    let filteredCountries = countryCodes.map(countryCode => {
+      const country = sourceCountryList.find(country => country.iso2 === countryCode);
+      if (!country) {
+        console.warn(`Supplied country code '${countryCode}' could not be found in list of supported countries.`);
+      }
+      return country;
+    }).filter(country => country); // remove any not found
+
+    if (filteredCountries.length > 1) {
+      switch (sortOption) {
+        case CountriesSortOption.AsProvided:
+          // leave sort as provided
+          break;
+        case CountriesSortOption.Alphabetical:
+        default:
+          filteredCountries = filteredCountries.sort((a, b) => this.getDropdownCountryName(a).localeCompare(this.getDropdownCountryName(b)));
+          break;
+      }
+    }
+
+    return filteredCountries;
   }
 
   excludeCountries = (selectedCountries, excludedCountries) => {

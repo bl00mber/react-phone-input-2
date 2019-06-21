@@ -2,3 +2,5 @@
 node_modules
 package-lock.json
 animation.gif
+
+settings.json
