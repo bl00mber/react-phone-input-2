@@ -126,10 +126,16 @@ class ReactPhoneInput extends React.Component {
     if (props.regions) filteredCountries = this.filterRegions(props.regions, filteredCountries);
     if (Object.keys(props.masks).length !== 0) filteredCountries = this.insertMasks(props.masks, filteredCountries);
 
+    // onlyCountries is used as the main source of countries for the drop down
+    // so it should either contain:
+    //   all countries, if props.onlyCountries is specified
+    //   only all specified countries, if props.onlyCountries is specified
+    // in both cases, it removes props.excludeCountries
     const onlyCountries = this.excludeCountries(
       this.getFilteredCountryList(props.onlyCountries, filteredCountries, props.onlyCountriesSort), props.excludeCountries);
 
-    const preferredCountries = this.getFilteredCountryList(props.preferredCountries, filteredCountries, props.preferredCountriesSort);
+    // preferredCountries should only contain countries if props.preferredCountries is specified; it is prepended to onlyCountries in the list with a separator
+    const preferredCountries = props.preferredCountries.length === 0 ? [] : this.getFilteredCountryList(props.preferredCountries, filteredCountries, props.preferredCountriesSort);
 
 
     const inputNumber = props.value.replace(/[^0-9\.]+/g, '') || '';
