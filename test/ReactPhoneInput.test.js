@@ -148,4 +148,20 @@ describe('<ReactPhoneInput /> other props', () => {
     expect(phoneInput.querySelector('.country-list').children.length).toBe(2) // search field & 1 search result
     expect(phoneInput.querySelector('.country-list').children[1].querySelector('.country-name').textContent).toBe('United Kingdom')
   })
+
+  test('should rerender without crashing', () => {
+    const { container: phoneInput, rerender } = render(
+      <ReactPhoneInput
+        value={undefined}
+      />)
+
+    // re-render the same component with new props
+    rerender(
+      <ReactPhoneInput
+        value="012312332"
+      />)
+
+    expect(phoneInput.querySelector('.selected-flag').children.length).toBe(1)
+    expect(phoneInput.querySelector('.selected-flag').children[0].className).toBe('flag undefined')
+  })
 })
