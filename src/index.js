@@ -265,11 +265,21 @@ class ReactPhoneInput extends React.Component {
 
     const bestGuess = onlyCountries.reduce((selectedCountry, country) => {
       if (inputNumber.startsWith(country.dialCode)) {
-        if (country.dialCode.length > selectedCountry.dialCode.length) {
-          return country;
-        }
-        if (country.dialCode.length === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
-          return country;
+
+        if (this.props.disableAreaCodes) {
+          if (!country.hasAreaCodes && country.dialCode.length > selectedCountry.dialCode.length) {
+            return country;
+          }
+          if (!country.hasAreaCodes && country.dialCode.length === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
+            return country;
+          }
+        } else {
+          if (country.dialCode.length > selectedCountry.dialCode.length) {
+            return country;
+          }
+          if (country.dialCode.length === selectedCountry.dialCode.length && country.priority < selectedCountry.priority) {
+            return country;
+          }
         }
       }
       return selectedCountry;
