@@ -791,7 +791,7 @@ class ReactPhoneInput extends React.Component {
       'flag-dropdown': true,
       'open-dropdown': showDropdown
     });
-    const inputFlagClasses = `flag ${selectedCountry.iso2}`;
+    const inputFlagClasses = `flag ${selectedCountry && selectedCountry.iso2}`;
 
     return (
       <div
