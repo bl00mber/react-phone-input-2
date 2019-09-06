@@ -1,4 +1,7 @@
-# React-Phone-Input-2
+# React-Phone-Input-Intl
+
+This repo is a clone of the below React-Phone-Input-2 (2.9.3) The below repo however adds local country codes to the list. This package takes those out and only includes the International Dialing code.
+
 Highly customizable phone input component with auto formatting.
 
 [![npm version](https://img.shields.io/npm/v/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2)
@@ -9,16 +12,21 @@ Highly customizable phone input component with auto formatting.
 ![alt tag](https://media.giphy.com/media/xiORAWnqoTJDsH0UOI/giphy.gif)
 
 ## Installation
+
 ```shell-script
 npm install react-phone-input-2 --save
 ```
 
 ## Usage
-```jsx
-import ReactPhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/dist/style.css'
 
-<ReactPhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange}/>
+```jsx
+import ReactPhoneInput from "react-phone-input-2"
+import "react-phone-input-2/dist/style.css"
+;<ReactPhoneInput
+  defaultCountry={"us"}
+  value={this.state.phone}
+  onChange={handleOnChange}
+/>
 ```
 
 Your handler for the `onChange` event should expect a string as
@@ -31,6 +39,7 @@ function handleOnChange(value) {
 ```
 
 ## Options
+
 <table>
   <tr>
     <th> Name </th>
@@ -187,7 +196,7 @@ function handleOnChange(value) {
 ```jsx
 <ReactPhoneInput
   inputExtraProps={{
-    name: 'phone',
+    name: "phone",
     required: true,
     autoFocus: true
   }}
@@ -195,6 +204,7 @@ function handleOnChange(value) {
 ```
 
 ### Regions
+
 <table>
   <tr>
     <th> Name </th>
@@ -224,22 +234,19 @@ function handleOnChange(value) {
 </table>
 
 Regions selected: {'europe'}
+
 ```jsx
-<ReactPhoneInput
-  defaultCountry='it'
-  regions={'europe'}
-/>
+<ReactPhoneInput defaultCountry="it" regions={"europe"} />
 ```
 
 Regions selected: {['north-america', 'carribean']}
+
 ```jsx
-<ReactPhoneInput
-  defaultCountry='ca'
-  regions={['north-america', 'carribean']}
-/>
+<ReactPhoneInput defaultCountry="ca" regions={["north-america", "carribean"]} />
 ```
 
 ### Localization
+
 <table>
   <tr>
     <th> Name </th>
@@ -264,6 +271,7 @@ Regions selected: {['north-america', 'carribean']}
 ```
 
 ### Custom masks
+
 <table>
   <tr>
     <th> Name </th>
@@ -277,12 +285,13 @@ Regions selected: {['north-america', 'carribean']}
 
 ```jsx
 <ReactPhoneInput
-  onlyCountries={['fr', 'at']}
-  masks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....'}}
+  onlyCountries={["fr", "at"]}
+  masks={{ fr: "+.. (...) ..-..-..", at: "+.. (....) ...-...." }}
 />
 ```
 
 ### Supported events
+
 <table>
   <tr>
     <td> onChange </td>
@@ -314,16 +323,21 @@ Country data object not returns from onKeyDown event
 </table>
 
 ### Phone without dialCode
+
 ```jsx
 function handleOnChange(value, data) {
-  this.setState({ rawPhone: value.replace(/[^0-9]+/g,'').slice(data.dialCode.length) })
+  this.setState({
+    rawPhone: value.replace(/[^0-9]+/g, "").slice(data.dialCode.length)
+  })
 }
 ```
 
 ## Contributing
+
 Code style changes not allowed
 
 ## License
+
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bl00mber/react-phone-input-2/blob/master/LICENSE)
 
 Based on [react-phone-input](https://github.com/razagill/react-phone-input)

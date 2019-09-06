@@ -18,6 +18,12 @@
 
 const rawAllCountries = [
   [
+    'United States',
+    ['america', 'north-america'],
+    'us',
+    '1'
+  ],
+  [
     'Afghanistan',
     ['asia'],
     'af',
@@ -36,12 +42,6 @@ const rawAllCountries = [
     '213'
   ],
   [
-    'American Samoa',
-    ['oceania'],
-    'as',
-    '1684'
-  ],
-  [
     'Andorra',
     ['europe'],
     'ad',
@@ -52,18 +52,6 @@ const rawAllCountries = [
     ['africa'],
     'ao',
     '244'
-  ],
-  [
-    'Anguilla',
-    ['america', 'carribean'],
-    'ai',
-    '1264'
-  ],
-  [
-    'Antigua and Barbuda',
-    ['america', 'carribean'],
-    'ag',
-    '1268'
   ],
   [
     'Argentina',
@@ -104,12 +92,6 @@ const rawAllCountries = [
     '994'
   ],
   [
-    'Bahamas',
-    ['america', 'carribean'],
-    'bs',
-    '1242'
-  ],
-  [
     'Bahrain',
     ['middle-east'],
     'bh',
@@ -120,12 +102,6 @@ const rawAllCountries = [
     ['asia'],
     'bd',
     '880'
-  ],
-  [
-    'Barbados',
-    ['america', 'carribean'],
-    'bb',
-    '1246'
   ],
   [
     'Belarus',
@@ -152,12 +128,6 @@ const rawAllCountries = [
     ['africa'],
     'bj',
     '229'
-  ],
-  [
-    'Bermuda',
-    ['america', 'north-america'],
-    'bm',
-    '1441'
   ],
   [
     'Bhutan',
@@ -195,12 +165,6 @@ const rawAllCountries = [
     ['asia'],
     'io',
     '246'
-  ],
-  [
-    'British Virgin Islands',
-    ['america', 'carribean'],
-    'vg',
-    '1284'
   ],
   [
     'Brunei',
@@ -257,12 +221,6 @@ const rawAllCountries = [
     '599',
     '',
     1
-  ],
-  [
-    'Cayman Islands',
-    ['america', 'carribean'],
-    'ky',
-    '1345'
   ],
   [
     'Central African Republic',
@@ -377,18 +335,6 @@ const rawAllCountries = [
     ['africa'],
     'dj',
     '253'
-  ],
-  [
-    'Dominica',
-    ['america', 'carribean'],
-    'dm',
-    '1767'
-  ],
-  [
-    'Dominican Republic',
-    ['america', 'carribean'],
-    'do',
-    '1'
   ],
   [
     'Ecuador',
@@ -526,12 +472,6 @@ const rawAllCountries = [
     ['america'],
     'gl',
     '299'
-  ],
-  [
-    'Grenada',
-    ['america', 'carribean'],
-    'gd',
-    '1473'
   ],
   [
     'Guadeloupe',
@@ -866,12 +806,6 @@ const rawAllCountries = [
     '382'
   ],
   [
-    'Montserrat',
-    ['america', 'carribean'],
-    'ms',
-    '1664'
-  ],
-  [
     'Morocco',
     ['africa', 'north-africa'],
     'ma',
@@ -1046,14 +980,6 @@ const rawAllCountries = [
     '351'
   ],
   [
-    'Puerto Rico',
-    ['america', 'carribean'],
-    'pr',
-    '1',
-    '',
-    3, ['787', '939']
-  ],
-  [
     'Qatar',
     ['middle-east'],
     'qa',
@@ -1100,18 +1026,6 @@ const rawAllCountries = [
     '290'
   ],
   [
-    'Saint Kitts and Nevis',
-    ['america', 'carribean'],
-    'kn',
-    '1869'
-  ],
-  [
-    'Saint Lucia',
-    ['america', 'carribean'],
-    'lc',
-    '1758'
-  ],
-  [
     'Saint Martin',
     ['america', 'carribean'],
     'mf',
@@ -1124,12 +1038,6 @@ const rawAllCountries = [
     ['america', 'north-america'],
     'pm',
     '508'
-  ],
-  [
-    'Saint Vincent and the Grenadines',
-    ['america', 'carribean'],
-    'vc',
-    '1784'
   ],
   [
     'Samoa',
@@ -1360,22 +1268,10 @@ const rawAllCountries = [
     '993'
   ],
   [
-    'Turks and Caicos Islands',
-    ['america', 'carribean'],
-    'tc',
-    '1649'
-  ],
-  [
     'Tuvalu',
     ['asia'],
     'tv',
     '688'
-  ],
-  [
-    'U.S. Virgin Islands',
-    ['america', 'carribean'],
-    'vi',
-    '1340'
   ],
   [
     'Uganda',
@@ -1402,12 +1298,6 @@ const rawAllCountries = [
     'gb',
     '44',
     '+.. .... ......'
-  ],
-  [
-    'United States',
-    ['america', 'north-america'],
-    'us',
-    '1'
   ],
   [
     'Uruguay',

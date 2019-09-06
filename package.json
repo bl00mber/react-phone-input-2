@@ -1,7 +1,7 @@
 {
-  "name": "react-phone-input-2",
-  "version": "2.9.4",
-  "description": "A react component to format phone numbers",
+  "name": "react-phone-input-intl",
+  "version": "3.0.45",
+  "description": "A react component to format International phone numbers",
   "main": "dist/lib.js",
   "scripts": {
     "test": "jest",
@@ -30,14 +30,8 @@
     "dist/lib.js",
     "dist/style.css"
   ],
-  "author": "Nikita Lebedev <bloomber111@gmail.com> (http://github.com/bl00mber)",
-  "contributors": [
-    "Raza Gill <raza.gill@outlook.com> (http://github.com/razagill)"
-  ],
+  "author": "Kyle Czajkowski <skiroyjenkins@gmail.com@gmail.com> (http://github.com/kyle-ski)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bl00mber/react-phone-input-2/issues"
-  },
   "homepage": "https://github.com/bl00mber/react-phone-input-2",
   "jest": {
     "moduleNameMapper": {
