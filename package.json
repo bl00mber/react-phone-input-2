@@ -76,6 +76,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.memoize": "^4.1.2",
     "lodash.reduce": "^4.6.0",
+    "lodash.startswith": "^4.2.1",
     "prop-types": "^15.7.2"
   }
 }
