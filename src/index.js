@@ -369,6 +369,10 @@ class ReactPhoneInput extends React.Component {
 
   formatNumber = (text, patternArg) => {
     const { disableCountryCode, enableLongNumbers, autoFormat } = this.props;
+
+    // We don't want to just add a '+' everywhere. When the text is empty and already starts with '+' we won't add it.
+    // We won't even add '+' when the selectedCountry is US
+
     if (text !== '' && !text.startsWith('+') && this.state.selectedCountry && this.state.selectedCountry.dialCode !== '1') {
       return '+' + text;
     }
@@ -603,7 +607,8 @@ class ReactPhoneInput extends React.Component {
   }
   
   handleInputFocus = (e) => {
-    // if the input is blank, insert dial code of the selected country
+    // if the input is blank, insert dial code of the selected country\
+    // We don't need this method as of now as the formatting is done before even focus.
     // if (this.numberInputRef) {
     //   if (this.numberInputRef.value === '+' && this.state.selectedCountry && !this.props.disableCountryCode) {
     //     this.setState({
