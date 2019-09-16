@@ -580,18 +580,18 @@ class ReactPhoneInput extends React.Component {
   
   handleInputFocus = (e) => {
     // if the input is blank, insert dial code of the selected country
-    if (this.numberInputRef) {
-      if (this.numberInputRef.value === '+' && this.state.selectedCountry && !this.props.disableCountryCode) {
-        this.setState({
-          formattedNumber: '+' + this.state.selectedCountry.dialCode
-        }, () => setTimeout(this.cursorToEnd, 10));
-      }
-    }
+    // if (this.numberInputRef) {
+    //   if (this.numberInputRef.value === '+' && this.state.selectedCountry && !this.props.disableCountryCode) {
+    //     this.setState({
+    //       formattedNumber: '+' + this.state.selectedCountry.dialCode
+    //     }, () => setTimeout(this.cursorToEnd, 10));
+    //   }
+    // }
 
-    this.setState({ placeholder: '' });
+    // this.setState({ placeholder: '' });
 
-    this.props.onFocus && this.props.onFocus(e, this.getCountryData());
-    setTimeout(this.cursorToEnd, 10);
+    // this.props.onFocus && this.props.onFocus(e, this.getCountryData());
+    // setTimeout(this.cursorToEnd, 10);
   }
 
   handleInputBlur = (e) => {
