@@ -180,6 +180,14 @@ class ReactPhoneInput extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.props.value !== this.state.formattedNumber) {
+      this.setState({
+        formattedNumber: this.props.value,
+      });
+    }
+  }
+
   componentWillUnmount() {
     if (document.removeEventListener) {
       document.removeEventListener('mousedown', this.handleClickOutside);
