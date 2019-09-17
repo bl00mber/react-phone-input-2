@@ -165,7 +165,7 @@ class Demo extends React.Component {
         <div>
           <br/><br/>
           <p>Press enter to render</p>
-          <textarea name="" id="" cols="55" rows="3"
+          <textarea name="" id="" cols="55" rows="3" spellCheck="false"
             style={{borderRadius: '5px', fontFamily: 'Roboto', fontSize: '14px', marginBottom: '15px'}}
             onKeyDown={this.renderPlayground} defaultValue={JSON.stringify(this.state.playgroundProps)} />
 

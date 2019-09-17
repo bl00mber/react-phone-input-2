@@ -174,14 +174,12 @@ class PhoneInput extends React.Component {
   componentDidMount() {
     if (document.addEventListener) {
       document.addEventListener('mousedown', this.handleClickOutside);
-      document.addEventListener('keydown', this.handleKeydown);
     }
   }
 
   componentWillUnmount() {
     if (document.removeEventListener) {
       document.removeEventListener('mousedown', this.handleClickOutside);
-      document.removeEventListener('keydown', this.handleKeydown);
     }
   }
 
@@ -537,7 +535,6 @@ class PhoneInput extends React.Component {
 
   handleFlagItemClick = (country) => {
     const currentSelectedCountry = this.state.selectedCountry;
-    console.log('COUNTRY', country)
     const nextSelectedCountry = this.state.onlyCountries.find(o => o == country);
     if (!nextSelectedCountry) return;
 
@@ -602,7 +599,11 @@ class PhoneInput extends React.Component {
     const { keys } = this.props;
     const { target: { id } } = e;
 
-    if (id === 'phone-form-control' && e.which === keys.ENTER) e.target.blur();
+    if (id === 'flag-dropdown' && e.which === keys.ENTER && !this.state.showDropdown)
+      return this.handleFlagDropdownClick();
+
+    if (id === 'phone-form-control' && (e.which === keys.ENTER || e.which === keys.ESC))
+      return e.target.blur();
 
     if (!this.state.showDropdown || this.props.disabled) return;
     if (id === 'search-box') {
@@ -821,7 +822,8 @@ class PhoneInput extends React.Component {
     return (
       <div
         className={this.props.containerClass}
-        style={this.props.containerStyle}>
+        style={this.props.containerStyle}
+        onKeyDown={this.handleKeydown}>
         <input
           className={inputClasses}
           id='phone-form-control'
