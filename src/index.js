@@ -340,7 +340,7 @@ class ReactPhoneInput extends React.Component {
     let newScrollTop = elementTop - containerTop + container.scrollTop;
     const middleOffset = (containerHeight / 2) - (elementHeight / 2);
 
-    if (elementTop < containerTop) {
+    if (this.props.enableSearchField ? elementTop < containerTop + 32 : elementTop < containerTop) {
       // scroll up
       if (middle) {
         newScrollTop -= middleOffset;
@@ -537,7 +537,9 @@ class ReactPhoneInput extends React.Component {
 
   handleFlagItemClick = (country) => {
     const currentSelectedCountry = this.state.selectedCountry;
+    console.log('COUNTRY', country)
     const nextSelectedCountry = this.state.onlyCountries.find(o => o == country);
+    if (!nextSelectedCountry) return;
 
     const unformattedNumber = this.state.formattedNumber.replace(' ', '').replace('(', '').replace(')', '').replace('-', '');
     const newNumber = unformattedNumber.length > 1 ? unformattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode) : nextSelectedCountry.dialCode;
@@ -583,6 +585,7 @@ class ReactPhoneInput extends React.Component {
       return highlightCountryIndex - direction;
     }
 
+    if (this.props.enableSearchField && highlightCountryIndex > this.getSearchFilteredCountries().length) return 0; // select first country
     return highlightCountryIndex;
   }
 
@@ -597,9 +600,20 @@ class ReactPhoneInput extends React.Component {
 
   handleKeydown = (e) => {
     const { keys } = this.props;
-    if (!this.state.showDropdown || this.props.disabled) return;
     const { target: { id } } = e;
-    if (id === 'search-box') return; // don't process events coming from the search field
+
+    if (id === 'phone-form-control' && e.which === keys.ENTER) e.target.blur();
+
+    if (!this.state.showDropdown || this.props.disabled) return;
+    if (id === 'search-box') {
+      if (e.which !== keys.UP && e.which !== keys.DOWN && e.which !== keys.ENTER) {
+        if (e.which === keys.ESC && e.target.value === '') {
+         // do nothing // if search field is empty, pass event (close dropdown)
+       } else {
+         return; // don't process other events coming from the search field
+       }
+      }
+    }
 
     // ie hack
     if (e.preventDefault) {
@@ -626,7 +640,11 @@ class ReactPhoneInput extends React.Component {
         moveHighlight(-1);
         break;
       case keys.ENTER:
-        this.handleFlagItemClick(this.state.onlyCountries[this.state.highlightCountryIndex], e);
+        if (this.props.enableSearchField) {
+          this.handleFlagItemClick(this.getSearchFilteredCountries()[this.state.highlightCountryIndex], e);
+        } else {
+          this.handleFlagItemClick(this.state.onlyCountries[this.state.highlightCountryIndex], e);
+        }
         break;
       case keys.ESC:
         this.setState({
@@ -652,8 +670,7 @@ class ReactPhoneInput extends React.Component {
   }
 
   handleClickOutside = (e) => {
-    const target = (e.composed && e.composedPath && e.composedPath().shift()) || e.target;
-    if (this.dropdownRef && !this.dropdownContainerRef.contains(target)) {
+    if (this.dropdownRef && !this.dropdownContainerRef.contains(e.target)) {
       this.state.showDropdown && this.setState({ showDropdown: false });
     }
   }
@@ -673,23 +690,28 @@ class ReactPhoneInput extends React.Component {
     return country.name;
   }
 
-  getCountryDropdownList = () => {
-    const { preferredCountries, onlyCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
-    const { enableSearchField, disableSearchIcon, searchClass, searchStyle, searchPlaceholder } = this.props;
-
-    const countryIsPreferred = this.state.preferredCountries.includes(this.state.selectedCountry);
+  getSearchFilteredCountries = () => {
+    const { preferredCountries, onlyCountries, searchValue } = this.state
+    const { enableSearchField } = this.props
     const allCountries = preferredCountries.concat(onlyCountries);
-
     const sanitizedSearchValue = searchValue.trim().toLowerCase();
-    let filteredCountries = (enableSearchField && sanitizedSearchValue)
+    let searchedCountries = (enableSearchField && sanitizedSearchValue)
       // using [...new Set()] here to get rid of duplicates
       ? [...new Set(allCountries.filter(({ name, iso2, dialCode }) =>
         [`${name}`, `${iso2}`, `+${dialCode}`].some(field => field.toLowerCase().includes(sanitizedSearchValue))))]
       : allCountries;
+    if (this.props.disableAreaCodes) searchedCountries = this.deleteAreaCodes(searchedCountries);
+    return searchedCountries
+  }
 
-    if (this.props.disableAreaCodes) filteredCountries = this.deleteAreaCodes(filteredCountries);
+  getCountryDropdownList = () => {
+    const { preferredCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
+    const { enableSearchField, disableSearchIcon, searchClass, searchStyle, searchPlaceholder } = this.props;
 
-    let countryDropdownList = filteredCountries.map((country, index) => {
+    const countryIsPreferred = this.state.preferredCountries.includes(this.state.selectedCountry);
+    const searchedCountries = this.getSearchFilteredCountries()
+
+    let countryDropdownList = searchedCountries.map((country, index) => {
       const itemClasses = classNames({
         country: true,
         preferred: country.iso2 === 'us' || country.iso2 === 'gb',
@@ -706,6 +728,7 @@ class ReactPhoneInput extends React.Component {
           data-flag-key={`flag_no_${index}`}
           className={itemClasses}
           data-dial-code='1'
+          tabIndex='0'
           data-country-code={country.iso2}
           onClick={() => this.handleFlagItemClick(country)}
         >
@@ -801,6 +824,7 @@ class ReactPhoneInput extends React.Component {
         style={this.props.containerStyle}>
         <input
           className={inputClasses}
+          id='phone-form-control'
           style={this.props.inputStyle}
           onChange={this.handleInput}
           onClick={this.handleInputClick}
@@ -817,9 +841,11 @@ class ReactPhoneInput extends React.Component {
 
         <div
           className={flagViewClasses}
+          id='flag-dropdown'
           style={this.props.buttonStyle}
-          onKeyDown={this.handleKeydown}
           ref={el => this.dropdownContainerRef = el}
+          tabIndex='0'
+          role='button'
         >
           <div
             onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
