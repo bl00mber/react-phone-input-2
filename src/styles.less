@@ -741,6 +741,7 @@
     }
   }
   .flag-dropdown {
+    outline: none;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -756,7 +757,7 @@
         border-radius: 3px 0 0 0;
       }
     }
-    &:hover {
+    &:hover, &:focus {
       cursor: pointer;
       .selected-flag {
         background-color: #fff;

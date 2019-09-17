@@ -15,10 +15,10 @@ npm install react-phone-input-2 --save
 
 ## Usage
 ```jsx
-import ReactPhoneInput from 'react-phone-input-2'
+import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/dist/style.css'
 
-<ReactPhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange}/>
+<PhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange}/>
 ```
 
 Your handler for the `onChange` event should expect a string as
@@ -185,7 +185,7 @@ function handleOnChange(value) {
 </table>
 
 ```jsx
-<ReactPhoneInput
+<PhoneInput
   inputExtraProps={{
     name: 'phone',
     required: true,
@@ -225,7 +225,7 @@ function handleOnChange(value) {
 
 Regions selected: {'europe'}
 ```jsx
-<ReactPhoneInput
+<PhoneInput
   defaultCountry='it'
   regions={'europe'}
 />
@@ -233,7 +233,7 @@ Regions selected: {'europe'}
 
 Regions selected: {['north-america', 'carribean']}
 ```jsx
-<ReactPhoneInput
+<PhoneInput
   defaultCountry='ca'
   regions={['north-america', 'carribean']}
 />
@@ -252,12 +252,12 @@ Regions selected: {['north-america', 'carribean']}
 </table>
 
 ```jsx
-<ReactPhoneInput
+<PhoneInput
   onlyCountries={['de', 'es']}
   localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
 />
 
-<ReactPhoneInput
+<PhoneInput
   onlyCountries={['de', 'es']}
   localization={{'de': 'Deutschland', 'es': 'España'}}
 />
@@ -276,7 +276,7 @@ Regions selected: {['north-america', 'carribean']}
 </table>
 
 ```jsx
-<ReactPhoneInput
+<PhoneInput
   onlyCountries={['fr', 'at']}
   masks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....'}}
 />

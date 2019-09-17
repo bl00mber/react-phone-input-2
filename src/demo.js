@@ -1,14 +1,26 @@
 import React from 'react';
 import { render } from 'react-dom';
-import ReactPhoneInput from './index';
+import PhoneInput from './index';
 
 
 class Demo extends React.Component {
-  state = { defaultCountry: 'br', value: '12345' }
+  state = { defaultCountry: 'br', value: '12345',
+    playgroundProps: {defaultCountry: 'us', disableAreaCodes: true} }
+
+  renderPlayground = (e) => {
+    if (e.which === 13) {
+      let playgroundProps;
+      try { playgroundProps = JSON.parse(e.target.value) }
+      catch(error) { console.error(error); e.preventDefault(); e.stopPropagation(); }
+      this.setState({ playgroundProps })
+      e.preventDefault()
+      e.stopPropagation()
+    }
+  }
 
   render() {
     return (
-      <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px' }}>
+      <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px', padding: '10px 25px' }}>
         <style dangerouslySetInnerHTML={{__html: `
           input[type="tel"].custom-phone-input {
             font-size: 14px;
@@ -27,17 +39,17 @@ class Demo extends React.Component {
         <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
           <p>v1.2.1</p>
           <p>Exclude countries (usa, canada)</p>
-          <ReactPhoneInput
+          <PhoneInput
             defaultCountry='no'
             excludeCountries={['us', 'ca']}
           />
           <p>Only countries</p>
-          <ReactPhoneInput
+          <PhoneInput
             defaultCountry='gb'
             onlyCountries={['gb', 'es']}
           />
           <p>Preferred countries</p>
-          <ReactPhoneInput
+          <PhoneInput
             defaultCountry='it'
             preferredCountries={['it', 'se']}
           />
@@ -46,18 +58,18 @@ class Demo extends React.Component {
         <div style={{ display: 'inline-block', marginLeft: '40px' }}>
           <p>v2</p>
           <p>Auto country detect by value</p>
-          <ReactPhoneInput
+          <PhoneInput
             value='+3802343252'
           />
           <p>Disabled area codes with disableAreaCodes</p>
-          <ReactPhoneInput
+          <PhoneInput
             defaultCountry='us'
             disableAreaCodes
           />
           <p>Disabled flag by default</p>
           <p>Customizable placeholder</p>
           <p>Customizable styles</p>
-          <ReactPhoneInput
+          <PhoneInput
             disableAreaCodes
             placeholder='Type your phone here'
             inputStyle={{
@@ -71,7 +83,7 @@ class Demo extends React.Component {
             dropdownStyle={{ width: '300px' }}
           />
           <p>Customizable classes</p>
-          <ReactPhoneInput
+          <PhoneInput
             containerClass={'react-tel-input'}
             inputClass={'custom-phone-input'}
             buttonClass={'custom-phone-button'}
@@ -81,17 +93,17 @@ class Demo extends React.Component {
 
         <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
           <p>Custom region selected: {`{'europe'}`}</p>
-          <ReactPhoneInput
+          <PhoneInput
             defaultCountry='it'
             regions={'europe'}
           />
           <p>Custom regions selected: {`{['north-america', 'carribean']}`}</p>
-          <ReactPhoneInput
+          <PhoneInput
             defaultCountry='ca'
             regions={['north-america', 'carribean']}
           />
           <p>Disabled dropdown and country code</p>
-          <ReactPhoneInput
+          <PhoneInput
             onlyCountries={['us']}
             defaultCountry='us'
             placeholder='(702) 123-4567'
@@ -102,7 +114,7 @@ class Demo extends React.Component {
           <p>Localization</p>
           <p>Non-editable country code</p>
           <p>Autofocus</p>
-          <ReactPhoneInput
+          <PhoneInput
             defaultCountry='de'
             onlyCountries={['de', 'es']}
             localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
@@ -116,30 +128,31 @@ class Demo extends React.Component {
         </div>
         <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
           <p>Search field</p>
-          <ReactPhoneInput
+          <PhoneInput
             defaultCountry='nl'
             enableSearchField
           />
-          <ReactPhoneInput
+          <PhoneInput
             defaultCountry='pl'
             containerStyle={{marginTop: '15px'}}
             searchClass='search-class'
             searchStyle={{margin: '0', width: '97%', height: '30px'}}
             enableSearchField
             disableSearchIcon
+            disableAreaCodes
           />
           <p>Custom masks</p>
-          <ReactPhoneInput
+          <PhoneInput
             defaultCountry='at'
             onlyCountries={['fr', 'at']}
             masks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....', 'zz': '+.. ... ...'}}
           />
           <p>State manipulations</p>
-          <ReactPhoneInput
+          <PhoneInput
             value={this.state.value}
             onChange={(value, country) => {console.log(value, country); this.setState({ value })}}
           />
-          <ReactPhoneInput
+          <PhoneInput
             containerStyle={{marginTop: '15px', marginBottom: '15px'}}
             defaultCountry={this.state.defaultCountry}
           />
@@ -147,6 +160,16 @@ class Demo extends React.Component {
             if (this.state.defaultCountry == 'br') {this.setState({defaultCountry: 'it'})}
             else {this.setState({defaultCountry: 'br'})}
           }}>Change default country</button>
+        </div>
+
+        <div>
+          <br/><br/>
+          <p>Press enter to render</p>
+          <textarea name="" id="" cols="55" rows="3" spellCheck="false"
+            style={{borderRadius: '5px', fontFamily: 'Roboto', fontSize: '14px', marginBottom: '15px'}}
+            onKeyDown={this.renderPlayground} defaultValue={JSON.stringify(this.state.playgroundProps)} />
+
+          <PhoneInput {...this.state.playgroundProps}/>
         </div>
       </div>
     )
