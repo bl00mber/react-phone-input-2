@@ -4,11 +4,23 @@ import ReactPhoneInput from './index';
 
 
 class Demo extends React.Component {
-  state = { defaultCountry: 'br', value: '12345' }
+  state = { defaultCountry: 'br', value: '12345',
+    playgroundProps: {defaultCountry: 'us', disableAreaCodes: true} }
+
+  renderPlayground = (e) => {
+    if (e.which === 13) {
+      let playgroundProps;
+      try { playgroundProps = JSON.parse(e.target.value) }
+      catch(error) { console.error(error); e.preventDefault(); e.stopPropagation(); }
+      this.setState({ playgroundProps })
+      e.preventDefault()
+      e.stopPropagation()
+    }
+  }
 
   render() {
     return (
-      <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px' }}>
+      <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px', padding: '10px 25px' }}>
         <style dangerouslySetInnerHTML={{__html: `
           input[type="tel"].custom-phone-input {
             font-size: 14px;
@@ -148,6 +160,16 @@ class Demo extends React.Component {
             if (this.state.defaultCountry == 'br') {this.setState({defaultCountry: 'it'})}
             else {this.setState({defaultCountry: 'br'})}
           }}>Change default country</button>
+        </div>
+
+        <div>
+          <br/><br/>
+          <p>Press enter to render</p>
+          <textarea name="" id="" cols="55" rows="3"
+            style={{borderRadius: '5px', fontFamily: 'Roboto', fontSize: '14px', marginBottom: '15px'}}
+            onKeyDown={this.renderPlayground} defaultValue={JSON.stringify(this.state.playgroundProps)} />
+
+          <ReactPhoneInput {...this.state.playgroundProps}/>
         </div>
       </div>
     )
