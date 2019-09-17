@@ -287,6 +287,25 @@ Regions selected: {['north-america', 'carribean']}
 />
 ```
 
+### Preserve countries order instead of alphabetical order
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Type </th>
+  </tr>
+  <tr>
+    <td> preserveOrder </td>
+    <td> array </td>
+  </tr>
+</table>
+
+```jsx
+<PhoneInput
+  onlyCountries={['fr', 'at']}
+  preserveOrder={['onlyCountries', 'preferredCountries']}
+/>
+```
+
 ### Supported events
 <table>
   <tr>

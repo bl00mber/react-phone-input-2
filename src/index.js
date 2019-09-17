@@ -51,6 +51,8 @@ class PhoneInput extends React.Component {
     localization: PropTypes.object,
     masks: PropTypes.object,
 
+    preserveOrder: PropTypes.arrayOf(PropTypes.string),
+
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -103,6 +105,8 @@ class PhoneInput extends React.Component {
     localization: {},
     masks: {},
 
+    preserveOrder: [],
+
     onEnterKeyPress: () => {},
 
     keys: {
@@ -119,13 +123,11 @@ class PhoneInput extends React.Component {
     if (Object.keys(props.masks).length !== 0) filteredCountries = this.insertMasks(props.masks, filteredCountries);
 
     const onlyCountries = this.excludeCountries(
-      this.getOnlyCountries(props.onlyCountries, filteredCountries), props.excludeCountries);
+          this.getFilteredCountryList(props.onlyCountries, filteredCountries, props.preserveOrder.includes('onlyCountries')),
+          props.excludeCountries);
 
-    const preferredCountries = filteredCountries.filter((country) => {
-      return props.preferredCountries.some((preferredCountry) => {
-        return preferredCountry === country.iso2;
-      });
-    });
+    const preferredCountries = props.preferredCountries.length === 0 ?
+      [] : this.getFilteredCountryList(props.preferredCountries, filteredCountries, props.preserveOrder.includes('preferredCountries'));
 
     const inputNumber = props.value.replace(/[^0-9\.]+/g, '') || '';
 
@@ -227,14 +229,27 @@ class PhoneInput extends React.Component {
     return filteredCountries
   }
 
-  getOnlyCountries = (onlyCountriesArray, filteredCountries) => {
-    if (onlyCountriesArray.length === 0) return filteredCountries;
+  getFilteredCountryList = (countryCodes, sourceCountryList, preserveOrder) => {
+    if (countryCodes.length === 0) return sourceCountryList;
 
-    return filteredCountries.filter((country) => {
-      return onlyCountriesArray.some((element) => {
-        return element === country.iso2;
+    if (preserveOrder) {
+      // filter with user-defined order
+      return countryCodes.map(countryCode => {
+        const country = sourceCountryList.find(country => country.iso2 === countryCode);
+        if (!country) {
+          console.warn(`Supplied country code '${countryCode}' could not be found in list of supported countries.`);
+        }
+        return country;
+      }).filter(country => country); // remove any not found
+    }
+    else {
+      // filter with alphabetical order
+      return sourceCountryList.filter((country) => {
+        return countryCodes.some((element) => {
+          return element === country.iso2;
+        });
       });
-    });
+    }
   }
 
   excludeCountries = (selectedCountries, excludedCountries) => {
