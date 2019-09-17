@@ -18,11 +18,13 @@ npm install react-phone-input-2 --save
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/dist/style.css'
 
+<PhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange} />
+```
+
+```jsx
 handleOnChange(value) {
   this.setState({ phone: value })
 }
-
-<PhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange} />
 ```
 
 ## Options
@@ -143,6 +145,7 @@ handleOnChange(value) {
   }}
 />
 ```
+
 ### Style
 <table>
   <tr>
@@ -198,6 +201,36 @@ handleOnChange(value) {
   </tr>
 </table>
 
+### Events
+<table>
+  <tr>
+    <td> onChange </td>
+    <td> onFocus </td>
+    <td> onBlur </td>
+    <td> onClick </td>
+    <td> onKeyDown </td>
+  </tr>
+</table>
+
+Country data object not returns from onKeyDown event
+
+<table>
+  <tr>
+    <th> Data </th>
+    <th> Type </th>
+    <th> Description </th>
+  </tr>
+  <tr>
+    <td> value/event </td>
+    <td> string/object </td>
+    <td> event or the phone number </td>
+  </tr>
+  <tr>
+    <td> country data </td>
+    <td> object </td>
+    <td> country object { name, dialCode, countryCode (iso2) } </td>
+  </tr>
+</table>
 
 ### Regions
 <table>
@@ -287,7 +320,7 @@ Regions selected: {['north-america', 'carribean']}
 />
 ```
 
-### Preserve countries order instead of alphabetical order
+### Preserve countries order
 <table>
   <tr>
     <th> Name </th>
@@ -306,34 +339,11 @@ Regions selected: {['north-america', 'carribean']}
 />
 ```
 
-### Supported events
+### Other props
 <table>
   <tr>
-    <td> onChange </td>
-    <td> onFocus </td>
-    <td> onBlur </td>
-    <td> onClick </td>
-    <td> onKeyDown </td>
-  </tr>
-</table>
-
-Country data object not returns from onKeyDown event
-
-<table>
-  <tr>
-    <th> Data </th>
-    <th> Type </th>
-    <th> Description </th>
-  </tr>
-  <tr>
-    <td> value/event </td>
-    <td> string/object </td>
-    <td> the event or the phone number </td>
-  </tr>
-  <tr>
-    <td> country data </td>
-    <td> object </td>
-    <td> the country object { name, dialCode, countryCode (iso2 format) } </td>
+    <td> renderStringAsFlag </td>
+    <td> string </td>
   </tr>
 </table>
 

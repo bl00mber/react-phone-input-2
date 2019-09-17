@@ -52,6 +52,7 @@ class PhoneInput extends React.Component {
     masks: PropTypes.object,
 
     preserveOrder: PropTypes.arrayOf(PropTypes.string),
+    renderStringAsFlag: PropTypes.string,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -106,6 +107,7 @@ class PhoneInput extends React.Component {
     masks: {},
 
     preserveOrder: [],
+    renderStringAsFlag: '',
 
     onEnterKeyPress: () => {},
 
@@ -822,7 +824,7 @@ class PhoneInput extends React.Component {
 
   render() {
     const { selectedCountry, showDropdown, formattedNumber } = this.state;
-    const disableDropdown = this.props.disableDropdown;
+    const { disableDropdown, renderStringAsFlag } = this.props;
 
     const arrowClasses = classNames({'arrow': true, 'up': showDropdown});
     const inputClasses = classNames({
@@ -868,6 +870,9 @@ class PhoneInput extends React.Component {
           tabIndex='0'
           role='button'
         >
+          {renderStringAsFlag ?
+          <div className='selected-flag'>{renderStringAsFlag}</div>
+          :
           <div
             onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
             className='selected-flag'
@@ -876,7 +881,7 @@ class PhoneInput extends React.Component {
             <div className={inputFlagClasses}>
               {!disableDropdown && <div className={arrowClasses}></div>}
             </div>
-          </div>
+          </div>}
 
           {showDropdown && this.getCountryDropdownList()}
         </div>
