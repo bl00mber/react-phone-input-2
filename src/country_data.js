@@ -1521,7 +1521,12 @@ const allCountries = [].concat(...rawAllCountries.map((country) => {
     countryItem.hasAreaCodes
   );
 
-  return (areaItems.length > 0) ? [countryItem, ...areaItems] : [countryItem];
+  if (areaItems.length > 0) {
+    countryItem.mainCode = true;
+    return [countryItem, ...areaItems];
+  } else {
+    return [countryItem];
+  }
 }));
 
 export default {

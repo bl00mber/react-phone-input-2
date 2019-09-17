@@ -483,7 +483,11 @@ class PhoneInput extends React.Component {
     let freezeSelection = this.state.freezeSelection;
 
     if(!this.props.countryCodeEditable) {
-        const updatedInput = '+' + newSelectedCountry.dialCode;
+        const mainCode = newSelectedCountry.hasAreaCodes ?
+          this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.mainCode).dialCode :
+          newSelectedCountry.dialCode;
+
+        const updatedInput = '+' + mainCode;
         if (e.target.value.length < updatedInput.length) {
             return;
         }
