@@ -18,16 +18,11 @@ npm install react-phone-input-2 --save
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/dist/style.css'
 
-<PhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange}/>
-```
-
-Your handler for the `onChange` event should expect a string as
-parameter, where the value is that of the entered phone number. For example:
-
-```jsx
-function handleOnChange(value) {
+handleOnChange(value) {
   this.setState({ phone: value })
 }
+
+<PhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange} />
 ```
 
 ## Options
@@ -80,6 +75,77 @@ function handleOnChange(value) {
   </tr>
 
   <tr>
+    <td> inputExtraProps </td>
+    <td> object </td>
+    <td colspan="2"> props to pass into the input </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th> Booleans </th>
+    <th> Default </th>
+    <th> Description </th>
+  </tr>
+  <tr>
+    <td> disableAreaCodes </td>
+    <td> false </td>
+    <td> disable local codes for all countries </td>
+  </tr>
+  <tr>
+    <td> autoFormat </td>
+    <td> true </td>
+    <td> on/off phone formatting </td>
+  </tr>
+  <tr>
+    <td> disabled </td>
+    <td> false </td>
+    <td> disable input and dropdown </td>
+  </tr>
+  <tr>
+    <td> disableDropdown </td>
+    <td> false </td>
+    <td> disable dropdown only </td>
+  </tr>
+  <tr>
+    <td> disableCountryCode </td>
+    <td> false </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td> enableLongNumbers </td>
+    <td> false </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td> countryCodeEditable </td>
+    <td> true </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td> enableSearchField </td>
+    <td> false </td>
+    <td> enable search in the dropdown </td>
+  </tr>
+  <tr>
+    <td> disableSearchIcon </td>
+    <td> false </td>
+    <td> hide icon for the search field </td>
+  </tr>
+</table>
+
+```jsx
+<PhoneInput
+  inputExtraProps={{
+    name: 'phone',
+    required: true,
+    autoFocus: true
+  }}
+/>
+```
+### Style
+<table>
+  <tr>
     <td> containerClass </td>
     <td> string </td>
     <td colspan="2"> class for container </td>
@@ -130,69 +196,8 @@ function handleOnChange(value) {
     <td> object </td>
     <td colspan="2"> styles for search field </td>
   </tr>
-
-  <tr>
-    <td> inputExtraProps </td>
-    <td> object </td>
-    <td colspan="2"> props to pass into the input </td>
-  </tr>
-
-  <tr>
-    <td> autoFormat </td>
-    <td> bool </td>
-    <td colspan="2"> on/off phone formatting, true by default </td>
-  </tr>
-  <tr>
-    <td> disableAreaCodes </td>
-    <td> bool </td>
-    <td colspan="2"> disable local codes for all countries </td>
-  </tr>
-  <tr>
-    <td> disabled </td>
-    <td> bool </td>
-    <td colspan="2"> disable input and dropdown </td>
-  </tr>
-  <tr>
-    <td> disableDropdown </td>
-    <td> bool </td>
-    <td colspan="2"> disable dropdown only, false by default </td>
-  </tr>
-  <tr>
-    <td> disableCountryCode </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> enableLongNumbers </td>
-    <td> bool </td>
-    <td colspan="2"> false by default </td>
-  </tr>
-  <tr>
-    <td> countryCodeEditable </td>
-    <td> bool </td>
-    <td colspan="2"> true by default </td>
-  </tr>
-  <tr>
-    <td> enableSearchField </td>
-    <td> bool </td>
-    <td colspan="2"> enables search field in the dropdown </td>
-  </tr>
-  <tr>
-    <td> disableSearchIcon </td>
-    <td> bool </td>
-    <td colspan="2"> hide icon for the search field </td>
-  </tr>
 </table>
 
-```jsx
-<PhoneInput
-  inputExtraProps={{
-    name: 'phone',
-    required: true,
-    autoFocus: true
-  }}
-/>
-```
 
 ### Regions
 <table>
@@ -315,7 +320,7 @@ Country data object not returns from onKeyDown event
 
 ### Phone without dialCode
 ```jsx
-function handleOnChange(value, data) {
+handleOnChange(value, data) {
   this.setState({ rawPhone: value.replace(/[^0-9]+/g,'').slice(data.dialCode.length) })
 }
 ```
