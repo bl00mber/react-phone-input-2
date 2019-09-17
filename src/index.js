@@ -234,9 +234,10 @@ class PhoneInput extends React.Component {
   getFilteredCountryList = (countryCodes, sourceCountryList, preserveOrder) => {
     if (countryCodes.length === 0) return sourceCountryList;
 
+    let filteredCountries;
     if (preserveOrder) {
       // filter with user-defined order
-      return countryCodes.map(countryCode => {
+      filteredCountries = countryCodes.map(countryCode => {
         const country = sourceCountryList.find(country => country.iso2 === countryCode);
         if (!country) {
           console.warn(`Supplied country code '${countryCode}' could not be found in list of supported countries.`);
@@ -246,12 +247,27 @@ class PhoneInput extends React.Component {
     }
     else {
       // filter with alphabetical order
-      return sourceCountryList.filter((country) => {
+      filteredCountries = sourceCountryList.filter((country) => {
         return countryCodes.some((element) => {
           return element === country.iso2;
         });
       });
     }
+    return this.props.localization ?
+      this.localizeCountries(filteredCountries, this.props.localization) :
+      filteredCountries;
+  }
+
+  localizeCountries = (countries, localization) => {
+    for (let i = 0; i < countries.length; i++) {
+      if (localization[countries[i].name] !== undefined) {
+        countries[i].localName = localization[countries[i].name];
+      }
+      else if (localization[countries[i].iso2] !== undefined) {
+        countries[i].localName = localization[countries[i].iso2];
+      }
+    }
+    return countries;
   }
 
   excludeCountries = (selectedCountries, excludedCountries) => {
@@ -703,13 +719,7 @@ class PhoneInput extends React.Component {
   }
 
   getDropdownCountryName = (country) => {
-    if (this.props.localization[country.name] != undefined) {
-      return this.props.localization[country.name];
-    }
-    else if (this.props.localization[country.iso2] != undefined) {
-      return this.props.localization[country.iso2];
-    }
-    return country.name;
+    return country.localName || country.name;
   }
 
   getSearchFilteredCountries = () => {
@@ -719,8 +729,8 @@ class PhoneInput extends React.Component {
     const sanitizedSearchValue = searchValue.trim().toLowerCase();
     let searchedCountries = (enableSearchField && sanitizedSearchValue)
       // using [...new Set()] here to get rid of duplicates
-      ? [...new Set(allCountries.filter(({ name, iso2, dialCode }) =>
-        [`${name}`, `${iso2}`, `+${dialCode}`].some(field => field.toLowerCase().includes(sanitizedSearchValue))))]
+      ? [...new Set(allCountries.filter(({ name, localName, iso2, dialCode }) =>
+        [`${name}`, `${localName}`, `${iso2}`, `+${dialCode}`].some(field => field.toLowerCase().includes(sanitizedSearchValue))))]
       : allCountries;
     if (this.props.disableAreaCodes) searchedCountries = this.deleteAreaCodes(searchedCountries);
     return searchedCountries
