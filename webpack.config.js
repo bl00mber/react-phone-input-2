@@ -48,7 +48,10 @@ if (TARGET === 'dev') {
       hot: true,
       inline: true,
       progress: true,
-      contentBase: 'dist'
+      contentBase: 'dist',
+      historyApiFallback: {
+        index: 'test/index.html'
+      }
     },
     module: {
       rules: [
