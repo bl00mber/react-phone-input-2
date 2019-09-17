@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import countryData from './country_data.js';
 import './styles.less';
 
-class ReactPhoneInput extends React.Component {
+class PhoneInput extends React.Component {
   static propTypes = {
     excludeCountries: PropTypes.arrayOf(PropTypes.string),
     onlyCountries: PropTypes.arrayOf(PropTypes.string),
@@ -864,6 +864,6 @@ class ReactPhoneInput extends React.Component {
   }
 }
 
-export default ReactPhoneInput;
+export default PhoneInput;
 
 if (__DEV__) require('./demo.js');
