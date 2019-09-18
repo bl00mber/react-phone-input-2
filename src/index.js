@@ -50,6 +50,7 @@ class PhoneInput extends React.Component {
     inputExtraProps: PropTypes.object,
     localization: PropTypes.object,
     masks: PropTypes.object,
+    areaCodes: PropTypes.object,
 
     preserveOrder: PropTypes.arrayOf(PropTypes.string),
     renderStringAsFlag: PropTypes.string,
@@ -105,6 +106,7 @@ class PhoneInput extends React.Component {
     inputExtraProps: {},
     localization: {},
     masks: {},
+    areaCodes: {},
 
     preserveOrder: [],
     renderStringAsFlag: '',
@@ -122,7 +124,6 @@ class PhoneInput extends React.Component {
     let filteredCountries = countryData.allCountries;
 
     if (props.regions) filteredCountries = this.filterRegions(props.regions, filteredCountries);
-    if (Object.keys(props.masks).length !== 0) filteredCountries = this.insertMasks(props.masks, filteredCountries);
 
     const onlyCountries = this.excludeCountries(
           this.getFilteredCountryList(props.onlyCountries, filteredCountries, props.preserveOrder.includes('onlyCountries')),
@@ -223,14 +224,6 @@ class PhoneInput extends React.Component {
     });
   }
 
-  insertMasks = (masks, filteredCountries) => {
-    for (let key in masks) {
-      const modifiedCountryIndex = filteredCountries.findIndex(o => o.iso2 == key);
-      if (modifiedCountryIndex != -1) filteredCountries[modifiedCountryIndex].format = masks[key]
-    }
-    return filteredCountries
-  }
-
   getFilteredCountryList = (countryCodes, sourceCountryList, preserveOrder) => {
     if (countryCodes.length === 0) return sourceCountryList;
 
@@ -253,12 +246,13 @@ class PhoneInput extends React.Component {
         });
       });
     }
-    return this.props.localization ?
-      this.localizeCountries(filteredCountries, this.props.localization) :
-      filteredCountries;
+
+    return this.extendCountries(filteredCountries);
   }
 
-  localizeCountries = (countries, localization) => {
+  extendCountries = (countries) => {
+    const { localization, masks, areaCodes } = this.props
+
     for (let i = 0; i < countries.length; i++) {
       if (localization[countries[i].name] !== undefined) {
         countries[i].localName = localization[countries[i].name];
@@ -266,8 +260,53 @@ class PhoneInput extends React.Component {
       else if (localization[countries[i].iso2] !== undefined) {
         countries[i].localName = localization[countries[i].iso2];
       }
+
+      if (masks[countries[i].name] !== undefined) {
+        countries[i].format = masks[countries[i].name];
+      }
+      else if (masks[countries[i].iso2] !== undefined) {
+        countries[i].format = masks[countries[i].iso2];
+      }
+    }
+
+    if (Object.keys(areaCodes).length > 0) {
+      let updCountries = [];
+      let foundCountry = null;
+
+      for (let i = 0; i < countries.length; i++) {
+        updCountries.push(countries[i]);
+
+        if (areaCodes[countries[i].name] !== undefined) {
+          if (!foundCountry) foundCountry = countries[i];
+          // skip until all native area codes pushed
+          if (countries[i+1] && countries[i+1].iso2 === foundCountry.iso2) continue;
+          this.getCustomAreas(foundCountry, areaCodes[countries[i].name]).forEach(o => {
+            updCountries.push(o);
+          });
+          foundCountry = null;
+        }
+        else if (areaCodes[countries[i].iso2] !== undefined) {
+          if (!foundCountry) foundCountry = countries[i];
+          if (countries[i+1] && countries[i+1].iso2 === foundCountry.iso2) continue;
+          this.getCustomAreas(foundCountry, areaCodes[countries[i].iso2]).forEach(o => {
+            updCountries.push(o);
+          });
+          foundCountry = null;
+        }
+      }
+      return updCountries;
     }
     return countries;
+  }
+
+  getCustomAreas = (country, areaCodes) => {
+    let customAreas = [];
+    for (let i = 0; i < areaCodes.length; i++) {
+      let newCountry = JSON.parse(JSON.stringify(country));
+      newCountry.dialCode += areaCodes[i];
+      customAreas.push(newCountry);
+    }
+    return customAreas;
   }
 
   excludeCountries = (selectedCountries, excludedCountries) => {

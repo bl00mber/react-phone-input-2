@@ -141,11 +141,12 @@ class Demo extends React.Component {
             disableSearchIcon
             disableAreaCodes
           />
-          <p>Custom masks</p>
+          <p>Custom masks & area codes</p>
           <PhoneInput
             defaultCountry='at'
-            onlyCountries={['fr', 'at']}
+            onlyCountries={['fr', 'at', 'gr', 'us']}
             masks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....', 'zz': '+.. ... ...'}}
+            areaCodes={{'gr': ['2694', '2647'], 'fr': ['369', '463'], 'us': ['300']}}
           />
           <p>State manipulations</p>
           <PhoneInput

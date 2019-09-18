@@ -301,6 +301,25 @@ Regions selected: {['north-america', 'carribean']}
 />
 ```
 
+### Custom area codes
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Type </th>
+  </tr>
+  <tr>
+    <td> areaCodes </td>
+    <td> object </td>
+  </tr>
+</table>
+
+```jsx
+<PhoneInput
+  onlyCountries={['gr', 'fr', 'us']}
+  areaCodes={{'gr': ['2694', '2647'], 'fr': ['369', '463'], 'us': ['300']}}
+/>
+```
+
 ### Custom masks
 <table>
   <tr>
