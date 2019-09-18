@@ -146,6 +146,20 @@ handleOnChange(value) {
 />
 ```
 
+### Contents
+- [Style](#style)
+- [Events](#events)
+- [Regions](#regions)
+- [Custom area codes](#custom-area-codes)
+- [Custom masks](#ocustom-masks)
+- [Localization](#localization)
+- [Guides](#guides)
+  - [Phone without dialCode](#phone-without-dialcode)
+  - [Check validity of the phone number](#check-validity-of-the-phone-number)
+  - [CDN](#cdn)
+- [Contributing](#contributing)
+- [Support](https://www.paypal.me/bloomber/20)
+
 ### Style
 <table>
   <tr>
@@ -277,40 +291,6 @@ Regions selected: {['north-america', 'carribean']}
 />
 ```
 
-### Localization
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-  </tr>
-  <tr>
-    <td> localization </td>
-    <td> object </td>
-  </tr>
-</table>
-
-```jsx
-<PhoneInput
-  onlyCountries={['de', 'es']}
-  localization={{de: 'Deutschland', es: 'España'}}
-/>
-
-<PhoneInput
-  onlyCountries={['de', 'es']}
-  localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
-/>
-```
-
-Predefined translations
-`es`, `de`, `ru`, `fr`
-```jsx
-import es from 'lang/es.json'
-
-<PhoneInput
-  localization={es}
-/>
-```
-
 ### Custom area codes
 <table>
   <tr>
@@ -349,6 +329,40 @@ import es from 'lang/es.json'
 />
 ```
 
+### Localization
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Type </th>
+  </tr>
+  <tr>
+    <td> localization </td>
+    <td> object </td>
+  </tr>
+</table>
+
+```jsx
+<PhoneInput
+  onlyCountries={['de', 'es']}
+  localization={{de: 'Deutschland', es: 'España'}}
+/>
+
+<PhoneInput
+  onlyCountries={['de', 'es']}
+  localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
+/>
+```
+
+Predefined translations
+`es`, `de`, `ru`, `fr`
+```jsx
+import es from 'lang/es.json'
+
+<PhoneInput
+  localization={es}
+/>
+```
+
 ### Preserve countries order
 <table>
   <tr>
@@ -376,11 +390,24 @@ import es from 'lang/es.json'
   </tr>
 </table>
 
+## Guides
 ### Phone without dialCode
 ```jsx
 handleOnChange(value, data) {
   this.setState({ rawPhone: value.replace(/[^0-9]+/g,'').slice(data.dialCode.length) })
 }
+```
+
+### Check validity of the phone number
+```jsx
+<PhoneInput
+  isValid={v => v === '1'}
+/>
+```
+
+### CDN
+```html
+<script src="https://unpkg.com/react-phone-input-2@2.x/dist/lib.js"></script>
 ```
 
 ## Contributing
