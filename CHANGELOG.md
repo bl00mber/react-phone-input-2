@@ -1,3 +1,15 @@
+## 2.10.0 (September 18, 2019)
+* Add languages: es, de, ru, fr
+* Custom `areaCodes`
+* Search localized country name #123
+* `renderStringAsFlag` to show string instead of flag
+* Fix input freezing on area codes #119
+* Add `preserveOrder` #109
+* Better keyboard support
+* Make lib work inside shadow DOM #105 [@newying61](https://github.com/newying61)
+* IE Polyfyll startswith #102
+
+
 ## 2.9.3 (April 8, 2019)
 * SSR support (removed references to browser objects)
 * Change importing method
