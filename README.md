@@ -292,12 +292,22 @@ Regions selected: {['north-america', 'carribean']}
 ```jsx
 <PhoneInput
   onlyCountries={['de', 'es']}
-  localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
+  localization={{de: 'Deutschland', es: 'España'}}
 />
 
 <PhoneInput
   onlyCountries={['de', 'es']}
-  localization={{'de': 'Deutschland', 'es': 'España'}}
+  localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
+/>
+```
+
+Predefined translations
+`es`, `de`, `ru`, `fr`
+```jsx
+import es from 'lang/es.json'
+
+<PhoneInput
+  localization={es}
 />
 ```
 
@@ -316,7 +326,7 @@ Regions selected: {['north-america', 'carribean']}
 ```jsx
 <PhoneInput
   onlyCountries={['gr', 'fr', 'us']}
-  areaCodes={{'gr': ['2694', '2647'], 'fr': ['369', '463'], 'us': ['300']}}
+  areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
 />
 ```
 
@@ -335,7 +345,7 @@ Regions selected: {['north-america', 'carribean']}
 ```jsx
 <PhoneInput
   onlyCountries={['fr', 'at']}
-  masks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....'}}
+  masks={{fr: '+.. (...) ..-..-..', at: '+.. (....) ...-....'}}
 />
 ```
 
@@ -379,4 +389,4 @@ Code style changes not allowed
 ## License
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bl00mber/react-phone-input-2/blob/master/LICENSE)
 
-Based on [react-phone-input](https://github.com/razagill/react-phone-input)
+Make sure you have donated for lib maintenance:  [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/bloomber/20)

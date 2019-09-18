@@ -225,17 +225,14 @@ class PhoneInput extends React.Component {
   }
 
   getFilteredCountryList = (countryCodes, sourceCountryList, preserveOrder) => {
-    if (countryCodes.length === 0) return sourceCountryList;
+    if (countryCodes.length === 0) return this.extendCountries(sourceCountryList);
 
     let filteredCountries;
     if (preserveOrder) {
       // filter with user-defined order
       filteredCountries = countryCodes.map(countryCode => {
         const country = sourceCountryList.find(country => country.iso2 === countryCode);
-        if (!country) {
-          console.warn(`Supplied country code '${countryCode}' could not be found in list of supported countries.`);
-        }
-        return country;
+        if (country) return country;
       }).filter(country => country); // remove any not found
     }
     else {
@@ -254,18 +251,18 @@ class PhoneInput extends React.Component {
     const { localization, masks, areaCodes } = this.props
 
     for (let i = 0; i < countries.length; i++) {
-      if (localization[countries[i].name] !== undefined) {
-        countries[i].localName = localization[countries[i].name];
-      }
-      else if (localization[countries[i].iso2] !== undefined) {
+      if (localization[countries[i].iso2] !== undefined) {
         countries[i].localName = localization[countries[i].iso2];
       }
-
-      if (masks[countries[i].name] !== undefined) {
-        countries[i].format = masks[countries[i].name];
+      else if (localization[countries[i].name] !== undefined) {
+        countries[i].localName = localization[countries[i].name];
       }
-      else if (masks[countries[i].iso2] !== undefined) {
+
+      if (masks[countries[i].iso2] !== undefined) {
         countries[i].format = masks[countries[i].iso2];
+      }
+      else if (masks[countries[i].name] !== undefined) {
+        countries[i].format = masks[countries[i].name];
       }
     }
 
@@ -276,19 +273,19 @@ class PhoneInput extends React.Component {
       for (let i = 0; i < countries.length; i++) {
         updCountries.push(countries[i]);
 
-        if (areaCodes[countries[i].name] !== undefined) {
+        if (areaCodes[countries[i].iso2] !== undefined) {
           if (!foundCountry) foundCountry = countries[i];
-          // skip until all native area codes pushed
           if (countries[i+1] && countries[i+1].iso2 === foundCountry.iso2) continue;
-          this.getCustomAreas(foundCountry, areaCodes[countries[i].name]).forEach(o => {
+          this.getCustomAreas(foundCountry, areaCodes[countries[i].iso2]).forEach(o => {
             updCountries.push(o);
           });
           foundCountry = null;
         }
-        else if (areaCodes[countries[i].iso2] !== undefined) {
+        else if (areaCodes[countries[i].name] !== undefined) {
           if (!foundCountry) foundCountry = countries[i];
+          // skip until all native area codes pushed
           if (countries[i+1] && countries[i+1].iso2 === foundCountry.iso2) continue;
-          this.getCustomAreas(foundCountry, areaCodes[countries[i].iso2]).forEach(o => {
+          this.getCustomAreas(foundCountry, areaCodes[countries[i].name]).forEach(o => {
             updCountries.push(o);
           });
           foundCountry = null;

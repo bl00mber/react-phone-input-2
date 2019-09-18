@@ -145,8 +145,8 @@ class Demo extends React.Component {
           <PhoneInput
             defaultCountry='at'
             onlyCountries={['fr', 'at', 'gr', 'us']}
-            masks={{'fr': '+.. (...) ..-..-..', 'at': '+.. (....) ...-....', 'zz': '+.. ... ...'}}
-            areaCodes={{'gr': ['2694', '2647'], 'fr': ['369', '463'], 'us': ['300']}}
+            masks={{fr: '+.. (...) ..-..-..', at: '+.. (....) ...-....', zz: '+.. ... ...'}}
+            areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
           />
           <p>State manipulations</p>
           <PhoneInput
