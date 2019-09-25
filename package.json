@@ -7,6 +7,7 @@
     "test": "jest",
     "start": "TARGET=dev NODE_ENV=development webpack-dev-server --progress",
     "build": "TARGET=build NODE_ENV=production webpack -p --progress",
+    "start:build": "TARGET=dev NODE_ENV=development webpack-dev-server --progress",
     "analyze": "TARGET=analyze NODE_ENV=production webpack -p --progress"
   },
   "repository": {

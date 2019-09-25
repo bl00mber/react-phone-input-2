@@ -8,16 +8,17 @@ const TARGET = process.env.TARGET;
 const ROOT_PATH = path.resolve(__dirname);
 const nodeModulesDir = path.join(ROOT_PATH, 'node_modules');
 
-// Common configuration settings
 const common = {
-  entry: path.resolve(ROOT_PATH, 'src/index.js'),
+  entry: {
+    'dist/lib': path.resolve(ROOT_PATH, 'src/index.js')
+  },
+  output: {
+    path: ROOT_PATH,
+    filename: '[name].js'
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: ['node_modules']
-  },
-  output: {
-    path: path.resolve(ROOT_PATH, 'dist'),
-    filename: 'lib.js'
   },
   module: {
     rules: [
@@ -35,10 +36,12 @@ const common = {
   }
 };
 
-// Development configuration settings
 if (TARGET === 'dev') {
   module.exports = merge(common, {
     mode: 'development',
+    entry: {
+      'demo': path.resolve(ROOT_PATH, 'src/demo.js')
+    },
     devtool: 'inline-source-map',
     devServer: {
       publicPath: 'http://localhost:3000/',
@@ -70,7 +73,6 @@ if (TARGET === 'dev') {
   });
 }
 
-// Production configuration settings
 if (TARGET === 'build' || TARGET === 'analyze') {
   let plugins = [
     new webpack.DefinePlugin({
@@ -82,7 +84,7 @@ if (TARGET === 'build' || TARGET === 'analyze') {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: "style.css",
+      filename: "dist/style.css",
       chunkFilename: "[id].css"
     })
   ];
@@ -93,16 +95,11 @@ if (TARGET === 'build' || TARGET === 'analyze') {
 
   module.exports = merge(common, {
     mode: 'production',
-    entry: {
-      'react-phone-input': path.resolve(ROOT_PATH, 'src/index.js')
-    },
     optimization: {},
     output: {
-      path: path.resolve(ROOT_PATH, 'dist'),
-      filename: 'lib.js',
       library: 'ReactPhoneInput',
       libraryTarget: 'umd',
-      globalObject: 'this' // SSR ReferenceError: window is not defined
+      globalObject: 'this'
     },
     module: {
       rules: [

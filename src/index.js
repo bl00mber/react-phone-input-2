@@ -7,7 +7,7 @@ import startsWith from 'lodash.startswith';
 import classNames from 'classnames';
 
 import countryData from './country_data.js';
-import './styles.less';
+import './style.less';
 
 class PhoneInput extends React.Component {
   static propTypes = {
@@ -937,5 +937,3 @@ class PhoneInput extends React.Component {
 }
 
 export default PhoneInput;
-
-if (__DEV__) require('./demo.js');
