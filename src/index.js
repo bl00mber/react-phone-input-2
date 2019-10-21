@@ -660,9 +660,12 @@ class PhoneInput extends React.Component {
   }
 
   searchCountry = () => {
-    const probableCandidate = this.getProbableCandidate(this.state.queryString) || this.state.onlyCountries[0];
-    const probableCandidateIndex = this.state.onlyCountries.findIndex(o => o == probableCandidate) + this.state.preferredCountries.length;
+    const preferredSelected = this.state.preferredCountries.includes(this.state.selectedCountry);
+    const onlyCountries = this.props.disableAreaCodes ? this.deleteAreaCodes(this.state.onlyCountries) : this.state.onlyCountries;
 
+    const probableCandidate = this.getProbableCandidate(this.state.queryString) || this.state.onlyCountries[0];
+    const probableCandidateIndex = onlyCountries.findIndex(o => o == probableCandidate) + (preferredSelected ? this.state.preferredCountries.length : 0);
+    this.scrollTo(this.getElement(probableCandidateIndex + (preferredSelected ? 0 : this.state.preferredCountries.length)), true);
     this.scrollTo(this.getElement(probableCandidateIndex), true);
 
     this.setState({queryString: '', highlightCountryIndex: probableCandidateIndex});
