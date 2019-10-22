@@ -1,6 +1,6 @@
 {
   "name": "react-phone-input-intl",
-  "version": "3.0.48",
+  "version": "3.0.49",
   "description": "A react component to format International phone numbers",
   "main": "dist/lib.js",
   "scripts": {
