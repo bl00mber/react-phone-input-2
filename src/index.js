@@ -715,7 +715,7 @@ class PhoneInput extends React.Component {
         break;
       case keys.ENTER:
         if (this.props.enableSearchField) {
-          this.handleFlagItemClick(this.getSearchFilteredCountries()[this.state.highlightCountryIndex], e);
+          this.handleFlagItemClick(this.getSearchFilteredCountries()[this.state.highlightCountryIndex] || this.getSearchFilteredCountries()[0], e);
         } else {
           this.handleFlagItemClick(this.state.onlyCountries[this.state.highlightCountryIndex], e);
         }
