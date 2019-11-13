@@ -98,7 +98,7 @@ if (TARGET === 'build' || TARGET === 'analyze') {
     optimization: {},
     output: {
       library: 'ReactPhoneInput',
-      libraryTarget: 'umd',
+      libraryTarget: 'commonjs2',
       globalObject: 'this'
     },
     module: {
