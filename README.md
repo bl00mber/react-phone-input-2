@@ -18,7 +18,7 @@ npm install react-phone-input-2 --save
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/dist/style.css'
 
-<PhoneInput defaultCountry={'us'} value={this.state.phone} onChange={handleOnChange} />
+<PhoneInput country={'us'} value={this.state.phone} onChange={handleOnChange} />
 ```
 
 ```jsx
@@ -36,11 +36,17 @@ handleOnChange(value) {
     <th> Example </th>
   </tr>
   <tr>
-    <td> excludeCountries </td>
-    <td> array </td>
-    <td> array of country codes to be excluded </td>
-    <td> ['cu','cw','kz'] </td>
+    <td> country </td>
+    <td> string </td>
+    <td> initial country </td>
+    <td> 'us' </td>
   </tr>
+  <tr>
+    <td> value </td>
+    <td> string </td>
+    <td colspan="2"> input state value </td>
+  </tr>
+
   <tr>
     <td> onlyCountries </td>
     <td> array </td>
@@ -53,18 +59,13 @@ handleOnChange(value) {
     <td> country codes to be at the top </td>
     <td> ['cu','cw','kz'] </td>
   </tr>
+  <tr>
+    <td> excludeCountries </td>
+    <td> array </td>
+    <td> array of country codes to be excluded </td>
+    <td> ['cu','cw','kz'] </td>
+  </tr>
 
-  <tr>
-    <td> defaultCountry </td>
-    <td> string </td>
-    <td> initial country </td>
-    <td> 'us' </td>
-  </tr>
-  <tr>
-    <td> value </td>
-    <td> string </td>
-    <td colspan="2"> input state value </td>
-  </tr>
   <tr>
     <td> placeholder </td>
     <td> string </td>
@@ -279,7 +280,7 @@ Country data object not returns from onKeyDown event
 Regions selected: {'europe'}
 ```jsx
 <PhoneInput
-  defaultCountry='it'
+  country='it'
   regions={'europe'}
 />
 ```
@@ -287,7 +288,7 @@ Regions selected: {'europe'}
 Regions selected: {['north-america', 'carribean']}
 ```jsx
 <PhoneInput
-  defaultCountry='ca'
+  country='ca'
   regions={['north-america', 'carribean']}
 />
 ```

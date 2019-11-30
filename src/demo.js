@@ -4,8 +4,8 @@ import PhoneInput from './index';
 
 
 class Demo extends React.Component {
-  state = { defaultCountry: 'br', value: '12345',
-    playgroundProps: {defaultCountry: 'us', disableAreaCodes: true} }
+  state = { country: 'br', value: '12345',
+    playgroundProps: {country: 'us', disableAreaCodes: true} }
 
   renderPlayground = (e) => {
     if (e.which === 13) {
@@ -44,17 +44,17 @@ class Demo extends React.Component {
           <p>Created by <a style={{color: '#000'}} href="https://github.com/bl00mber">Nick Reiley</a></p>
           <p>Exclude countries (usa, canada)</p>
           <PhoneInput
-            defaultCountry='no'
+            country='no'
             excludeCountries={['us', 'ca']}
           />
           <p>Only countries</p>
           <PhoneInput
-            defaultCountry='gb'
+            country='gb'
             onlyCountries={['gb', 'es']}
           />
           <p>Preferred countries</p>
           <PhoneInput
-            defaultCountry='it'
+            country='it'
             preferredCountries={['it', 'se']}
           />
         </div>
@@ -66,7 +66,7 @@ class Demo extends React.Component {
           />
           <p>Enabled area codes with enableAreaCodes</p>
           <PhoneInput
-            defaultCountry='us'
+            country='us'
             enableAreaCodes
           />
           <p>Disabled flag by default</p>
@@ -96,20 +96,20 @@ class Demo extends React.Component {
         <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
           <p>Custom region selected: {`{'europe'}`}</p>
           <PhoneInput
-            defaultCountry='it'
+            country='it'
             regions={'europe'}
             enableAreaCodes
           />
           <p>Custom regions selected: {`{['north-america', 'carribean']}`}</p>
           <PhoneInput
-            defaultCountry='ca'
+            country='ca'
             regions={['north-america', 'carribean']}
             enableAreaCodes
           />
           <p>Disabled dropdown and country code</p>
           <PhoneInput
             onlyCountries={['us']}
-            defaultCountry='us'
+            country='us'
             placeholder='(702) 123-4567'
             disableCountryCode
             disableDropdown
@@ -118,7 +118,7 @@ class Demo extends React.Component {
           <p>Non-editable country code</p>
           <p>Autofocus</p>
           <PhoneInput
-            defaultCountry='de'
+            country='de'
             onlyCountries={['de', 'es']}
             localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
             enableAreaCodes
@@ -133,17 +133,17 @@ class Demo extends React.Component {
         <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
           <p>Search using iso2 or country name</p>
           <PhoneInput
-            defaultCountry='nl'
+            country='nl'
             enableSearchField
-            enableAreaCodes
-          />
-          <PhoneInput
-            defaultCountry='it'
-            preferredCountries={['us', 'ca']}
             enableAreaCodes={['ca']}
           />
           <PhoneInput
-            defaultCountry='pl'
+            country='it'
+            preferredCountries={['us', 'ca']}
+            enableSearchField
+          />
+          <PhoneInput
+            country='pl'
             searchClass='search-class'
             searchStyle={{margin: '0', width: '97%', height: '30px'}}
             enableSearchField
@@ -151,7 +151,7 @@ class Demo extends React.Component {
           />
           <p>Custom masks & area codes</p>
           <PhoneInput
-            defaultCountry='at'
+            country='at'
             onlyCountries={['fr', 'at', 'gr', 'us']}
             masks={{fr: '+.. (...) ..-..-..', at: '+.. (....) ...-....', zz: '+.. ... ...'}}
             areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
@@ -163,11 +163,11 @@ class Demo extends React.Component {
           />
           <PhoneInput
             containerStyle={{marginBottom: '15px'}}
-            defaultCountry={this.state.defaultCountry}
+            country={this.state.country}
           />
           <button onClick={() => {
-            if (this.state.defaultCountry == 'br') {this.setState({defaultCountry: 'it'})}
-            else {this.setState({defaultCountry: 'br'})}
+            if (this.state.country == 'br') {this.setState({country: 'it'})}
+            else {this.setState({country: 'br'})}
           }}>Change default country</button>
         </div>
 
