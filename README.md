@@ -150,6 +150,7 @@ handleOnChange(value) {
 - [Style](#style)
 - [Events](#events)
 - [Regions](#regions)
+- [Local area codes](#local-area-codes)
 - [Custom area codes](#custom-area-codes)
 - [Custom masks](#ocustom-masks)
 - [Localization](#localization)
@@ -291,6 +292,14 @@ Regions selected: {['north-america', 'carribean']}
 />
 ```
 
+### Local area codes
+```jsx
+<PhoneInput
+  enableAreaCodes={true}
+  enableAreaCodes={['us', 'ca']}
+/>
+```
+
 ### Custom area codes
 <table>
   <tr>
@@ -356,7 +365,7 @@ Regions selected: {['north-america', 'carribean']}
 Predefined translations
 `es`, `de`, `ru`, `fr`
 ```jsx
-import es from 'lang/es.json'
+import { es } from 'react-phone-input-2/lang'
 
 <PhoneInput
   localization={es}
@@ -401,7 +410,11 @@ handleOnChange(value, data) {
 ### Check validity of the phone number
 ```jsx
 <PhoneInput
-  isValid={v => v === '1'}
+  isValid={(inputNumber, onlyCountries) => {
+    return onlyCountries.some((country) => {
+      return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
+    });
+  }}
 />
 ```
 

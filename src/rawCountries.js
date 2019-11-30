@@ -16,7 +16,7 @@
 // ['north-america', 'south-america', 'central-america', 'carribean',
 //  'european-union', 'ex-ussr', 'middle-east', 'north-africa']
 
-const rawAllCountries = [
+const rawCountries = [
   [
     'Afghanistan',
     ['asia'],
@@ -1479,57 +1479,6 @@ const rawAllCountries = [
     'zw',
     '263'
   ]
-];
+]
 
-let allCountryCodes = {};
-
-function addCountryCode(iso2, dialCode, priority) {
-  if (!(dialCode in allCountryCodes)) {
-    allCountryCodes[dialCode] = [];
-  }
-  const index = priority || 0;
-  allCountryCodes[dialCode][index] = iso2;
-};
-
-const allCountries = [].concat(...rawAllCountries.map((country) => {
-  const countryItem = {
-    name: country[0],
-    regions: country[1],
-    iso2: country[2],
-    dialCode: country[3],
-    format: country[4] || undefined,
-    priority: country[5] || 0,
-    hasAreaCodes: country[6] ? true : false,
-  };
-
-  const areaItems = [];
-
-  country[6] && country[6].map((areaCode) => {
-    const areaItem = {...countryItem};
-    areaItem.regions = country[1];
-    areaItem.dialCode = country[3] + areaCode;
-    areaItem.isAreaCode = true;
-
-    areaItems.push(areaItem);
-
-    addCountryCode(country[2], areaItem.dialCode);
-  });
-
-  addCountryCode(
-    countryItem.iso2,
-    countryItem.dialCode,
-    countryItem.hasAreaCodes
-  );
-
-  if (areaItems.length > 0) {
-    countryItem.mainCode = true;
-    return [countryItem, ...areaItems];
-  } else {
-    return [countryItem];
-  }
-}));
-
-export default {
-  allCountries: allCountries,
-  allCountryCodes: allCountryCodes
-};
+export default rawCountries

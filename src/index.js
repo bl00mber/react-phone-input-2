@@ -6,7 +6,7 @@ import reduce from 'lodash.reduce';
 import startsWith from 'lodash.startswith';
 import classNames from 'classnames';
 
-import countryData from './country_data.js';
+import CountryData from './CountryData.js';
 import './style.less';
 
 class PhoneInput extends React.Component {
@@ -34,7 +34,12 @@ class PhoneInput extends React.Component {
     searchClass: PropTypes.string,
 
     autoFormat: PropTypes.bool,
-    disableAreaCodes: PropTypes.bool,
+
+    enableAreaCodes: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
+
     disableCountryCode: PropTypes.bool,
     disableDropdown: PropTypes.bool,
     enableLongNumbers: PropTypes.bool,
@@ -88,12 +93,8 @@ class PhoneInput extends React.Component {
     searchClass: '',
 
     autoFormat: true,
-    disableAreaCodes: false,
-    isValid: (inputNumber) => {
-      return countryData.allCountries.some((country) => {
-        return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
-      });
-    },
+    enableAreaCodes: false,
+    isValid: (inputNumber, onlyCountries) => true,
     disableCountryCode: false,
     disableDropdown: false,
     enableLongNumbers: false,
@@ -121,16 +122,11 @@ class PhoneInput extends React.Component {
 
   constructor(props) {
     super(props);
-    let filteredCountries = countryData.allCountries;
-
-    if (props.regions) filteredCountries = this.filterRegions(props.regions, filteredCountries);
-
-    const onlyCountries = this.excludeCountries(
-          this.getFilteredCountryList(props.onlyCountries, filteredCountries, props.preserveOrder.includes('onlyCountries')),
-          props.excludeCountries);
-
-    const preferredCountries = props.preferredCountries.length === 0 ?
-      [] : this.getFilteredCountryList(props.preferredCountries, filteredCountries, props.preserveOrder.includes('preferredCountries'));
+    let { onlyCountries, preferredCountries } = new CountryData(
+      props.enableAreaCodes, props.regions,
+      props.onlyCountries, props.preferredCountries, props.excludeCountries, props.preserveOrder,
+      props.localization, props.masks, props.areaCodes,
+    );
 
     const inputNumber = props.value.replace(/[^0-9\.]+/g, '') || '';
 
@@ -159,7 +155,7 @@ class PhoneInput extends React.Component {
       countryGuess.name ? countryGuess.format : undefined
     );
 
-    const highlightCountryIndex = filteredCountries.findIndex(o => o == countryGuess);
+    const highlightCountryIndex = onlyCountries.findIndex(o => o == countryGuess);
 
     this.state = {
       formattedNumber,
@@ -194,125 +190,6 @@ class PhoneInput extends React.Component {
     }
     else if (nextProps.value !== this.state.formattedNumber) {
       this.updateFormattedNumber(nextProps.value);
-    }
-  }
-
-  // Countries array methods
-  deleteAreaCodes = (filteredCountries) => {
-    return filteredCountries.filter((country) => {
-      return country.isAreaCode !== true;
-    });
-  }
-
-  filterRegions = (regions, filteredCountries) => {
-    if (typeof regions === 'string') {
-      const region = regions;
-      return filteredCountries.filter((country) => {
-        return country.regions.some((element) => {
-          return element === region;
-        });
-      });
-    }
-
-    return filteredCountries.filter((country) => {
-      const matches = regions.map((region) => {
-        return country.regions.some((element) => {
-          return element === region;
-        });
-      });
-      return matches.some(el => el);
-    });
-  }
-
-  getFilteredCountryList = (countryCodes, sourceCountryList, preserveOrder) => {
-    if (countryCodes.length === 0) return this.extendCountries(sourceCountryList);
-
-    let filteredCountries;
-    if (preserveOrder) {
-      // filter with user-defined order
-      filteredCountries = countryCodes.map(countryCode => {
-        const country = sourceCountryList.find(country => country.iso2 === countryCode);
-        if (country) return country;
-      }).filter(country => country); // remove any not found
-    }
-    else {
-      // filter with alphabetical order
-      filteredCountries = sourceCountryList.filter((country) => {
-        return countryCodes.some((element) => {
-          return element === country.iso2;
-        });
-      });
-    }
-
-    return this.extendCountries(filteredCountries);
-  }
-
-  extendCountries = (countries) => {
-    const { localization, masks, areaCodes } = this.props
-
-    for (let i = 0; i < countries.length; i++) {
-      if (localization[countries[i].iso2] !== undefined) {
-        countries[i].localName = localization[countries[i].iso2];
-      }
-      else if (localization[countries[i].name] !== undefined) {
-        countries[i].localName = localization[countries[i].name];
-      }
-
-      if (masks[countries[i].iso2] !== undefined) {
-        countries[i].format = masks[countries[i].iso2];
-      }
-      else if (masks[countries[i].name] !== undefined) {
-        countries[i].format = masks[countries[i].name];
-      }
-    }
-
-    if (Object.keys(areaCodes).length > 0) {
-      let updCountries = [];
-      let foundCountry = null;
-
-      for (let i = 0; i < countries.length; i++) {
-        updCountries.push(countries[i]);
-
-        if (areaCodes[countries[i].iso2] !== undefined) {
-          if (!foundCountry) foundCountry = countries[i];
-          if (countries[i+1] && countries[i+1].iso2 === foundCountry.iso2) continue;
-          this.getCustomAreas(foundCountry, areaCodes[countries[i].iso2]).forEach(o => {
-            updCountries.push(o);
-          });
-          foundCountry = null;
-        }
-        else if (areaCodes[countries[i].name] !== undefined) {
-          if (!foundCountry) foundCountry = countries[i];
-          // skip until all native area codes pushed
-          if (countries[i+1] && countries[i+1].iso2 === foundCountry.iso2) continue;
-          this.getCustomAreas(foundCountry, areaCodes[countries[i].name]).forEach(o => {
-            updCountries.push(o);
-          });
-          foundCountry = null;
-        }
-      }
-      return updCountries;
-    }
-    return countries;
-  }
-
-  getCustomAreas = (country, areaCodes) => {
-    let customAreas = [];
-    for (let i = 0; i < areaCodes.length; i++) {
-      let newCountry = JSON.parse(JSON.stringify(country));
-      newCountry.dialCode += areaCodes[i];
-      customAreas.push(newCountry);
-    }
-    return customAreas;
-  }
-
-  excludeCountries = (selectedCountries, excludedCountries) => {
-    if (excludedCountries.length === 0) {
-      return selectedCountries;
-    } else {
-      return selectedCountries.filter((selCountry) => {
-        return !excludedCountries.includes(selCountry.iso2);
-      });
     }
   }
 
@@ -389,8 +266,7 @@ class PhoneInput extends React.Component {
 
     const container = this.dropdownRef;
 
-    if (!container || !document.body)
-      return;
+    if (!container || !document.body) return;
 
     const containerHeight = container.offsetHeight;
     const containerOffset = container.getBoundingClientRect();
@@ -517,12 +393,12 @@ class PhoneInput extends React.Component {
       });
     }
     else {
-      const onlyCountries = this.props.disableAreaCodes ? this.deleteAreaCodes(this.state.onlyCountries) : this.state.onlyCountries;
+      const onlyCountries = this.state.onlyCountries;
 
       this.setState({
         showDropdown: !this.state.showDropdown,
-        highlightCountryIndex: this.props.disableAreaCodes ? onlyCountries.findIndex(o => o.iso2 == this.state.selectedCountry.iso2) :
-          onlyCountries.findIndex(o => o == this.state.selectedCountry)
+        highlightCountryIndex: this.props.enableAreaCodes ? onlyCountries.findIndex(o => o == this.state.selectedCountry)
+          : onlyCountries.findIndex(o => o.iso2 == this.state.selectedCountry.iso2)
       }, () => {
         if (this.state.showDropdown) {
           this.scrollTo(this.getElement(this.state.highlightCountryIndex + this.state.preferredCountries.length));
@@ -768,7 +644,6 @@ class PhoneInput extends React.Component {
       ? [...new Set(allCountries.filter(({ name, localName, iso2, dialCode }) =>
         [`${name}`, `${localName}`, `${iso2}`, `+${dialCode}`].some(field => field.toLowerCase().includes(sanitizedSearchValue))))]
       : allCountries;
-    if (this.props.disableAreaCodes) searchedCountries = this.deleteAreaCodes(searchedCountries);
     return searchedCountries
   }
 
@@ -802,7 +677,7 @@ class PhoneInput extends React.Component {
         >
           <div className={inputFlagClasses}/>
           <span className='country-name'>{this.getDropdownCountryName(country)}</span>
-          <span className='dial-code'>{'+' + country.dialCode}</span>
+          <span className='dial-code'>{country.format ? this.formatNumber(country.dialCode, country.format) : ('+'+country.dialCode)}</span>
         </li>
       );
     });
@@ -869,14 +744,14 @@ class PhoneInput extends React.Component {
   }
 
   render() {
-    const { selectedCountry, showDropdown, formattedNumber } = this.state;
+    const { onlyCountries, selectedCountry, showDropdown, formattedNumber } = this.state;
     const { disableDropdown, renderStringAsFlag } = this.props;
 
     const arrowClasses = classNames({'arrow': true, 'up': showDropdown});
     const inputClasses = classNames({
       [this.props.inputClass]: true,
       'form-control': true,
-      'invalid-number': !this.props.isValid(formattedNumber.replace(/\D/g, ''))
+      'invalid-number': !this.props.isValid(formattedNumber.replace(/\D/g, ''), onlyCountries)
     });
 
     const flagViewClasses = classNames({

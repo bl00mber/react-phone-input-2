@@ -35,9 +35,13 @@ class Demo extends React.Component {
           .custom-dropdown {
             margin-top: 0 !important;
           }
+
+          .react-tel-input {
+            margin-top: 15px;
+          }
         `}} />
         <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
-          <p>v1.2.1</p>
+          <p>Created by <a style={{color: '#000'}} href="https://github.com/bl00mber">Nick Reiley</a></p>
           <p>Exclude countries (usa, canada)</p>
           <PhoneInput
             defaultCountry='no'
@@ -55,22 +59,20 @@ class Demo extends React.Component {
           />
         </div>
 
-        <div style={{ display: 'inline-block', marginLeft: '40px' }}>
-          <p>v2</p>
+        <div style={{ display: 'inline-block', marginLeft: '40px', marginTop: '35px' }}>
           <p>Auto country detect by value</p>
           <PhoneInput
             value='+3802343252'
           />
-          <p>Disabled area codes with disableAreaCodes</p>
+          <p>Enabled area codes with enableAreaCodes</p>
           <PhoneInput
             defaultCountry='us'
-            disableAreaCodes
+            enableAreaCodes
           />
           <p>Disabled flag by default</p>
           <p>Customizable placeholder</p>
           <p>Customizable styles</p>
           <PhoneInput
-            disableAreaCodes
             placeholder='Type your phone here'
             inputStyle={{
               width: '300px',
@@ -96,18 +98,19 @@ class Demo extends React.Component {
           <PhoneInput
             defaultCountry='it'
             regions={'europe'}
+            enableAreaCodes
           />
           <p>Custom regions selected: {`{['north-america', 'carribean']}`}</p>
           <PhoneInput
             defaultCountry='ca'
             regions={['north-america', 'carribean']}
+            enableAreaCodes
           />
           <p>Disabled dropdown and country code</p>
           <PhoneInput
             onlyCountries={['us']}
             defaultCountry='us'
             placeholder='(702) 123-4567'
-            disableAreaCodes
             disableCountryCode
             disableDropdown
           />
@@ -118,6 +121,7 @@ class Demo extends React.Component {
             defaultCountry='de'
             onlyCountries={['de', 'es']}
             localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
+            enableAreaCodes
             countryCodeEditable={false}
             inputExtraProps={{
               name: 'tel',
@@ -127,19 +131,23 @@ class Demo extends React.Component {
           />
         </div>
         <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
-          <p>Search field</p>
+          <p>Search using iso2 or country name</p>
           <PhoneInput
             defaultCountry='nl'
             enableSearchField
+            enableAreaCodes
+          />
+          <PhoneInput
+            defaultCountry='it'
+            preferredCountries={['us', 'ca']}
+            enableAreaCodes={['ca']}
           />
           <PhoneInput
             defaultCountry='pl'
-            containerStyle={{marginTop: '15px'}}
             searchClass='search-class'
             searchStyle={{margin: '0', width: '97%', height: '30px'}}
             enableSearchField
             disableSearchIcon
-            disableAreaCodes
           />
           <p>Custom masks & area codes</p>
           <PhoneInput
@@ -154,7 +162,7 @@ class Demo extends React.Component {
             onChange={(value, country) => {console.log(value, country); this.setState({ value })}}
           />
           <PhoneInput
-            containerStyle={{marginTop: '15px', marginBottom: '15px'}}
+            containerStyle={{marginBottom: '15px'}}
             defaultCountry={this.state.defaultCountry}
           />
           <button onClick={() => {
@@ -167,7 +175,7 @@ class Demo extends React.Component {
           <br/><br/>
           <p>Press enter to render</p>
           <textarea name="" id="" cols="55" rows="3" spellCheck="false"
-            style={{borderRadius: '5px', fontFamily: 'Roboto', fontSize: '14px', marginBottom: '15px'}}
+            style={{borderRadius: '5px', fontFamily: 'Roboto', fontSize: '14px'}}
             onKeyDown={this.renderPlayground} defaultValue={JSON.stringify(this.state.playgroundProps)} />
 
           <PhoneInput {...this.state.playgroundProps}/>
