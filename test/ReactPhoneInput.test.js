@@ -44,7 +44,7 @@ describe('<ReactPhoneInput /> main props', () => {
   test('has "us" as the default/highlighted country', () => {
     const { container: phoneInput } = render(
       <ReactPhoneInput
-        defaultCountry='us'
+        country='us'
       />)
 
     fireEvent.click(phoneInput.querySelector('.selected-flag'))
@@ -68,7 +68,7 @@ describe('<ReactPhoneInput /> event handlers', () => {
     const mockFn = jest.fn();
     const { container: phoneInput } = render(
       <ReactPhoneInput
-        defaultCountry={'us'}
+        country={'us'}
         onChange={mockFn}
       />)
 
@@ -116,7 +116,7 @@ describe('<ReactPhoneInput /> other props', () => {
   test('render custom mask with the "masks" prop', () => {
     const { container: phoneInput } = render(
       <ReactPhoneInput
-        defaultCountry='fr'
+        country='fr'
         onlyCountries={['fr']}
         masks={{'fr': '+.. (...) ..-..-..'}}
         value='33543773322'

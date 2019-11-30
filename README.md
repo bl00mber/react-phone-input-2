@@ -153,7 +153,7 @@ handleOnChange(value) {
 - [Regions](#regions)
 - [Local area codes](#local-area-codes)
 - [Custom area codes](#custom-area-codes)
-- [Custom masks](#ocustom-masks)
+- [Custom masks](#custom-masks)
 - [Localization](#localization)
 - [Guides](#guides)
   - [Phone without dialCode](#phone-without-dialcode)
