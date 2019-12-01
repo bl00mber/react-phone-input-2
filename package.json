@@ -23,7 +23,9 @@
     "telephone",
     "javascript",
     "international",
-    "tel"
+    "tel",
+    "localized",
+    "i18n"
   ],
   "files": [
     "LICENSE",

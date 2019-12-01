@@ -73,7 +73,7 @@ describe('<ReactPhoneInput /> event handlers', () => {
       />)
 
     fireEvent.change(phoneInput.querySelector('.form-control'), {target: {value: '12345'}})
-    expect(mockFn).toHaveBeenCalledWith('+1 (234) 5', {name: 'United States', dialCode: '1', 'format': '+. (...) ...-....', countryCode: 'us'})
+    expect(mockFn).toHaveBeenCalledWith('+1 (234) 5', {name: 'United States', dialCode: '1', 'format': '+. (...) ...-....', countryCode: 'us'}, expect.any(Object))
   })
 })
 

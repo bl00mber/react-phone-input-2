@@ -149,7 +149,7 @@ class Demo extends React.Component {
             enableSearchField
             disableSearchIcon
           />
-          <p>Custom masks & area codes & countries</p>
+          <p>Custom masks & area codes</p>
           <PhoneInput
             country='at'
             onlyCountries={['fr', 'at', 'gr', 'us']}
@@ -166,6 +166,7 @@ class Demo extends React.Component {
           <PhoneInput
             value={this.state.value}
             onChange={(value, country, e) => {console.log(value, country, e); this.setState({ value })}}
+            enableAreaCodes
           />
           <PhoneInput
             containerStyle={{marginBottom: '15px'}}

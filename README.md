@@ -151,7 +151,7 @@ handleOnChange(value) {
 - [Style](#style)
 - [Events](#events)
 - [Regions](#regions)
-- [Predefined localization](#predefined-localization)
+- [Localization](#predefined-localization)
 - [Local area codes](#local-area-codes)
 - [Custom area codes](#custom-area-codes)
 - [Custom masks](#custom-masks)
@@ -295,9 +295,12 @@ Regions selected: {['north-america', 'carribean']}
 ```
 
 ### Predefined localization
-`es` Spanish, `de` Deutsch, `ru` Russian, `fr` French
+`es` Spanish, `de` Deutsch, `ru` Russian, `fr` French<br/>
+`jp` Japanese, `cn` Chinese, `pt` Portuguese, `it` Italian<br/>
+`ir` Iranian, `ar` Arabic, `id` Indonesian
+
 ```jsx
-import { es } from 'react-phone-input-2/lang'
+import es from 'react-phone-input-2/lang/es.json'
 
 <PhoneInput
   localization={es}
