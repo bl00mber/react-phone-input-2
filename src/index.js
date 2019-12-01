@@ -493,6 +493,11 @@ class PhoneInput extends React.Component {
     if (this.props.onClick) this.props.onClick(e, this.getCountryData());
   }
 
+  handleDoubleClick = (e) => {
+    const len = e.target.value.length;
+    e.target.setSelectionRange(0, len);
+  }
+
   handleFlagItemClick = (country) => {
     const currentSelectedCountry = this.state.selectedCountry;
     const newSelectedCountry = this.state.onlyCountries.find(o => o == country);
@@ -535,7 +540,7 @@ class PhoneInput extends React.Component {
   }
 
   handleInputCopy = (e) => {
-    if (this.props.copyNumbersOnly) return;
+    if (!this.props.copyNumbersOnly) return;
     const text = window.getSelection().toString().replace(/[^0-9]+/g,'');
     e.clipboardData.setData('text/plain', text);
     e.preventDefault();
@@ -797,6 +802,7 @@ class PhoneInput extends React.Component {
           style={this.props.inputStyle}
           onChange={this.handleInput}
           onClick={this.handleInputClick}
+          onDoubleClick={this.handleDoubleClick}
           onFocus={this.handleInputFocus}
           onBlur={this.handleInputBlur}
           onCopy={this.handleInputCopy}
