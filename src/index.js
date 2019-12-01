@@ -63,6 +63,7 @@ class PhoneInput extends React.Component {
     preserveOrder: PropTypes.arrayOf(PropTypes.string),
     renderStringAsFlag: PropTypes.string,
     copyNumbersOnly: PropTypes.bool,
+    jumpCursorToEnd: PropTypes.bool,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -119,6 +120,7 @@ class PhoneInput extends React.Component {
     preserveOrder: [],
     renderStringAsFlag: '',
     copyNumbersOnly: true,
+    jumpCursorToEnd: true,
 
     onEnterKeyPress: () => {},
 
@@ -493,16 +495,16 @@ class PhoneInput extends React.Component {
 
   handleFlagItemClick = (country) => {
     const currentSelectedCountry = this.state.selectedCountry;
-    const nextSelectedCountry = this.state.onlyCountries.find(o => o == country);
-    if (!nextSelectedCountry) return;
+    const newSelectedCountry = this.state.onlyCountries.find(o => o == country);
+    if (!newSelectedCountry) return;
 
     const unformattedNumber = this.state.formattedNumber.replace(' ', '').replace('(', '').replace(')', '').replace('-', '');
-    const newNumber = unformattedNumber.length > 1 ? unformattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode) : nextSelectedCountry.dialCode;
-    const formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), nextSelectedCountry.format || this.getDefaultMask(newSelectedCountry));
+    const newNumber = unformattedNumber.length > 1 ? unformattedNumber.replace(currentSelectedCountry.dialCode, newSelectedCountry.dialCode) : newSelectedCountry.dialCode;
+    const formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), newSelectedCountry.format || this.getDefaultMask(newSelectedCountry));
 
     this.setState({
       showDropdown: false,
-      selectedCountry: nextSelectedCountry,
+      selectedCountry: newSelectedCountry,
       freezeSelection: true,
       formattedNumber
     }, () => {
@@ -517,14 +519,14 @@ class PhoneInput extends React.Component {
       if (this.numberInputRef.value === '+' && this.state.selectedCountry && !this.props.disableCountryCode) {
         this.setState({
           formattedNumber: '+' + this.state.selectedCountry.dialCode
-        }, () => setTimeout(this.cursorToEnd, 10));
+        }, () => {this.props.jumpCursorToEnd && setTimeout(this.cursorToEnd, 0)});
       }
     }
 
     this.setState({ placeholder: '' });
 
     this.props.onFocus && this.props.onFocus(e, this.getCountryData());
-    setTimeout(this.cursorToEnd, 10);
+    this.props.jumpCursorToEnd && setTimeout(this.cursorToEnd, 0);
   }
 
   handleInputBlur = (e) => {

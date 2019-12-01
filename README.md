@@ -403,6 +403,10 @@ import es from 'react-phone-input-2/lang/es.json'
     <td> autocompleteSearch </td>
     <td> false </td>
   </tr>
+  <tr>
+    <td> jumpCursorToEnd </td>
+    <td> false </td>
+  </tr>
 </table>
 
 ## Guides
