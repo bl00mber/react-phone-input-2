@@ -392,6 +392,10 @@ import { es } from 'react-phone-input-2/lang'
     <td> renderStringAsFlag </td>
     <td> string </td>
   </tr>
+  <tr>
+    <td> copyNumbersOnly </td>
+    <td> boolean </td>
+  </tr>
 </table>
 
 ## Guides

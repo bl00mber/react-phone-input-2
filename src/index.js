@@ -61,6 +61,7 @@ class PhoneInput extends React.Component {
 
     preserveOrder: PropTypes.arrayOf(PropTypes.string),
     renderStringAsFlag: PropTypes.string,
+    copyNumbersOnly: PropTypes.bool,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -115,6 +116,7 @@ class PhoneInput extends React.Component {
 
     preserveOrder: [],
     renderStringAsFlag: '',
+    copyNumbersOnly: true,
 
     onEnterKeyPress: () => {},
 
@@ -529,6 +531,13 @@ class PhoneInput extends React.Component {
     this.props.onBlur && this.props.onBlur(e, this.getCountryData());
   }
 
+  handleInputCopy = (e) => {
+    if (this.props.copyNumbersOnly) return;
+    const text = window.getSelection().toString().replace(/[^0-9]+/g,'');
+    e.clipboardData.setData('text/plain', text);
+    e.preventDefault();
+  }
+
   getHighlightCountryIndex = (direction) => {
     // had to write own function because underscore does not have findIndex. lodash has it
     const highlightCountryIndex = this.state.highlightCountryIndex + direction;
@@ -786,6 +795,7 @@ class PhoneInput extends React.Component {
           onClick={this.handleInputClick}
           onFocus={this.handleInputFocus}
           onBlur={this.handleInputBlur}
+          onCopy={this.handleInputCopy}
           value={formattedNumber}
           ref={el => this.numberInputRef = el}
           onKeyDown={this.handleInputKeyDown}
