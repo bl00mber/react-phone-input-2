@@ -385,6 +385,10 @@ import { es } from 'react-phone-input-2/lang'
 ### Other props
 <table>
   <tr>
+    <td> defaultMask </td>
+    <td> string </td>
+  </tr>
+  <tr>
     <td> renderStringAsFlag </td>
     <td> string </td>
   </tr>

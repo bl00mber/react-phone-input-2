@@ -21,6 +21,7 @@ class PhoneInput extends React.Component {
     placeholder: PropTypes.string,
     searchPlaceholder: PropTypes.string,
     disabled: PropTypes.bool,
+    defaultMask: PropTypes.string,
 
     containerStyle: PropTypes.object,
     inputStyle: PropTypes.object,
@@ -81,6 +82,7 @@ class PhoneInput extends React.Component {
     searchPlaceholder: 'search',
     flagsImagePath: './flags.png',
     disabled: false,
+    defaultMask: '...... ...... ..', // '+'+dialCode+' '+defaultMask
 
     containerStyle: {},
     inputStyle: {},
@@ -251,17 +253,19 @@ class PhoneInput extends React.Component {
       const dialCode = newSelectedCountry && !startsWith(inputNumber.replace(/\D/g, ''), newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
       formattedNumber = this.formatNumber(
         (this.props.disableCountryCode ? '' : dialCode) + inputNumber.replace(/\D/g, ''),
-        newSelectedCountry ? newSelectedCountry.format : undefined
+        newSelectedCountry ? (newSelectedCountry.format || this.getDefaultMask(newSelectedCountry)) : undefined
       );
     }
     else {
       inputNumber = inputNumber.replace(/\D/g, '');
       newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), onlyCountries, country);
-      formattedNumber = this.formatNumber(inputNumber, newSelectedCountry.format);
+      formattedNumber = this.formatNumber(inputNumber, newSelectedCountry.format || this.getDefaultMask(newSelectedCountry));
     }
 
     this.setState({ selectedCountry: newSelectedCountry, formattedNumber });
   }
+
+  getDefaultMask = country => '+'.padEnd(country.dialCode.length+1,'.')+' '+this.props.defaultMask;
 
   // View methods
   scrollTo = (country, middle) => {
@@ -449,7 +453,7 @@ class PhoneInput extends React.Component {
         newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), this.state.onlyCountries, this.state.country);
         freezeSelection = false;
       }
-      formattedNumber = this.formatNumber(inputNumber, newSelectedCountry.format); // remove all non numerals from the input
+      formattedNumber = this.formatNumber(inputNumber, newSelectedCountry.format || this.getDefaultMask(newSelectedCountry)); // remove all non numerals from the input
       newSelectedCountry = newSelectedCountry.dialCode ? newSelectedCountry : this.state.selectedCountry;
     }
 
@@ -491,7 +495,7 @@ class PhoneInput extends React.Component {
 
     const unformattedNumber = this.state.formattedNumber.replace(' ', '').replace('(', '').replace(')', '').replace('-', '');
     const newNumber = unformattedNumber.length > 1 ? unformattedNumber.replace(currentSelectedCountry.dialCode, nextSelectedCountry.dialCode) : nextSelectedCountry.dialCode;
-    const formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), nextSelectedCountry.format);
+    const formattedNumber = this.formatNumber(newNumber.replace(/\D/g, ''), nextSelectedCountry.format || this.getDefaultMask(newSelectedCountry));
 
     this.setState({
       showDropdown: false,
