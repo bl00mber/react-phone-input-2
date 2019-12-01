@@ -388,7 +388,8 @@ class PhoneInput extends React.Component {
     return {
       name: this.state.selectedCountry.name || '',
       dialCode: this.state.selectedCountry.dialCode || '',
-      countryCode: this.state.selectedCountry.iso2 || ''
+      countryCode: this.state.selectedCountry.iso2 || '',
+      format: this.state.selectedCountry.format || ''
     }
   }
 
