@@ -423,15 +423,13 @@ class PhoneInput extends React.Component {
     let newSelectedCountry = this.state.selectedCountry;
     let freezeSelection = this.state.freezeSelection;
 
-    if(!this.props.countryCodeEditable) {
-        const mainCode = newSelectedCountry.hasAreaCodes ?
-          this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.mainCode).dialCode :
-          newSelectedCountry.dialCode;
+    if (!this.props.countryCodeEditable) {
+      const mainCode = newSelectedCountry.hasAreaCodes ?
+        this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.mainCode).dialCode :
+        newSelectedCountry.dialCode;
 
-        const updatedInput = '+' + mainCode;
-        if (e.target.value.length < updatedInput.length) {
-            return;
-        }
+      const updatedInput = '+'+mainCode;
+      if (e.target.value.slice(0, updatedInput.length) !== updatedInput) return;
     }
 
     // Does not exceed 15 digit phone number limit
