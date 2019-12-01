@@ -151,10 +151,11 @@ handleOnChange(value) {
 - [Style](#style)
 - [Events](#events)
 - [Regions](#regions)
+- [Predefined localization](#predefined-localization)
 - [Local area codes](#local-area-codes)
 - [Custom area codes](#custom-area-codes)
 - [Custom masks](#custom-masks)
-- [Localization](#localization)
+- [Custom localization](#custom-localization)
 - [Guides](#guides)
   - [Phone without dialCode](#phone-without-dialcode)
   - [Check validity of the phone number](#check-validity-of-the-phone-number)
@@ -273,7 +274,7 @@ Country data object not returns from onKeyDown event
     <th> Subregions </th>
   </tr>
   <tr>
-    <td> ['north-america', 'south-america', 'central-america', 'carribean', 'european-union', 'ex-ussr', 'middle-east', 'north-africa'] </td>
+    <td> ['north-america', 'south-america', 'central-america', 'carribean', 'eu-union', 'ex-ussr', 'ex-yugos', 'baltic', 'middle-east', 'north-africa'] </td>
   </tr>
 </table>
 
@@ -290,6 +291,16 @@ Regions selected: {['north-america', 'carribean']}
 <PhoneInput
   country='ca'
   regions={['north-america', 'carribean']}
+/>
+```
+
+### Predefined localization
+`es` Spanish, `de` Deutsch, `ru` Russian, `fr` French
+```jsx
+import { es } from 'react-phone-input-2/lang'
+
+<PhoneInput
+  localization={es}
 />
 ```
 
@@ -339,18 +350,7 @@ Regions selected: {['north-america', 'carribean']}
 />
 ```
 
-### Localization
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-  </tr>
-  <tr>
-    <td> localization </td>
-    <td> object </td>
-  </tr>
-</table>
-
+### Custom localization
 ```jsx
 <PhoneInput
   onlyCountries={['de', 'es']}
@@ -360,16 +360,6 @@ Regions selected: {['north-america', 'carribean']}
 <PhoneInput
   onlyCountries={['de', 'es']}
   localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
-/>
-```
-
-Predefined translations
-`es`, `de`, `ru`, `fr`
-```jsx
-import { es } from 'react-phone-input-2/lang'
-
-<PhoneInput
-  localization={es}
 />
 ```
 
@@ -430,4 +420,6 @@ Code style changes not allowed
 ## License
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bl00mber/react-phone-input-2/blob/master/LICENSE)
 
-Make sure you have donated for lib maintenance:  [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/bloomber/20)
+Based on [react-phone-input](https://github.com/razagill/react-phone-input)
+
+Make sure you have donated for lib maintenance: [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/bloomber/20)

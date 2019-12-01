@@ -149,9 +149,15 @@ class Demo extends React.Component {
             enableSearchField
             disableSearchIcon
           />
-          <p>Custom masks & area codes</p>
+          <p>Custom masks & area codes & countries</p>
           <PhoneInput
             country='at'
+            onlyCountries={['fr', 'at', 'gr', 'us']}
+            masks={{fr: '+.. (...) ..-..-..', at: '+.. (....) ...-....', zz: '+.. ... ...'}}
+            areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
+          />
+          <PhoneInput
+            country='eu'
             onlyCountries={['fr', 'at', 'gr', 'us']}
             masks={{fr: '+.. (...) ..-..-..', at: '+.. (....) ...-....', zz: '+.. ... ...'}}
             areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
@@ -185,6 +191,13 @@ class Demo extends React.Component {
   }
 }
 
+[
+  'Netherlands',
+  ['europe', 'european-union'],
+  'nl',
+  '31',
+  '+.. .. ........'
+]
 
 export default render(
   <Demo />,

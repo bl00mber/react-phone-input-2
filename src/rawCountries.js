@@ -14,7 +14,7 @@
 //
 // Sub-regions:
 // ['north-america', 'south-america', 'central-america', 'carribean',
-//  'european-union', 'ex-ussr', 'middle-east', 'north-africa']
+//  'eu-union', 'ex-ussr', 'ex-yugos', 'baltic', 'middle-east', 'north-africa']
 
 const rawCountries = [
   [
@@ -93,7 +93,7 @@ const rawCountries = [
   ],
   [
     'Austria',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'at',
     '43'
   ],
@@ -136,7 +136,7 @@ const rawCountries = [
   ],
   [
     'Belgium',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'be',
     '32',
     '+.. ... .. .. ..'
@@ -173,7 +173,7 @@ const rawCountries = [
   ],
   [
     'Bosnia and Herzegovina',
-    ['europe'],
+    ['europe', 'ex-yugos'],
     'ba',
     '387'
   ],
@@ -210,7 +210,7 @@ const rawCountries = [
   ],
   [
     'Bulgaria',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'bg',
     '359'
   ],
@@ -336,7 +336,7 @@ const rawCountries = [
   ],
   [
     'Croatia',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union', 'ex-yugos'],
     'hr',
     '385'
   ],
@@ -356,20 +356,20 @@ const rawCountries = [
   ],
   [
     'Cyprus',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'cy',
     '357',
     '+... .. ......'
   ],
   [
     'Czech Republic',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'cz',
     '420'
   ],
   [
     'Denmark',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union', 'baltic'],
     'dk',
     '45',
     '+.. .. .. .. ..'
@@ -427,7 +427,7 @@ const rawCountries = [
   ],
   [
     'Estonia',
-    ['europe', 'european-union', 'ex-ussr'],
+    ['europe', 'eu-union', 'ex-ussr', 'baltic'],
     'ee',
     '372',
     '+... .... ......'
@@ -458,14 +458,14 @@ const rawCountries = [
   ],
   [
     'Finland',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union', 'baltic'],
     'fi',
     '358',
     '+... .. ... .. ..'
   ],
   [
     'France',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'fr',
     '33',
     '+.. . .. .. .. ..'
@@ -502,7 +502,7 @@ const rawCountries = [
   ],
   [
     'Germany',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union', 'baltic'],
     'de',
     '49',
     '+.. .... ........'
@@ -521,7 +521,7 @@ const rawCountries = [
   ],
   [
     'Greece',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'gr',
     '30'
   ],
@@ -598,7 +598,7 @@ const rawCountries = [
   ],
   [
     'Hungary',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'hu',
     '36'
   ],
@@ -636,7 +636,7 @@ const rawCountries = [
   ],
   [
     'Ireland',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'ie',
     '353',
     '+... .. .......'
@@ -650,7 +650,7 @@ const rawCountries = [
   ],
   [
     'Italy',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'it',
     '39',
     '+.. ... .......',
@@ -696,6 +696,12 @@ const rawCountries = [
     '686'
   ],
   [
+    'Kosovo',
+    ['europe', 'ex-yugos'],
+    'xk',
+    '383'
+  ],
+  [
     'Kuwait',
     ['middle-east'],
     'kw',
@@ -715,7 +721,7 @@ const rawCountries = [
   ],
   [
     'Latvia',
-    ['europe', 'european-union', 'ex-ussr'],
+    ['europe', 'eu-union', 'ex-ussr', 'baltic'],
     'lv',
     '371'
   ],
@@ -751,13 +757,13 @@ const rawCountries = [
   ],
   [
     'Lithuania',
-    ['europe', 'european-union', 'ex-ussr'],
+    ['europe', 'eu-union', 'ex-ussr', 'baltic'],
     'lt',
     '370'
   ],
   [
     'Luxembourg',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'lu',
     '352'
   ],
@@ -769,7 +775,7 @@ const rawCountries = [
   ],
   [
     'Macedonia',
-    ['europe'],
+    ['europe', 'ex-yugos'],
     'mk',
     '389'
   ],
@@ -806,7 +812,7 @@ const rawCountries = [
   ],
   [
     'Malta',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'mt',
     '356'
   ],
@@ -867,7 +873,7 @@ const rawCountries = [
   ],
   [
     'Montenegro',
-    ['europe'],
+    ['europe', 'ex-yugos'],
     'me',
     '382'
   ],
@@ -915,7 +921,7 @@ const rawCountries = [
   ],
   [
     'Netherlands',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'nl',
     '31',
     '+.. .. ........'
@@ -977,7 +983,7 @@ const rawCountries = [
   ],
   [
     'Norway',
-    ['europe'],
+    ['europe', 'baltic'],
     'no',
     '47',
     '+.. ... .. ...'
@@ -1040,14 +1046,14 @@ const rawCountries = [
   ],
   [
     'Poland',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union', 'baltic'],
     'pl',
     '48',
     '+.. ...-...-...'
   ],
   [
     'Portugal',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'pt',
     '351'
   ],
@@ -1073,13 +1079,13 @@ const rawCountries = [
   ],
   [
     'Romania',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'ro',
     '40'
   ],
   [
     'Russia',
-    ['europe', 'asia', 'ex-ussr'],
+    ['europe', 'asia', 'ex-ussr', 'baltic'],
     'ru',
     '7',
     '+. (...) ...-..-..',
@@ -1169,7 +1175,7 @@ const rawCountries = [
   ],
   [
     'Serbia',
-    ['europe'],
+    ['europe', 'ex-yugos'],
     'rs',
     '381'
   ],
@@ -1200,13 +1206,13 @@ const rawCountries = [
   ],
   [
     'Slovakia',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'sk',
     '421'
   ],
   [
     'Slovenia',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union', 'ex-yugos'],
     'si',
     '386'
   ],
@@ -1243,7 +1249,7 @@ const rawCountries = [
   ],
   [
     'Spain',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'es',
     '34',
     '+.. ... ... ...'
@@ -1274,7 +1280,7 @@ const rawCountries = [
   ],
   [
     'Sweden',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union', 'baltic'],
     'se',
     '46',
     '+.. (...) ...-...'
@@ -1404,7 +1410,7 @@ const rawCountries = [
   ],
   [
     'United Kingdom',
-    ['europe', 'european-union'],
+    ['europe', 'eu-union'],
     'gb',
     '44',
     '+.. .... ......'
