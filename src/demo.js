@@ -165,7 +165,7 @@ class Demo extends React.Component {
           <p>State manipulations</p>
           <PhoneInput
             value={this.state.value}
-            onChange={(value, country) => {console.log(value, country); this.setState({ value })}}
+            onChange={(value, country, e) => {console.log(value, country, e); this.setState({ value })}}
           />
           <PhoneInput
             containerStyle={{marginBottom: '15px'}}

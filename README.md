@@ -396,12 +396,16 @@ import { es } from 'react-phone-input-2/lang'
     <td> copyNumbersOnly </td>
     <td> boolean </td>
   </tr>
+  <tr>
+    <td> autocompleteSearch </td>
+    <td> false </td>
+  </tr>
 </table>
 
 ## Guides
 ### Phone without dialCode
 ```jsx
-handleOnChange(value, data) {
+handleOnChange(value, data, event) {
   this.setState({ rawPhone: value.replace(/[^0-9]+/g,'').slice(data.dialCode.length) })
 }
 ```

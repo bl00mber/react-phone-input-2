@@ -20,7 +20,6 @@ class PhoneInput extends React.Component {
 
     placeholder: PropTypes.string,
     searchPlaceholder: PropTypes.string,
-    autocompleteSearch: Proptypes.bool,
     disabled: PropTypes.bool,
     defaultMask: PropTypes.string,
 
@@ -48,6 +47,7 @@ class PhoneInput extends React.Component {
     enableLongNumbers: PropTypes.bool,
     countryCodeEditable: PropTypes.bool,
     enableSearchField: PropTypes.bool,
+    autocompleteSearch: PropTypes.bool,
     disableSearchIcon: PropTypes.bool,
 
     regions: PropTypes.oneOfType([
@@ -82,7 +82,6 @@ class PhoneInput extends React.Component {
 
     placeholder: '+1 (702) 123-4567',
     searchPlaceholder: 'search',
-    autocompleteSearch: false,
     flagsImagePath: './flags.png',
     disabled: false,
     defaultMask: '...... ...... ..', // '+'+dialCode+' '+defaultMask
@@ -107,6 +106,7 @@ class PhoneInput extends React.Component {
     enableLongNumbers: false,
     countryCodeEditable: true,
     enableSearchField: false,
+    autocompleteSearch: false,
     disableSearchIcon: false,
 
     regions: '',
@@ -484,7 +484,7 @@ class PhoneInput extends React.Component {
         this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
       }
 
-      if (this.props.onChange) this.props.onChange(this.state.formattedNumber, this.getCountryData());
+      if (this.props.onChange) this.props.onChange(this.state.formattedNumber, this.getCountryData(), e);
     });
   }
 
