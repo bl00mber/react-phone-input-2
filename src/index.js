@@ -20,6 +20,7 @@ class PhoneInput extends React.Component {
 
     placeholder: PropTypes.string,
     searchPlaceholder: PropTypes.string,
+    autocompleteSearch: Proptypes.bool,
     disabled: PropTypes.bool,
     defaultMask: PropTypes.string,
 
@@ -81,6 +82,7 @@ class PhoneInput extends React.Component {
 
     placeholder: '+1 (702) 123-4567',
     searchPlaceholder: 'search',
+    autocompleteSearch: false,
     flagsImagePath: './flags.png',
     disabled: false,
     defaultMask: '...... ...... ..', // '+'+dialCode+' '+defaultMask
@@ -672,7 +674,7 @@ class PhoneInput extends React.Component {
 
   getCountryDropdownList = () => {
     const { preferredCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
-    const { enableSearchField, disableSearchIcon, searchClass, searchStyle, searchPlaceholder } = this.props;
+    const { enableSearchField, disableSearchIcon, searchClass, searchStyle, searchPlaceholder, autocompleteSearch } = this.props;
 
     const searchedCountries = this.getSearchFilteredCountries()
 
@@ -749,6 +751,7 @@ class PhoneInput extends React.Component {
               type='search'
               placeholder={searchPlaceholder}
               autoFocus={true}
+              autoComplete={autocompleteSearch ? 'on' : 'off'}
               value={searchValue}
               onChange={this.handleSearchChange}
             />
