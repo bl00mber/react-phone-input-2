@@ -166,6 +166,7 @@ class Demo extends React.Component {
           <PhoneInput
             value={this.state.value}
             onChange={(value, country, e) => {console.log(value, country, e); this.setState({ value })}}
+            predecessor=''
             enableAreaCodes
           />
           <PhoneInput

@@ -153,6 +153,7 @@ handleOnChange(value) {
 - [Regions](#regions)
 - [Localization](#predefined-localization)
 - [Local area codes](#local-area-codes)
+- [Other props](#other-props)
 - [Custom area codes](#custom-area-codes)
 - [Custom masks](#custom-masks)
 - [Custom localization](#custom-localization)
@@ -315,6 +316,34 @@ import es from 'react-phone-input-2/lang/es.json'
 />
 ```
 
+### Other props
+<table>
+  <tr>
+    <td> defaultMask </td>
+    <td> '...... ...... ..' </td>
+  </tr>
+  <tr>
+    <td> predecessor </td>
+    <td> '+' </td>
+  </tr>
+  <tr>
+    <td> copyNumbersOnly </td>
+    <td> true </td>
+  </tr>
+  <tr>
+    <td> renderStringAsFlag </td>
+    <td> string </td>
+  </tr>
+  <tr>
+    <td> autocompleteSearch </td>
+    <td> false </td>
+  </tr>
+  <tr>
+    <td> jumpCursorToEnd </td>
+    <td> false </td>
+  </tr>
+</table>
+
 ### Custom area codes
 <table>
   <tr>
@@ -384,30 +413,6 @@ import es from 'react-phone-input-2/lang/es.json'
   preserveOrder={['onlyCountries', 'preferredCountries']}
 />
 ```
-
-### Other props
-<table>
-  <tr>
-    <td> defaultMask </td>
-    <td> string </td>
-  </tr>
-  <tr>
-    <td> renderStringAsFlag </td>
-    <td> string </td>
-  </tr>
-  <tr>
-    <td> copyNumbersOnly </td>
-    <td> boolean </td>
-  </tr>
-  <tr>
-    <td> autocompleteSearch </td>
-    <td> false </td>
-  </tr>
-  <tr>
-    <td> jumpCursorToEnd </td>
-    <td> false </td>
-  </tr>
-</table>
 
 ## Guides
 ### Phone without dialCode

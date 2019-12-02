@@ -72,6 +72,7 @@ export default class CountryData {
     enableAreaCodes, regions,
     onlyCountries, preferredCountries, excludeCountries, preserveOrder,
     localization, masks, areaCodes,
+    predecessor
   ) {
     let filteredCountries = enableAreaCodes ? initCountriesAndAreaCodes(enableAreaCodes) : initCountries();
     if (regions) filteredCountries = this.filterRegions(regions, filteredCountries);
@@ -79,7 +80,8 @@ export default class CountryData {
     this.onlyCountries = this.excludeCountries(
       this.extendCountries(
         this.getFilteredCountryList(onlyCountries, filteredCountries, preserveOrder.includes('onlyCountries')),
-        localization, masks, areaCodes
+        localization, masks, areaCodes,
+        predecessor
       ),
       excludeCountries
     );
@@ -87,7 +89,8 @@ export default class CountryData {
     this.preferredCountries = preferredCountries.length === 0 ? [] :
       this.extendCountries(
         this.getFilteredCountryList(preferredCountries, filteredCountries, preserveOrder.includes('preferredCountries')),
-        localization, masks, areaCodes
+        localization, masks, areaCodes,
+        predecessor
       );
   }
 
@@ -134,7 +137,7 @@ export default class CountryData {
     return filteredCountries;
   }
 
-  extendCountries = (countries, localization, masks, areaCodes) => {
+  extendCountries = (countries, localization, masks, areaCodes, predecessor) => {
     for (let i = 0; i < countries.length; i++) {
       if (localization[countries[i].iso2] !== undefined) {
         countries[i].localName = localization[countries[i].iso2];
@@ -176,9 +179,9 @@ export default class CountryData {
           foundCountry = null;
         }
       }
-      return updCountries;
+      return predecessor == '+' ? updCountries : this.modifyPredecessor(updCountries, predecessor);
     }
-    return countries;
+    return predecessor == '+' ? countries : this.modifyPredecessor(countries, predecessor);
   }
 
   getCustomAreas = (country, areaCodes) => {
@@ -189,6 +192,13 @@ export default class CountryData {
       customAreas.push(newCountry);
     }
     return customAreas;
+  }
+
+  modifyPredecessor = (countries, predecessor) => {
+    return countries.map(o => {
+      if (o.format && o.format.slice(0, 1) == '+') o.format = predecessor+o.format.slice(1)
+      return o;
+    });
   }
 
   excludeCountries = (selectedCountries, excludedCountries) => {
