@@ -8,7 +8,7 @@ class Demo extends React.Component {
   state = { currentStyle: '', fetch: true }
 
   componentDidMount () {
-    this.loadCSS('style')
+    this.loadCSS('material')
     // this.setState({ fetch: false })
   }
 

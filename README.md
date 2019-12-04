@@ -40,7 +40,7 @@ import 'react-phone-input-2/lib/style.css'
     <td> country </td>
     <td> string </td>
     <td> initial country </td>
-    <td> 'us' </td>
+    <td> 'us' | 1 </td>
   </tr>
   <tr>
     <td> value </td>

@@ -180,9 +180,10 @@ class Demo extends React.Component {
           <PhoneInput
             containerStyle={{marginBottom: '15px'}}
             country={this.state.country}
+            enableAreaCodes
           />
           <button onClick={() => {
-            if (this.state.country == 'br') {this.setState({country: 'it'})}
+            if (this.state.country == 'br') {this.setState({country: '1205'})}
             else {this.setState({country: 'br'})}
           }}>Change default country</button>
         </div>

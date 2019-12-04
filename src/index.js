@@ -240,7 +240,12 @@ class PhoneInput extends React.Component {
 
   // Hooks for updated props
   updateCountry = (country) => {
-    const newSelectedCountry = this.state.onlyCountries.find(o => o.iso2 == country);
+    let newSelectedCountry;
+    if (country.indexOf(0) >= '0' && country.indexOf(0) <= '9') {
+      newSelectedCountry = this.state.onlyCountries.find(o => o.dialCode == +country);
+    } else {
+      newSelectedCountry = this.state.onlyCountries.find(o => o.iso2 == country);
+    }
     if (newSelectedCountry && newSelectedCountry.dialCode) {
       this.setState({
         country: country,
