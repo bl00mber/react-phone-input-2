@@ -6,7 +6,7 @@ Highly customizable phone input component with auto formatting.
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/bl00mber/react-phone-input-2#contributing)
 [![travis build](https://travis-ci.org/bl00mber/react-phone-input-2.svg?branch=master)](https://travis-ci.org/bl00mber/react-phone-input-2)
 
-![alt tag](https://media.giphy.com/media/xiORAWnqoTJDsH0UOI/giphy.gif)
+![animation](https://media.giphy.com/media/xiORAWnqoTJDsH0UOI/giphy.gif)
 
 ## Installation
 ```shell-script
@@ -24,9 +24,11 @@ import 'react-phone-input-2/lib/style.css'
   onChange={phone => this.setState({ phone })}
 />
 ```
-
-### [Demo 1](https://bl00mber.github.io/react-phone-input-2.html) - [Demo 2](https://bl00mber.github.io/react-phone-input-2-css.html)
 **available styles** - style • high-res • material • bootstrap • semantic-ui • plain
+
+#### [Demo 1 (UI)](https://bl00mber.github.io/react-phone-input-2.html) - [Demo 2 (CSS)](https://bl00mber.github.io/react-phone-input-2-css.html)
+
+![screenshot](https://raw.githubusercontent.com/bl00mber/react-phone-input-2/master/test/screenshot.png)
 
 ## Options
 <table>

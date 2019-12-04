@@ -21,10 +21,6 @@ class Demo extends React.Component {
     }
   }
 
-  copyTopSiblingTextContent = (e) => {
-
-  }
-
   render() {
     return (
       <div style={{fontFamily: "'Roboto', sans-serif", fontSize: '15px', padding: '10px 25px', margin: '20px auto', maxWidth: '1500px'}}>
