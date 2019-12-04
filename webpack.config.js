@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const TARGET = process.env.TARGET;
 const ROOT_PATH = path.resolve(__dirname);
@@ -10,7 +9,7 @@ const nodeModulesDir = path.join(ROOT_PATH, 'node_modules');
 
 const common = {
   entry: {
-    'dist/lib': path.resolve(ROOT_PATH, 'src/index.js')
+    'lib/lib': path.resolve(ROOT_PATH, 'src/index.js')
   },
   output: {
     path: ROOT_PATH,
@@ -25,7 +24,10 @@ const common = {
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        include: path.resolve(ROOT_PATH, 'src')
+        include: [
+          path.resolve(ROOT_PATH, 'src'),
+          path.resolve(ROOT_PATH, 'test')
+        ]
       },
       {
         test: /\.png.*$/,
@@ -36,11 +38,11 @@ const common = {
   }
 };
 
-if (TARGET === 'dev') {
+if (TARGET === 'dev:js' || TARGET === 'dev:css') {
   module.exports = merge(common, {
     mode: 'development',
     entry: {
-      'demo': path.resolve(ROOT_PATH, 'src/demo.js')
+      'demo': path.resolve(ROOT_PATH, 'test/'+TARGET+'/demo.js')
     },
     devtool: 'inline-source-map',
     devServer: {
@@ -51,7 +53,7 @@ if (TARGET === 'dev') {
       hot: true,
       inline: true,
       progress: true,
-      contentBase: ['dist', 'test/index']
+      contentBase: ['lib', 'test/index']
     },
     module: {
       rules: [
@@ -73,26 +75,7 @@ if (TARGET === 'dev') {
   });
 }
 
-if (TARGET === 'build' || TARGET === 'analyze') {
-  let plugins = [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      },
-      __DEV__: false
-    }),
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: "dist/style.css",
-      chunkFilename: "[id].css"
-    })
-  ];
-
-  if (TARGET === 'analyze') {
-    plugins.push(new BundleAnalyzerPlugin());
-  }
-
+if (TARGET === 'build:js' || TARGET === 'analyze') {
   module.exports = merge(common, {
     mode: 'production',
     optimization: {},
@@ -100,25 +83,6 @@ if (TARGET === 'build' || TARGET === 'analyze') {
       library: 'ReactPhoneInput',
       libraryTarget: 'commonjs2',
       globalObject: 'this'
-    },
-    module: {
-      rules: [
-        {
-          test: /\.less$/,
-          use: [
-            {
-              loader: MiniCssExtractPlugin.loader,
-              // options: {
-              //   // you can specify a publicPath here
-              //   // by default it use publicPath in webpackOptions.output
-              //   publicPath: '../'
-              // }
-            },
-            'css-loader',
-            'less-loader'
-          ]
-        }
-      ]
     },
     externals: [
       {
@@ -130,6 +94,46 @@ if (TARGET === 'build' || TARGET === 'analyze') {
         }
       }
     ],
-    plugins
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production')
+        },
+        __DEV__: false
+      }),
+      ...(TARGET === 'analyze' ? [new BundleAnalyzerPlugin()] : [])
+    ]
+  });
+}
+
+if (TARGET === 'build:css') {
+  module.exports = merge(common, {
+    entry: [
+      './src/style/style.less',
+      './src/style/high-res.less',
+      './src/style/material.less',
+      './src/style/bootstrap.less',
+      './src/style/semantic-ui.less',
+      './src/style/plain.less'
+    ],
+    mode: 'production',
+    module: {
+      rules: [
+        {
+          test: /\.less$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'lib/[name].css',
+              }
+            },
+            'extract-loader',
+            'css-loader',
+            'less-loader'
+          ]
+        }
+      ]
+    }
   });
 }

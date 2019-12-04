@@ -2,12 +2,14 @@
   "name": "react-phone-input-2",
   "version": "2.10.1",
   "description": "A react component to format phone numbers",
-  "main": "dist/lib.js",
+  "main": "lib/lib.js",
   "scripts": {
     "test": "jest",
-    "start": "TARGET=dev NODE_ENV=development webpack-dev-server --progress",
-    "build": "TARGET=build NODE_ENV=production webpack -p --progress",
-    "start:build": "TARGET=dev NODE_ENV=development webpack-dev-server --progress",
+    "start": "TARGET=dev:js NODE_ENV=development webpack-dev-server --progress",
+    "start:css": "TARGET=dev:css NODE_ENV=development webpack-dev-server --progress",
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "TARGET=build:js NODE_ENV=production webpack -p --progress",
+    "build:css": "TARGET=build:css NODE_ENV=production webpack -p --progress && rm ./main.js",
     "analyze": "TARGET=analyze NODE_ENV=production webpack -p --progress"
   },
   "repository": {
@@ -30,8 +32,7 @@
   "files": [
     "LICENSE",
     "README.md",
-    "dist/lib.js",
-    "dist/style.css",
+    "lib",
     "lang"
   ],
   "author": "Nick Reiley <bloomber111@gmail.com> (https://github.com/bl00mber)",
@@ -45,7 +46,7 @@
   "homepage": "https://github.com/bl00mber/react-phone-input-2",
   "jest": {
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/test/__mocks__/fileMock.js",
       "\\.(css|less|stylus|scss)$": "<rootDir>/test/__mocks__/styleMock.js"
     },
     "globals": {
@@ -57,10 +58,13 @@
     "babel-loader": "^8.0.5",
     "babel-preset-react-app": "^7.0.1",
     "css-loader": "^2.1.0",
+    "extract-loader": "^3.1.0",
+    "file-loader": "^5.0.2",
     "jest": "^24.7.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "mini-css-extract-plugin": "^0.5.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "react-hot-loader": "^4.6.5",
     "react-testing-library": "^6.0.4",
     "style-loader": "^0.23.1",
@@ -72,8 +76,8 @@
     "webpack-merge": "^4.2.1"
   },
   "peerDependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "dependencies": {
     "classnames": "^2.2.6",

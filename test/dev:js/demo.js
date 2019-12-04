@@ -1,26 +1,33 @@
 import React from 'react';
 import { render } from 'react-dom';
-import PhoneInput from './index';
+import PhoneInput from '../../src/index';
+import '../../src/style/style.less';
 
 
 class Demo extends React.Component {
   state = { country: 'br', value: '12345',
-    playgroundProps: {country: 'us', disableAreaCodes: true} }
+    playgroundProps: {country: 'us', enableAreaCodes: true} }
+
+  playgroundKey = 1
 
   renderPlayground = (e) => {
     if (e.which === 13) {
       let playgroundProps;
       try { playgroundProps = JSON.parse(e.target.value) }
       catch(error) { console.error(error); e.preventDefault(); e.stopPropagation(); }
-      this.setState({ playgroundProps })
+      this.setState({ playgroundProps }, () => ++this.playgroundKey)
       e.preventDefault()
       e.stopPropagation()
     }
   }
 
+  copyTopSiblingTextContent = (e) => {
+
+  }
+
   render() {
     return (
-      <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px', padding: '10px 25px' }}>
+      <div style={{fontFamily: "'Roboto', sans-serif", fontSize: '15px', padding: '10px 25px', margin: '20px auto', maxWidth: '1500px'}}>
         <style dangerouslySetInnerHTML={{__html: `
           input[type="tel"].custom-phone-input {
             font-size: 14px;
@@ -40,8 +47,9 @@ class Demo extends React.Component {
             margin-top: 15px;
           }
         `}} />
-        <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
-          <p>Created by <a style={{color: '#000'}} href="https://github.com/bl00mber">Nick Reiley</a></p>
+        <p style={{fontWeight: '500'}}>Created by <a style={{color: '#000'}}
+          href="https://github.com/bl00mber/react-phone-input-2">Nick Reiley</a></p>
+        <div style={{display: 'inline-block', verticalAlign: 'top'}}>
           <p>Exclude countries (usa, canada)</p>
           <PhoneInput
             country='no'
@@ -59,7 +67,7 @@ class Demo extends React.Component {
           />
         </div>
 
-        <div style={{ display: 'inline-block', marginLeft: '40px', marginTop: '35px' }}>
+        <div style={{display: 'inline-block', marginLeft: '40px'}}>
           <p>Auto country detect by value</p>
           <PhoneInput
             value='+3802343252'
@@ -93,7 +101,7 @@ class Demo extends React.Component {
           />
         </div>
 
-        <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
+        <div style={{display: 'inline-block', marginLeft: '40px', verticalAlign: 'top'}}>
           <p>Custom region selected: {`{'europe'}`}</p>
           <PhoneInput
             country='it'
@@ -130,23 +138,23 @@ class Demo extends React.Component {
             }}
           />
         </div>
-        <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top', marginTop: '35px' }}>
+        <div style={{display: 'inline-block', marginLeft: '40px', verticalAlign: 'top'}}>
           <p>Search using iso2 or country name</p>
           <PhoneInput
             country='nl'
-            enableSearchField
+            enableSearch
             enableAreaCodes={['ca']}
           />
           <PhoneInput
             country='it'
             preferredCountries={['us', 'ca']}
-            enableSearchField
+            enableSearch
           />
           <PhoneInput
             country='pl'
             searchClass='search-class'
             searchStyle={{margin: '0', width: '97%', height: '30px'}}
-            enableSearchField
+            enableSearch
             disableSearchIcon
           />
           <p>Custom masks & area codes</p>
@@ -166,7 +174,7 @@ class Demo extends React.Component {
           <PhoneInput
             value={this.state.value}
             onChange={(value, country, e) => {console.log(value, country, e); this.setState({ value })}}
-            predecessor=''
+            prefix=''
             enableAreaCodes
           />
           <PhoneInput
@@ -186,20 +194,12 @@ class Demo extends React.Component {
             style={{borderRadius: '5px', fontFamily: 'Roboto', fontSize: '14px'}}
             onKeyDown={this.renderPlayground} defaultValue={JSON.stringify(this.state.playgroundProps)} />
 
-          <PhoneInput {...this.state.playgroundProps}/>
+          <PhoneInput key={this.playgroundKey} {...this.state.playgroundProps}/>
         </div>
       </div>
     )
   }
 }
-
-[
-  'Netherlands',
-  ['europe', 'european-union'],
-  'nl',
-  '31',
-  '+.. .. ........'
-]
 
 export default render(
   <Demo />,

@@ -16,16 +16,17 @@ npm install react-phone-input-2 --save
 ## Usage
 ```jsx
 import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/dist/style.css'
+import 'react-phone-input-2/lib/style.css'
 
-<PhoneInput country={'us'} value={this.state.phone} onChange={handleOnChange} />
+<PhoneInput
+  country={'us'}
+  value={this.state.phone}
+  onChange={phone => this.setState({ phone })}
+/>
 ```
 
-```jsx
-handleOnChange(value) {
-  this.setState({ phone: value })
-}
-```
+### [Demo 1](https://bl00mber.github.io/react-phone-input-2.html) - [Demo 2](https://bl00mber.github.io/react-phone-input-2-css.html)
+**available styles** - style • high-res • material • bootstrap • semantic-ui • plain
 
 ## Options
 <table>
@@ -78,7 +79,7 @@ handleOnChange(value) {
   </tr>
 
   <tr>
-    <td> inputExtraProps </td>
+    <td> inputProps </td>
     <td> object </td>
     <td colspan="2"> props to pass into the input </td>
   </tr>
@@ -126,7 +127,7 @@ handleOnChange(value) {
     <td> </td>
   </tr>
   <tr>
-    <td> enableSearchField </td>
+    <td> enableSearch </td>
     <td> false </td>
     <td> enable search in the dropdown </td>
   </tr>
@@ -139,7 +140,7 @@ handleOnChange(value) {
 
 ```jsx
 <PhoneInput
-  inputExtraProps={{
+  inputProps={{
     name: 'phone',
     required: true,
     autoFocus: true
@@ -153,9 +154,9 @@ handleOnChange(value) {
 - [Regions](#regions)
 - [Localization](#predefined-localization)
 - [Local area codes](#local-area-codes)
-- [Other props](#other-props)
-- [Custom area codes](#custom-area-codes)
 - [Custom masks](#custom-masks)
+- [Custom area codes](#custom-area-codes)
+- [Other props](#other-props)
 - [Custom localization](#custom-localization)
 - [Guides](#guides)
   - [Phone without dialCode](#phone-without-dialcode)
@@ -260,7 +261,7 @@ Country data object not returns from onKeyDown event
   <tr>
     <td> regions </td>
     <td> array/string </td>
-    <td> to only show codes from selected regions </td>
+    <td> to show countries only from specified regions </td>
   </tr>
 </table>
 
@@ -279,18 +280,14 @@ Country data object not returns from onKeyDown event
   </tr>
 </table>
 
-Regions selected: {'europe'}
 ```jsx
 <PhoneInput
-  country='it'
+  country='de'
   regions={'europe'}
 />
-```
 
-Regions selected: {['north-america', 'carribean']}
-```jsx
 <PhoneInput
-  country='ca'
+  country='us'
   regions={['north-america', 'carribean']}
 />
 ```
@@ -316,15 +313,31 @@ import es from 'react-phone-input-2/lang/es.json'
 />
 ```
 
+### Custom masks
+```jsx
+<PhoneInput
+  onlyCountries={['fr', 'at']}
+  masks={{fr: '+.. (...) ..-..-..', at: '+.. (....) ...-....'}}
+/>
+```
+
+### Custom area codes
+```jsx
+<PhoneInput
+  onlyCountries={['gr', 'fr', 'us']}
+  areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
+/>
+```
+
 ### Other props
 <table>
   <tr>
     <td> defaultMask </td>
-    <td> '...... ...... ..' </td>
+    <td> ...... ...... .. </td>
   </tr>
   <tr>
-    <td> predecessor </td>
-    <td> '+' </td>
+    <td> prefix </td>
+    <td> + </td>
   </tr>
   <tr>
     <td> copyNumbersOnly </td>
@@ -344,44 +357,6 @@ import es from 'react-phone-input-2/lang/es.json'
   </tr>
 </table>
 
-### Custom area codes
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-  </tr>
-  <tr>
-    <td> areaCodes </td>
-    <td> object </td>
-  </tr>
-</table>
-
-```jsx
-<PhoneInput
-  onlyCountries={['gr', 'fr', 'us']}
-  areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
-/>
-```
-
-### Custom masks
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-  </tr>
-  <tr>
-    <td> masks </td>
-    <td> object </td>
-  </tr>
-</table>
-
-```jsx
-<PhoneInput
-  onlyCountries={['fr', 'at']}
-  masks={{fr: '+.. (...) ..-..-..', at: '+.. (....) ...-....'}}
-/>
-```
-
 ### Custom localization
 ```jsx
 <PhoneInput
@@ -396,17 +371,6 @@ import es from 'react-phone-input-2/lang/es.json'
 ```
 
 ### Preserve countries order
-<table>
-  <tr>
-    <th> Name </th>
-    <th> Type </th>
-  </tr>
-  <tr>
-    <td> preserveOrder </td>
-    <td> array </td>
-  </tr>
-</table>
-
 ```jsx
 <PhoneInput
   onlyCountries={['fr', 'at']}

@@ -1,0 +1,158 @@
+@import "./common/flags.less";
+
+.react-tel-input {
+  .form-control {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: .01rem;
+    z-index: 0;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: 48px;
+    margin-left: 0;
+    background: #FFFFFF;
+    border: 1px solid #CACACA;
+    border-radius: 5px;
+    line-height: 25px;
+    height: 35px;
+    width: 300px;
+    outline: none;
+    &.invalid-number {
+      border: 1px solid #d79f9f;
+      background-color: #FAF0F0;
+      border-left-color: #cacaca;
+      &:focus {
+        border: 1px solid #d79f9f;
+        border-left-color: #cacaca;
+        background-color: #FAF0F0;
+      }
+    }
+    &.open {
+      z-index: 2;
+    }
+  }
+  .flag-dropdown {
+    outline: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    border: 1px solid #cacaca;
+    border-radius: 3px 0 0 3px;
+    &.open {
+      z-index: 2;
+      background: #fff;
+      border-radius: 3px 0 0 0;
+      .selected-flag {
+        background: #fff;
+        border-radius: 3px 0 0 0;
+      }
+    }
+    &:hover, &:focus {
+      cursor: pointer;
+      .selected-flag {
+        background-color: #fff;
+      }
+    }
+  }
+  input[disabled] {
+    &+.flag-dropdown {
+      &:hover {
+        cursor: default;
+        .selected-flag {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+  .selected-flag {
+    position: relative;
+    width: 38px;
+    height: 100%;
+    padding: 0 0 0 8px;
+    border-radius: 3px 0 0 3px;
+    .flag {
+      position: absolute;
+      top: 50%;
+      margin-top: -5px;
+    }
+    .arrow {
+      position: relative;
+      top: 50%;
+      margin-top: -2px;
+      left: 20px;
+      width: 0;
+      height: 0;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      border-top: 4px solid #555;
+      &.up {
+        border-top: none;
+        border-bottom: 4px solid #555;
+      }
+    }
+  }
+  .country-list {
+    z-index: 1;
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    margin: 10px 0 10px -1px;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.35);
+    background-color: white;
+    width: 300px;
+    max-height: 200px;
+    overflow-y: scroll;
+    border-radius: 0 0 3px 3px;
+    .flag {
+      display: inline-block;
+    }
+    .divider {
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+      border-bottom: 1px solid #ccc;
+    }
+    .country {
+      padding: 7px 9px;
+      .dial-code {
+        color: #6b6b6b;
+      }
+      &:hover {
+        background-color: #f1f1f1;
+      }
+      &.highlight {
+        background-color: #f1f1f1;
+      }
+    }
+    .flag {
+      margin-right: 7px;
+      margin-top: 2px;
+    }
+    .country-name {
+      margin-right: 6px;
+    }
+    .search {
+      position: sticky;
+      top: 0;
+      background-color: #fff;
+      padding: 10px 0 6px 10px;
+    }
+    .search-emoji {
+      font-size: 15px;
+    }
+    .search-box {
+      border: 1px solid #cacaca;
+      border-radius: 3px;
+      font-size: 15px;
+      line-height: 15px;
+      margin-left: 6px;
+      padding: 3px 8px 5px;
+      outline: none;
+    }
+    .no-entries-message {
+      padding: 7px 10px 11px;
+      opacity: .7;
+    }
+  }
+}

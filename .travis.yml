@@ -3,5 +3,3 @@ node_js:
   - 'node'
 install:
   - npm install
-  - npm install react@^16.9.0 --save
-  - npm install react-dom@^16.9.0 --save
