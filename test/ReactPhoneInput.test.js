@@ -1,14 +1,14 @@
 import { render, fireEvent, cleanup } from 'react-testing-library'
 import React from 'react'
-import ReactPhoneInput from '../src/index'
+import PhoneInput from '../src/index'
 
 
 afterEach(cleanup)
 
-describe('<ReactPhoneInput /> countries props', () => {
+describe('<PhoneInput /> countries props', () => {
   test('has not "us" country in the dropdown', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
+      <PhoneInput
         excludeCountries={['us']}
       />)
 
@@ -19,7 +19,7 @@ describe('<ReactPhoneInput /> countries props', () => {
 
   test('has only "us" country in the dropdown', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
+      <PhoneInput
         onlyCountries={['us']}
       />)
 
@@ -30,7 +30,7 @@ describe('<ReactPhoneInput /> countries props', () => {
 
   test('has "us" in the preferred countries section', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
+      <PhoneInput
         preferredCountries={['us']}
       />)
 
@@ -40,10 +40,10 @@ describe('<ReactPhoneInput /> countries props', () => {
 })
 
 
-describe('<ReactPhoneInput /> main props', () => {
+describe('<PhoneInput /> main props', () => {
   test('has "us" as the default/highlighted country', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
+      <PhoneInput
         country='us'
       />)
 
@@ -54,7 +54,7 @@ describe('<ReactPhoneInput /> main props', () => {
 
   test('receive correct value', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
+      <PhoneInput
         value='+3802343252'
       />)
 
@@ -63,11 +63,11 @@ describe('<ReactPhoneInput /> main props', () => {
 })
 
 
-describe('<ReactPhoneInput /> event handlers', () => {
+describe('<PhoneInput /> event handlers', () => {
   test('onChange is being called with formatted value and country object as callback arguments', () => {
     const mockFn = jest.fn();
     const { container: phoneInput } = render(
-      <ReactPhoneInput
+      <PhoneInput
         country={'us'}
         onChange={mockFn}
       />)
@@ -78,11 +78,11 @@ describe('<ReactPhoneInput /> event handlers', () => {
 })
 
 
-describe('<ReactPhoneInput /> other props', () => {
-  test('pass inputExtraProps into the input', () => {
+describe('<PhoneInput /> other props', () => {
+  test('pass inputProps into the input', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
-        inputExtraProps={{name: 'phone'}}
+      <PhoneInput
+        inputProps={{name: 'phone'}}
       />)
 
     expect(phoneInput.querySelector('.form-control').name).toBe('phone')
@@ -90,7 +90,7 @@ describe('<ReactPhoneInput /> other props', () => {
 
   test('filter european countries with the regions={\'europe\'} prop', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
+      <PhoneInput
         regions={'europe'}
       />)
 
@@ -103,7 +103,7 @@ describe('<ReactPhoneInput /> other props', () => {
 
   test('localize countries labels using "localization" prop', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
+      <PhoneInput
         onlyCountries={['de', 'es']}
         localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
       />)
@@ -115,7 +115,7 @@ describe('<ReactPhoneInput /> other props', () => {
 
   test('render custom mask with the "masks" prop', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
+      <PhoneInput
         country='fr'
         onlyCountries={['fr']}
         masks={{'fr': '+.. (...) ..-..-..'}}
@@ -128,7 +128,7 @@ describe('<ReactPhoneInput /> other props', () => {
 
   test('not renders area codes with disableAreaCodes', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
+      <PhoneInput
         disableAreaCodes
       />)
 
@@ -139,8 +139,8 @@ describe('<ReactPhoneInput /> other props', () => {
 
   test('search correct country via search field', () => {
     const { container: phoneInput } = render(
-      <ReactPhoneInput
-        enableSearchField
+      <PhoneInput
+        enableSearch
       />)
 
     fireEvent.click(phoneInput.querySelector('.selected-flag'))
@@ -151,13 +151,13 @@ describe('<ReactPhoneInput /> other props', () => {
 
   test('should rerender without crashing', () => {
     const { container: phoneInput, rerender } = render(
-      <ReactPhoneInput
+      <PhoneInput
         value={undefined}
       />)
 
     // re-render the same component with new props
     rerender(
-      <ReactPhoneInput
+      <PhoneInput
         value="012312332"
       />)
 

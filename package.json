@@ -1,6 +1,6 @@
 {
   "name": "react-phone-input-2",
-  "version": "2.10.1",
+  "version": "2.11.0",
   "description": "A react component to format phone numbers",
   "main": "lib/lib.js",
   "scripts": {
@@ -27,13 +27,15 @@
     "international",
     "tel",
     "localized",
+    "material",
+    "bootstrap",
     "i18n"
   ],
   "files": [
-    "LICENSE",
-    "README.md",
+    "lang",
     "lib",
-    "lang"
+    "LICENSE",
+    "README.md"
   ],
   "author": "Nick Reiley <bloomber111@gmail.com> (https://github.com/bl00mber)",
   "contributors": [
