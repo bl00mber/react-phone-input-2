@@ -437,7 +437,7 @@ class PhoneInput extends React.Component {
 
     if (!this.props.countryCodeEditable) {
       const mainCode = newSelectedCountry.hasAreaCodes ?
-        this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.mainCode).dialCode :
+        this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2).dialCode :
         newSelectedCountry.dialCode;
 
       const updatedInput = this.props.prefix+mainCode;
