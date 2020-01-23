@@ -580,13 +580,13 @@ class PhoneInput extends React.Component {
 
   handleKeydown = (e) => {
     const { keys } = this.props;
-    const { target: { id } } = e;
+    const { target: { className } } = e;
 
-    if (id === 'flag-dropdown' && e.which === keys.ENTER && !this.state.showDropdown) return this.handleFlagDropdownClick();
-    if (id === 'phone-form-control' && (e.which === keys.ENTER || e.which === keys.ESC)) return e.target.blur();
+    if (className.includes('flag-dropdown') && e.which === keys.ENTER && !this.state.showDropdown) return this.handleFlagDropdownClick();
+    if (className.includes('phone-form-control') && (e.which === keys.ENTER || e.which === keys.ESC)) return e.target.blur();
 
     if (!this.state.showDropdown || this.props.disabled) return;
-    if (id === 'search-box') {
+    if (className.includes('search-box')) {
       if (e.which !== keys.UP && e.which !== keys.DOWN && e.which !== keys.ENTER) {
         if (e.which === keys.ESC && e.target.value === '') {
          // do nothing // if search field is empty, pass event (close dropdown)
@@ -763,7 +763,6 @@ class PhoneInput extends React.Component {
                 [`${searchClass}-box`]: searchClass,
               })}
               style={searchStyle}
-              id='search-box'
               type='search'
               placeholder={searchPlaceholder}
               autoFocus={true}
@@ -812,8 +811,7 @@ class PhoneInput extends React.Component {
         style={this.props.style || this.props.containerStyle}
         onKeyDown={this.handleKeydown}>
         <input
-          className={inputClasses}
-          id='phone-form-control'
+          className={classNames(inputClasses, 'phone-form-control')}
           style={this.props.inputStyle}
           onChange={this.handleInput}
           onClick={this.handleInputClick}
@@ -832,7 +830,6 @@ class PhoneInput extends React.Component {
 
         <div
           className={flagViewClasses}
-          id='flag-dropdown'
           style={this.props.buttonStyle}
           ref={el => this.dropdownContainerRef = el}
           tabIndex='0'
