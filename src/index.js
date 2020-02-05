@@ -711,7 +711,7 @@ class PhoneInput extends React.Component {
           data-flag-key={`flag_no_${index}`}
           className={itemClasses}
           data-dial-code='1'
-          tabIndex='0'
+          tabIndex={this.props.disableCountryCode || this.props.disabled ? '-1' : '0'}
           data-country-code={country.iso2}
           onClick={() => this.handleFlagItemClick(country)}
         >
