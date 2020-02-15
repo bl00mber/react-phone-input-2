@@ -456,6 +456,8 @@ class PhoneInput extends React.Component {
     } else {
       e.returnValue = false;
     }
+    
+    if (this.props.onChange) e.persist();
 
     if (e.target.value.length > 0) {
       // before entering the number in new format, lets check if the dial code now matches some other country
