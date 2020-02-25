@@ -62,7 +62,6 @@ function initCountries() {
     dialCode: country[3],
     format: country[4] || undefined,
     priority: country[5] || 0,
-    hasAreaCodes: country[6] ? true : false,
   }))
 }
 

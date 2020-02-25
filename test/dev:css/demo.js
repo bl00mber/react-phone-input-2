@@ -80,7 +80,7 @@ class Demo extends React.Component {
         </div>
 
         <div style={{display: 'inline-block', marginLeft: '40px', position: 'absolute', top: '30px', left: '560px'}}>
-          <p>{"import 'react-phone-input-2/lib/"+currentStyle+".css"}</p>
+          <p>{"import 'react-phone-input-2/lib/"+currentStyle+".css'"}</p>
         </div>
       </div>
     )
