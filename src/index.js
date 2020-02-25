@@ -65,6 +65,7 @@ class PhoneInput extends React.Component {
     renderStringAsFlag: PropTypes.string,
     autocompleteSearch: PropTypes.bool,
     jumpCursorToEnd: PropTypes.bool,
+    tabIndex: PropTypes.string,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -124,6 +125,7 @@ class PhoneInput extends React.Component {
     renderStringAsFlag: '',
     autocompleteSearch: false,
     jumpCursorToEnd: true,
+    tabIndex: '0',
 
     onEnterKeyPress: () => {},
 
@@ -456,7 +458,7 @@ class PhoneInput extends React.Component {
     } else {
       e.returnValue = false;
     }
-    
+
     if (this.props.onChange) e.persist();
 
     if (e.target.value.length > 0) {
@@ -713,7 +715,7 @@ class PhoneInput extends React.Component {
           data-flag-key={`flag_no_${index}`}
           className={itemClasses}
           data-dial-code='1'
-          tabIndex='0'
+          tabIndex={this.props.tabIndex}
           data-country-code={country.iso2}
           onClick={() => this.handleFlagItemClick(country)}
         >
@@ -834,7 +836,7 @@ class PhoneInput extends React.Component {
           className={flagViewClasses}
           style={this.props.buttonStyle}
           ref={el => this.dropdownContainerRef = el}
-          tabIndex='0'
+          tabIndex={this.props.tabIndex}
           role='button'
         >
           {renderStringAsFlag ?

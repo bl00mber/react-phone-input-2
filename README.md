@@ -357,6 +357,10 @@ import es from 'react-phone-input-2/lang/es.json'
     <td> jumpCursorToEnd </td>
     <td> false </td>
   </tr>
+  <tr>
+    <td> tabIndex </td>
+    <td> 0 </td>
+  </tr>
 </table>
 
 ### Custom localization
@@ -390,6 +394,8 @@ handleOnChange(value, data, event) {
 
 ### Check validity of the phone number
 ```jsx
+import startsWith from 'lodash.startswith';
+
 <PhoneInput
   isValid={(inputNumber, onlyCountries) => {
     return onlyCountries.some((country) => {
