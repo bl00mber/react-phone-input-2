@@ -1,3 +1,10 @@
+## 2.12.0 (February 25, 2020)
+* `priority`, `alwaysDefaultMask`
+* Custom `tabIndex`
+* Replace id usage to classes to avoid warnings [@J-theGit](https://github.com/J-theGit)
+* Dynamic mask creation
+
+
 ## 2.11.0 (December 4, 2019)
 * Add languages: jp, cn, pt, it, ir, ar, id
 * Replace `disableAreaCodes` to `enableAreaCodes`
