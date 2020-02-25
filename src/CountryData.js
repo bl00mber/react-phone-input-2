@@ -10,7 +10,13 @@ import rawCountries from './rawCountries'
 //   allCountryCodes[dialCode][index] = iso2;
 // }
 
-const getDefaultMask = (prefix, dialCode, defaultMask) => prefix+''.padEnd(dialCode.length,'.')+' '+defaultMask;
+function getMask(prefix, dialCode, predefinedMask, defaultMask, alwaysDefaultMask) {
+  if (!predefinedMask || alwaysDefaultMask) {
+    return prefix+''.padEnd(dialCode.length,'.')+' '+defaultMask;
+  } else {
+    return prefix+''.padEnd(dialCode.length,'.')+' '+predefinedMask;
+  }
+}
 
 // enableAreaCodes: boolean || array of iso2 codes
 function initCountriesAndAreaCodes(enableAreaCodes, prefix, defaultMask, alwaysDefaultMask) {
@@ -24,8 +30,7 @@ function initCountriesAndAreaCodes(enableAreaCodes, prefix, defaultMask, alwaysD
       regions: country[1],
       iso2: country[2],
       dialCode: country[3],
-      format: alwaysDefaultMask ? getDefaultMask(prefix, country[3], defaultMask) :
-        country[4] || getDefaultMask(prefix, country[3], defaultMask),
+      format: getMask(prefix, country[3], country[4], defaultMask, alwaysDefaultMask),
       priority: country[5] || 0,
       hasAreaCodes: country[6] ? true : false,
     };
@@ -64,8 +69,7 @@ function initCountries(prefix, defaultMask, alwaysDefaultMask) {
     regions: country[1],
     iso2: country[2],
     dialCode: country[3],
-    format: alwaysDefaultMask ? getDefaultMask(prefix, country[3], defaultMask) :
-      country[4] || getDefaultMask(prefix, country[3], defaultMask),
+    format: getMask(prefix, country[3], country[4], defaultMask, alwaysDefaultMask),
     priority: country[5] || 0,
   }))
 }
@@ -87,9 +91,7 @@ export default class CountryData {
     this.onlyCountries = this.excludeCountries(
       this.extendCountries(
         this.getFilteredCountryList(onlyCountries, filteredCountries, preserveOrder.includes('onlyCountries')),
-        localization, masks, areaCodes,
-        prefix,
-        priority
+        localization, masks, areaCodes, priority
       ),
       excludeCountries
     );
@@ -97,9 +99,7 @@ export default class CountryData {
     this.preferredCountries = preferredCountries.length === 0 ? [] :
       this.extendCountries(
         this.getFilteredCountryList(preferredCountries, filteredCountries, preserveOrder.includes('preferredCountries')),
-        localization, masks, areaCodes,
-        prefix,
-        priority
+        localization, masks, areaCodes, priority
       );
   }
 
@@ -146,7 +146,7 @@ export default class CountryData {
     return filteredCountries;
   }
 
-  extendCountries = (countries, localization, masks, areaCodes, prefix, priority) => {
+  extendCountries = (countries, localization, masks, areaCodes, priority) => {
     for (let i = 0; i < countries.length; i++) {
       if (localization[countries[i].iso2] !== undefined) {
         countries[i].localName = localization[countries[i].iso2];
@@ -188,9 +188,9 @@ export default class CountryData {
           foundCountry = null;
         }
       }
-      return this.modifyPriority(prefix == '+' ? updCountries : this.modifyPrefix(updCountries, prefix), priority);
+      return this.modifyPriority(updCountries, priority);
     }
-    return this.modifyPriority(prefix == '+' ? countries : this.modifyPrefix(countries, prefix), priority);
+    return this.modifyPriority(countries, priority);
   }
 
   getCustomAreas = (country, areaCodes) => {
@@ -201,13 +201,6 @@ export default class CountryData {
       customAreas.push(newCountry);
     }
     return customAreas;
-  }
-
-  modifyPrefix = (countries, prefix) => {
-    return countries.map(o => {
-      if (o.format && o.format.slice(0, 1) == '+') o.format = prefix+o.format.slice(1)
-      return o;
-    });
   }
 
   modifyPriority = (countries, priority) => {
