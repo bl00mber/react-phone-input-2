@@ -5,7 +5,7 @@
 //    iso2 code,
 //    International dial code,
 //    Format (if available),
-//    Order (if >1 country with same dial code),
+//    Order priority (if >1 country with same dial code),
 //    Area codes (if >1 country with same dial code)
 // ]
 //

@@ -67,6 +67,7 @@ class PhoneInput extends React.Component {
     autocompleteSearch: PropTypes.bool,
     jumpCursorToEnd: PropTypes.bool,
     tabIndex: PropTypes.string,
+    priority: PropTypes.object,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -128,6 +129,7 @@ class PhoneInput extends React.Component {
     autocompleteSearch: false,
     jumpCursorToEnd: true,
     tabIndex: '0',
+    priority: null,
 
     onEnterKeyPress: () => {},
 
@@ -144,6 +146,7 @@ class PhoneInput extends React.Component {
       props.onlyCountries, props.preferredCountries, props.excludeCountries, props.preserveOrder,
       props.localization, props.masks, props.areaCodes,
       props.prefix, props.defaultMask, props.alwaysDefaultMask,
+      props.priority,
     );
 
     const inputNumber = props.value.replace(/[^0-9\.]+/g, '') || '';

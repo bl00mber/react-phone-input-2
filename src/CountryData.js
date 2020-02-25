@@ -77,6 +77,7 @@ export default class CountryData {
     onlyCountries, preferredCountries, excludeCountries, preserveOrder,
     localization, masks, areaCodes,
     prefix, defaultMask, alwaysDefaultMask,
+    priority,
   ) {
     let filteredCountries = enableAreaCodes ?
       initCountriesAndAreaCodes(enableAreaCodes, prefix, defaultMask, alwaysDefaultMask) :
@@ -87,7 +88,8 @@ export default class CountryData {
       this.extendCountries(
         this.getFilteredCountryList(onlyCountries, filteredCountries, preserveOrder.includes('onlyCountries')),
         localization, masks, areaCodes,
-        prefix
+        prefix,
+        priority
       ),
       excludeCountries
     );
@@ -96,7 +98,8 @@ export default class CountryData {
       this.extendCountries(
         this.getFilteredCountryList(preferredCountries, filteredCountries, preserveOrder.includes('preferredCountries')),
         localization, masks, areaCodes,
-        prefix
+        prefix,
+        priority
       );
   }
 
@@ -143,7 +146,7 @@ export default class CountryData {
     return filteredCountries;
   }
 
-  extendCountries = (countries, localization, masks, areaCodes, prefix) => {
+  extendCountries = (countries, localization, masks, areaCodes, prefix, priority) => {
     for (let i = 0; i < countries.length; i++) {
       if (localization[countries[i].iso2] !== undefined) {
         countries[i].localName = localization[countries[i].iso2];
@@ -185,9 +188,9 @@ export default class CountryData {
           foundCountry = null;
         }
       }
-      return prefix == '+' ? updCountries : this.modifyPrefix(updCountries, prefix);
+      return this.modifyPriority(prefix == '+' ? updCountries : this.modifyPrefix(updCountries, prefix), priority);
     }
-    return prefix == '+' ? countries : this.modifyPrefix(countries, prefix);
+    return this.modifyPriority(prefix == '+' ? countries : this.modifyPrefix(countries, prefix), priority);
   }
 
   getCustomAreas = (country, areaCodes) => {
@@ -205,6 +208,20 @@ export default class CountryData {
       if (o.format && o.format.slice(0, 1) == '+') o.format = prefix+o.format.slice(1)
       return o;
     });
+  }
+
+  modifyPriority = (countries, priority) => {
+    if (priority) {
+      const priorityKeys = Object.keys(priority)
+      countries.forEach(o => {
+        if (priorityKeys.includes(o.iso2)) {
+          Object.keys(priority).forEach(key => {
+            if (key === o.iso2) o.priority = priority[key]
+          })
+        }
+      })
+    }
+    return countries;
   }
 
   excludeCountries = (selectedCountries, excludedCountries) => {

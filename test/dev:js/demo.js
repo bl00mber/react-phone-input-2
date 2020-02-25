@@ -67,6 +67,7 @@ class Demo extends React.Component {
           <p>Auto country detect by value</p>
           <PhoneInput
             value='+3802343252'
+            priority={{ca: 0, us: 1, kz: 0, ru: 1}}
           />
           <p>Enabled area codes with enableAreaCodes</p>
           <PhoneInput
