@@ -10,7 +10,10 @@ import rawCountries from './rawCountries'
 //   allCountryCodes[dialCode][index] = iso2;
 // }
 
-function initCountriesAndAreaCodes(enableAreaCodes) { // boolean || array of iso2 codes
+const getDefaultMask = (prefix, dialCode, defaultMask) => prefix+''.padEnd(dialCode.length,'.')+' '+defaultMask;
+
+// enableAreaCodes: boolean || array of iso2 codes
+function initCountriesAndAreaCodes(enableAreaCodes, prefix, defaultMask, alwaysDefaultMask) {
   let enableAllCodes;
   if (typeof enableAreaCodes === 'boolean') { enableAllCodes = true }
   else { enableAllCodes = false }
@@ -21,7 +24,8 @@ function initCountriesAndAreaCodes(enableAreaCodes) { // boolean || array of iso
       regions: country[1],
       iso2: country[2],
       dialCode: country[3],
-      format: country[4] || undefined,
+      format: alwaysDefaultMask ? getDefaultMask(prefix, country[3], defaultMask) :
+        country[4] || getDefaultMask(prefix, country[3], defaultMask),
       priority: country[5] || 0,
       hasAreaCodes: country[6] ? true : false,
     };
@@ -54,13 +58,14 @@ function initCountriesAndAreaCodes(enableAreaCodes) { // boolean || array of iso
   }))
 }
 
-function initCountries() {
+function initCountries(prefix, defaultMask, alwaysDefaultMask) {
   return rawCountries.map((country) => ({
     name: country[0],
     regions: country[1],
     iso2: country[2],
     dialCode: country[3],
-    format: country[4] || undefined,
+    format: alwaysDefaultMask ? getDefaultMask(prefix, country[3], defaultMask) :
+      country[4] || getDefaultMask(prefix, country[3], defaultMask),
     priority: country[5] || 0,
   }))
 }
@@ -71,16 +76,18 @@ export default class CountryData {
     enableAreaCodes, regions,
     onlyCountries, preferredCountries, excludeCountries, preserveOrder,
     localization, masks, areaCodes,
-    predecessor
+    prefix, defaultMask, alwaysDefaultMask,
   ) {
-    let filteredCountries = enableAreaCodes ? initCountriesAndAreaCodes(enableAreaCodes) : initCountries();
+    let filteredCountries = enableAreaCodes ?
+      initCountriesAndAreaCodes(enableAreaCodes, prefix, defaultMask, alwaysDefaultMask) :
+      initCountries(prefix, defaultMask, alwaysDefaultMask);
     if (regions) filteredCountries = this.filterRegions(regions, filteredCountries);
 
     this.onlyCountries = this.excludeCountries(
       this.extendCountries(
         this.getFilteredCountryList(onlyCountries, filteredCountries, preserveOrder.includes('onlyCountries')),
         localization, masks, areaCodes,
-        predecessor
+        prefix
       ),
       excludeCountries
     );
@@ -89,7 +96,7 @@ export default class CountryData {
       this.extendCountries(
         this.getFilteredCountryList(preferredCountries, filteredCountries, preserveOrder.includes('preferredCountries')),
         localization, masks, areaCodes,
-        predecessor
+        prefix
       );
   }
 
@@ -136,7 +143,7 @@ export default class CountryData {
     return filteredCountries;
   }
 
-  extendCountries = (countries, localization, masks, areaCodes, predecessor) => {
+  extendCountries = (countries, localization, masks, areaCodes, prefix) => {
     for (let i = 0; i < countries.length; i++) {
       if (localization[countries[i].iso2] !== undefined) {
         countries[i].localName = localization[countries[i].iso2];
@@ -178,9 +185,9 @@ export default class CountryData {
           foundCountry = null;
         }
       }
-      return predecessor == '+' ? updCountries : this.modifyPredecessor(updCountries, predecessor);
+      return prefix == '+' ? updCountries : this.modifyPrefix(updCountries, prefix);
     }
-    return predecessor == '+' ? countries : this.modifyPredecessor(countries, predecessor);
+    return prefix == '+' ? countries : this.modifyPrefix(countries, prefix);
   }
 
   getCustomAreas = (country, areaCodes) => {
@@ -193,9 +200,9 @@ export default class CountryData {
     return customAreas;
   }
 
-  modifyPredecessor = (countries, predecessor) => {
+  modifyPrefix = (countries, prefix) => {
     return countries.map(o => {
-      if (o.format && o.format.slice(0, 1) == '+') o.format = predecessor+o.format.slice(1)
+      if (o.format && o.format.slice(0, 1) == '+') o.format = prefix+o.format.slice(1)
       return o;
     });
   }

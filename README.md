@@ -338,6 +338,10 @@ import es from 'react-phone-input-2/lang/es.json'
     <td> ...... ...... .. </td>
   </tr>
   <tr>
+    <td> alwaysDefaultMask </td>
+    <td> false </td>
+  </tr>
+  <tr>
     <td> prefix </td>
     <td> + </td>
   </tr>
