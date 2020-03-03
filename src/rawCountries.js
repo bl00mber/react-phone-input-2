@@ -670,6 +670,13 @@ const rawCountries = [
     '.. .... ....'
   ],
   [
+    'Jersey',
+    ['europe', 'eu-union'],
+    'je',
+    '44',
+    '.... ......'
+  ],
+  [
     'Jordan',
     ['middle-east'],
     'jo',
