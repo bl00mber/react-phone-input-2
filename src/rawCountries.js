@@ -36,12 +36,6 @@ const rawCountries = [
     '213'
   ],
   [
-    'American Samoa',
-    ['oceania'],
-    'as',
-    '1684'
-  ],
-  [
     'Andorra',
     ['europe'],
     'ad',
@@ -52,12 +46,6 @@ const rawCountries = [
     ['africa'],
     'ao',
     '244'
-  ],
-  [
-    'Anguilla',
-    ['america', 'carribean'],
-    'ai',
-    '1264'
   ],
   [
     'Antigua and Barbuda',
@@ -154,12 +142,6 @@ const rawCountries = [
     '229'
   ],
   [
-    'Bermuda',
-    ['america', 'north-america'],
-    'bm',
-    '1441'
-  ],
-  [
     'Bhutan',
     ['asia'],
     'bt',
@@ -195,12 +177,6 @@ const rawCountries = [
     ['asia'],
     'io',
     '246'
-  ],
-  [
-    'British Virgin Islands',
-    ['america', 'carribean'],
-    'vg',
-    '1284'
   ],
   [
     'Brunei',
@@ -261,12 +237,6 @@ const rawCountries = [
     1
   ],
   [
-    'Cayman Islands',
-    ['america', 'carribean'],
-    'ky',
-    '1345'
-  ],
-  [
     'Central African Republic',
     ['africa'],
     'cf',
@@ -314,12 +284,6 @@ const rawCountries = [
     ['africa'],
     'cg',
     '242'
-  ],
-  [
-    'Cook Islands',
-    ['oceania'],
-    'ck',
-    '682'
   ],
   [
     'Costa Rica',
@@ -439,18 +403,6 @@ const rawCountries = [
     '251'
   ],
   [
-    'Falkland Islands',
-    ['america', 'south-america'],
-    'fk',
-    '500'
-  ],
-  [
-    'Faroe Islands',
-    ['europe'],
-    'fo',
-    '298'
-  ],
-  [
     'Fiji',
     ['oceania'],
     'fj',
@@ -514,22 +466,10 @@ const rawCountries = [
     '233'
   ],
   [
-    'Gibraltar',
-    ['europe'],
-    'gi',
-    '350'
-  ],
-  [
     'Greece',
     ['europe', 'eu-union'],
     'gr',
     '30'
-  ],
-  [
-    'Greenland',
-    ['america'],
-    'gl',
-    '299'
   ],
   [
     'Grenada',
@@ -668,13 +608,6 @@ const rawCountries = [
     'jp',
     '81',
     '.. .... ....'
-  ],
-  [
-    'Jersey',
-    ['europe', 'eu-union'],
-    'je',
-    '44',
-    '.... ......'
   ],
   [
     'Jordan',
@@ -885,12 +818,6 @@ const rawCountries = [
     '382'
   ],
   [
-    'Montserrat',
-    ['america', 'carribean'],
-    'ms',
-    '1664'
-  ],
-  [
     'Morocco',
     ['africa', 'north-africa'],
     'ma',
@@ -965,28 +892,10 @@ const rawCountries = [
     '234'
   ],
   [
-    'Niue',
-    ['asia'],
-    'nu',
-    '683'
-  ],
-  [
-    'Norfolk Island',
-    ['oceania'],
-    'nf',
-    '672'
-  ],
-  [
     'North Korea',
     ['asia'],
     'kp',
     '850'
-  ],
-  [
-    'Northern Mariana Islands',
-    ['oceania'],
-    'mp',
-    '1670'
   ],
   [
     'Norway',
@@ -1105,20 +1014,6 @@ const rawCountries = [
     '250'
   ],
   [
-    'Saint Barthélemy',
-    ['america', 'carribean'],
-    'bl',
-    '590',
-    '',
-    1
-  ],
-  [
-    'Saint Helena',
-    ['africa'],
-    'sh',
-    '290'
-  ],
-  [
     'Saint Kitts and Nevis',
     ['america', 'carribean'],
     'kn',
@@ -1129,20 +1024,6 @@ const rawCountries = [
     ['america', 'carribean'],
     'lc',
     '1758'
-  ],
-  [
-    'Saint Martin',
-    ['america', 'carribean'],
-    'mf',
-    '590',
-    '',
-    2
-  ],
-  [
-    'Saint Pierre and Miquelon',
-    ['america', 'north-america'],
-    'pm',
-    '508'
   ],
   [
     'Saint Vincent and the Grenadines',
@@ -1204,12 +1085,6 @@ const rawCountries = [
     'sg',
     '65',
     '....-....'
-  ],
-  [
-    'Sint Maarten',
-    ['america', 'carribean'],
-    'sx',
-    '1721'
   ],
   [
     'Slovakia',
@@ -1342,12 +1217,6 @@ const rawCountries = [
     '228'
   ],
   [
-    'Tokelau',
-    ['oceania'],
-    'tk',
-    '690'
-  ],
-  [
     'Tonga',
     ['oceania'],
     'to',
@@ -1379,22 +1248,10 @@ const rawCountries = [
     '993'
   ],
   [
-    'Turks and Caicos Islands',
-    ['america', 'carribean'],
-    'tc',
-    '1649'
-  ],
-  [
     'Tuvalu',
     ['asia'],
     'tv',
     '688'
-  ],
-  [
-    'U.S. Virgin Islands',
-    ['america', 'carribean'],
-    'vi',
-    '1340'
   ],
   [
     'Uganda',
@@ -1467,12 +1324,6 @@ const rawCountries = [
     ['asia'],
     'vn',
     '84'
-  ],
-  [
-    'Wallis and Futuna',
-    ['oceania'],
-    'wf',
-    '681'
   ],
   [
     'Yemen',

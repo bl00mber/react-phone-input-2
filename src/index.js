@@ -39,6 +39,10 @@ class PhoneInput extends React.Component {
       PropTypes.bool,
       PropTypes.arrayOf(PropTypes.string)
     ]),
+    enableTerritories: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
 
     disableCountryCode: PropTypes.bool,
     disableDropdown: PropTypes.bool,
@@ -104,6 +108,7 @@ class PhoneInput extends React.Component {
 
     autoFormat: true,
     enableAreaCodes: false,
+    enableTerritories: false,
     isValid: (inputNumber, onlyCountries) => true,
     disableCountryCode: false,
     disableDropdown: false,
@@ -142,7 +147,7 @@ class PhoneInput extends React.Component {
   constructor(props) {
     super(props);
     let { onlyCountries, preferredCountries } = new CountryData(
-      props.enableAreaCodes, props.regions,
+      props.enableAreaCodes, props.enableTerritories, props.regions,
       props.onlyCountries, props.preferredCountries, props.excludeCountries, props.preserveOrder,
       props.localization, props.masks, props.areaCodes,
       props.prefix, props.defaultMask, props.alwaysDefaultMask,

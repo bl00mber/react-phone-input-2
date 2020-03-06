@@ -74,6 +74,11 @@ class Demo extends React.Component {
             country='us'
             enableAreaCodes
           />
+          <p>Enabled territories with enableTerritories</p>
+          <PhoneInput
+            country='us'
+            enableTerritories
+          />
           <p>Disabled flag by default</p>
           <p>Customizable placeholder</p>
           <p>Customizable styles</p>
