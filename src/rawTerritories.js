@@ -16,7 +16,7 @@
 // ['north-america', 'south-america', 'central-america', 'carribean',
 //  'eu-union', 'ex-ussr', 'ex-yugos', 'baltic', 'middle-east', 'north-africa']
 
-const rawCountries = [
+const rawTerritories = [
   [
     'American Samoa',
     ['oceania'],
@@ -168,4 +168,4 @@ const rawCountries = [
   ],
 ]
 
-export default rawCountries
+export default rawTerritories
