@@ -1,4 +1,5 @@
 import rawCountries from './rawCountries'
+import rawTerritories from './rawTerritories'
 
 // let allCountryCodes = {}
 //
@@ -19,12 +20,12 @@ function getMask(prefix, dialCode, predefinedMask, defaultMask, alwaysDefaultMas
 }
 
 // enableAreaCodes: boolean || array of iso2 codes
-function initCountriesAndAreaCodes(enableAreaCodes, prefix, defaultMask, alwaysDefaultMask) {
+function initCountriesAndAreaCodes(countries, enableAreaCodes, prefix, defaultMask, alwaysDefaultMask) {
   let enableAllCodes;
   if (typeof enableAreaCodes === 'boolean') { enableAllCodes = true }
   else { enableAllCodes = false }
 
-  return [].concat(...rawCountries.map((country) => {
+  return [].concat(...countries.map((country) => {
     const countryItem = {
       name: country[0],
       regions: country[1],
@@ -63,8 +64,8 @@ function initCountriesAndAreaCodes(enableAreaCodes, prefix, defaultMask, alwaysD
   }))
 }
 
-function initCountries(prefix, defaultMask, alwaysDefaultMask) {
-  return rawCountries.map((country) => ({
+function initCountries(countries, prefix, defaultMask, alwaysDefaultMask) {
+  return countries.map((country) => ({
     name: country[0],
     regions: country[1],
     iso2: country[2],
@@ -77,15 +78,21 @@ function initCountries(prefix, defaultMask, alwaysDefaultMask) {
 
 export default class CountryData {
   constructor (
-    enableAreaCodes, regions,
+    enableAreaCodes, enableTerritories, regions,
     onlyCountries, preferredCountries, excludeCountries, preserveOrder,
     localization, masks, areaCodes,
     prefix, defaultMask, alwaysDefaultMask,
     priority,
   ) {
     let filteredCountries = enableAreaCodes ?
-      initCountriesAndAreaCodes(enableAreaCodes, prefix, defaultMask, alwaysDefaultMask) :
-      initCountries(prefix, defaultMask, alwaysDefaultMask);
+      initCountriesAndAreaCodes(rawCountries, enableAreaCodes, prefix, defaultMask, alwaysDefaultMask) :
+      initCountries(rawCountries, prefix, defaultMask, alwaysDefaultMask);
+    if (enableTerritories) {
+      let filteredTerritories = enableAreaCodes ?
+        initCountriesAndAreaCodes(rawTerritories, enableAreaCodes, prefix, defaultMask, alwaysDefaultMask) :
+        initCountries(rawTerritories, prefix, defaultMask, alwaysDefaultMask);
+      filteredCountries = this.initTerritories(filteredTerritories, filteredCountries);
+    }
     if (regions) filteredCountries = this.filterRegions(regions, filteredCountries);
 
     this.onlyCountries = this.excludeCountries(
@@ -121,6 +128,16 @@ export default class CountryData {
       });
       return matches.some(el => el);
     });
+  }
+
+  initTerritories = (filteredTerritories, filteredCountries) => {
+    const fullCountryList = [...filteredTerritories, ...filteredCountries];
+    fullCountryList.sort(function(a, b){
+      if(a.name < b.name) { return -1; }
+      if(a.name > b.name) { return 1; }
+      return 0;
+    });
+    return fullCountryList;
   }
 
   getFilteredCountryList = (countryCodes, sourceCountryList, preserveOrder) => {

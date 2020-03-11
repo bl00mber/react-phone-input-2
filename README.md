@@ -119,6 +119,11 @@ import 'react-phone-input-2/lib/style.css'
     <td> enable local codes for all countries </td>
   </tr>
   <tr>
+    <td> enableTerritories </td>
+    <td> false </td>
+    <td> enable dependent territories with a population count of ~100,000 or lower </td>
+  </tr>
+  <tr>
     <td> enableLongNumbers </td>
     <td> false </td>
     <td> </td>
