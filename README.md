@@ -121,7 +121,7 @@ import 'react-phone-input-2/lib/style.css'
   <tr>
     <td> enableTerritories </td>
     <td> false </td>
-    <td> enable dependent territories with a population count of ~100,000 or lower </td>
+    <td> enable dependent territories with population of ~100,000 or lower </td>
   </tr>
   <tr>
     <td> enableLongNumbers </td>
@@ -431,4 +431,4 @@ Code style changes not allowed
 
 Based on [react-phone-input](https://github.com/razagill/react-phone-input)
 
-Make sure you have donated for lib maintenance: [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/bloomber/20)
+Make sure you donated for lib maintenance [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/bloomber/20)

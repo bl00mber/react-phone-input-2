@@ -1,8 +1,9 @@
-## 2.12.0 (February 25, 2020)
+## 2.12.1 (March 11, 2020)
 * `priority`, `alwaysDefaultMask`
 * Custom `tabIndex`
 * Replace id usage to classes to avoid warnings [@J-theGit](https://github.com/J-theGit)
 * Dynamic mask creation
+* Move dependent territories to external file, add `enableTerritories` [@gillerg8](https://github.com/gillerg8)
 
 
 ## 2.11.0 (December 4, 2019)

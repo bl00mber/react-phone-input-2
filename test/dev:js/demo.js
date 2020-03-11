@@ -69,14 +69,15 @@ class Demo extends React.Component {
             value='+3802343252'
             priority={{ca: 0, us: 1, kz: 0, ru: 1}}
           />
-          <p>Enabled area codes with enableAreaCodes</p>
+          <p>Local area codes with enableAreaCodes</p>
           <PhoneInput
             country='us'
             enableAreaCodes
           />
-          <p>Enabled territories with enableTerritories</p>
+          <p>Dependent territories with enableTerritories</p>
           <PhoneInput
-            country='us'
+            country='vg'
+            enableSearch
             enableTerritories
           />
           <p>Disabled flag by default</p>
