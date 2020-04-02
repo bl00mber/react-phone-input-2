@@ -521,7 +521,7 @@ class PhoneInput extends React.Component {
     e.target.setSelectionRange(0, len);
   }
 
-  handleFlagItemClick = (country) => {
+  handleFlagItemClick = (country, e) => {
     const currentSelectedCountry = this.state.selectedCountry;
     const newSelectedCountry = this.state.onlyCountries.find(o => o == country);
     if (!newSelectedCountry) return;
@@ -537,7 +537,7 @@ class PhoneInput extends React.Component {
       formattedNumber
     }, () => {
       this.cursorToEnd();
-      if (this.props.onChange) this.props.onChange(formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData());
+      if (this.props.onChange) this.props.onChange(formattedNumber, this.getCountryData(), e);
     });
   }
 
@@ -725,7 +725,7 @@ class PhoneInput extends React.Component {
           data-dial-code='1'
           tabIndex={this.props.tabIndex}
           data-country-code={country.iso2}
-          onClick={() => this.handleFlagItemClick(country)}
+          onClick={(e) => this.handleFlagItemClick(country, e)}
         >
           <div className={inputFlagClasses}/>
           <span className='country-name'>{this.getDropdownCountryName(country)}</span>
