@@ -268,6 +268,8 @@ class PhoneInput extends React.Component {
   }
 
   updateFormattedNumber(value) {
+    if (!value) return this.setState({ selectedCountry: 0, formattedNumber: '' });
+
     const { onlyCountries, country } = this.state;
     let newSelectedCountry;
     let inputNumber = value;
@@ -449,6 +451,7 @@ class PhoneInput extends React.Component {
   }
 
   handleInput = (e) => {
+    const { value } = e.target;
     let formattedNumber = this.props.disableCountryCode ? '' : this.props.prefix;
     let newSelectedCountry = this.state.selectedCountry;
     let freezeSelection = this.state.freezeSelection;
@@ -459,14 +462,14 @@ class PhoneInput extends React.Component {
         newSelectedCountry.dialCode;
 
       const updatedInput = this.props.prefix+mainCode;
-      if (e.target.value.slice(0, updatedInput.length) !== updatedInput) return;
+      if (value.slice(0, updatedInput.length) !== updatedInput) return;
     }
 
     // Does not exceed 15 digit phone number limit
-    if (e.target.value.replace(/\D/g, '').length > 15) return;
+    if (value.replace(/\D/g, '').length > 15) return;
 
     // if the input is the same as before, must be some special key like enter etc.
-    if (e.target.value === this.state.formattedNumber) return;
+    if (value === this.state.formattedNumber) return;
 
     // ie hack
     if (e.preventDefault) {
@@ -477,9 +480,9 @@ class PhoneInput extends React.Component {
 
     if (this.props.onChange) e.persist();
 
-    if (e.target.value.length > 0) {
+    if (value.length > 0) {
       // before entering the number in new format, lets check if the dial code now matches some other country
-      const inputNumber = e.target.value.replace(/\D/g, '');
+      const inputNumber = value.replace(/\D/g, '');
 
       // we don't need to send the whole number to guess the country... only the first 6 characters are enough
       // the guess country function can then use memoization much more effectively since the set of input it

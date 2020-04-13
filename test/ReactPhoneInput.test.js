@@ -155,13 +155,22 @@ describe('<PhoneInput /> other props', () => {
         value={undefined}
       />)
 
-    // re-render the same component with new props
     rerender(
       <PhoneInput
-        value="012312332"
+        value="+3802343252"
+      />)
+
+    rerender(
+      <PhoneInput
+        value=""
+      />)
+
+    rerender(
+      <PhoneInput
+        value={null}
       />)
 
     expect(phoneInput.querySelector('.selected-flag').children.length).toBe(1)
-    expect(phoneInput.querySelector('.selected-flag').children[0].className).toBe('flag undefined')
+    expect(phoneInput.querySelector('.selected-flag').children[0].className).toBe('flag 0')
   })
 })
