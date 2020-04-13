@@ -367,10 +367,6 @@ import es from 'react-phone-input-2/lang/es.json'
     <td> false </td>
   </tr>
   <tr>
-    <td> tabIndex </td>
-    <td> 0 </td>
-  </tr>
-  <tr>
     <td> priority </td>
     <td> {{ca: 0, us: 1, kz: 0, ru: 1}} </td>
   </tr>

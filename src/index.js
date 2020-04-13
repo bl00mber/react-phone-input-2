@@ -70,7 +70,6 @@ class PhoneInput extends React.Component {
     renderStringAsFlag: PropTypes.string,
     autocompleteSearch: PropTypes.bool,
     jumpCursorToEnd: PropTypes.bool,
-    tabIndex: PropTypes.string,
     priority: PropTypes.object,
 
     onChange: PropTypes.func,
@@ -133,7 +132,6 @@ class PhoneInput extends React.Component {
     renderStringAsFlag: '',
     autocompleteSearch: false,
     jumpCursorToEnd: true,
-    tabIndex: '0',
     priority: null,
 
     onEnterKeyPress: () => {},
@@ -702,6 +700,7 @@ class PhoneInput extends React.Component {
 
   getCountryDropdownList = () => {
     const { preferredCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
+    const { disableDropdown, prefix } = this.props
     const { enableSearch, disableSearchIcon, searchClass, searchStyle, searchPlaceholder, autocompleteSearch } = this.props;
 
     const searchedCountries = this.getSearchFilteredCountries()
@@ -723,13 +722,13 @@ class PhoneInput extends React.Component {
           data-flag-key={`flag_no_${index}`}
           className={itemClasses}
           data-dial-code='1'
-          tabIndex={this.props.tabIndex}
+          tabIndex={disableDropdown ? '-1' : '0'}
           data-country-code={country.iso2}
           onClick={() => this.handleFlagItemClick(country)}
         >
           <div className={inputFlagClasses}/>
           <span className='country-name'>{this.getDropdownCountryName(country)}</span>
-          <span className='dial-code'>{country.format ? this.formatNumber(country.dialCode, country.format) : (this.props.prefix+country.dialCode)}</span>
+          <span className='dial-code'>{country.format ? this.formatNumber(country.dialCode, country.format) : (prefix+country.dialCode)}</span>
         </li>
       );
     });
@@ -844,7 +843,7 @@ class PhoneInput extends React.Component {
           className={flagViewClasses}
           style={this.props.buttonStyle}
           ref={el => this.dropdownContainerRef = el}
-          tabIndex={this.props.tabIndex}
+          tabIndex={disableDropdown ? '-1' : '0'}
           role='button'
         >
           {renderStringAsFlag ?
