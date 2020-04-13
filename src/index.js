@@ -354,7 +354,7 @@ class PhoneInput extends React.Component {
       pattern.shift();
       pattern = pattern.join(' ');
     } else {
-      if (enableAreaCodeStretch && country.isAreaCode) {
+      if (enableAreaCodeStretch && country.isAreaCode && format) {
         pattern = format.split(' ');
         pattern[1] = pattern[1].replace(/\.+/, ''.padEnd(country.areaCodeLength, '.'))
         pattern = pattern.join(' ');

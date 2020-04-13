@@ -343,7 +343,7 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
 <table>
   <tr>
     <td> defaultMask </td>
-    <td> ...... ...... .. </td>
+    <td> '...... ...... ..', '' </td>
   </tr>
   <tr>
     <td> alwaysDefaultMask </td>

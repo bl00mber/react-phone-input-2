@@ -31,7 +31,7 @@ function initCountriesAndAreaCodes(countries, enableAreaCodes, prefix, defaultMa
       regions: country[1],
       iso2: country[2],
       dialCode: country[3],
-      format: getMask(prefix, country[3], country[4], defaultMask, alwaysDefaultMask),
+      format: defaultMask ? getMask(prefix, country[3], country[4], defaultMask, alwaysDefaultMask) : undefined,
       priority: country[5] || 0,
       hasAreaCodes: country[6] ? true : false,
     };
