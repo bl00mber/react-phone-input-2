@@ -140,6 +140,13 @@ class Demo extends React.Component {
               autoFocus: true
             }}
           />
+          <p>enableAreaCodeStretch: +61 (2), +61 (02)</p>
+          <PhoneInput
+            onlyCountries={['au']}
+            enableAreaCodes
+            enableAreaCodeStretch
+            country='au'
+          />
         </div>
         <div style={{display: 'inline-block', marginLeft: '40px', verticalAlign: 'top'}}>
           <p>Search using iso2 or country name</p>

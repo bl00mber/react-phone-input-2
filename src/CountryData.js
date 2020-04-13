@@ -43,6 +43,7 @@ function initCountriesAndAreaCodes(countries, enableAreaCodes, prefix, defaultMa
       areaItem.regions = country[1];
       areaItem.dialCode = country[3] + areaCode;
       areaItem.isAreaCode = true;
+      areaItem.areaCodeLength = areaCode.length;
 
       areaItems.push(areaItem);
 

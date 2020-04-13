@@ -317,8 +317,11 @@ import es from 'react-phone-input-2/lang/es.json'
 <PhoneInput
   enableAreaCodes={true}
   enableAreaCodes={['us', 'ca']}
+  enableAreaCodeStretch
 />
 ```
+
+If `enableAreaCodeStretch` is added, the part of the mask with the area code will not stretch to length of the respective section of phone mask.
 
 ### Custom masks
 ```jsx
