@@ -373,6 +373,10 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
     <td> priority </td>
     <td> {{ca: 0, us: 1, kz: 0, ru: 1}} </td>
   </tr>
+  <tr>
+    <td> enableClickOutside </td>
+    <td> true </td>
+  </tr>
 </table>
 
 ### Custom localization

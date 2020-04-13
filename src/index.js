@@ -72,6 +72,7 @@ class PhoneInput extends React.Component {
     jumpCursorToEnd: PropTypes.bool,
     priority: PropTypes.object,
     enableAreaCodeStretch: PropTypes.bool,
+    enableClickOutside: PropTypes.bool,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -135,6 +136,7 @@ class PhoneInput extends React.Component {
     jumpCursorToEnd: true,
     priority: null,
     enableAreaCodeStretch: false,
+    enableClickOutside: true,
 
     onEnterKeyPress: () => {},
 
@@ -199,13 +201,13 @@ class PhoneInput extends React.Component {
   }
 
   componentDidMount() {
-    if (document.addEventListener) {
+    if (document.addEventListener && enableClickOutside) {
       document.addEventListener('mousedown', this.handleClickOutside);
     }
   }
 
   componentWillUnmount() {
-    if (document.removeEventListener) {
+    if (document.removeEventListener && enableClickOutside) {
       document.removeEventListener('mousedown', this.handleClickOutside);
     }
   }
