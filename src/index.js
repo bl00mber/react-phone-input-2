@@ -73,6 +73,7 @@ class PhoneInput extends React.Component {
     priority: PropTypes.object,
     enableAreaCodeStretch: PropTypes.bool,
     enableClickOutside: PropTypes.bool,
+    showDropdown: PropTypes.bool,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -137,6 +138,7 @@ class PhoneInput extends React.Component {
     priority: null,
     enableAreaCodeStretch: false,
     enableClickOutside: true,
+    showDropdown: false,
 
     onEnterKeyPress: () => {},
 
@@ -193,7 +195,7 @@ class PhoneInput extends React.Component {
       selectedCountry: countryGuess,
       highlightCountryIndex,
       queryString: '',
-      showDropdown: false,
+      showDropdown: props.showDropdown,
       freezeSelection: false,
       debouncedQueryStingSearcher: debounce(this.searchCountry, 250),
       searchValue: '',
@@ -201,13 +203,13 @@ class PhoneInput extends React.Component {
   }
 
   componentDidMount() {
-    if (document.addEventListener && enableClickOutside) {
+    if (document.addEventListener && this.props.enableClickOutside) {
       document.addEventListener('mousedown', this.handleClickOutside);
     }
   }
 
   componentWillUnmount() {
-    if (document.removeEventListener && enableClickOutside) {
+    if (document.removeEventListener && this.props.enableClickOutside) {
       document.removeEventListener('mousedown', this.handleClickOutside);
     }
   }
@@ -270,7 +272,7 @@ class PhoneInput extends React.Component {
   }
 
   updateFormattedNumber(value) {
-    if (!value) return this.setState({ selectedCountry: 0, formattedNumber: '' });
+    if (value === null) return this.setState({ selectedCountry: 0, formattedNumber: '' });
 
     const { onlyCountries, country } = this.state;
     let newSelectedCountry;

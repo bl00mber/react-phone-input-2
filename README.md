@@ -377,6 +377,10 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
     <td> enableClickOutside </td>
     <td> true </td>
   </tr>
+  <tr>
+    <td> showDropdown </td>
+    <td> false </td>
+  </tr>
 </table>
 
 ### Custom localization
