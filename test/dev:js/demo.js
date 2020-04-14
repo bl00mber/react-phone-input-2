@@ -184,12 +184,12 @@ class Demo extends React.Component {
           <PhoneInput
             value={this.state.value}
             onChange={(value, country, e) => {console.log(value, country, e); this.setState({ value })}}
-            prefix=''
             enableAreaCodes
           />
           <PhoneInput
             containerStyle={{marginBottom: '15px'}}
             country={this.state.country}
+            prefix=''
             enableAreaCodes
           />
           <button onClick={() => {
