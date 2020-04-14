@@ -104,7 +104,7 @@ class PhoneInput extends React.Component {
     dropdownStyle: {},
     searchStyle: {},
 
-    containerClass: 'react-tel-input',
+    containerClass: '',
     inputClass: '',
     buttonClass: '',
     dropdownClass: '',
@@ -848,6 +848,10 @@ class PhoneInput extends React.Component {
     const { onlyCountries, selectedCountry, showDropdown, formattedNumber } = this.state;
     const { disableDropdown, renderStringAsFlag } = this.props;
 
+    const containerClasses = classNames({
+      [this.props.containerClass]: true,
+      'react-tel-input': true,
+    });
     const arrowClasses = classNames({'arrow': true, 'up': showDropdown});
     const inputClasses = classNames({
       [this.props.inputClass]: true,
@@ -868,7 +872,7 @@ class PhoneInput extends React.Component {
 
     return (
       <div
-        className={this.props.containerClass}
+        className={containerClasses}
         style={this.props.style || this.props.containerStyle}
         onKeyDown={this.handleKeydown}>
         <input
