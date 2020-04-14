@@ -74,11 +74,6 @@ import 'react-phone-input-2/lib/style.css'
     <td> string </td>
     <td colspan="2"> custom placeholder </td>
   </tr>
-  <tr>
-    <td> searchPlaceholder </td>
-    <td> string </td>
-    <td colspan="2"> custom search placeholder </td>
-  </tr>
 
   <tr>
     <td> inputProps </td>
@@ -353,6 +348,15 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
     <td> prefix </td>
     <td> + </td>
   </tr>
+  <tr>
+    <td> searchPlaceholder </td>
+    <td> search </td>
+  </tr>
+  <tr>
+    <td> searchNotFound </td>
+    <td> 'No entries to show' </td>
+  </tr>
+
   <tr>
     <td> copyNumbersOnly </td>
     <td> true </td>

@@ -19,6 +19,7 @@ class PhoneInput extends React.Component {
 
     placeholder: PropTypes.string,
     searchPlaceholder: PropTypes.string,
+    searchNotFound: PropTypes.string,
     disabled: PropTypes.bool,
 
     containerStyle: PropTypes.object,
@@ -93,6 +94,7 @@ class PhoneInput extends React.Component {
 
     placeholder: '1 (702) 123-4567',
     searchPlaceholder: 'search',
+    searchNotFound: 'No entries to show',
     flagsImagePath: './flags.png',
     disabled: false,
 
@@ -703,12 +705,18 @@ class PhoneInput extends React.Component {
     if (enableSearch && sanitizedSearchValue) {
       // [...new Set()] to get rid of duplicates
       // firstly search by iso2 code
-      const iso2countries = allCountries.filter(({ name, localName, iso2, dialCode }) =>
-        [`${iso2}`].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
-      const searchedCountries = allCountries.filter(({ name, localName, iso2, dialCode }) =>
-        [`${name}`, `${localName}`, this.props.prefix+dialCode].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
-      this.scrollToTop()
-      return [...new Set([].concat(iso2countries, searchedCountries))]
+      if (/^\d+$/.test(sanitizedSearchValue)) { // contains digits only
+         // values wrapped in ${} to prevent undefined
+        return allCountries.filter(({ dialCode }) =>
+          [`${dialCode}`].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
+      } else {
+        const iso2countries = allCountries.filter(({ iso2 }) =>
+          [`${iso2}`].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
+        const searchedCountries = allCountries.filter(({ name, localName, iso2 }) =>
+          [`${name}`, `${localName}`].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
+        this.scrollToTop()
+        return [...new Set([].concat(iso2countries, searchedCountries))]
+      }
     } else {
       return allCountries
     }
@@ -803,7 +811,7 @@ class PhoneInput extends React.Component {
           ? countryDropdownList
           : (
             <li className='no-entries-message'>
-              <span>No entries to show.</span>
+              <span>{searchNotFound}</span>
             </li>
           )}
       </ul>
