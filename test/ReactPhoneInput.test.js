@@ -52,7 +52,7 @@ describe('<PhoneInput /> main props', () => {
     expect(phoneInput.querySelector('li[data-country-code="us"]').classList).toContain('highlight')
   })
 
-  test('receive correct value', () => {
+  test('receive formatted value', () => {
     const { container: phoneInput } = render(
       <PhoneInput
         value='+3802343252'
@@ -64,7 +64,7 @@ describe('<PhoneInput /> main props', () => {
 
 
 describe('<PhoneInput /> event handlers', () => {
-  test('onChange is being called with formatted value and country object as callback arguments', () => {
+  test('onChange is called with unformatted value and country object as callback arguments', () => {
     const mockFn = jest.fn();
     const { container: phoneInput } = render(
       <PhoneInput
@@ -73,7 +73,7 @@ describe('<PhoneInput /> event handlers', () => {
       />)
 
     fireEvent.change(phoneInput.querySelector('.form-control'), {target: {value: '12345'}})
-    expect(mockFn).toHaveBeenCalledWith('+1 (234) 5', {name: 'United States', dialCode: '1', 'format': '+. (...) ...-....', countryCode: 'us'}, expect.any(Object))
+    expect(mockFn).toHaveBeenCalledWith('12345', {name: 'United States', dialCode: '1', 'format': '+. (...) ...-....', countryCode: 'us'}, expect.any(Object))
   })
 })
 

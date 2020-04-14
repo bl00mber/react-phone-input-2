@@ -218,7 +218,7 @@ class PhoneInput extends React.Component {
     if (nextProps.country && nextProps.country !== this.state.country) {
       this.updateCountry(nextProps.country);
     }
-    else if (nextProps.value !== this.state.formattedNumber) {
+    else if (nextProps.value !== this.props.value) {
       this.updateFormattedNumber(nextProps.value);
     }
   }
@@ -274,24 +274,24 @@ class PhoneInput extends React.Component {
   updateFormattedNumber(value) {
     if (value === null) return this.setState({ selectedCountry: 0, formattedNumber: '' });
 
-    const { onlyCountries, country } = this.state;
+    const { onlyCountries, country, selectedCountry } = this.state;
     let newSelectedCountry;
-    let inputNumber = value;
+    let inputNumber = value.replace(/\D/g, '');
     let formattedNumber = value;
 
-    // if inputNumber does not start with this.props.prefix, then use default country's dialing prefix,
-    // otherwise use logic for finding country based on country prefix.
-    if (!startsWith(inputNumber, this.props.prefix)) {
-      newSelectedCountry = this.state.selectedCountry || onlyCountries.find(o => o.iso2 == country);
-      const dialCode = newSelectedCountry && !startsWith(inputNumber.replace(/\D/g, ''), newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
+    // if value does not start with prefix+selectedCountry.dialCode, then use default country's dialing prefix,
+    // otherwise try to find country based on value dialCode
+    const prefixDialCode = selectedCountry ? this.props.prefix+selectedCountry.dialCode : this.props.prefix;
+    if (!startsWith(value, prefixDialCode)) {
+      newSelectedCountry = selectedCountry || onlyCountries.find(o => o.iso2 == country);
+      const dialCode = newSelectedCountry && !startsWith(inputNumber, newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
       formattedNumber = this.formatNumber(
-        (this.props.disableCountryCode ? '' : dialCode) + inputNumber.replace(/\D/g, ''),
+        (this.props.disableCountryCode ? '' : dialCode) + inputNumber,
         newSelectedCountry ? (newSelectedCountry) : undefined
       );
     }
     else {
-      inputNumber = inputNumber.replace(/\D/g, '');
-      newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), onlyCountries, country) || this.state.selectedCountry;
+      newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), onlyCountries, country) || selectedCountry;
       formattedNumber = this.formatNumber(inputNumber, newSelectedCountry);
     }
 

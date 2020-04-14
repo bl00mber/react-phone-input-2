@@ -166,6 +166,7 @@ class Demo extends React.Component {
             searchStyle={{margin: '0', width: '97%', height: '30px'}}
             enableSearch
             disableSearchIcon
+            prefix=''
           />
           <p>Custom masks & area codes</p>
           <PhoneInput
