@@ -3,6 +3,7 @@
   "version": "2.12.1",
   "description": "A react component to format phone numbers",
   "main": "lib/lib.js",
+  "typings": "index.d.ts",
   "scripts": {
     "test": "jest",
     "start": "TARGET=dev:js NODE_ENV=development webpack-dev-server --progress",
@@ -36,7 +37,8 @@
     "lang",
     "lib",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "index.d.ts"
   ],
   "author": "Nick Reiley <bloomber111@gmail.com> (https://github.com/bl00mber)",
   "contributors": [
