@@ -184,7 +184,8 @@ class Demo extends React.Component {
           <p>State manipulations</p>
           <PhoneInput
             value={this.state.value}
-            onChange={(value, country, e) => {console.log(value, country, e); this.setState({ value })}}
+            onChange={(value, country, e, formattedValue) => {console.log(value, country, e, formattedValue);
+              this.setState({ value })}}
             enableAreaCodes
             defaultErrorMessage='Invalid value'
             isValid={(value, country) => {

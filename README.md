@@ -233,6 +233,8 @@ import 'react-phone-input-2/lib/style.css'
   </tr>
 </table>
 
+onChange(value, country, e, formattedValue)
+
 Country data object not returns from onKeyDown event
 
 <table>
