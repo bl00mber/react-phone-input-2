@@ -322,7 +322,7 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
 ```jsx
 <PhoneInput
   onlyCountries={['fr', 'at']}
-  masks={{fr: '+.. (...) ..-..-..', at: '+.. (....) ...-....'}}
+  masks={{fr: '(...) ..-..-..', at: '(....) ...-....'}}
 />
 ```
 
@@ -338,7 +338,7 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
 <table>
   <tr>
     <td> defaultMask </td>
-    <td> '...... ...... ..', '' </td>
+    <td> ... ... ... ... .. </td>
   </tr>
   <tr>
     <td> alwaysDefaultMask </td>
@@ -350,7 +350,7 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
   </tr>
   <tr>
     <td> searchPlaceholder </td>
-    <td> search </td>
+    <td> 'search' </td>
   </tr>
   <tr>
     <td> searchNotFound </td>
@@ -428,6 +428,9 @@ import startsWith from 'lodash.startswith';
   }}
 />
 ```
+
+### Clear country
+To clear country, pass `null` as value.
 
 ### CDN
 ```html

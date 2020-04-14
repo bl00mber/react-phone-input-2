@@ -113,9 +113,8 @@ class Demo extends React.Component {
           />
           <p>Custom regions selected: {`{['north-america', 'carribean']}`}</p>
           <PhoneInput
-            country='ca'
+            country='us'
             regions={['north-america', 'carribean']}
-            enableAreaCodes
           />
           <p>Disabled dropdown and country code</p>
           <PhoneInput
@@ -132,7 +131,6 @@ class Demo extends React.Component {
             country='de'
             onlyCountries={['de', 'es']}
             localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
-            enableAreaCodes
             countryCodeEditable={false}
             inputExtraProps={{
               name: 'tel',
@@ -172,14 +170,16 @@ class Demo extends React.Component {
           <PhoneInput
             country='at'
             onlyCountries={['fr', 'at', 'gr', 'us']}
-            masks={{fr: '+.. (...) ..-..-..', at: '+.. (....) ...-....', zz: '+.. ... ...'}}
+            masks={{fr: '(...) ..-..-..', at: '(....) ...-....', zz: '... ...'}}
             areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
+            enableAreaCodes
           />
           <PhoneInput
             country='eu'
             onlyCountries={['fr', 'at', 'gr', 'us']}
-            masks={{fr: '+.. (...) ..-..-..', at: '+.. (....) ...-....', zz: '+.. ... ...'}}
+            masks={{fr: '(...) ..-..-..', at: '(....) ...-....', zz: '... ...'}}
             areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
+            enableAreaCodes
           />
           <p>State manipulations</p>
           <PhoneInput

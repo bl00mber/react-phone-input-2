@@ -118,7 +118,7 @@ describe('<PhoneInput /> other props', () => {
       <PhoneInput
         country='fr'
         onlyCountries={['fr']}
-        masks={{'fr': '+.. (...) ..-..-..'}}
+        masks={{'fr': '(...) ..-..-..'}}
         value='33543773322'
       />)
 
