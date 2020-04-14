@@ -5,7 +5,6 @@
     position: relative;
     font-size: 14px;
     letter-spacing: .01rem;
-    z-index: 0;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     padding-left: 48px;
@@ -33,7 +32,6 @@
     &.open {
       box-shadow: rgba(34, 36, 38, 0.15) 0px 2px 3px 0px;
       border-color: rgb(150, 200, 218);
-      z-index: 2;
       border-radius: 5px 5px 0 0;
       border-bottom: none;
       box-shadow: none;
@@ -169,5 +167,15 @@
     &::-webkit-scrollbar { width: 12px; }
     &::-webkit-scrollbar-track { background-color: #e6e6e6; }
     &::-webkit-scrollbar-thumb { background-color: #c5c5c4; border-radius: 5px; }
+  }
+  .invalid-number-message {
+    position: absolute;
+    z-index: 1;
+    font-size: 13px;
+    left: 46px;
+    top: -8px;
+    background: #fff;
+    padding: 0 2px;
+    color: #de0000;
   }
 }

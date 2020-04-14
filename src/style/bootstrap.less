@@ -17,16 +17,12 @@
       border-color: #80bdff;
       outline: 0;
       box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+      &.invalid-number {
+        box-shadow: 0 0 0 0.2rem rgba(222,0,0,.25);
+      }
     }
     &.invalid-number {
       border: 1px solid #f44336;
-      border-left-color: #cacaca;
-      &:focus {
-        box-shadow: 0 0 0 1px #f44336;
-      }
-    }
-    &.open {
-      z-index: 2;
     }
   }
   .flag-dropdown {
@@ -147,5 +143,15 @@
       padding: 7px 10px 11px;
       opacity: .7;
     }
+  }
+  .invalid-number-message {
+    position: absolute;
+    z-index: 1;
+    font-size: 13px;
+    left: 25px;
+    top: -7px;
+    background: #fff;
+    padding: 0 5px;
+    color: #de0000;
   }
 }

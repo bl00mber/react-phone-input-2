@@ -385,6 +385,10 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
     <td> showDropdown </td>
     <td> false </td>
   </tr>
+  <tr>
+    <td> defaultInvalidMessage </td>
+    <td> string </td>
+  </tr>
 </table>
 
 ### Custom localization
@@ -417,12 +421,28 @@ handleOnChange(value, data, event) {
 ```
 
 ### Check validity of the phone number
+`isValid(value, country, countries, hiddenAreaCodes)`
+
+```jsx
+<PhoneInput
+  isValid={(value, country) => {
+    if (value.match(/12345/)) {
+      return 'Invalid value: '+value+', '+country.name;
+    } else if (value.match(/1234/)) {
+      return false;
+    } else {
+      return true;
+    }
+  }}
+/>
+```
+
 ```jsx
 import startsWith from 'lodash.startswith';
 
 <PhoneInput
-  isValid={(inputNumber, onlyCountries) => {
-    return onlyCountries.some((country) => {
+  isValid={(inputNumber, country, countries) => {
+    return countries.some((country) => {
       return startsWith(inputNumber, country.dialCode) || startsWith(country.dialCode, inputNumber);
     });
   }}

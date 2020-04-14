@@ -113,7 +113,7 @@ class Demo extends React.Component {
           />
           <p>Custom regions selected: {`{['north-america', 'carribean']}`}</p>
           <PhoneInput
-            country='us'
+            country='ca'
             regions={['north-america', 'carribean']}
           />
           <p>Disabled dropdown and country code</p>
@@ -186,6 +186,16 @@ class Demo extends React.Component {
             value={this.state.value}
             onChange={(value, country, e) => {console.log(value, country, e); this.setState({ value })}}
             enableAreaCodes
+            defaultErrorMessage='Invalid value'
+            isValid={(value, country) => {
+              if (value.match(/12345/)) {
+                return 'Invalid value: '+value+', '+country.name
+              } else if (value.match(/1234/)) {
+                return false
+              } else {
+                return true
+              }
+            }}
           />
           <PhoneInput
             containerStyle={{marginBottom: '15px'}}

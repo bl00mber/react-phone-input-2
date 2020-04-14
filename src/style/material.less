@@ -23,24 +23,21 @@
     }
     &.invalid-number {
       border: 1px solid #f44336;
-      border-left-color: #cacaca;
       &:focus {
         box-shadow: 0 0 0 1px #f44336;
       }
       &+div:before {
         content: 'Error';
+        display: none;
         color: #f44336;
         width: 27px;
       }
-    }
-    &.open {
-      z-index: 2;
     }
     &+div:before {
       content: 'Phone input';
       position: absolute;
       top: -7px;
-      left: 19px;
+      left: 25px;
       display: block;
       background: white;
       padding: 0 5px;
@@ -169,5 +166,15 @@
       padding: 7px 10px 11px;
       opacity: .7;
     }
+  }
+  .invalid-number-message {
+    position: absolute;
+    z-index: 1;
+    font-size: 13px;
+    left: 25px;
+    top: -7px;
+    background: #fff;
+    padding: 0 5px;
+    color: #de0000;
   }
 }

@@ -81,7 +81,11 @@ class PhoneInput extends React.Component {
     onBlur: PropTypes.func,
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
-    isValid: PropTypes.func,
+    isValid: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.func,
+    ]),
+    defaultErrorMessage: PropTypes.string,
   }
 
   static defaultProps = {
@@ -113,7 +117,6 @@ class PhoneInput extends React.Component {
     autoFormat: true,
     enableAreaCodes: false,
     enableTerritories: false,
-    isValid: (inputNumber, onlyCountries) => true,
     disableCountryCode: false,
     disableDropdown: false,
     enableLongNumbers: false,
@@ -142,6 +145,9 @@ class PhoneInput extends React.Component {
     enableAreaCodeStretch: false,
     enableClickOutside: true,
     showDropdown: false,
+
+    isValid: true, // (value, selectedCountry, onlyCountries, hiddenAreaCodes) => true | false | 'Message'
+    defaultErrorMessage: '',
 
     onEnterKeyPress: null, // null or function
 
@@ -279,16 +285,17 @@ class PhoneInput extends React.Component {
 
   // Hooks for updated props
   updateCountry = (country) => {
+    const { onlyCountries } = this.state
     let newSelectedCountry;
-    if (country.indexOf(0) >= '0' && country.indexOf(0) <= '9') {
-      newSelectedCountry = this.state.onlyCountries.find(o => o.dialCode == +country);
+    if (country.indexOf(0) >= '0' && country.indexOf(0) <= '9') { // digit
+      newSelectedCountry = onlyCountries.find(o => o.dialCode == +country);
     } else {
-      newSelectedCountry = this.state.onlyCountries.find(o => o.iso2 == country);
+      newSelectedCountry = onlyCountries.find(o => o.iso2 == country);
     }
     if (newSelectedCountry && newSelectedCountry.dialCode) {
       this.setState({
         selectedCountry: newSelectedCountry,
-        formattedNumber: this.props.disableCountryCode ? '' : this.props.prefix+newSelectedCountry.dialCode
+        formattedNumber: this.props.disableCountryCode ? '' : this.formatNumber(newSelectedCountry.dialCode, newSelectedCountry),
       });
     }
   }
@@ -301,9 +308,8 @@ class PhoneInput extends React.Component {
 
     if (value === '') return this.setState({ selectedCountry, formattedNumber: '' });
 
-    let newSelectedCountry;
     let inputNumber = value.replace(/\D/g, '');
-    let formattedNumber = value;
+    let newSelectedCountry, formattedNumber;
 
     // if new value start with selectedCountry.dialCode, format number, otherwise find newSelectedCountry
     if (selectedCountry && startsWith(value, selectedCountry.dialCode)) {
@@ -844,8 +850,22 @@ class PhoneInput extends React.Component {
   }
 
   render() {
-    const { onlyCountries, selectedCountry, showDropdown, formattedNumber } = this.state;
-    const { disableDropdown, renderStringAsFlag } = this.props;
+    const { onlyCountries, selectedCountry, showDropdown, formattedNumber, hiddenAreaCodes } = this.state;
+    const { disableDropdown, renderStringAsFlag, isValid, defaultErrorMessage } = this.props;
+
+    let isValidValue, errorMessage;
+    if (typeof isValid === 'boolean') {
+      isValidValue = isValid;
+    } else {
+      const isValidProcessed = isValid(formattedNumber.replace(/\D/g, ''), selectedCountry, onlyCountries, hiddenAreaCodes)
+      if (typeof isValidProcessed === 'boolean') {
+        isValidValue = isValidProcessed;
+        if (isValidValue === false) errorMessage = defaultErrorMessage
+      } else { // typeof === 'string'
+        isValidValue = false;
+        errorMessage = isValidProcessed;
+      }
+    }
 
     const containerClasses = classNames({
       [this.props.containerClass]: true,
@@ -855,7 +875,7 @@ class PhoneInput extends React.Component {
     const inputClasses = classNames({
       [this.props.inputClass]: true,
       'form-control': true,
-      'invalid-number': !this.props.isValid(formattedNumber.replace(/\D/g, ''), onlyCountries),
+      'invalid-number': !isValidValue,
       'open': showDropdown,
     });
     const selectedFlagClasses = classNames({
@@ -865,6 +885,7 @@ class PhoneInput extends React.Component {
     const flagViewClasses = classNames({
       [this.props.buttonClass]: true,
       'flag-dropdown': true,
+      'invalid-number': !isValidValue,
       'open': showDropdown,
     });
     const inputFlagClasses = `flag ${selectedCountry && selectedCountry.iso2}`;
@@ -874,6 +895,7 @@ class PhoneInput extends React.Component {
         className={containerClasses}
         style={this.props.style || this.props.containerStyle}
         onKeyDown={this.handleKeydown}>
+        {errorMessage && <div className='invalid-number-message'>{errorMessage}</div>}
         <input
           className={inputClasses}
           style={this.props.inputStyle}
