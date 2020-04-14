@@ -143,7 +143,7 @@ class PhoneInput extends React.Component {
     enableClickOutside: true,
     showDropdown: false,
 
-    onEnterKeyPress: () => {},
+    onEnterKeyPress: null, // null or function
 
     keys: {
       UP: 38, DOWN: 40, RIGHT: 39, LEFT: 37, ENTER: 13,
@@ -692,12 +692,11 @@ class PhoneInput extends React.Component {
   }
 
   handleInputKeyDown = (e) => {
-    const { keys } = this.props;
+    const { keys, onEnterKeyPress, onKeyDown } = this.props;
     if (e.which === keys.ENTER) {
-      this.props.onEnterKeyPress(e);
+      if (onEnterKeyPress) onEnterKeyPress(e);
     }
-
-    if (this.props.onKeyDown) this.props.onKeyDown(e);
+    if (onKeyDown) onKeyDown(e);
   }
 
   handleClickOutside = (e) => {
