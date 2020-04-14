@@ -1,3 +1,21 @@
+## 2.13.1 (April 15, 2020)
+* `enableAreaCodeStretch` to handle area codes of different length on the same country
+* null passed as value will clear country, empty string will clear prefix
+* `enableClickOutside` to disable dropdown close handler
+* `showDropdown` to allow initially opened dropdowns
+* Always return unformatted value as 1st argument and formatted as 4th in onChange
+* Search by dialCode
+* `searchNotFound` to modify text showed when no entry is found
+* Do not use prefix and dialCode in custom masks
+* Add `hiddenAreaCodes` which is the array of disabled area codes used to compute correct country
+* Enable event propagation for onEnterKeyPress
+* Validation `defaultErrorMessage` on the top of the input
+* Derive errorMessage from isValid handler
+* Mexican area codes [@fleetofthemalden](https://github.com/fleetofthemalden)
+* Australia area codes
+* Typescript support
+
+
 ## 2.12.1 (March 11, 2020)
 * `priority`, `alwaysDefaultMask`
 * Custom `tabIndex`

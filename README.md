@@ -388,7 +388,7 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
     <td> false </td>
   </tr>
   <tr>
-    <td> defaultInvalidMessage </td>
+    <td> defaultErrorMessage </td>
     <td> string </td>
   </tr>
 </table>
