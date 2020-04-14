@@ -305,23 +305,21 @@ class PhoneInput extends React.Component {
     let inputNumber = value.replace(/\D/g, '');
     let formattedNumber = value;
 
-    // if value does not start with prefix+selectedCountry.dialCode, then use default country's dialing prefix,
-    // otherwise try to find country based on value dialCode
-    const prefixDialCode = selectedCountry ? prefix : prefix;
-    if (!startsWith(value, prefixDialCode)) {
-      newSelectedCountry = selectedCountry || onlyCountries.find(o => o.iso2 == country);
-      const dialCode = newSelectedCountry && !startsWith(inputNumber, newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
+    // if new value start with selectedCountry.dialCode, format number, otherwise find newSelectedCountry
+    if (selectedCountry && startsWith(value, selectedCountry.dialCode)) {
+      formattedNumber = this.formatNumber(inputNumber, selectedCountry);
+      this.setState({ formattedNumber });
+    }
+    else {
+      newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
+      const dialCode = newSelectedCountry && startsWith(inputNumber, newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
+
       formattedNumber = this.formatNumber(
         (this.props.disableCountryCode ? '' : dialCode) + inputNumber,
         newSelectedCountry ? (newSelectedCountry) : undefined
       );
+      this.setState({ selectedCountry: newSelectedCountry, formattedNumber });
     }
-    else {
-      newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
-      formattedNumber = this.formatNumber(inputNumber, newSelectedCountry);
-    }
-
-    this.setState({ selectedCountry: newSelectedCountry, formattedNumber });
   }
 
   // View methods
@@ -438,7 +436,8 @@ class PhoneInput extends React.Component {
   cursorToEnd = () => {
     const input = this.numberInputRef;
     input.focus();
-    const len = input.value.length;
+    let len = input.value.length;
+    if (input.value.charAt(len-1)=== ')') len = len-1;
     input.setSelectionRange(len, len);
   }
 
