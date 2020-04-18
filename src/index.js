@@ -5,6 +5,7 @@ import memoize from 'lodash.memoize';
 import reduce from 'lodash.reduce';
 import startsWith from 'lodash.startswith';
 import classNames from 'classnames';
+import './utils/prototypes'
 
 import CountryData from './CountryData.js';
 
