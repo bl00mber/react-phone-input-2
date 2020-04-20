@@ -164,6 +164,7 @@ class Demo extends React.Component {
             searchStyle={{margin: '0', width: '97%', height: '30px'}}
             enableSearch
             disableSearchIcon
+            searchNotFound='Not found'
             prefix=''
           />
           <p>Custom masks & area codes</p>
