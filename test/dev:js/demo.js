@@ -95,7 +95,6 @@ class Demo extends React.Component {
             buttonStyle={{ borderRadius: '5px 0 0 5px' }}
             dropdownStyle={{ width: '300px' }}
           />
-
           <p>Customizable classes</p>
           <PhoneInput
             containerClass={'react-tel-input'}
