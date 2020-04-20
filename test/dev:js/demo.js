@@ -95,20 +95,6 @@ class Demo extends React.Component {
             buttonStyle={{ borderRadius: '5px 0 0 5px' }}
             dropdownStyle={{ width: '300px' }}
           />
-          <p>Disable initial country guess</p>
-          <PhoneInput
-            value={'965555555'}
-            inputStyle={{
-              width: '300px',
-              height: '35px',
-              fontSize: '13px',
-              paddingLeft: '48px',
-              borderRadius: '5px'
-            }}
-            buttonStyle={{ borderRadius: '5px 0 0 5px' }}
-            dropdownStyle={{ width: '300px' }}
-            disableInitialCountryGuess
-          />
 
           <p>Customizable classes</p>
           <PhoneInput
