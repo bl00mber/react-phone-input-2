@@ -219,18 +219,18 @@ class PhoneInput extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    if (document.removeEventListener && this.props.enableClickOutside) {
-      document.removeEventListener('mousedown', this.handleClickOutside);
+  componentDidUpdate(prevProps) {
+    if (prevProps.country !== this.props.country) {
+      this.updateCountry(prevProps.country);
+    }
+    else if (prevProps.value !== this.props.value) {
+      this.updateFormattedNumber(prevProps.value);
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.country !== this.props.country) {
-      this.updateCountry(nextProps.country);
-    }
-    else if (nextProps.value !== this.props.value) {
-      this.updateFormattedNumber(nextProps.value);
+  componentWillUnmount() {
+    if (document.removeEventListener && this.props.enableClickOutside) {
+      document.removeEventListener('mousedown', this.handleClickOutside);
     }
   }
 
