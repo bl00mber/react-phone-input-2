@@ -244,24 +244,14 @@ Country data object not returns from onKeyDown event
     <th> Description </th>
   </tr>
   <tr>
-    <td> value </td>
-    <td> string </td>
-    <td> the phone number </td>
+    <td> value/event </td>
+    <td> string/object </td>
+    <td> event or the phone number </td>
   </tr>
   <tr>
     <td> country data </td>
     <td> object </td>
     <td> country object { name, dialCode, countryCode (iso2) } </td>
-  </tr>
-  <tr>
-    <td> event </td>
-    <td> object </td>
-    <td> onChange event object </td>
-  </tr>
-  <tr>
-    <td> formattedValue </td>
-    <td> string </td>
-    <td> the formatted phone number </td>
   </tr>
 </table>
 
