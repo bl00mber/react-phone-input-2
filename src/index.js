@@ -313,13 +313,13 @@ class PhoneInput extends React.Component {
     let newSelectedCountry, formattedNumber;
 
     // if new value start with selectedCountry.dialCode, format number, otherwise find newSelectedCountry
-    if (selectedCountry && startsWith(value, selectedCountry.dialCode)) {
+    if (selectedCountry && startsWith(value, prefix + selectedCountry.dialCode)) {
       formattedNumber = this.formatNumber(inputNumber, selectedCountry);
       this.setState({ formattedNumber });
     }
     else {
       newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
-      const dialCode = newSelectedCountry && startsWith(inputNumber, newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
+      const dialCode = newSelectedCountry && startsWith(inputNumber, prefix + newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
 
       formattedNumber = this.formatNumber(
         (this.props.disableCountryCode ? '' : dialCode) + inputNumber,
