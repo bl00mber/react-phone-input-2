@@ -148,7 +148,10 @@ describe('<PhoneInput /> other props', () => {
     expect(phoneInput.querySelector('.country-list').children.length).toBe(2) // search field & 1 search result
     expect(phoneInput.querySelector('.country-list').children[1].querySelector('.country-name').textContent).toBe('United Kingdom')
   })
+})
 
+
+describe('correct value update', () => {
   test('should rerender without crashing', () => {
     const { container: phoneInput, rerender } = render(
       <PhoneInput
@@ -172,5 +175,19 @@ describe('<PhoneInput /> other props', () => {
 
     expect(phoneInput.querySelector('.selected-flag').children.length).toBe(1)
     expect(phoneInput.querySelector('.selected-flag').children[0].className).toBe('flag 0')
+  })
+
+  it('renders one prefix when updated from empty value', () => {
+    const { container: phoneInput, rerender } = render(
+      <PhoneInput
+        value=""
+      />)
+
+      rerender(
+        <PhoneInput
+          value="+49 1701 601234"
+        />)
+
+    expect(phoneInput.querySelector('.form-control').value).toBe('+49 1701 601234')
   })
 })
