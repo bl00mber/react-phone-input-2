@@ -417,7 +417,7 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
 ## Guides
 ### Phone without dialCode
 ```jsx
-handleOnChange(value, data, event) {
+handleOnChange(value, data, event, formattedValue) {
   this.setState({ rawPhone: value.slice(data.dialCode.length) })
 }
 ```

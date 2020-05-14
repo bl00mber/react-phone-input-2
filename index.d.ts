@@ -23,7 +23,12 @@ declare module "react-phone-input-2" {
   }
 
   interface PhoneInputEventsProps {
-    onChange?(value: string, data: CountryData | {}): void;
+    onChange?(
+      value: string,
+      data: CountryData | {},
+      event: React.ChangeEvent<HTMLInputElement>,
+      formattedValue: string
+    ): void;
     onFocus?(
       event: React.FocusEvent<HTMLInputElement>,
       data: CountryData | {}
