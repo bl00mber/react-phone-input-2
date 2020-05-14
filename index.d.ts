@@ -42,28 +42,61 @@ declare module "react-phone-input-2" {
       data: CountryData | {}
     ): void;
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    isValid?: ((
+      value: string,
+      country: object,
+      countries: object[],
+      hiddenAreaCodes: object[],
+    ) => boolean | string) | boolean;
   }
 
   export interface PhoneInputProps extends PhoneInputEventsProps, Style {
     country?: string;
     value?: string;
+
     onlyCountries?: string[];
     preferredCountries?: string[];
     excludeCountries?: string[];
+
     placeholder?: string;
     searchPlaceholder?: string;
-    inputProps?: object;
+    searchNotFound?: string;
+    disabled?: boolean;
 
     autoFormat?: boolean;
-    disabled?: boolean;
-    disableDropdown?: boolean;
-    disableCountryCode?: boolean;
     enableAreaCodes?: boolean;
     enableTerritories?: boolean;
+
+    disableCountryCode?: boolean;
+    disableDropdown?: boolean;
     enableLongNumbers?: boolean;
     countryCodeEditable?: boolean;
     enableSearch?: boolean;
     disableSearchIcon?: boolean;
+
+    regions?: string | string[];
+
+    inputProps?: object;
+    localization?: object;
+    masks?: object;
+    areaCodes?: object;
+
+    preserveOrder?: string[];
+
+    defaultMask?: string;
+
+    alwaysDefaultMask?: boolean;
+    prefix?: string;
+    copyNumbersOnly?: boolean;
+    renderStringAsFlag?: string;
+    autocompleteSearch?: boolean;
+    jumpCursorToEnd?: boolean;
+    priority?: object;
+    enableAreaCodeStretch?: boolean;
+    enableClickOutside?: boolean;
+    showDropdown?: boolean;
+
+    defaultErrorMessage?: string;
   }
   const PhoneInput: React.FC<PhoneInputProps>;
   export default PhoneInput;
