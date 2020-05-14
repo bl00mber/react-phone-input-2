@@ -52,6 +52,7 @@ class PhoneInput extends React.Component {
     countryCodeEditable: PropTypes.bool,
     enableSearch: PropTypes.bool,
     disableSearchIcon: PropTypes.bool,
+    disableInitialCountryGuess: PropTypes.bool,
 
     regions: PropTypes.oneOfType([
       PropTypes.string,
@@ -124,6 +125,7 @@ class PhoneInput extends React.Component {
     countryCodeEditable: true,
     enableSearch: false,
     disableSearchIcon: false,
+    disableInitialCountryGuess: false,
 
     regions: '',
 
@@ -170,7 +172,9 @@ class PhoneInput extends React.Component {
     const inputNumber = props.value.replace(/\D/g, '') || '';
 
     let countryGuess;
-    if (inputNumber.length > 1) {
+    if (props.disableInitialCountryGuess) {
+      countryGuess = 0;
+    } else if (inputNumber.length > 1) {
       // Country detect by phone
       countryGuess = this.guessSelectedCountry(inputNumber.substring(0, 6), props.country, onlyCountries, hiddenAreaCodes) || 0;
     } else if (props.country) {
