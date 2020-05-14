@@ -506,7 +506,7 @@ class PhoneInput extends React.Component {
     }
 
     // Does not exceed 15 digit phone number limit
-    if (value.replace(/\D/g, '').length > 15) return;
+    if (value.replace(/\D/g, '').length > 15 && !enableLongNumbers) return;
 
     // if the input is the same as before, must be some special key like enter etc.
     if (value === this.state.formattedNumber) return;
