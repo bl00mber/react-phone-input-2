@@ -489,22 +489,21 @@ class PhoneInput extends React.Component {
     const { value } = e.target;
     const { prefix } = this.props;
 
-    if (value === prefix) return this.setState({ formattedNumber: '' });
-
     let formattedNumber = this.props.disableCountryCode ? '' : prefix;
     let newSelectedCountry = this.state.selectedCountry;
     let freezeSelection = this.state.freezeSelection;
-
-
+    
     if (!this.props.countryCodeEditable) {
       const mainCode = newSelectedCountry.hasAreaCodes ?
-        this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.mainCode).dialCode :
-        newSelectedCountry.dialCode;
-
+      this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.mainCode).dialCode :
+      newSelectedCountry.dialCode;
+      
       const updatedInput = prefix+mainCode;
       if (value.slice(0, updatedInput.length) !== updatedInput) return;
     }
-
+    
+    if (value === prefix) return this.setState({ formattedNumber: '' });
+    
     // Does not exceed 15 digit phone number limit
     if (value.replace(/\D/g, '').length > 15 && !this.state.enableLongNumbers) return;
 
