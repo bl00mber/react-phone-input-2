@@ -11,7 +11,10 @@ import CountryData from './CountryData.js';
 
 class PhoneInput extends React.Component {
   static propTypes = {
-    country: PropTypes.string,
+    country: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     value: PropTypes.string,
 
     onlyCountries: PropTypes.arrayOf(PropTypes.string),
