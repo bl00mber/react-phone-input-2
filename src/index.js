@@ -83,6 +83,7 @@ class PhoneInput extends React.Component {
     onBlur: PropTypes.func,
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
+    onEnterKeyPress: PropTypes.func,
     isValid: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.func,
