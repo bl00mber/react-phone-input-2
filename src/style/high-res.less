@@ -32,7 +32,6 @@
     }
   }
   .flag-dropdown {
-    outline: none;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -40,6 +39,7 @@
     background-color: #f5f5f5;
     border: 1px solid #cacaca;
     border-radius: 3px 0 0 3px;
+    cursor: pointer;
     &.open {
       z-index: 2;
       background: #fff;
@@ -47,12 +47,6 @@
       .selected-flag {
         background: #fff;
         border-radius: 3px 0 0 0;
-      }
-    }
-    &:hover, &:focus {
-      cursor: pointer;
-      .selected-flag {
-        background-color: #fff;
       }
     }
   }
@@ -72,6 +66,11 @@
     height: 100%;
     padding: 0 0 0 8px;
     border-radius: 3px 0 0 3px;
+    outline: none;
+    cursor: pointer;
+    &:hover, &:focus {
+      background-color: #fff;
+    }
     .flag {
       position: absolute;
       top: 50%;
@@ -105,6 +104,7 @@
     max-height: 224px;
     overflow-y: scroll;
     border-radius: 0 0 3px 3px;
+    outline: none;
     .flag {
       display: inline-block;
       position: absolute;
