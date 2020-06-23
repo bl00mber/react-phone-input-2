@@ -467,7 +467,8 @@ class PhoneInput extends React.Component {
     }
   }
 
-  handleFlagDropdownClick = () => {
+  handleFlagDropdownClick = (e) => {
+    e.preventDefault(); 
     if (!this.state.showDropdown && this.props.disabled) return;
     const { preferredCountries, selectedCountry } = this.state
     const allCountries = preferredCountries.concat(this.state.onlyCountries)
@@ -647,7 +648,7 @@ class PhoneInput extends React.Component {
     const { keys } = this.props;
     const { target: { className } } = e;
 
-    if (className.includes('flag-dropdown') && e.which === keys.ENTER && !this.state.showDropdown) return this.handleFlagDropdownClick();
+    if (className.includes('flag-dropdown') && e.which === keys.ENTER && !this.state.showDropdown) return this.handleFlagDropdownClick(e);
     if (className.includes('form-control') && (e.which === keys.ENTER || e.which === keys.ESC)) return e.target.blur();
 
     if (!this.state.showDropdown || this.props.disabled) return;
