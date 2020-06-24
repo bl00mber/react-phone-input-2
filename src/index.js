@@ -914,7 +914,7 @@ class PhoneInput extends React.Component {
           onBlur={this.handleInputBlur}
           onCopy={this.handleInputCopy}
           value={formattedNumber}
-          ref={el => if (el) this.numberInputRef = el}
+          ref={el => this.numberInputRef = el}
           onKeyDown={this.handleInputKeyDown}
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
@@ -925,7 +925,7 @@ class PhoneInput extends React.Component {
         <div
           className={flagViewClasses}
           style={this.props.buttonStyle}
-          ref={el => this.dropdownContainerRef = el}
+          ref={el => {if (el) this.dropdownContainerRef = el}}
           tabIndex={disableDropdown ? '-1' : '0'}
           role='button'
         >
