@@ -446,10 +446,12 @@ class PhoneInput extends React.Component {
   // Put the cursor to the end of the input (usually after a focus event)
   cursorToEnd = () => {
     const input = this.numberInputRef;
-    input.focus();
-    let len = input.value.length;
-    if (input.value.charAt(len-1)=== ')') len = len-1;
-    input.setSelectionRange(len, len);
+    if (input) {
+      input.focus();
+      let len = input.value.length;
+      if (input.value.charAt(len-1)=== ')') len = len-1;
+      input.setSelectionRange(len, len);
+    }
   }
 
   getElement = (index) => {
@@ -912,7 +914,7 @@ class PhoneInput extends React.Component {
           onBlur={this.handleInputBlur}
           onCopy={this.handleInputCopy}
           value={formattedNumber}
-          ref={el => this.numberInputRef = el}
+          ref={el => if (el) this.numberInputRef = el}
           onKeyDown={this.handleInputKeyDown}
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
