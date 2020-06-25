@@ -446,12 +446,10 @@ class PhoneInput extends React.Component {
   // Put the cursor to the end of the input (usually after a focus event)
   cursorToEnd = () => {
     const input = this.numberInputRef;
-    if (input) {
-      input.focus();
-      let len = input.value.length;
-      if (input.value.charAt(len-1)=== ')') len = len-1;
-      input.setSelectionRange(len, len);
-    }
+    input.focus();
+    let len = input.value.length;
+    if (input.value.charAt(len-1)=== ')') len = len-1;
+    input.setSelectionRange(len, len);
   }
 
   getElement = (index) => {
@@ -925,7 +923,7 @@ class PhoneInput extends React.Component {
         <div
           className={flagViewClasses}
           style={this.props.buttonStyle}
-          ref={el => {if (el) this.dropdownContainerRef = el}}
+          ref={el => {this.dropdownContainerRef = el}}
           tabIndex={disableDropdown ? '-1' : '0'}
           role='button'
         >
