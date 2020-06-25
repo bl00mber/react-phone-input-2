@@ -749,7 +749,7 @@ class PhoneInput extends React.Component {
         const iso2countries = allCountries.filter(({ iso2 }) =>
           [`${iso2}`].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
         const searchedCountries = allCountries.filter(({ name, localName, iso2 }) =>
-          [`${name}`, `${localName}`].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
+          [`${name}`, `${localName || ''}`].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
         this.scrollToTop()
         return [...new Set([].concat(iso2countries, searchedCountries))]
       }
