@@ -51,7 +51,7 @@ declare module "react-phone-input-2" {
   }
 
   export interface PhoneInputProps extends PhoneInputEventsProps, Style {
-    country?: string;
+    country?: string | number | null;
     value?: string;
 
     onlyCountries?: string[];
