@@ -148,6 +148,17 @@ describe('<PhoneInput /> other props', () => {
     expect(phoneInput.querySelector('.country-list').children.length).toBe(2) // search field & 1 search result
     expect(phoneInput.querySelector('.country-list').children[1].querySelector('.country-name').textContent).toBe('United Kingdom')
   })
+  
+  test('search "undefined" string returns no non-matching results', () => {
+    const { container: phoneInput } = render(
+      <PhoneInput
+        enableSearch
+      />)
+
+    fireEvent.click(phoneInput.querySelector('.selected-flag'))
+    fireEvent.change(phoneInput.querySelector('.search-box'), {target: {value: 'undefined'}})
+    expect(phoneInput.querySelector('.no-entries-message')).toBeTruthy()
+  })
 })
 
 
