@@ -1,3 +1,11 @@
+## 2.13.6 (June 26, 2020)
+* Fix countryCodeEditable for single digit country [@kieshaherman](https://github.com/kieshaherman)
+* Add Turkish translation [@smddzcy](https://github.com/smddzcy)
+* Fix search of 'undefined' strings [@sackeyjason](https://github.com/sackeyjason)
+* Fix handleFlagDropdownClick [@Manimall](https://github.com/Manimall)
+* `disableInitialCountryGuess` [@xavieramoros](https://github.com/xavieramoros)
+
+
 ## 2.13.1 (April 15, 2020)
 * `enableAreaCodeStretch` to handle area codes of different length on the same country
 * null passed as value will clear country, empty string will clear prefix

@@ -472,7 +472,7 @@ class PhoneInput extends React.Component {
   }
 
   handleFlagDropdownClick = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (!this.state.showDropdown && this.props.disabled) return;
     const { preferredCountries, selectedCountry } = this.state
     const allCountries = preferredCountries.concat(this.state.onlyCountries)
@@ -497,7 +497,7 @@ class PhoneInput extends React.Component {
     let formattedNumber = this.props.disableCountryCode ? '' : prefix;
     let newSelectedCountry = this.state.selectedCountry;
     let freezeSelection = this.state.freezeSelection;
-    
+
     if (!this.props.countryCodeEditable) {
       const mainCode = newSelectedCountry.hasAreaCodes ?
         this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.mainCode).dialCode :
@@ -506,9 +506,9 @@ class PhoneInput extends React.Component {
       const updatedInput = prefix+mainCode;
       if (value.slice(0, updatedInput.length) !== updatedInput) return;
     }
-    
+
     if (value === prefix) return this.setState({ formattedNumber: '' });
-    
+
     // Does not exceed 15 digit phone number limit
     if (value.replace(/\D/g, '').length > 15 && !this.state.enableLongNumbers) return;
 
@@ -752,6 +752,9 @@ class PhoneInput extends React.Component {
       } else {
         const iso2countries = allCountries.filter(({ iso2 }) =>
           [`${iso2}`].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
+        // || '' - is a fix to prevent search of 'undefined' strings
+        // Since all the other values shouldn't be undefined, this fix was accepte
+        // but the structure do not looks very good
         const searchedCountries = allCountries.filter(({ name, localName, iso2 }) =>
           [`${name}`, `${localName || ''}`].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
         this.scrollToTop()
