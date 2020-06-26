@@ -33,18 +33,10 @@
     bottom: 0;
     padding: 0;
     border: 1px solid #cacaca;
+    cursor: pointer;
     &.open {
       z-index: 2;
       background: #fff;
-      .selected-flag {
-        background: #fff;
-      }
-    }
-    &:hover, &:focus, &.open {
-      cursor: pointer;
-      .selected-flag {
-        background-color: #f5f5f5;
-      }
     }
   }
   input[disabled] {
@@ -63,6 +55,10 @@
     height: 100%;
     padding: 0 0 0 8px;
     border-radius: 3px 0 0 3px;
+    cursor: pointer;
+    &:hover, &:focus, &.open {
+      background-color: #f5f5f5;
+    }
     .flag {
       position: absolute;
       top: 50%;
@@ -95,6 +91,7 @@
     width: 300px;
     max-height: 282px;
     overflow-y: scroll;
+    outline: none;
     .flag {
       display: inline-block;
     }

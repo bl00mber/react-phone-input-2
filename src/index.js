@@ -651,7 +651,7 @@ class PhoneInput extends React.Component {
     const { keys } = this.props;
     const { target: { className } } = e;
 
-    if (className.includes('flag-dropdown') && e.which === keys.ENTER && !this.state.showDropdown) return this.handleFlagDropdownClick(e);
+    if (className.includes('selected-flag') && e.which === keys.ENTER && !this.state.showDropdown) return this.handleFlagDropdownClick(e);
     if (className.includes('form-control') && (e.which === keys.ENTER || e.which === keys.ESC)) return e.target.blur();
 
     if (!this.state.showDropdown || this.props.disabled) return;
@@ -773,11 +773,12 @@ class PhoneInput extends React.Component {
     const searchedCountries = this.getSearchFilteredCountries()
 
     let countryDropdownList = searchedCountries.map((country, index) => {
+      const highlight = highlightCountryIndex === index;
       const itemClasses = classNames({
         country: true,
         preferred: country.iso2 === 'us' || country.iso2 === 'gb',
         active: country.iso2 === 'us',
-        highlight: highlightCountryIndex === index
+        highlight
       });
 
       const inputFlagClasses = `flag ${country.iso2}`;
@@ -792,6 +793,8 @@ class PhoneInput extends React.Component {
           tabIndex={disableDropdown ? '-1' : '0'}
           data-country-code={country.iso2}
           onClick={(e) => this.handleFlagItemClick(country, e)}
+          role='option'
+          {... highlight ? { "aria-selected": true } : {}}
         >
           <div className={inputFlagClasses}/>
           <span className='country-name'>{this.getDropdownCountryName(country)}</span>
@@ -813,9 +816,14 @@ class PhoneInput extends React.Component {
 
     return (
       <ul
-        ref={el => this.dropdownRef = el}
+        ref={el => {
+          !enableSearch && el && el.focus();
+          return (this.dropdownRef = el);
+        }}
         className={dropDownClasses}
         style={this.props.dropdownStyle}
+        role='listbox'
+        tabIndex='0'
       >
         {enableSearch && (
           <li
@@ -930,8 +938,6 @@ class PhoneInput extends React.Component {
           className={flagViewClasses}
           style={this.props.buttonStyle}
           ref={el => this.dropdownContainerRef = el}
-          tabIndex={disableDropdown ? '-1' : '0'}
-          role='button'
         >
           {renderStringAsFlag ?
           <div className={selectedFlagClasses}>{renderStringAsFlag}</div>
@@ -940,6 +946,10 @@ class PhoneInput extends React.Component {
             onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
             className={selectedFlagClasses}
             title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
+            tabIndex={disableDropdown ? '-1' : '0'}
+            role='button'
+            aria-haspopup="listbox"
+            aria-expanded={showDropdown ? true : undefined}
           >
             <div className={inputFlagClasses}>
               {!disableDropdown && <div className={arrowClasses}></div>}
