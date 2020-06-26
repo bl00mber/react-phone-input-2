@@ -42,6 +42,7 @@ declare module "react-phone-input-2" {
       data: CountryData | {}
     ): void;
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    onEnterKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
     isValid?: ((
       value: string,
       country: object,
