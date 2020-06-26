@@ -43,7 +43,6 @@
       padding: 0 5px;
       font-size: 13px;
       white-space: nowrap;
-      z-index: 1;
     }
   }
   .flag-dropdown {
@@ -52,11 +51,11 @@
     bottom: 0;
     padding: 0;
     border-radius: 3px 0 0 3px;
-    &.open {
-      z-index: 2;
-    }
     &:hover, &:focus {
       cursor: pointer;
+    }
+    &.open {
+      z-index: 2;
     }
   }
   input[disabled] {
@@ -70,30 +69,12 @@
     }
   }
   .selected-flag {
+    outline: none;
     position: relative;
     width: 52px;
     height: 100%;
     padding: 0 0 0 11px;
     border-radius: 3px 0 0 3px;
-    outline: none;
-    &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 2px;
-      bottom: 2px;
-      left: 0;
-      width: 100%;
-      border-radius: 4px 0 0 4px;
-      border: 1px solid transparent;
-      transition: box-shadow ease .25s, border-color ease .25s;
-    }
-    &:focus {
-      &:before {
-        border-color: #1976d2;
-        box-shadow: 0 0 0 1px #1976d2;
-      }
-    }
     .flag {
       position: absolute;
       top: 50%;
@@ -116,6 +97,7 @@
     }
   }
   .country-list {
+    outline: none;
     z-index: 1;
     list-style: none;
     position: absolute;
@@ -127,7 +109,6 @@
     max-height: 220px;
     overflow-y: scroll;
     border-radius: 7px;
-    outline: none;
     .flag {
       display: inline-block;
       position: absolute;
