@@ -183,10 +183,10 @@ describe('correct value update', () => {
         value=""
       />)
 
-      rerender(
-        <PhoneInput
-          value="+49 1701 601234"
-        />)
+    rerender(
+      <PhoneInput
+        value="+49 1701 601234"
+      />)
 
     expect(phoneInput.querySelector('.form-control').value).toBe('+49 1701 601234')
   })

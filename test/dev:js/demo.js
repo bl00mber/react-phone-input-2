@@ -129,7 +129,7 @@ class Demo extends React.Component {
           <p>Autofocus</p>
           <PhoneInput
             country='de'
-            onlyCountries={['de', 'es']}
+            onlyCountries={['de', 'es', 'us']}
             localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
             countryCodeEditable={false}
             inputExtraProps={{
