@@ -8,11 +8,10 @@
     border-radius: 5px;
     width: 300px;
     outline: none;
-    padding: 18.5px 14px 18.5px 58px;
+    padding: 18.5px 14px 18.5px 60px;
     transition: box-shadow ease .25s, border-color ease .25s;
     color: #495057;
-
-    &:focus, &.open {
+    &:focus {
       background-color: #fff;
       border-color: #80bdff;
       outline: 0;
@@ -26,17 +25,16 @@
     }
   }
   .flag-dropdown {
-    outline: none;
     position: absolute;
     top: 0;
     bottom: 0;
     padding: 0;
     border-radius: 3px 0 0 3px;
-    &.open {
-      z-index: 2;
-    }
     &:hover, &:focus {
       cursor: pointer;
+    }
+    &.open {
+      z-index: 2;
     }
   }
   input[disabled] {
@@ -50,11 +48,30 @@
     }
   }
   .selected-flag {
+    outline: none;
     position: relative;
     width: 52px;
     height: 100%;
     padding: 0 0 0 11px;
     border-radius: 3px 0 0 3px;
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 2px;
+      bottom: 2px;
+      left: 0;
+      width: 100%;
+      border-radius: 4px 2px 2px 4px;
+      border: 1px solid transparent;
+      transition: box-shadow ease .25s, border-color ease .25s;
+    }
+    &:focus, &.open {
+      &:before {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+      }
+    }
     .flag {
       position: absolute;
       top: 50%;
@@ -77,6 +94,7 @@
     }
   }
   .country-list {
+    outline: none;
     z-index: 1;
     list-style: none;
     position: absolute;

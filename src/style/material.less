@@ -46,17 +46,16 @@
     }
   }
   .flag-dropdown {
-    outline: none;
     position: absolute;
     top: 0;
     bottom: 0;
     padding: 0;
     border-radius: 3px 0 0 3px;
-    &.open {
-      z-index: 2;
-    }
     &:hover, &:focus {
       cursor: pointer;
+    }
+    &.open {
+      z-index: 2;
     }
   }
   input[disabled] {
@@ -70,11 +69,19 @@
     }
   }
   .selected-flag {
+    outline: none;
     position: relative;
     width: 52px;
     height: 100%;
     padding: 0 0 0 11px;
     border-radius: 3px 0 0 3px;
+    &:focus {
+      .arrow {
+        border-left-width: 4px;
+        border-right-width: 4px;
+        border-top: 5px solid #1976d2;
+      }
+    }
     .flag {
       position: absolute;
       top: 50%;
@@ -97,6 +104,7 @@
     }
   }
   .country-list {
+    outline: none;
     z-index: 1;
     list-style: none;
     position: absolute;
