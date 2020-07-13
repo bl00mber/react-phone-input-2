@@ -173,7 +173,7 @@ class PhoneInput extends React.Component {
       props.prefix, props.defaultMask, props.alwaysDefaultMask,
     );
 
-    const inputNumber = props.value.replace(/\D/g, '') || '';
+    const inputNumber = props.value ? props.value.replace(/\D/g, '') : '';
 
     let countryGuess;
     if (props.disableInitialCountryGuess) {
