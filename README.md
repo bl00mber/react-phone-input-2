@@ -10,13 +10,13 @@ Highly customizable phone input component with auto formatting.
 
 ## Installation
 ```shell-script
-npm install react-phone-input-2 --save
+npm install react-phone-input-gja --save
 ```
 
 ## Usage
 ```jsx
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import PhoneInput from 'react-phone-input-gja'
+import 'react-phone-input-gja/lib/style.css'
 
 <PhoneInput
   country={'us'}
@@ -165,7 +165,7 @@ import 'react-phone-input-2/lib/style.css'
   - [Check validity of the phone number](#check-validity-of-the-phone-number)
   - [CDN](#cdn)
 - [Contributing](#contributing)
-- [Support](https://www.paypal.me/bloomber/20)
+- [Support](https://www.paypal.me/gmjjatin/20)
 
 ### Style
 <table>
@@ -471,4 +471,4 @@ Code style changes not allowed
 
 Based on [react-phone-input](https://github.com/razagill/react-phone-input)
 
-Make sure you donated for lib maintenance [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/bloomber/20)
+Make sure you donated for lib maintenance [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/gmjjatin/20)

@@ -42,7 +42,8 @@
   ],
   "author": "Nick Reiley <bloomber111@gmail.com> (https://github.com/bl00mber)",
   "contributors": [
-    "Jatin Sharma <gmjjatin@gmail.com> (https://github.com/gmjjatin)" ],
+    "Jatin Sharma <gmjjatin@gmail.com> (https://github.com/gmjjatin)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gmjjatin/react-phone-input-2/issues"
