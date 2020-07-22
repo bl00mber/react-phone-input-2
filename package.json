@@ -1,6 +1,6 @@
 {
-  "name": "react-phone-input-2",
-  "version": "2.13.7",
+  "name": "react-phone-input-gja",
+  "version": "0.0.1",
   "description": "A react component to format phone numbers",
   "main": "lib/lib.js",
   "typings": "index.d.ts",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bl00mber/react-phone-input-2.git"
+    "url": "git+https://github.com/gmjjatin/react-phone-input-2.git"
   },
   "keywords": [
     "react",
@@ -42,13 +42,12 @@
   ],
   "author": "Nick Reiley <bloomber111@gmail.com> (https://github.com/bl00mber)",
   "contributors": [
-    "Raza Gill <raza.gill@outlook.com> (https://github.com/razagill)"
-  ],
+    "Jatin Sharma <gmjjatin@gmail.com> (https://github.com/gmjjatin)" ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bl00mber/react-phone-input-2/issues"
+    "url": "https://github.com/gmjjatin/react-phone-input-2/issues"
   },
-  "homepage": "https://github.com/bl00mber/react-phone-input-2",
+  "homepage": "https://github.com/gmjjatin/react-phone-input-2",
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/test/__mocks__/fileMock.js",
