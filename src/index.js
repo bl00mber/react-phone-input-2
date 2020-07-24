@@ -160,7 +160,7 @@ class PhoneInput extends React.Component {
 
     keys: {
       UP: 38, DOWN: 40, RIGHT: 39, LEFT: 37, ENTER: 13,
-      ESC: 27, PLUS: 43, A: 65, Z: 90, SPACE: 32
+      ESC: 27, PLUS: 43, A: 65, Z: 90, SPACE: 32, TAB: 9
     }
   }
 
@@ -655,6 +655,13 @@ class PhoneInput extends React.Component {
     if (className.includes('form-control') && (e.which === keys.ENTER || e.which === keys.ESC)) return e.target.blur();
 
     if (!this.state.showDropdown || this.props.disabled) return;
+
+     // preserve default tab behavior, moving to next element
+     if (e.which === keys.TAB) {
+      this.setState({ showDropdown: false })
+      return;
+    }
+
     if (className.includes('search-box')) {
       if (e.which !== keys.UP && e.which !== keys.DOWN && e.which !== keys.ENTER) {
         if (e.which === keys.ESC && e.target.value === '') {
