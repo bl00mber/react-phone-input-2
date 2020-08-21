@@ -70,7 +70,7 @@ declare module "react-phone-input-2" {
 
     disableCountryCode?: boolean;
     disableDropdown?: boolean;
-    enableLongNumbers?: boolean;
+    enableLongNumbers?: boolean | number;
     countryCodeEditable?: boolean;
     enableSearch?: boolean;
     disableSearchIcon?: boolean;

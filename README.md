@@ -121,7 +121,7 @@ import 'react-phone-input-2/lib/style.css'
   <tr>
     <td> enableLongNumbers </td>
     <td> false </td>
-    <td> </td>
+    <td> boolean/number </td>
   </tr>
   <tr>
     <td> countryCodeEditable </td>

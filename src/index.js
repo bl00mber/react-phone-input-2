@@ -51,7 +51,10 @@ class PhoneInput extends React.Component {
 
     disableCountryCode: PropTypes.bool,
     disableDropdown: PropTypes.bool,
-    enableLongNumbers: PropTypes.bool,
+    enableLongNumbers: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.number
+    ]),
     countryCodeEditable: PropTypes.bool,
     enableSearch: PropTypes.bool,
     disableSearchIcon: PropTypes.bool,
@@ -513,8 +516,13 @@ class PhoneInput extends React.Component {
       return this.setState({ formattedNumber: '' });
     }
 
-    // Does not exceed 15 digit phone number limit
-    if (value.replace(/\D/g, '').length > 15 && !this.state.enableLongNumbers) return;
+    // Does exceed default 15 digit phone number limit
+    if (value.replace(/\D/g, '').length > 15) {
+      if (this.props.enableLongNumbers === false) return;
+      if (typeof this.props.enableLongNumbers === 'number') {
+        if (value.replace(/\D/g, '').length > this.props.enableLongNumbers) return;
+      }
+    }
 
     // if the input is the same as before, must be some special key like enter etc.
     if (value === this.state.formattedNumber) return;
