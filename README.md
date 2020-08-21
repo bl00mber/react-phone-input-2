@@ -456,7 +456,7 @@ import startsWith from 'lodash.startswith';
 ```
 
 ### Clear country
-To clear country, pass `null` as value.
+To clear `country`, pass `null` as `value`.
 
 ### CDN
 ```html
