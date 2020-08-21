@@ -492,7 +492,7 @@ class PhoneInput extends React.Component {
 
   handleInput = (e) => {
     const { value } = e.target;
-    const { prefix } = this.props;
+    const { prefix, onChange } = this.props;
 
     let formattedNumber = this.props.disableCountryCode ? '' : prefix;
     let newSelectedCountry = this.state.selectedCountry;
@@ -507,7 +507,11 @@ class PhoneInput extends React.Component {
       if (value.slice(0, updatedInput.length) !== updatedInput) return;
     }
 
-    if (value === prefix) return this.setState({ formattedNumber: '' });
+    if (value === prefix) {
+      // we should handle change when we delete the last digit
+      if (onChange) onChange('', this.getCountryData(), e, '');
+      return this.setState({ formattedNumber: '' });
+    }
 
     // Does not exceed 15 digit phone number limit
     if (value.replace(/\D/g, '').length > 15 && !this.state.enableLongNumbers) return;
@@ -522,7 +526,7 @@ class PhoneInput extends React.Component {
       e.returnValue = false;
     }
 
-    const { country, onChange } = this.props
+    const { country } = this.props
     const { onlyCountries, selectedCountry, hiddenAreaCodes } = this.state
 
     if (onChange) e.persist();
