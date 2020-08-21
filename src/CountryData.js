@@ -26,7 +26,6 @@ function initCountries(countries, enableAreaCodes, prefix, defaultMask, alwaysDe
       dialCode: country[3],
       format: getMask(prefix, country[3], country[4], defaultMask, alwaysDefaultMask),
       priority: country[5] || 0,
-      hasAreaCodes: country[6] ? true : false,
     };
 
     const areaItems = [];
@@ -44,6 +43,7 @@ function initCountries(countries, enableAreaCodes, prefix, defaultMask, alwaysDe
     if (areaItems.length > 0) {
       countryItem.mainCode = true;
       if (enableAllCodes || (enableAreaCodes.constructor.name === 'Array' && enableAreaCodes.includes(country[2]))) {
+        countryItem.hasAreaCodes = true;
         return [countryItem, ...areaItems];
       } else {
         hiddenAreaCodes = hiddenAreaCodes.concat(areaItems);
