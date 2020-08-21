@@ -71,11 +71,13 @@ class Demo extends React.Component {
             <div>
             <PhoneInput
               country='no'
+              enableTerritories
             />
             <PhoneInput
               style={{marginTop: '20px'}}
               country='ua'
               enableSearch
+              enableTerritories
             /></div>}
         </div>
 
