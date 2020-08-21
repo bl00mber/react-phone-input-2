@@ -98,6 +98,7 @@ declare module "react-phone-input-2" {
     showDropdown?: boolean;
 
     defaultErrorMessage?: string;
+    disableInitialCountryGuess?: boolean;
   }
   const PhoneInput: React.FC<PhoneInputProps>;
   export default PhoneInput;
