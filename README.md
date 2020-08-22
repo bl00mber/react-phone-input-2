@@ -464,7 +464,8 @@ To clear `country`, pass `null` as `value`.
 ```
 
 ## Contributing
-Code style changes not allowed
+- Code style changes not allowed
+- Do not create issues about incorrect or missing country masks (of already present countries) or absent area codes (they will be closed). Only create issues if the subject is an actual mechanism that is not present in the component. Otherwise create a PR with a link that proves the correctness of your newly suggested mask or list of area codes
 
 ## License
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bl00mber/react-phone-input-2/blob/master/LICENSE)
