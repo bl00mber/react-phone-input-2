@@ -55,6 +55,7 @@ class Demo extends React.Component {
           <PhoneInput
             country='gb'
             onlyCountries={['gb', 'es']}
+            preserveOrder={['onlyCountries']}
           />
           <p>Preferred countries</p>
           <PhoneInput

@@ -129,13 +129,15 @@ export default class CountryData {
     this.onlyCountries = this.localizeCountries(
       this.excludeCountries(this.getFilteredCountryList(onlyCountries, initializedCountries, preserveOrder.includes('onlyCountries')),
         excludeCountries),
-      localization
+      localization,
+      preserveOrder.includes('onlyCountries')
     );
 
     this.preferredCountries = preferredCountries.length === 0 ? [] :
       this.localizeCountries(
         this.getFilteredCountryList(preferredCountries, initializedCountries, preserveOrder.includes('preferredCountries')),
-        localization
+        localization,
+        preserveOrder.includes('preferredCountries')
       );
 
     // apply filters to hiddenAreaCodes
@@ -198,7 +200,7 @@ export default class CountryData {
     return filteredCountries;
   }
 
-  localizeCountries = (countries, localization) => {
+  localizeCountries = (countries, localization, preserveOrder) => {
     for (let i = 0; i < countries.length; i++) {
       if (localization[countries[i].iso2] !== undefined) {
         countries[i].localName = localization[countries[i].iso2];
@@ -207,7 +209,13 @@ export default class CountryData {
         countries[i].localName = localization[countries[i].name];
       }
     }
-
+    if (!preserveOrder) {
+      countries.sort(function(a, b){
+        if(a.localName < b.localName) { return -1; }
+        if(a.localName > b.localName) { return 1; }
+        return 0;
+      });
+    }
     return countries;
   }
 
