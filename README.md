@@ -392,6 +392,10 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
     <td> string </td>
   </tr>
   <tr>
+    <td> specialLabel </td>
+    <td> string </td>
+  </tr>
+  <tr>
     <td> disableInitialCountryGuess </td>
     <td> false </td>
   </tr>

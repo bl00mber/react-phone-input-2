@@ -96,6 +96,7 @@ class PhoneInput extends React.Component {
       PropTypes.func,
     ]),
     defaultErrorMessage: PropTypes.string,
+    specialLabel: PropTypes.string,
   }
 
   static defaultProps = {
@@ -160,6 +161,7 @@ class PhoneInput extends React.Component {
 
     isValid: true, // (value, selectedCountry, onlyCountries, hiddenAreaCodes) => true | false | 'Message'
     defaultErrorMessage: '',
+    specialLabel: 'Phone',
 
     onEnterKeyPress: null, // null or function
 
@@ -892,7 +894,7 @@ class PhoneInput extends React.Component {
 
   render() {
     const { onlyCountries, selectedCountry, showDropdown, formattedNumber, hiddenAreaCodes } = this.state;
-    const { disableDropdown, renderStringAsFlag, isValid, defaultErrorMessage } = this.props;
+    const { disableDropdown, renderStringAsFlag, isValid, defaultErrorMessage, specialLabel } = this.props;
 
     let isValidValue, errorMessage;
     if (typeof isValid === 'boolean') {
@@ -936,6 +938,7 @@ class PhoneInput extends React.Component {
         className={containerClasses}
         style={this.props.style || this.props.containerStyle}
         onKeyDown={this.handleKeydown}>
+        {specialLabel && <div className='special-label'>{specialLabel}</div>}
         {errorMessage && <div className='invalid-number-message'>{errorMessage}</div>}
         <input
           className={inputClasses}
