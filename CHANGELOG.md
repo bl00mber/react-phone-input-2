@@ -1,3 +1,9 @@
+## 2.13.8 (August 25, 2020)
+* `specialLabel`, `disableCountryGuess`
+* Add some missing flags to css
+* Minor fixes
+
+
 ## 2.13.7 (June 27, 2020)
 * Fix countryCodeEditable for single digit country [@kieshaherman](https://github.com/kieshaherman)
 * Add Turkish translation [@smddzcy](https://github.com/smddzcy)
