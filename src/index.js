@@ -59,6 +59,7 @@ class PhoneInput extends React.Component {
     enableSearch: PropTypes.bool,
     disableSearchIcon: PropTypes.bool,
     disableInitialCountryGuess: PropTypes.bool,
+    disableCountryGuess: PropTypes.bool,
 
     regions: PropTypes.oneOfType([
       PropTypes.string,
@@ -133,6 +134,7 @@ class PhoneInput extends React.Component {
     enableSearch: false,
     disableSearchIcon: false,
     disableInitialCountryGuess: false,
+    disableCountryGuess: false,
 
     regions: '',
 
@@ -329,7 +331,10 @@ class PhoneInput extends React.Component {
       this.setState({ formattedNumber });
     }
     else {
-      newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
+      if (this.props.disableCountryGuess) {newSelectedCountry = selectedCountry;}
+      else {
+        newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
+      }
       const dialCode = newSelectedCountry && startsWith(inputNumber, prefix + newSelectedCountry.dialCode) ? newSelectedCountry.dialCode : '';
 
       formattedNumber = this.formatNumber(
@@ -547,7 +552,10 @@ class PhoneInput extends React.Component {
       // the guess country function can then use memoization much more effectively since the set of input it
       // gets has drastically reduced
       if (!this.state.freezeSelection || selectedCountry.dialCode.length > inputNumber.length) {
-        newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
+        if (this.props.disableCountryGuess) {newSelectedCountry = selectedCountry;}
+        else {
+          newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
+        }
         freezeSelection = false;
       }
       formattedNumber = this.formatNumber(inputNumber, newSelectedCountry);

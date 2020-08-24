@@ -395,6 +395,10 @@ If `enableAreaCodeStretch` is added, the part of the mask with the area code wil
     <td> disableInitialCountryGuess </td>
     <td> false </td>
   </tr>
+  <tr>
+    <td> disableCountryGuess </td>
+    <td> false </td>
+  </tr>
 </table>
 
 ### Custom localization
