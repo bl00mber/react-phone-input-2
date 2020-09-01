@@ -742,6 +742,11 @@ class PhoneInput extends React.Component {
     }
   }
 
+  handlePaste = (e) => {
+    const value = e.clipboardData.getData('text/plain');
+    this.handleInput({ ...e, target: { value } });
+  }
+
   handleSearchChange = (e) => {
     const { currentTarget: { value: searchValue } } = e;
     const { preferredCountries, selectedCountry } = this.state
@@ -946,6 +951,7 @@ class PhoneInput extends React.Component {
           onChange={this.handleInput}
           onClick={this.handleInputClick}
           onDoubleClick={this.handleDoubleClick}
+          onPaste={this.handlePaste}
           onFocus={this.handleInputFocus}
           onBlur={this.handleInputBlur}
           onCopy={this.handleInputCopy}
