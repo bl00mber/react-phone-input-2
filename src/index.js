@@ -481,6 +481,11 @@ class PhoneInput extends React.Component {
     }
   }
 
+  handleFlagDropdownKeyPress = (e) => {
+    e.preventDefault();
+    e.key === 'Enter' || e.key === ' ' && this.handleFlagDropdownClick(e);
+  }
+
   handleFlagDropdownClick = (e) => {
     e.preventDefault();
     if (!this.state.showDropdown && this.props.disabled) return;
@@ -968,6 +973,7 @@ class PhoneInput extends React.Component {
           :
           <div
             onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
+            onKeyPress={disableDropdown ? undefined : this.handleFlagDropdownKeyPress}
             className={selectedFlagClasses}
             title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
             tabIndex={disableDropdown ? '-1' : '0'}
