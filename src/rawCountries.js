@@ -238,6 +238,12 @@ const rawCountries = [
     1
   ],
   [
+    'Cayman Islands',
+    ['america', 'carribean'],
+    'ky',
+    '1345'
+  ],
+  [
     'Central African Republic',
     ['africa'],
     'cf',
