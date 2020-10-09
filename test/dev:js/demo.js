@@ -64,6 +64,12 @@ class Demo extends React.Component {
           />
         </div>
 
+        <div>
+          <br/><br/>
+          <p>Render dropdown in container</p>
+          <PhoneInput dropdownContainerId={'root'} dropdownContainerStyle={{ 'z-index': '10000', 'font-weight': 600 }}/>
+        </div>
+
         <div style={{display: 'inline-block', marginLeft: '40px'}}>
           <p>Auto country detect by value</p>
           <PhoneInput

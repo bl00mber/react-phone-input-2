@@ -96,6 +96,9 @@ declare module "react-phone-input-2" {
     enableAreaCodeStretch?: boolean;
     enableClickOutside?: boolean;
     showDropdown?: boolean;
+    dropdownContainerId?: string,
+    dropdownContainerClass?: string,
+    dropdownContainerStyle?: { [k: string]: any },
 
     defaultErrorMessage?: string;
     specialLabel?: string;

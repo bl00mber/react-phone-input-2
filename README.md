@@ -80,6 +80,34 @@ import 'react-phone-input-2/lib/style.css'
     <td> object </td>
     <td colspan="2"> props to pass into the input </td>
   </tr>
+
+  <tr>
+    <td> dropdownContainerId </td>
+    <td> string </td>
+    <td colspan="2"> id of container where flags dropdown would be put(eg. useful for using component in modals).<br/>
+    If component with passed id doesn't exist, dropdown will be appended as last child of body.<br/>
+    <i>uses React.Portal, so React 16+ version is required</i>
+    </td>
+  </tr>
+
+  <tr>
+    <td> dropdownContainerClass </td>
+    <td> string </td>
+    <td colspan="2"> class name that will be passed to dropdown container(if <b>dropdownContainerId</b> is set)<br/>
+    It could be used to style or adjust positioning.
+    </td>
+  </tr>
+
+  <tr>
+    <td> dropdownContainerStyle </td>
+    <td> {[name: DOMString]: any} </td>
+    <td>
+    It could be used to style or adjust positioning directly without creating CSS class(if <b>dropdownContainerId</b> is set).
+    </td>
+    <td>
+        { 'z-index': 10000, 'font-weight': 600 }}
+    </td>
+  </tr>
 </table>
 
 <table>
