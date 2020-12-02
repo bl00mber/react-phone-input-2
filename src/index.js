@@ -513,8 +513,9 @@ class PhoneInput extends React.Component {
         this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.mainCode).dialCode :
         newSelectedCountry.dialCode;
 
+      const valueWithPrefix = prefix+value;
       const updatedInput = prefix+mainCode;
-      if (value.slice(0, updatedInput.length) !== updatedInput) return;
+      if (value.slice(0, updatedInput.length) !== updatedInput && valueWithPrefix.slice(0, updatedInput.length) !== updatedInput) return;
     }
 
     if (value === prefix) {
