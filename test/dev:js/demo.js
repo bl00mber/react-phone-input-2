@@ -62,6 +62,17 @@ class Demo extends React.Component {
             country='it'
             preferredCountries={['it', 'se']}
           />
+          <p>Autocomplete</p>
+          <div>
+            <PhoneInput
+              country='us'
+              countryCodeEditable={false}
+              autocompleteSearch={true}
+              inputProps={{
+                name: "mobileNumber",
+              }}
+            />
+          </div>
         </div>
 
         <div style={{display: 'inline-block', marginLeft: '40px'}}>
