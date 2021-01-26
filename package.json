@@ -1,6 +1,6 @@
 {
-  "name": "@jonathancalb/react-phone-input-2",
-  "version": "2.13.15",
+  "name": "react-phone-input-international",
+  "version": "2.14.1",
   "description": "A react component to format phone numbers. Fork from https://github.com/bl00mber/react-phone-input-2",
   "main": "lib/lib.js",
   "typings": "index.d.ts",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jonathancalb/react-phone-input-2"
+    "url": "git+https://github.com/jonathancalb/react-phone-input-international.git"
   },
   "keywords": [
     "react",
@@ -40,15 +40,16 @@
     "README.md",
     "index.d.ts"
   ],
-  "author": "Nick Reiley <bloomber111@gmail.com> (https://github.com/bl00mber)",
+  "author": "Jonathan Calb <jonathancalb@gmail.com> (https://github.com/jonathancalb)",
   "contributors": [
+    "Nick Reiley <bloomber111@gmail.com> (https://github.com/bl00mber)",
     "Raza Gill <raza.gill@outlook.com> (https://github.com/razagill)"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bl00mber/react-phone-input-2/issues"
+    "url": "https://github.com/jonathancalb/react-phone-input-international/issues"
   },
-  "homepage": "https://github.com/bl00mber/react-phone-input-2",
+  "homepage": "https://github.com/jonathancalb/react-phone-input-international",
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/test/__mocks__/fileMock.js",
@@ -91,5 +92,9 @@
     "lodash.reduce": "^4.6.0",
     "lodash.startswith": "^4.2.1",
     "prop-types": "^15.7.2"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
   }
 }

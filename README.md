@@ -1,22 +1,22 @@
-# React-Phone-Input-2
+# React-Phone-Input-International
 Highly customizable phone input component with auto formatting.
 
-[![npm version](https://img.shields.io/npm/v/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2)
-[![npm downloads](https://img.shields.io/npm/dm/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/bl00mber/react-phone-input-2#contributing)
-[![travis build](https://travis-ci.org/bl00mber/react-phone-input-2.svg?branch=master)](https://travis-ci.org/bl00mber/react-phone-input-2)
+[![npm version](https://img.shields.io/npm/v/react-phone-input-international.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-international)
+[![npm downloads](https://img.shields.io/npm/dm/react-phone-input-international.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-international)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/bl00mber/react-phone-input-international#contributing)
+[![travis build](https://travis-ci.org/bl00mber/react-phone-input-international.svg?branch=master)](https://travis-ci.org/bl00mber/react-phone-input-international)
 
 ![animation](https://media.giphy.com/media/xiORAWnqoTJDsH0UOI/giphy.gif)
 
 ## Installation
 ```shell-script
-npm install react-phone-input-2 --save
+npm install react-phone-input-international --save
 ```
 
 ## Usage
 ```jsx
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import PhoneInput from 'react-phone-input-international'
+import 'react-phone-input-international/lib/style.css'
 
 <PhoneInput
   country={'us'}
@@ -26,9 +26,9 @@ import 'react-phone-input-2/lib/style.css'
 ```
 **available styles** - style • high-res • material • bootstrap • semantic-ui • plain
 
-#### [Demo 1 (UI)](https://bl00mber.github.io/react-phone-input-2.html) - [Demo 2 (CSS)](https://bl00mber.github.io/react-phone-input-2-css.html)
+#### [Demo 1 (UI)](https://bl00mber.github.io/react-phone-input-international.html) - [Demo 2 (CSS)](https://bl00mber.github.io/react-phone-input-international-css.html)
 
-![screenshot](https://raw.githubusercontent.com/bl00mber/react-phone-input-2/master/test/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/bl00mber/react-phone-input-international/master/test/screenshot.png)
 
 ## Options
 <table>
@@ -302,7 +302,7 @@ Country data object not returns from onKeyDown event
 `ir` Iranian, `ar` Arabic, `tr` Turkish, `id` Indonesian
 
 ```jsx
-import es from 'react-phone-input-2/lang/es.json'
+import es from 'react-phone-input-international/lang/es.json'
 
 <PhoneInput
   localization={es}
@@ -470,7 +470,7 @@ To clear `country`, pass `null` as `value`.
 
 ### CDN
 ```html
-<script src="https://unpkg.com/react-phone-input-2@2.x/dist/lib.js"></script>
+<script src="https://unpkg.com/react-phone-input-international@2.x/dist/lib.js"></script>
 ```
 
 ## Contributing
@@ -479,7 +479,7 @@ To clear `country`, pass `null` as `value`.
 - Do not send new languages
 
 ## License
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bl00mber/react-phone-input-2/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bl00mber/react-phone-input-international/blob/master/LICENSE)
 
 Based on [react-phone-input](https://github.com/razagill/react-phone-input)
 

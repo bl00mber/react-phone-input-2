@@ -57,7 +57,7 @@ class Demo extends React.Component {
         `}} />
         <div style={{display: 'inline-block', verticalAlign: 'top'}}>
           <p style={{fontWeight: '500'}}>Created by <a style={{color: '#000'}}
-            href="https://github.com/bl00mber/react-phone-input-2">Nick Reiley</a></p>
+            href="https://github.com/bl00mber/react-phone-input-international">Jonathan Calb</a></p>
           <p>
             <span onClick={this.updateStyle}
               className={'style-btn'+('style'==currentStyle?' active':'')}>style</span> — <span onClick={this.updateStyle}
@@ -82,7 +82,7 @@ class Demo extends React.Component {
         </div>
 
         <div style={{display: 'inline-block', marginLeft: '40px', position: 'absolute', top: '30px', left: '560px'}}>
-          <p>{"import 'react-phone-input-2/lib/"+currentStyle+".css'"}</p>
+          <p>{"import 'react-phone-input-international/lib/"+currentStyle+".css'"}</p>
         </div>
       </div>
     )

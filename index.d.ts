@@ -1,4 +1,4 @@
-declare module "@jonathancalb/react-phone-input-2" {
+declare module "react-phone-input-international" {
   import React from "react";
 
   interface CountryData {
