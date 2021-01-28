@@ -38,11 +38,11 @@ const common = {
   }
 };
 
-if (TARGET === 'dev:js' || TARGET === 'dev:css') {
+if (TARGET === 'dev_js' || TARGET === 'dev_css') {
   module.exports = merge(common, {
     mode: 'development',
     entry: {
-      'demo': path.resolve(ROOT_PATH, 'test/'+TARGET+'/demo.js')
+      'demo': path.resolve(ROOT_PATH, 'test/' + TARGET + '/demo.js')
     },
     devtool: 'inline-source-map',
     devServer: {
@@ -75,7 +75,7 @@ if (TARGET === 'dev:js' || TARGET === 'dev:css') {
   });
 }
 
-if (TARGET === 'build:js' || TARGET === 'analyze') {
+if (TARGET === 'build_js' || TARGET === 'analyze') {
   module.exports = merge(common, {
     mode: 'production',
     optimization: {},
@@ -106,7 +106,7 @@ if (TARGET === 'build:js' || TARGET === 'analyze') {
   });
 }
 
-if (TARGET === 'build:css') {
+if (TARGET === 'build_css') {
   module.exports = merge(common, {
     entry: [
       './src/style/style.less',
