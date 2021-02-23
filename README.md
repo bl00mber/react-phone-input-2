@@ -151,21 +151,30 @@ import 'react-phone-input-2/lib/style.css'
 ```
 
 ### Contents
-- [Style](#style)
-- [Events](#events)
-- [Regions](#regions)
-- [Localization](#predefined-localization)
-- [Local area codes](#local-area-codes)
-- [Custom masks](#custom-masks)
-- [Custom area codes](#custom-area-codes)
-- [Other props](#other-props)
-- [Custom localization](#custom-localization)
-- [Guides](#guides)
-  - [Phone without dialCode](#phone-without-dialcode)
-  - [Check validity of the phone number](#check-validity-of-the-phone-number)
-  - [CDN](#cdn)
-- [Contributing](#contributing)
-- [Support](https://www.paypal.me/bloomber/20)
+- [React-Phone-Input-2](#react-phone-input-2)
+  - [Installation](#installation)
+  - [Usage](#usage)
+      - [Demo 1 (UI) - [Demo 2 (CSS)](https://bl00mber.github.io/react-phone-input-2-css.html)](#demo-1-ui---demo-2-css)
+  - [Options](#options)
+    - [Contents](#contents)
+    - [Style](#style)
+    - [Events](#events)
+    - [Regions](#regions)
+    - [Predefined localization](#predefined-localization)
+    - [Local area codes](#local-area-codes)
+      - [Flexible mask](#flexible-mask)
+    - [Custom masks](#custom-masks)
+    - [Custom area codes](#custom-area-codes)
+    - [Other props](#other-props)
+    - [Custom localization](#custom-localization)
+    - [Preserve countries order](#preserve-countries-order)
+  - [Guides](#guides)
+    - [Phone without dialCode](#phone-without-dialcode)
+    - [Check validity of the phone number](#check-validity-of-the-phone-number)
+    - [Clear country](#clear-country)
+    - [CDN](#cdn)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ### Style
 <table>
@@ -403,6 +412,10 @@ Example: `+61 (2), +61 (02)`
   </tr>
   <tr>
     <td> disableCountryGuess </td>
+    <td> false </td>
+  </tr>
+  <tr>
+    <td> clearSearch </td>
     <td> false </td>
   </tr>
 </table>

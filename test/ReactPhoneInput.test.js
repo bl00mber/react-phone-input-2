@@ -159,6 +159,21 @@ describe('<PhoneInput /> other props', () => {
     fireEvent.change(phoneInput.querySelector('.search-box'), {target: {value: 'undefined'}})
     expect(phoneInput.querySelector('.no-entries-message')).toBeTruthy()
   })
+
+  test('clear search value after country selection', () => {
+    const { container: phoneInput } = render(
+      <PhoneInput
+        enableSearch
+        clearSearch
+      />)
+
+    fireEvent.click(phoneInput.querySelector('.selected-flag'))
+    fireEvent.change(phoneInput.querySelector('.search-box'), {target: {value: 'gb'}})
+    expect(phoneInput.querySelector('.country-list').children.length).toBe(2) // search field & 1 search result
+    fireEvent.click(phoneInput.querySelector('.country-list').children[1])
+    fireEvent.click(phoneInput.querySelector('.selected-flag'))
+    expect(phoneInput.querySelector('.search-box').value).toBe('')
+  })
 })
 
 

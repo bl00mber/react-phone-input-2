@@ -60,6 +60,7 @@ class PhoneInput extends React.Component {
     disableSearchIcon: PropTypes.bool,
     disableInitialCountryGuess: PropTypes.bool,
     disableCountryGuess: PropTypes.bool,
+    clearSearch: PropTypes.bool,
 
     regions: PropTypes.oneOfType([
       PropTypes.string,
@@ -136,6 +137,7 @@ class PhoneInput extends React.Component {
     disableSearchIcon: false,
     disableInitialCountryGuess: false,
     disableCountryGuess: false,
+    clearSearch: false,
 
     regions: '',
 
@@ -616,6 +618,7 @@ class PhoneInput extends React.Component {
       formattedNumber
     }, () => {
       this.cursorToEnd();
+      if(this.props.clearSearch) this.setState({searchValue: ''})
       if (this.props.onChange) this.props.onChange(formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData(), e, formattedNumber);
     });
   }
