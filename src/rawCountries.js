@@ -92,7 +92,8 @@ const rawCountries = [
     'Azerbaijan',
     ['asia', 'ex-ussr'],
     'az',
-    '994'
+    '994',
+    '(..) ... .. ..'
   ],
   [
     'Bahamas',
