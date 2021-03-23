@@ -148,7 +148,7 @@ describe('<PhoneInput /> other props', () => {
     expect(phoneInput.querySelector('.country-list').children.length).toBe(2) // search field & 1 search result
     expect(phoneInput.querySelector('.country-list').children[1].querySelector('.country-name').textContent).toBe('United Kingdom')
   })
-  
+
   test('search "undefined" string returns no non-matching results', () => {
     const { container: phoneInput } = render(
       <PhoneInput
@@ -220,5 +220,28 @@ describe('correct value update', () => {
       />)
 
     expect(phoneInput.querySelector('.form-control').value).toBe('+49 1701 601234')
+  })
+})
+describe('wrapUlClass', () => {
+  it('renders without class wrapping ul', () => {
+    const { container: phoneInput} = render(
+      <PhoneInput
+        value=""
+      />
+    );
+    fireEvent.click(phoneInput.querySelector('.selected-flag'));
+
+    expect(phoneInput.querySelector('.myclass ul.country-list')).toBeFalsy()
+  })
+  it('renders with class wrapping ul', () => {
+    const { container: phoneInput} = render(
+      <PhoneInput
+        value=""
+        wrapUlClass="myclass"
+      />
+    );
+    fireEvent.click(phoneInput.querySelector('.selected-flag'));
+
+    expect(phoneInput.querySelector('.myclass ul.country-list')).toBeTruthy()
   })
 })

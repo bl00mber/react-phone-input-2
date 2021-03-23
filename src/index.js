@@ -97,6 +97,7 @@ class PhoneInput extends React.Component {
     ]),
     defaultErrorMessage: PropTypes.string,
     specialLabel: PropTypes.string,
+    wrapUlClass: PropTypes.string
   }
 
   static defaultProps = {
@@ -168,7 +169,8 @@ class PhoneInput extends React.Component {
     keys: {
       UP: 38, DOWN: 40, RIGHT: 39, LEFT: 37, ENTER: 13,
       ESC: 27, PLUS: 43, A: 65, Z: 90, SPACE: 32, TAB: 9,
-    }
+    },
+    wrapUlClass: ''
   }
 
   constructor(props) {
@@ -177,7 +179,7 @@ class PhoneInput extends React.Component {
       props.enableAreaCodes, props.enableTerritories, props.regions,
       props.onlyCountries, props.preferredCountries, props.excludeCountries, props.preserveOrder,
       props.masks, props.priority, props.areaCodes, props.localization,
-      props.prefix, props.defaultMask, props.alwaysDefaultMask,
+      props.prefix, props.defaultMask, props.alwaysDefaultMask
     );
 
     const inputNumber = props.value ? props.value.replace(/\D/g, '') : '';
@@ -224,7 +226,8 @@ class PhoneInput extends React.Component {
       queryString: '',
       freezeSelection: false,
       debouncedQueryStingSearcher: debounce(this.searchCountry, 250),
-      searchValue: '',
+      searchValue: ''
+
     };
   }
 
@@ -790,7 +793,7 @@ class PhoneInput extends React.Component {
 
   getCountryDropdownList = () => {
     const { preferredCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
-    const { disableDropdown, prefix } = this.props
+    const { disableDropdown, prefix, wrapUlClass } = this.props
     const { enableSearch, searchNotFound, disableSearchIcon, searchClass, searchStyle, searchPlaceholder, autocompleteSearch } = this.props;
 
     const searchedCountries = this.getSearchFilteredCountries()
@@ -837,7 +840,7 @@ class PhoneInput extends React.Component {
       'hide': !showDropdown
     });
 
-    return (
+    const result = (
       <ul
         ref={el => {
           !enableSearch && el && el.focus();
@@ -890,6 +893,10 @@ class PhoneInput extends React.Component {
           )}
       </ul>
     );
+    if (wrapUlClass !== '') {
+      return <div className={wrapUlClass}>{result}</div>
+    }
+    return result;
   }
 
   render() {
@@ -932,6 +939,7 @@ class PhoneInput extends React.Component {
       'open': showDropdown,
     });
     const inputFlagClasses = `flag ${selectedCountry && selectedCountry.iso2}`;
+
 
     return (
       <div
