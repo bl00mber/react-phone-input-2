@@ -6,13 +6,13 @@
   "typings": "index.d.ts",
   "scripts": {
     "test": "jest",
-    "start": "TARGET=dev_js NODE_ENV=development webpack-dev-server --progress",
-    "start:css": "TARGET=dev_css NODE_ENV=development webpack-dev-server --progress",
+    "start": "cross-env TARGET=dev_js NODE_ENV=development webpack-dev-server --progress",
+    "start:css": "cross-env TARGET=dev_css NODE_ENV=development webpack-dev-server --progress",
     "build": "npm run build:js && npm run build:css",
-    "build:js": "TARGET=build_js NODE_ENV=production webpack -p --progress",
-    "build:css": "TARGET=build_css NODE_ENV=production webpack -p --progress && rm ./main.js",
+    "build:js": "cross-env TARGET=build_js NODE_ENV=production webpack -p --progress",
+    "build:css": "cross-env TARGET=build_css NODE_ENV=production webpack -p --progress && rm ./main.js",
     "prepublishOnly": "npm run build",
-    "analyze": "TARGET=analyze NODE_ENV=production webpack -p --progress"
+    "analyze": "cross-env TARGET=analyze NODE_ENV=production webpack -p --progress"
   },
   "repository": {
     "type": "git",
@@ -86,6 +86,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "cross-env": "^7.0.3",
     "lodash.debounce": "^4.0.8",
     "lodash.memoize": "^4.1.2",
     "lodash.reduce": "^4.6.0",

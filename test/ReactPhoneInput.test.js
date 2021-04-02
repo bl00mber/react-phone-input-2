@@ -148,7 +148,7 @@ describe('<PhoneInput /> other props', () => {
     expect(phoneInput.querySelector('.country-list').children.length).toBe(2) // search field & 1 search result
     expect(phoneInput.querySelector('.country-list').children[1].querySelector('.country-name').textContent).toBe('United Kingdom')
   })
-  
+
   test('search "undefined" string returns no non-matching results', () => {
     const { container: phoneInput } = render(
       <PhoneInput
@@ -220,5 +220,26 @@ describe('correct value update', () => {
       />)
 
     expect(phoneInput.querySelector('.form-control').value).toBe('+49 1701 601234')
+  })
+})
+describe('CountryListTitle', () => {
+  it('does NOT renders title before country-list', () => {
+    const { container: phoneInput, rerender } = render(
+      <PhoneInput
+        value=""
+        country="us"
+      />)
+    fireEvent.click(phoneInput.querySelector('.selected-flag'));
+    expect(phoneInput.querySelector('.myTitle')).toBeFalsy()
+  })
+  it('renders title before country-list', () => {
+    const { container: phoneInput, rerender } = render(
+      <PhoneInput
+        value=""
+        country="us"
+        CountryListTitle={() => <h3 className="myTitle">My title</h3>}
+      />)
+    fireEvent.click(phoneInput.querySelector('.selected-flag'));
+    expect(phoneInput.querySelector('.myTitle')).toBeTruthy()
   })
 })
