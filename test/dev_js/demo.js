@@ -221,6 +221,19 @@ class Demo extends React.Component {
 
           <PhoneInput key={this.playgroundKey} {...this.state.playgroundProps}/>
         </div>
+
+        <div>
+          <br/><br/>
+          <p>wrapUlClass</p>
+          <style type="text/css">
+            {`
+              .wrapUlClass {
+                border: 3px solid red;
+              }
+            `}
+          </style>
+          <PhoneInput wrapUlClass="wrapUlClass" value="" country={this.state.country} />
+        </div>
       </div>
     )
   }
