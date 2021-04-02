@@ -319,7 +319,7 @@ import es from 'react-phone-input-2/lang/es.json'
 ```
 
 #### Flexible mask
-If `enableAreaCodeStretch` is added, the part of the mask with the area code will not stretch to length of the respective section of phone mask.
+If `enableAreaCodeStretch` is added, the part of the mask with the area code will stretch to the length of the respective section of phone mask.
 Example: `+61 (2), +61 (02)`
 
 ### Custom masks
@@ -403,6 +403,10 @@ Example: `+61 (2), +61 (02)`
   </tr>
   <tr>
     <td> disableCountryGuess </td>
+    <td> false </td>
+  </tr>
+  <tr>
+    <td> disableAreaCodesDropdown </td>
     <td> false </td>
   </tr>
 </table>

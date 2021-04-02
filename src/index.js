@@ -60,6 +60,7 @@ class PhoneInput extends React.Component {
     disableSearchIcon: PropTypes.bool,
     disableInitialCountryGuess: PropTypes.bool,
     disableCountryGuess: PropTypes.bool,
+    disableAreaCodesDropdown: PropTypes.bool,
 
     regions: PropTypes.oneOfType([
       PropTypes.string,
@@ -136,6 +137,7 @@ class PhoneInput extends React.Component {
     disableSearchIcon: false,
     disableInitialCountryGuess: false,
     disableCountryGuess: false,
+    disableAreaCodesDropdown: false,
 
     regions: '',
 
@@ -762,7 +764,7 @@ class PhoneInput extends React.Component {
 
   getSearchFilteredCountries = () => {
     const { preferredCountries, onlyCountries, searchValue } = this.state
-    const { enableSearch } = this.props
+    const { enableSearch, disableAreaCodesDropdown } = this.props
     const allCountries = preferredCountries.concat(onlyCountries);
     const sanitizedSearchValue = searchValue.trim().toLowerCase();
     if (enableSearch && sanitizedSearchValue) {
@@ -784,7 +786,13 @@ class PhoneInput extends React.Component {
         return [...new Set([].concat(iso2countries, searchedCountries))]
       }
     } else {
-      return allCountries
+      const filteredCountries = allCountries.filter((country) => {
+        if (country.isAreaCode) {
+          return false;
+        }
+        return true;
+      })
+      return disableAreaCodesDropdown ? filteredCountries : allCountries
     }
   }
 
