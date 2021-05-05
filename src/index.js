@@ -91,6 +91,7 @@ class PhoneInput extends React.Component {
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
     onEnterKeyPress: PropTypes.func,
+    onMount: PropTypes.func,
     isValid: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.func,
@@ -231,6 +232,9 @@ class PhoneInput extends React.Component {
   componentDidMount() {
     if (document.addEventListener && this.props.enableClickOutside) {
       document.addEventListener('mousedown', this.handleClickOutside);
+    }
+    if(this.props.onMount){
+        this.props.onMount(this.state.formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData(), this.state.formattedNumber)
     }
   }
 
