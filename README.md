@@ -105,7 +105,7 @@ import 'react-phone-input-2/lib/style.css'
     It could be used to style or adjust positioning directly without creating CSS class(if <b>dropdownContainerId</b> is set).
     </td>
     <td>
-        { 'z-index': 10000, 'font-weight': 600 }}
+        { zIndex: 10000, fontWeight: 600 }}
     </td>
   </tr>
 </table>
