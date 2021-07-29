@@ -1,16 +1,16 @@
 {
   "name": "react-phone-input-2",
-  "version": "2.13.8",
+  "version": "2.14.0",
   "description": "A react component to format phone numbers",
   "main": "lib/lib.js",
   "typings": "index.d.ts",
   "scripts": {
     "test": "jest",
-    "start": "TARGET=dev:js NODE_ENV=development webpack-dev-server --progress",
-    "start:css": "TARGET=dev:css NODE_ENV=development webpack-dev-server --progress",
+    "start": "TARGET=dev_js NODE_ENV=development webpack-dev-server --progress",
+    "start:css": "TARGET=dev_css NODE_ENV=development webpack-dev-server --progress",
     "build": "npm run build:js && npm run build:css",
-    "build:js": "TARGET=build:js NODE_ENV=production webpack -p --progress",
-    "build:css": "TARGET=build:css NODE_ENV=production webpack -p --progress && rm ./main.js",
+    "build:js": "TARGET=build_js NODE_ENV=production webpack -p --progress",
+    "build:css": "TARGET=build_css NODE_ENV=production webpack -p --progress && rm ./main.js",
     "prepublishOnly": "npm run build",
     "analyze": "TARGET=analyze NODE_ENV=production webpack -p --progress"
   },
@@ -68,8 +68,8 @@
     "jest": "^24.7.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-hot-loader": "^4.6.5",
     "react-testing-library": "^6.0.4",
     "style-loader": "^0.23.1",
@@ -81,8 +81,8 @@
     "webpack-merge": "^4.2.1"
   },
   "peerDependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.12.0 || ^17.0.0",
+    "react-dom": "^16.12.0 || ^17.0.0"
   },
   "dependencies": {
     "classnames": "^2.2.6",

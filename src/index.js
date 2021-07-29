@@ -246,12 +246,12 @@ class PhoneInput extends React.Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.country !== this.props.country) {
-      this.updateCountry(nextProps.country);
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.country !== this.props.country) {
+      this.updateCountry(this.props.country);
     }
-    else if (nextProps.value !== this.props.value) {
-      this.updateFormattedNumber(nextProps.value);
+    else if (prevProps.value !== this.props.value) {
+      this.updateFormattedNumber(this.props.value);
     }
   }
 
