@@ -58,7 +58,9 @@ const rawCountries = [
     ['america', 'south-america'],
     'ar',
     '54',
-    '(..) ........'
+    '(..) ........',
+    0,
+    ['11', '221', '223', '261', '264', '2652', '280', '2905', '291', '2920', '2966', '299', '341', '342', '343', '351', '376', '379', '381', '3833', '385', '387', '388' ]
   ],
   [
     'Armenia',
@@ -90,7 +92,8 @@ const rawCountries = [
     'Azerbaijan',
     ['asia', 'ex-ussr'],
     'az',
-    '994'
+    '994',
+    '(..) ... .. ..'
   ],
   [
     'Bahamas',
@@ -266,7 +269,8 @@ const rawCountries = [
     'Colombia',
     ['america', 'south-america'],
     'co',
-    '57'
+    '57',
+    '... ... ....'
   ],
   [
     'Comoros',
@@ -568,7 +572,8 @@ const rawCountries = [
     'Iran',
     ['middle-east'],
     'ir',
-    '98'
+    '98',
+    '... ... ....'
   ],
   [
     'Iraq',

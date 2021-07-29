@@ -188,6 +188,26 @@ describe('correct value update', () => {
     expect(phoneInput.querySelector('.selected-flag').children[0].className).toBe('flag 0')
   })
 
+  test('should rerender country without crashing', () => {
+    const { container: phoneInput, rerender } = render(
+      <PhoneInput
+        country={undefined}
+      />)
+
+    rerender(
+      <PhoneInput
+        country="us"
+      />)
+
+    rerender(
+      <PhoneInput
+        country="es"
+      />)
+
+    expect(phoneInput.querySelector('.selected-flag').children.length).toBe(1)
+    expect(phoneInput.querySelector('.selected-flag').children[0].className).toBe('flag es')
+  })
+
   it('renders one prefix when updated from empty value', () => {
     const { container: phoneInput, rerender } = render(
       <PhoneInput
