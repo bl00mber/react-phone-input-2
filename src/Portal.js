@@ -1,29 +1,36 @@
-import { useEffect } from "react";
-import { createPortal } from "react-dom";
-import { DROPDOWN_ID } from "./index";
+import React from 'react';
+import {createPortal} from 'react-dom';
+import {DROPDOWN_ID} from "./index";
 
-const Portal = ({dropdownContainerId, dropdownContainerClass = '', dropdownContainerStyle, coords, children}) => {
-  let mount = document.getElementById(dropdownContainerId);
-  if (!mount) {
-    mount = document.body;
-  }
-  const el = document.createElement("div");
-  el.id = DROPDOWN_ID;
-  el.className = `react-tel-input ${dropdownContainerClass}`.trim();
-  if (dropdownContainerStyle) {
-    Object.keys(dropdownContainerStyle).map(key => el.style.setProperty(key, dropdownContainerStyle[key]));
-  }
-  el.style.setProperty('position',`absolute`);
-  el.style.setProperty('width', `auto`);
-  el.style.setProperty('top', `${coords.top}px`);
-  el.style.setProperty('left', `${coords.left}px`);
+const PortalWrapper = ({
+                         children,
+                         coords,
+                         dropdownContainerClass = '',
+                         dropdownContainerStyle,
+                       }) => {
 
-  useEffect(() => {
-    mount.appendChild(el);
-    return () => mount.removeChild(el);
-  }, [el, mount]);
+  const style = {
+    'position': `absolute`,
+    'width': `auto`,
+    'top': `${coords.top}px`,
+    'left': `${coords.left}px`,
+    ...dropdownContainerStyle
+  };
 
-  return createPortal(children, el)
+  return (
+    <div id={DROPDOWN_ID} className={`react-tel-input ${dropdownContainerClass}`.trim()} style={style}>{children}</div>
+  );
+}
+
+
+const Portal = ({
+                  children,
+                  dropdownContainerId,
+                  enableSearch,
+                  ...otherProps
+                }) => {
+  return createPortal(
+    <PortalWrapper {...otherProps}>{children}</PortalWrapper>, dropdownContainerId && document.getElementById(dropdownContainerId) || document.body)
 };
 
 export default Portal;

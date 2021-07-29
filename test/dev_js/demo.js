@@ -67,7 +67,7 @@ class Demo extends React.Component {
         <div>
           <br/><br/>
           <p>Render dropdown in container</p>
-          <PhoneInput dropdownContainerId={'root'} dropdownContainerStyle={{ 'z-index': '10000', 'font-weight': 600 }}/>
+          <PhoneInput dropdownContainerId={'root'} dropdownContainerStyle={{ zIndex: '10000', fontWeight: 600 }} enableSearch/>
         </div>
 
         <div style={{display: 'inline-block', marginLeft: '40px'}}>
