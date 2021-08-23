@@ -956,6 +956,14 @@ class PhoneInput extends React.Component {
           disabled={this.props.disabled}
           type='tel'
           {...this.props.inputProps}
+          ref={el => {
+            this.numberInputRef = el;
+            if (typeof this.props.inputProps.ref === 'function') {
+              this.props.inputProps.ref(el);
+            } else if (typeof this.props.inputProps.ref === 'object') {
+              this.props.inputProps.ref.current = el;
+            }
+          }}
         />
 
         <div
