@@ -408,6 +408,11 @@ const rawCountries = [
     'et',
     '251'
   ],
+  ['Faroe Islands',
+    ['europe'],
+    'fo',
+    '298'
+  ],
   [
     'Fiji',
     ['oceania'],
