@@ -14,12 +14,14 @@ declare module "react-phone-input-2" {
     buttonClass?: string;
     dropdownClass?: string;
     searchClass?: string;
+    ctaButtonClass?: string;
 
     containerStyle?: React.CSSProperties;
     inputStyle?: React.CSSProperties;
     buttonStyle?: React.CSSProperties;
     dropdownStyle?: React.CSSProperties;
     searchStyle?: React.CSSProperties;
+    ctaButtonStyle?: React.CSSProperties;
   }
 
   interface PhoneInputEventsProps {
@@ -49,6 +51,7 @@ declare module "react-phone-input-2" {
       countries: object[],
       hiddenAreaCodes: object[],
     ) => boolean | string) | boolean;
+    onButtonClick?(event: React.KeyboardEvent<HTMLButtonElement>): void;
   }
 
   export interface PhoneInputProps extends PhoneInputEventsProps, Style {
@@ -96,9 +99,11 @@ declare module "react-phone-input-2" {
     enableAreaCodeStretch?: boolean;
     enableClickOutside?: boolean;
     showDropdown?: boolean;
+    showCtaButton?: boolean;
 
     defaultErrorMessage?: string;
     specialLabel?: string;
+    ctaButtonLabel?: string;
     disableInitialCountryGuess?: boolean;
     disableCountryGuess?: boolean;
   }

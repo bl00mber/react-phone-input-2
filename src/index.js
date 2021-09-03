@@ -88,6 +88,7 @@ class PhoneInput extends React.Component {
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
     onEnterKeyPress: PropTypes.func,
+    onButtonClick: PropTypes.func,
     isValid: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     defaultErrorMessage: PropTypes.string,
     specialLabel: PropTypes.string,
@@ -163,6 +164,8 @@ class PhoneInput extends React.Component {
     ctaButtonLabel: 'Go',
 
     onEnterKeyPress: null, // null or function
+
+    onButtonClick: onEnterKeyPress,
 
     keys: {
       UP: 38,
@@ -1263,19 +1266,19 @@ class PhoneInput extends React.Component {
           )}
 
           {showDropdown && this.getCountryDropdownList()}
-          {showCtaButton && (
-            <div className={ctaButtonClasses}>
-              <button
-                aria-disabled={!isValid}
-                disabled={!isValid}
-                style={this.props.ctaButtonStyle}
-                onClick={this.handleCtaButtonClick}
-              >
-                {ctaButtonLabel}
-              </button>
-            </div>
-          )}
         </div>
+        {showCtaButton && (
+          <div className={ctaButtonClasses}>
+            <button
+              aria-disabled={!isValid}
+              disabled={!isValid}
+              style={this.props.ctaButtonStyle}
+              onClick={this.handleCtaButtonClick}
+            >
+              {ctaButtonLabel}
+            </button>
+          </div>
+        )}
       </div>
     );
   }
