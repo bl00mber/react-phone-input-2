@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bl00mber/react-phone-input-2.git"
+    "url": "git+https://github.com/vincentdatrier/react-phone-input-2.git"
   },
   "keywords": [
     "react",
@@ -42,13 +42,14 @@
   ],
   "author": "Nick Reiley <bloomber111@gmail.com> (https://github.com/bl00mber)",
   "contributors": [
-    "Raza Gill <raza.gill@outlook.com> (https://github.com/razagill)"
+    "Raza Gill <raza.gill@outlook.com> (https://github.com/razagill)",
+    "Vincent Datrier <vincent@datrier.com> (https://github.com/vincentdatrier)"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bl00mber/react-phone-input-2/issues"
+    "url": "https://github.com/vincentdatrier/react-phone-input-2/issues"
   },
-  "homepage": "https://github.com/bl00mber/react-phone-input-2",
+  "homepage": "https://github.com/vincentdatrier/react-phone-input-2",
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/test/__mocks__/fileMock.js",
