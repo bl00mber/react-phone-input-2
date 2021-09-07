@@ -460,6 +460,7 @@ class PhoneInput extends React.Component {
   // Put the cursor to the end of the input (usually after a focus event)
   cursorToEnd = () => {
     const input = this.numberInputRef;
+    if (document.activeElement !== input) return;
     input.focus();
     let len = input.value.length;
     if (input.value.charAt(len-1)=== ')') len = len-1;
