@@ -227,6 +227,21 @@ class Demo extends React.Component {
 
           <PhoneInput key={this.playgroundKey} {...this.state.playgroundProps}/>
         </div>
+
+        <div>
+          <br/><br/>
+          <p>Example for <a target={"_blank"} href={'https://github.com/bl00mber/react-phone-input-2/issues/456'}>https://github.com/bl00mber/react-phone-input-2/issues/456</a></p>
+          <p>i18n list of countries, first 3 are in German and the rest is in English</p>
+          <p>title has local name of the country, or if it's not exist - default one:</p>
+          <PhoneInput
+            countries={[{"value":"EG","label":"Ägypten"},{"value":"GQ","label":"Äquatorialguinea"},{"value":"ET","label":"Äthiopien"}]}
+            enableSearch
+            localization={{"eg":"Ägypten","gq":"Äquatorialguinea","et":"Äthiopien"}}
+            onlyCountries={["eg","gq","et","af","ax","al"]}
+            placeholder={`Select country`}
+            preserveOrder={['onlyCountries']}
+          />
+        </div>
       </div>
     )
   }
