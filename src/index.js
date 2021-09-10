@@ -964,21 +964,21 @@ class PhoneInput extends React.Component {
           ref={el => this.dropdownContainerRef = el}
         >
           {renderStringAsFlag ?
-          <div className={selectedFlagClasses}>{renderStringAsFlag}</div>
-          :
-          <div
-            onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
-            className={selectedFlagClasses}
-            title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
-            tabIndex={disableDropdown ? '-1' : '0'}
-            role='button'
-            aria-haspopup="listbox"
-            aria-expanded={showDropdown ? true : undefined}
-          >
-            <div className={inputFlagClasses}>
-              {!disableDropdown && <div className={arrowClasses}></div>}
-            </div>
-          </div>}
+            <div className={selectedFlagClasses}>{renderStringAsFlag}</div>
+            :
+            <div
+              onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
+              className={selectedFlagClasses}
+              title={selectedCountry ? `${selectedCountry.localName || selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
+              tabIndex={disableDropdown ? '-1' : '0'}
+              role='button'
+              aria-haspopup="listbox"
+              aria-expanded={showDropdown ? true : undefined}
+            >
+              <div className={inputFlagClasses}>
+                {!disableDropdown && <div className={arrowClasses}></div>}
+              </div>
+            </div>}
 
           {showDropdown && this.getCountryDropdownList()}
         </div>
