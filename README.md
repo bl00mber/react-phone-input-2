@@ -76,6 +76,12 @@ import 'react-phone-input-2/lib/style.css'
   </tr>
 
   <tr>
+    <td> emptyCountryDropdownTitle </td>
+    <td> string </td>
+    <td colspan="2"> fall back dropdown title in the event there is no country chosen </td>
+  </tr>
+
+  <tr>
     <td> inputProps </td>
     <td> object </td>
     <td colspan="2"> props to pass into the input </td>
