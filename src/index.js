@@ -66,6 +66,7 @@ class PhoneInput extends React.Component {
       PropTypes.arrayOf(PropTypes.string)
     ]),
 
+    emptyCountryDropdownTitle: PropTypes.string,
     inputProps: PropTypes.object,
     localization: PropTypes.object,
     masks: PropTypes.object,
@@ -139,6 +140,7 @@ class PhoneInput extends React.Component {
 
     regions: '',
 
+    emptyCountryDropdownTitle: '',
     inputProps: {},
     localization: {},
 
@@ -969,7 +971,7 @@ class PhoneInput extends React.Component {
           <div
             onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
             className={selectedFlagClasses}
-            title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
+            title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : props.emptyCountryDropdownTitle}
             tabIndex={disableDropdown ? '-1' : '0'}
             role='button'
             aria-haspopup="listbox"
