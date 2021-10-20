@@ -1,4 +1,4 @@
-# React-Phone-Input-2
+# React-Contact-Fields
 Highly customizable phone input component with auto formatting.
 
 [![npm version](https://img.shields.io/npm/v/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2)
@@ -10,13 +10,13 @@ Highly customizable phone input component with auto formatting.
 
 ## Installation
 ```shell-script
-npm install react-phone-input-2 --save
+npm install react-contact-fields --save
 ```
 
 ## Usage
 ```jsx
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import PhoneInput from 'react-contact-fields'
+import 'react-contact-fields/lib/style.css'
 
 <PhoneInput
   country={'us'}
