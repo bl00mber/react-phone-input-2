@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import PhoneInput from '../../src/index';
+import { Country, PhoneNumber } from '../../src/index';
 import '../../src/style/style.less';
 
 
@@ -44,39 +44,45 @@ class Demo extends React.Component {
           }
         `}} />
         <p style={{fontWeight: '500'}}>Created by <a style={{color: '#000'}}
-          href="https://github.com/bl00mber/react-phone-input-2">Nick Reiley</a></p>
+          href="https://github.com/ivovchak/react-contact-fields">Ihor Vovchak</a></p>
         <div style={{display: 'inline-block', verticalAlign: 'top'}}>
+            <Country
+                country='no'
+                excludeCountries={['us', 'ca']}
+            />
+        {/*
           <p>Exclude countries (usa, canada)</p>
-          <PhoneInput
+          <PhoneNumber
             country='no'
             excludeCountries={['us', 'ca']}
           />
           <p>Only countries</p>
-          <PhoneInput
+          <PhoneNumber
             country='gb'
             onlyCountries={['gb', 'es']}
             preserveOrder={['onlyCountries']}
           />
           <p>Preferred countries</p>
-          <PhoneInput
+          <PhoneNumber
             country='it'
             preferredCountries={['it', 'se']}
           />
+         */}
         </div>
-
+          {/*
         <div style={{display: 'inline-block', marginLeft: '40px'}}>
           <p>Auto country detect by value</p>
-          <PhoneInput
+          <PhoneNumber
             value='+3802343252'
             priority={{ca: 0, us: 1, kz: 0, ru: 1}}
           />
           <p>Local area codes with enableAreaCodes</p>
-          <PhoneInput
+          <PhoneNumber
             country='us'
             enableAreaCodes
           />
           <p>Dependent territories with enableTerritories</p>
-          <PhoneInput
+          <PhoneNumber
             country='vg'
             enableSearch
             enableTerritories
@@ -84,7 +90,7 @@ class Demo extends React.Component {
           <p>Disabled flag by default</p>
           <p>Customizable placeholder</p>
           <p>Customizable styles</p>
-          <PhoneInput
+          <PhoneNumber
             placeholder='Type your phone here'
             inputStyle={{
               width: '300px',
@@ -97,7 +103,7 @@ class Demo extends React.Component {
             dropdownStyle={{ width: '300px' }}
           />
           <p>Customizable classes</p>
-          <PhoneInput
+          <PhoneNumber
             containerClass={'react-tel-input'}
             inputClass={'custom-phone-input'}
             buttonClass={'custom-phone-button'}
@@ -107,18 +113,18 @@ class Demo extends React.Component {
 
         <div style={{display: 'inline-block', marginLeft: '40px', verticalAlign: 'top'}}>
           <p>Custom region selected: {`{'europe'}`}</p>
-          <PhoneInput
+          <PhoneNumber
             country='it'
             regions={'europe'}
             enableAreaCodes
           />
           <p>Custom regions selected: {`{['north-america', 'carribean']}`}</p>
-          <PhoneInput
+          <PhoneNumber
             country='ca'
             regions={['north-america', 'carribean']}
           />
           <p>Disabled dropdown and country code</p>
-          <PhoneInput
+          <PhoneNumber
             onlyCountries={['us']}
             country='us'
             placeholder='(702) 123-4567'
@@ -128,7 +134,7 @@ class Demo extends React.Component {
           <p>Localization</p>
           <p>Non-editable country code</p>
           <p>Autofocus</p>
-          <PhoneInput
+          <PhoneNumber
             country='de'
             onlyCountries={['de', 'es', 'us']}
             localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
@@ -140,7 +146,7 @@ class Demo extends React.Component {
             }}
           />
           <p>enableAreaCodeStretch: +61 (2), +61 (02)</p>
-          <PhoneInput
+          <PhoneNumber
             onlyCountries={['au']}
             enableAreaCodes
             enableAreaCodeStretch
@@ -149,17 +155,17 @@ class Demo extends React.Component {
         </div>
         <div style={{display: 'inline-block', marginLeft: '40px', verticalAlign: 'top'}}>
           <p>Search using iso2 or country name</p>
-          <PhoneInput
+          <PhoneNumber
             country='nl'
             enableSearch
             enableAreaCodes={['ca']}
           />
-          <PhoneInput
+          <PhoneNumber
             country='it'
             preferredCountries={['us', 'ca']}
             enableSearch
           />
-          <PhoneInput
+          <PhoneNumber
             country='pl'
             searchClass='search-class'
             searchStyle={{margin: '0', width: '97%', height: '30px'}}
@@ -169,14 +175,14 @@ class Demo extends React.Component {
             prefix=''
           />
           <p>Custom masks & area codes</p>
-          <PhoneInput
+          <PhoneNumber
             country='at'
             onlyCountries={['fr', 'at', 'gr', 'us']}
             masks={{fr: '(...) ..-..-..', at: '(....) ...-....', zz: '... ...'}}
             areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
             enableAreaCodes
           />
-          <PhoneInput
+          <PhoneNumber
             country='eu'
             onlyCountries={['fr', 'at', 'gr', 'us']}
             masks={{fr: '(...) ..-..-..', at: '(....) ...-....', zz: '... ...'}}
@@ -184,7 +190,7 @@ class Demo extends React.Component {
             enableAreaCodes
           />
           <p>State manipulations</p>
-          <PhoneInput
+          <PhoneNumber
             value={this.state.value}
             onChange={(value, country, e, formattedValue) => {console.log(value, country, e, formattedValue);
               this.setState({ value })}}
@@ -200,7 +206,7 @@ class Demo extends React.Component {
               }
             }}
           />
-          <PhoneInput
+          <PhoneNumber
             containerStyle={{marginBottom: '15px'}}
             country={this.state.country}
             prefix=''
@@ -219,8 +225,9 @@ class Demo extends React.Component {
             style={{borderRadius: '5px', fontFamily: 'Roboto', fontSize: '14px'}}
             onKeyDown={this.renderPlayground} defaultValue={JSON.stringify(this.state.playgroundProps)} />
 
-          <PhoneInput key={this.playgroundKey} {...this.state.playgroundProps}/>
+          <PhoneNumber key={this.playgroundKey} {...this.state.playgroundProps}/>
         </div>
+        */}
       </div>
     )
   }

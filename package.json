@@ -1,7 +1,7 @@
 {
-  "name": "react-phone-input-2",
-  "version": "2.14.0",
-  "description": "A react component to format phone numbers",
+  "name": "react-contact-fields",
+  "version": "0.0.1",
+  "description": "A react component to format phone numbers and countries",
   "main": "lib/lib.js",
   "typings": "index.d.ts",
   "scripts": {
@@ -16,10 +16,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bl00mber/react-phone-input-2.git"
+    "url": "git+https://github.com/ivovchak/react-contact-fields.git"
   },
   "keywords": [
     "react",
+    "country",
     "phone",
     "format",
     "number",
@@ -40,15 +41,13 @@
     "README.md",
     "index.d.ts"
   ],
-  "author": "Nick Reiley <bloomber111@gmail.com> (https://github.com/bl00mber)",
-  "contributors": [
-    "Raza Gill <raza.gill@outlook.com> (https://github.com/razagill)"
-  ],
+  "author": "Ihor Vovchak<ivovchak@gmail.com> (https://github.com/ivovchak)",
+  "contributors": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bl00mber/react-phone-input-2/issues"
+    "url": "https://github.com/ivovchak/react-contact-fields/issues"
   },
-  "homepage": "https://github.com/bl00mber/react-phone-input-2",
+  "homepage": "https://github.com/ivovchak/react-contact-fields",
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/test/__mocks__/fileMock.js",
