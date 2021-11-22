@@ -299,7 +299,8 @@ Country data object not returns from onKeyDown event
 ### Predefined localization
 `es` Spanish, `de` Deutsch, `ru` Russian, `fr` French<br/>
 `jp` Japanese, `cn` Chinese, `pt` Portuguese, `it` Italian<br/>
-`ir` Iranian, `ar` Arabic, `tr` Turkish, `id` Indonesian
+`ir` Iranian, `ar` Arabic, `tr` Turkish, `id` Indonesian<br/>
+`ca` Catalan
 
 ```jsx
 import es from 'react-phone-input-2/lang/es.json'
