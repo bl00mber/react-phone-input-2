@@ -37,6 +37,7 @@ class PhoneInput extends React.Component {
     buttonClass: PropTypes.string,
     dropdownClass: PropTypes.string,
     searchClass: PropTypes.string,
+    className: PropTypes.string,
 
     autoFormat: PropTypes.bool,
 
@@ -935,7 +936,7 @@ class PhoneInput extends React.Component {
 
     return (
       <div
-        className={containerClasses}
+        className={`${className} ${containerClasses}`}
         style={this.props.style || this.props.containerStyle}
         onKeyDown={this.handleKeydown}>
         {specialLabel && <div className='special-label'>{specialLabel}</div>}
