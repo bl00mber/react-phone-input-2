@@ -170,6 +170,11 @@ import 'react-phone-input-2/lib/style.css'
 ### Style
 <table>
   <tr>
+    <td> className </td>
+    <td> string </td>
+    <td colspan="2"> general class for the component to work with styled components </td>
+  </tr>
+  <tr>
     <td> containerClass </td>
     <td> string </td>
     <td colspan="2"> class for container </td>
