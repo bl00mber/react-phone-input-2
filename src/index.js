@@ -564,6 +564,7 @@ class PhoneInput extends React.Component {
       newSelectedCountry = newSelectedCountry.dialCode ? newSelectedCountry : selectedCountry;
     }
 
+    const oldCaretPosition = e.target.selectionStart;
     let caretPosition = e.target.selectionStart;
     const oldFormattedText = this.state.formattedNumber;
     const diff = formattedNumber.length - oldFormattedText.length;
@@ -581,9 +582,10 @@ class PhoneInput extends React.Component {
 
       if (lastChar == ')') {
         this.numberInputRef.setSelectionRange(formattedNumber.length - 1, formattedNumber.length - 1);
-      }
-      else if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
+      } else if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
         this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
+      } else if (oldCaretPosition < oldFormattedText.length) {
+        this.numberInputRef.setSelectionRange(oldCaretPosition, oldCaretPosition);
       }
 
       if (onChange) onChange(formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData(), e, formattedNumber);
