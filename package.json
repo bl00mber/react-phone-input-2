@@ -7,6 +7,7 @@
   "scripts": {
     "test": "jest",
     "start": "TARGET=dev_js NODE_ENV=development webpack-dev-server --progress",
+    "start:shadow": "TARGET=dev_js_shadow NODE_ENV=development webpack-dev-server --progress",
     "start:css": "TARGET=dev_css NODE_ENV=development webpack-dev-server --progress",
     "build": "npm run build:js && npm run build:css",
     "build:js": "TARGET=build_js NODE_ENV=production webpack -p --progress",
