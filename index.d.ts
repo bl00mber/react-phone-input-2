@@ -1,7 +1,7 @@
 declare module "react-phone-input-2" {
   import React from "react";
 
-  interface CountryData {
+  export interface CountryData {
     name: string;
     dialCode: string;
     countryCode: string;
