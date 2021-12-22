@@ -66,7 +66,8 @@ const rawCountries = [
     'Armenia',
     ['asia', 'ex-ussr'],
     'am',
-    '374'
+    '374',
+    '.. ......'
   ],
   [
     'Aruba',
@@ -335,7 +336,8 @@ const rawCountries = [
     'Czech Republic',
     ['europe', 'eu-union'],
     'cz',
-    '420'
+    '420',
+    '... ... ...'
   ],
   [
     'Denmark',
@@ -658,7 +660,8 @@ const rawCountries = [
     'Kyrgyzstan',
     ['asia', 'ex-ussr'],
     'kg',
-    '996'
+    '996',
+    '... ... ...'
   ],
   [
     'Laos',
@@ -670,7 +673,8 @@ const rawCountries = [
     'Latvia',
     ['europe', 'eu-union', 'ex-ussr', 'baltic'],
     'lv',
-    '371'
+    '371',
+    '.. ... ...'
   ],
   [
     'Lebanon',
@@ -1306,7 +1310,8 @@ const rawCountries = [
     'Uzbekistan',
     ['asia', 'ex-ussr'],
     'uz',
-    '998'
+    '998',
+    '.. ... .. ..'
   ],
   [
     'Vanuatu',
