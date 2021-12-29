@@ -556,7 +556,7 @@ class PhoneInput extends React.Component {
       if (!this.state.freezeSelection || selectedCountry.dialCode.length > inputNumber.length) {
         if (this.props.disableCountryGuess) {newSelectedCountry = selectedCountry;}
         else {
-          newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
+          newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes);
         }
         freezeSelection = false;
       }
