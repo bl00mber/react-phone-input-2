@@ -485,7 +485,7 @@ class PhoneInput extends React.Component {
     e.preventDefault();
     if (!this.state.showDropdown && this.props.disabled) return;
     const { preferredCountries, selectedCountry } = this.state
-    const allCountries = preferredCountries.concat(this.state.onlyCountries)
+    const allCountries =  [...new Set(preferredCountries.concat(this.state.onlyCountries))];
 
     const highlightCountryIndex = allCountries.findIndex(o =>
       o.dialCode === selectedCountry.dialCode && o.iso2 === selectedCountry.iso2);
@@ -763,7 +763,7 @@ class PhoneInput extends React.Component {
   getSearchFilteredCountries = () => {
     const { preferredCountries, onlyCountries, searchValue } = this.state
     const { enableSearch } = this.props
-    const allCountries = preferredCountries.concat(onlyCountries);
+    const allCountries = [...new Set(preferredCountries.concat(onlyCountries))];
     const sanitizedSearchValue = searchValue.trim().toLowerCase();
     if (enableSearch && sanitizedSearchValue) {
       // [...new Set()] to get rid of duplicates
