@@ -764,7 +764,7 @@ class PhoneInput extends React.Component {
     const { preferredCountries, onlyCountries, searchValue } = this.state
     const { enableSearch } = this.props
     const allCountries = preferredCountries.concat(onlyCountries);
-    const sanitizedSearchValue = searchValue.trim().toLowerCase();
+    const sanitizedSearchValue = searchValue.trim().toLowerCase().replace('+','');
     if (enableSearch && sanitizedSearchValue) {
       // [...new Set()] to get rid of duplicates
       // firstly search by iso2 code
