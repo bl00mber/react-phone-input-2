@@ -49,6 +49,11 @@ declare module "react-phone-input-2" {
       countries: object[],
       hiddenAreaCodes: object[],
     ) => boolean | string) | boolean;
+    onMount?(
+      value: string,
+      data: CountryData | {},
+      formattedValue: string
+    ): void;
   }
 
   export interface PhoneInputProps extends PhoneInputEventsProps, Style {
