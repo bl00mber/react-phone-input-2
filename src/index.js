@@ -8,6 +8,9 @@ import classNames from 'classnames';
 import './utils/prototypes'
 
 import CountryData from './CountryData.js';
+import Portal from './Portal';
+
+export const DROPDOWN_ID = `react-tel-input-portal`;
 
 class PhoneInput extends React.Component {
   static propTypes = {
@@ -84,6 +87,9 @@ class PhoneInput extends React.Component {
     enableAreaCodeStretch: PropTypes.bool,
     enableClickOutside: PropTypes.bool,
     showDropdown: PropTypes.bool,
+    dropdownContainerId: PropTypes.string,
+    dropdownContainerClass: PropTypes.string,
+    dropdownContainerStyle: PropTypes.object,
 
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -204,10 +210,10 @@ class PhoneInput extends React.Component {
 
     let formattedNumber;
     formattedNumber = (inputNumber === '' && countryGuess === 0) ? '' :
-    this.formatNumber(
-      (props.disableCountryCode ? '' : dialCode) + inputNumber,
-      countryGuess.name ? countryGuess : undefined
-    );
+      this.formatNumber(
+        (props.disableCountryCode ? '' : dialCode) + inputNumber,
+        countryGuess.name ? countryGuess : undefined
+      );
 
     const highlightCountryIndex = onlyCountries.findIndex(o => o == countryGuess);
 
@@ -683,10 +689,10 @@ class PhoneInput extends React.Component {
     if (className.includes('search-box')) {
       if (e.which !== keys.UP && e.which !== keys.DOWN && e.which !== keys.ENTER) {
         if (e.which === keys.ESC && e.target.value === '') {
-         // do nothing // if search field is empty, pass event (close dropdown)
-       } else {
-         return; // don't process other events coming from the search field
-       }
+          // do nothing // if search field is empty, pass event (close dropdown)
+        } else {
+          return; // don't process other events coming from the search field
+        }
       }
     }
 
@@ -740,7 +746,13 @@ class PhoneInput extends React.Component {
   }
 
   handleClickOutside = (e) => {
-    if (this.dropdownRef && !this.dropdownContainerRef.contains(e.target)) {
+    let dropdownContainer = this.dropdownContainerRef;
+    const { dropdownContainerId } = this.props;
+
+    if (dropdownContainerId) {
+      dropdownContainer = document.querySelector(`#${DROPDOWN_ID}`) || document.body;
+    }
+    if (this.dropdownRef && !dropdownContainer.contains(e.target)) {
       this.state.showDropdown && this.setState({ showDropdown: false });
     }
   }
@@ -772,7 +784,7 @@ class PhoneInput extends React.Component {
       // [...new Set()] to get rid of duplicates
       // firstly search by iso2 code
       if (/^\d+$/.test(sanitizedSearchValue)) { // contains digits only
-         // values wrapped in ${} to prevent undefined
+        // values wrapped in ${} to prevent undefined
         return allCountries.filter(({ dialCode }) =>
           [`${dialCode}`].some(field => field.toLowerCase().includes(sanitizedSearchValue)))
       } else {
@@ -859,14 +871,14 @@ class PhoneInput extends React.Component {
             })}
           >
             {!disableSearchIcon &&
-              <span
-                className={classNames({
-                  'search-emoji': true,
-                  [`${searchClass}-emoji`]: searchClass,
-                })}
-                role='img'
-                aria-label='Magnifying glass'
-              >
+            <span
+              className={classNames({
+                'search-emoji': true,
+                [`${searchClass}-emoji`]: searchClass,
+              })}
+              role='img'
+              aria-label='Magnifying glass'
+            >
                 &#128270;
               </span>}
             <input
@@ -893,6 +905,31 @@ class PhoneInput extends React.Component {
           )}
       </ul>
     );
+  }
+
+  showDropdown = () => {
+    const { dropdownContainerId, dropdownContainerClass, dropdownContainerStyle } = this.props;
+    if (dropdownContainerId) {
+      if (this.dropdownContainerRef) {
+        const rect = this.dropdownContainerRef && this.dropdownContainerRef.getBoundingClientRect();
+        const coords = {
+          left: rect.x, // small position adjustment
+          top: rect.y + window.scrollY + rect.height / 2,
+        }
+
+        return (
+          <Portal
+            dropdownContainerId={dropdownContainerId}
+            dropdownContainerClass={dropdownContainerClass}
+            dropdownContainerStyle={dropdownContainerStyle}
+            coords={coords}
+          >
+            {this.getCountryDropdownList()}
+          </Portal>
+        );
+      }
+    }
+    return this.getCountryDropdownList();
   }
 
   render() {
@@ -974,23 +1011,23 @@ class PhoneInput extends React.Component {
           ref={el => this.dropdownContainerRef = el}
         >
           {renderStringAsFlag ?
-          <div className={selectedFlagClasses}>{renderStringAsFlag}</div>
-          :
-          <div
-            onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
-            className={selectedFlagClasses}
-            title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
-            tabIndex={disableDropdown ? '-1' : '0'}
-            role='button'
-            aria-haspopup="listbox"
-            aria-expanded={showDropdown ? true : undefined}
-          >
-            <div className={inputFlagClasses}>
-              {!disableDropdown && <div className={arrowClasses}></div>}
-            </div>
-          </div>}
+            <div className={selectedFlagClasses}>{renderStringAsFlag}</div>
+            :
+            <div
+              onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
+              className={selectedFlagClasses}
+              title={selectedCountry ? `${selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
+              tabIndex={disableDropdown ? '-1' : '0'}
+              role='button'
+              aria-haspopup="listbox"
+              aria-expanded={showDropdown ? true : undefined}
+            >
+              <div className={inputFlagClasses}>
+                {!disableDropdown && <div className={arrowClasses}></div>}
+              </div>
+            </div>}
 
-          {showDropdown && this.getCountryDropdownList()}
+          {showDropdown && this.showDropdown()}
         </div>
       </div>
     );
