@@ -460,6 +460,7 @@ class PhoneInput extends React.Component {
   // Put the cursor to the end of the input (usually after a focus event)
   cursorToEnd = () => {
     const input = this.numberInputRef;
+    if (document.activeElement !== input) return;
     input.focus();
     let len = input.value.length;
     if (input.value.charAt(len-1)=== ')') len = len-1;
@@ -485,7 +486,7 @@ class PhoneInput extends React.Component {
     e.preventDefault();
     if (!this.state.showDropdown && this.props.disabled) return;
     const { preferredCountries, selectedCountry } = this.state
-    const allCountries = preferredCountries.concat(this.state.onlyCountries)
+    const allCountries =  [...new Set(preferredCountries.concat(this.state.onlyCountries))];
 
     const highlightCountryIndex = allCountries.findIndex(o =>
       o.dialCode === selectedCountry.dialCode && o.iso2 === selectedCountry.iso2);
@@ -553,7 +554,7 @@ class PhoneInput extends React.Component {
       // we don't need to send the whole number to guess the country... only the first 6 characters are enough
       // the guess country function can then use memoization much more effectively since the set of input it
       // gets has drastically reduced
-      if (!this.state.freezeSelection || selectedCountry.dialCode.length > inputNumber.length) {
+      if (!this.state.freezeSelection || (!!selectedCountry && selectedCountry.dialCode.length > inputNumber.length)) {
         if (this.props.disableCountryGuess) {newSelectedCountry = selectedCountry;}
         else {
           newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
@@ -564,6 +565,7 @@ class PhoneInput extends React.Component {
       newSelectedCountry = newSelectedCountry.dialCode ? newSelectedCountry : selectedCountry;
     }
 
+    const oldCaretPosition = e.target.selectionStart;
     let caretPosition = e.target.selectionStart;
     const oldFormattedText = this.state.formattedNumber;
     const diff = formattedNumber.length - oldFormattedText.length;
@@ -581,9 +583,10 @@ class PhoneInput extends React.Component {
 
       if (lastChar == ')') {
         this.numberInputRef.setSelectionRange(formattedNumber.length - 1, formattedNumber.length - 1);
-      }
-      else if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
+      } else if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
         this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
+      } else if (oldCaretPosition < oldFormattedText.length) {
+        this.numberInputRef.setSelectionRange(oldCaretPosition, oldCaretPosition);
       }
 
       if (onChange) onChange(formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData(), e, formattedNumber);
@@ -763,7 +766,7 @@ class PhoneInput extends React.Component {
   getSearchFilteredCountries = () => {
     const { preferredCountries, onlyCountries, searchValue } = this.state
     const { enableSearch } = this.props
-    const allCountries = preferredCountries.concat(onlyCountries);
+    const allCountries = [...new Set(preferredCountries.concat(onlyCountries))];
     const sanitizedSearchValue = searchValue.trim().toLowerCase().replace('+','');
     if (enableSearch && sanitizedSearchValue) {
       // [...new Set()] to get rid of duplicates
@@ -950,12 +953,19 @@ class PhoneInput extends React.Component {
           onBlur={this.handleInputBlur}
           onCopy={this.handleInputCopy}
           value={formattedNumber}
-          ref={el => this.numberInputRef = el}
           onKeyDown={this.handleInputKeyDown}
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
           type='tel'
           {...this.props.inputProps}
+          ref={el => {
+            this.numberInputRef = el;
+            if (typeof this.props.inputProps.ref === 'function') {
+              this.props.inputProps.ref(el);
+            } else if (typeof this.props.inputProps.ref === 'object') {
+              this.props.inputProps.ref.current = el;
+            }
+          }}
         />
 
         <div
