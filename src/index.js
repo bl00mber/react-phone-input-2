@@ -839,9 +839,9 @@ class PhoneInput extends React.Component {
     countryDropdownList.splice(preferredCountries.length, 0, dashedLi);
 
     const dropDownClasses = classNames({
-      [this.props.dropdownClass]: true,
       'country-list': true,
-      'hide': !showDropdown
+      'hide': !showDropdown,
+      [this.props.dropdownClass]: true,
     });
 
     return (
@@ -923,20 +923,20 @@ class PhoneInput extends React.Component {
     });
     const arrowClasses = classNames({'arrow': true, 'up': showDropdown});
     const inputClasses = classNames({
-      [this.props.inputClass]: true,
       'form-control': true,
       'invalid-number': !isValidValue,
       'open': showDropdown,
+      [this.props.inputClass]: true,
     });
     const selectedFlagClasses = classNames({
       'selected-flag': true,
       'open': showDropdown,
     });
     const flagViewClasses = classNames({
-      [this.props.buttonClass]: true,
       'flag-dropdown': true,
       'invalid-number': !isValidValue,
       'open': showDropdown,
+      [this.props.buttonClass]: true,
     });
     const inputFlagClasses = `flag ${selectedCountry && selectedCountry.iso2}`;
 
