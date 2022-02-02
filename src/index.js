@@ -950,12 +950,19 @@ class PhoneInput extends React.Component {
           onBlur={this.handleInputBlur}
           onCopy={this.handleInputCopy}
           value={formattedNumber}
-          ref={el => this.numberInputRef = el}
           onKeyDown={this.handleInputKeyDown}
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
           type='tel'
           {...this.props.inputProps}
+          ref={el => {
+            this.numberInputRef = el;
+            if (typeof this.props.inputProps.ref === 'function') {
+              this.props.inputProps.ref(el);
+            } else if (typeof this.props.inputProps.ref === 'object') {
+              this.props.inputProps.ref.current = el;
+            }
+          }}
         />
 
         <div
