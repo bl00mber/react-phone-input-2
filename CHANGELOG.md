@@ -1,3 +1,8 @@
+## 2.15.0 (February 3, 2022)
+* Hungarian, Polish, Korean translation
+* numerous fixes
+
+
 ## 2.13.8 (August 25, 2020)
 * `specialLabel`, `disableCountryGuess`
 * Add some missing flags to css

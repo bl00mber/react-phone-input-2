@@ -296,11 +296,11 @@ Country data object not returns from onKeyDown event
 />
 ```
 
-### Predefined localizations
+### Predefined localization
 `es` Spanish, `de` Deutsch, `ru` Russian, `fr` French<br/>
 `jp` Japanese, `cn` Chinese, `pt` Portuguese, `it` Italian<br/>
 `ir` Iranian, `ar` Arabic, `tr` Turkish, `id` Indonesian<br/>
-`hu` Hungarian
+`hu` Hungarian, `pl` Polish, `ko` Korean
 
 ```jsx
 import es from 'react-phone-input-2/lang/es.json'
@@ -468,6 +468,31 @@ import startsWith from 'lodash.startswith';
 
 ### Clear country
 To clear `country`, pass `null` as `value`.
+
+### Dynamic placeholder
+<details>
+  <summary>Show</summary>
+
+```jsx
+const phoneCountryFormat = useMemo(() => phoneCountry?.format || undefined, [phoneCountry]);
+const placeholder = useMemo(() => {
+  if (phoneCountryFormat) {
+    const words = phoneCountryFormat.split(' ');
+    words.shift(); // I'm using only local numbers so here I remove the country code from the format
+    let text = words.join(' ');
+     // first digit is special on french numbers, these 3 lines could be removed
+    if (country === 'fr') {
+      text = text.replace('.', '6');
+    }
+    while (text.indexOf('.') > -1) {
+      text = text.replace('.', `${Math.min(9, Math.max(1, Math.floor(Math.random() * 10)))}`);
+    }
+    return text;
+  }
+  return '';
+}, [phoneCountryFormat, country]);
+```
+</details>
 
 ### CDN
 ```html
