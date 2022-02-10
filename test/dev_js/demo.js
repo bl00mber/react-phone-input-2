@@ -221,6 +221,16 @@ class Demo extends React.Component {
 
           <PhoneInput key={this.playgroundKey} {...this.state.playgroundProps}/>
         </div>
+
+        <div>
+          <br/><br/>
+          <p>CountryListTitle example:
+          Click = to display 'My Title'
+          </p>
+
+          <PhoneInput country={this.state.country} CountryListTitle={() => <h1>My Title</h1>} />
+        </div>
+
       </div>
     )
   }

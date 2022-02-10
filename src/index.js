@@ -100,6 +100,7 @@ class PhoneInput extends React.Component {
     ]),
     defaultErrorMessage: PropTypes.string,
     specialLabel: PropTypes.string,
+    CountryListTitle:  PropTypes.oneOfType([PropTypes.node, PropTypes.func])
   }
 
   static defaultProps = {
@@ -172,7 +173,8 @@ class PhoneInput extends React.Component {
     keys: {
       UP: 38, DOWN: 40, RIGHT: 39, LEFT: 37, ENTER: 13,
       ESC: 27, PLUS: 43, A: 65, Z: 90, SPACE: 32, TAB: 9,
-    }
+    },
+    CountryListTitle: null
   }
 
   constructor(props) {
@@ -808,7 +810,7 @@ class PhoneInput extends React.Component {
 
   getCountryDropdownList = () => {
     const { preferredCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
-    const { disableDropdown, prefix } = this.props
+    const { disableDropdown, prefix, CountryListTitle} = this.props
     const { enableSearch, searchNotFound, disableSearchIcon, searchClass, searchStyle, searchPlaceholder, autocompleteSearch } = this.props;
 
     const searchedCountries = this.getSearchFilteredCountries()
@@ -855,7 +857,7 @@ class PhoneInput extends React.Component {
       [this.props.dropdownClass]: true,
     });
 
-    return (
+    const result = (
       <ul
         ref={el => {
           !enableSearch && el && el.focus();
@@ -908,6 +910,14 @@ class PhoneInput extends React.Component {
           )}
       </ul>
     );
+
+    if (CountryListTitle) {
+      return <>
+        <CountryListTitle />
+        {result}
+      </>
+    }
+    return result;
   }
 
   render() {
