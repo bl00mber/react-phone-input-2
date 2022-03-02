@@ -628,6 +628,9 @@ class PhoneInput extends React.Component {
       formattedNumber,
       searchValue: ''
     }, () => {
+      if (this.numberInputRef) {
+        this.numberInputRef.focus();
+      }
       this.cursorToEnd();
       if (this.props.onChange) this.props.onChange(formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData(), e, formattedNumber);
     });
