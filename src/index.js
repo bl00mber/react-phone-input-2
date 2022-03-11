@@ -100,6 +100,8 @@ class PhoneInput extends React.Component {
     ]),
     defaultErrorMessage: PropTypes.string,
     specialLabel: PropTypes.string,
+
+    countryListWrapper: PropTypes.element
   }
 
   static defaultProps = {
@@ -172,7 +174,9 @@ class PhoneInput extends React.Component {
     keys: {
       UP: 38, DOWN: 40, RIGHT: 39, LEFT: 37, ENTER: 13,
       ESC: 27, PLUS: 43, A: 65, Z: 90, SPACE: 32, TAB: 9,
-    }
+    },
+
+    countryListWrapper: null
   }
 
   constructor(props) {
@@ -855,59 +859,70 @@ class PhoneInput extends React.Component {
       [this.props.dropdownClass]: true,
     });
 
-    return (
-      <ul
-        ref={el => {
-          !enableSearch && el && el.focus();
-          return (this.dropdownRef = el);
-        }}
-        className={dropDownClasses}
-        style={this.props.dropdownStyle}
-        role='listbox'
-        tabIndex='0'
-      >
-        {enableSearch && (
-          <li
-            className={classNames({
-              search: true,
-              [searchClass]: searchClass,
-            })}
-          >
-            {!disableSearchIcon &&
-              <span
-                className={classNames({
-                  'search-emoji': true,
-                  [`${searchClass}-emoji`]: searchClass,
-                })}
-                role='img'
-                aria-label='Magnifying glass'
-              >
-                &#128270;
-              </span>}
-            <input
+    const renderCountryList = () => {
+      return (
+        <ul
+          ref={el => {
+            !enableSearch && el && el.focus();
+            return (this.dropdownRef = el);
+          }}
+          className={dropDownClasses}
+          style={this.props.dropdownStyle}
+          role='listbox'
+          tabIndex='0'
+        >
+          {enableSearch && (
+            <li
               className={classNames({
-                'search-box': true,
-                [`${searchClass}-box`]: searchClass,
+                search: true,
+                [searchClass]: searchClass,
               })}
-              style={searchStyle}
-              type='search'
-              placeholder={searchPlaceholder}
-              autoFocus={true}
-              autoComplete={autocompleteSearch ? 'on' : 'off'}
-              value={searchValue}
-              onChange={this.handleSearchChange}
-            />
-          </li>
-        )}
-        {countryDropdownList.length > 0
-          ? countryDropdownList
-          : (
-            <li className='no-entries-message'>
-              <span>{searchNotFound}</span>
+            >
+              {!disableSearchIcon &&
+                <span
+                  className={classNames({
+                    'search-emoji': true,
+                    [`${searchClass}-emoji`]: searchClass,
+                  })}
+                  role='img'
+                  aria-label='Magnifying glass'
+                >
+                  &#128270;
+                </span>}
+              <input
+                className={classNames({
+                  'search-box': true,
+                  [`${searchClass}-box`]: searchClass,
+                })}
+                style={searchStyle}
+                type='search'
+                placeholder={searchPlaceholder}
+                autoFocus={true}
+                autoComplete={autocompleteSearch ? 'on' : 'off'}
+                value={searchValue}
+                onChange={this.handleSearchChange}
+              />
             </li>
           )}
-      </ul>
-    );
+          {countryDropdownList.length > 0
+            ? countryDropdownList
+            : (
+              <li className='no-entries-message'>
+                <span>{searchNotFound}</span>
+              </li>
+            )}
+        </ul>
+      )
+    }
+
+    const CountryListWrapper = this.props.countryListWrapper;
+    if (CountryListWrapper) {
+        return <CountryListWrapper>
+            {renderCountryList()}
+        </CountryListWrapper>
+    }
+
+    return renderCountryList();
   }
 
   render() {
