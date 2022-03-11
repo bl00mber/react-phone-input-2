@@ -80,6 +80,11 @@ import 'react-phone-input-2/lib/style.css'
     <td> object </td>
     <td colspan="2"> props to pass into the input </td>
   </tr>
+    <tr>
+    <td> countryListWrapper </td>
+    <td> function </td>
+    <td colspan="2"> custom react component </td>
+  </tr>
 </table>
 
 <table>
@@ -159,6 +164,7 @@ import 'react-phone-input-2/lib/style.css'
 - [Custom masks](#custom-masks)
 - [Custom area codes](#custom-area-codes)
 - [Other props](#other-props)
+- [Country List Wrapper](#country-list-wrapper)
 - [Custom localization](#custom-localization)
 - [Guides](#guides)
   - [Phone without dialCode](#phone-without-dialcode)
@@ -426,6 +432,13 @@ Example: `+61 (2), +61 (02)`
 <PhoneInput
   onlyCountries={['fr', 'at']}
   preserveOrder={['onlyCountries', 'preferredCountries']}
+/>
+```
+
+### Country List Wrapper
+```jsx
+<PhoneInput
+  countryListWrapper={(children) => <CustomReactWrapper ...props />}
 />
 ```
 
