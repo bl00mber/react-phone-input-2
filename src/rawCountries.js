@@ -991,7 +991,7 @@ const rawCountries = [
     ['america', 'carribean'],
     'pr',
     '1',
-    '',
+    '(...) ...-....',
     3, ['787', '939']
   ],
   [
