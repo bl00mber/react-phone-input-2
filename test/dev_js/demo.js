@@ -64,6 +64,17 @@ class Demo extends React.Component {
           />
         </div>
 
+        <div>
+          <p>Country code next to flag</p>
+          <PhoneInput
+            country='us'
+            countryCodeNextToFlag
+            disableCountryCode
+            placeholder=''
+            disableCountryGuess
+          />
+        </div>
+
         <div style={{display: 'inline-block', marginLeft: '40px'}}>
           <p>Auto country detect by value</p>
           <PhoneInput

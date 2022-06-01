@@ -100,6 +100,7 @@ class PhoneInput extends React.Component {
     ]),
     defaultErrorMessage: PropTypes.string,
     specialLabel: PropTypes.string,
+    countryCodeNextToFlag: PropTypes.bool
   }
 
   static defaultProps = {
@@ -166,6 +167,7 @@ class PhoneInput extends React.Component {
     isValid: true, // (value, selectedCountry, onlyCountries, hiddenAreaCodes) => true | false | 'Message'
     defaultErrorMessage: '',
     specialLabel: 'Phone',
+    countryCodeNextToFlag: false,
 
     onEnterKeyPress: null, // null or function
 
@@ -913,6 +915,8 @@ class PhoneInput extends React.Component {
   render() {
     const { onlyCountries, selectedCountry, showDropdown, formattedNumber, hiddenAreaCodes } = this.state;
     const { disableDropdown, renderStringAsFlag, isValid, defaultErrorMessage, specialLabel } = this.props;
+    const dialCodeLength = selectedCountry.dialCode !== undefined ? (selectedCountry.dialCode.length + 1) : 0 
+    const showCodeNextToFlag = this.props.countryCodeNextToFlag && dialCodeLength != 0 && !this.props.renderStringAsFlag
 
     let isValidValue, errorMessage;
     if (typeof isValid === 'boolean') {
@@ -937,6 +941,7 @@ class PhoneInput extends React.Component {
       'form-control': true,
       'invalid-number': !isValidValue,
       'open': showDropdown,
+      [`input-country-code-next-to-flag-${dialCodeLength}-digits`]: showCodeNextToFlag,
       [this.props.inputClass]: true,
     });
     const selectedFlagClasses = classNames({
@@ -991,20 +996,23 @@ class PhoneInput extends React.Component {
           {renderStringAsFlag ?
           <div className={selectedFlagClasses}>{renderStringAsFlag}</div>
           :
-          <div
-            onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
-            className={selectedFlagClasses}
-            title={selectedCountry ? `${selectedCountry.localName || selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
-            tabIndex={disableDropdown ? '-1' : '0'}
-            role='button'
-            aria-haspopup="listbox"
-            aria-expanded={showDropdown ? true : undefined}
-          >
+          (<div className='dropdown-with-flag'> 
+            <div
+              onClick={disableDropdown ? undefined : this.handleFlagDropdownClick}
+              className={selectedFlagClasses}
+              title={selectedCountry ? `${selectedCountry.localName || selectedCountry.name}: + ${selectedCountry.dialCode}` : ''}
+              tabIndex={disableDropdown ? '-1' : '0'}
+              role='button'
+              aria-haspopup="listbox"
+              aria-expanded={showDropdown ? true : undefined}
+            >
             <div className={inputFlagClasses}>
-              {!disableDropdown && <div className={arrowClasses}></div>}
+              {!disableDropdown && <div className={arrowClasses}>{" "}</div>}
             </div>
-          </div>}
-
+            
+          </div>
+          {this.props.countryCodeNextToFlag && dialCodeLength !== 0 && <div className='country-code-next-to-flag'> +{selectedCountry.dialCode} </div>} </div>)}
+         
           {showDropdown && this.getCountryDropdownList()}
         </div>
       </div>
