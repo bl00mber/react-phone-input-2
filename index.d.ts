@@ -1,4 +1,4 @@
-declare module "react-phone-input-2" {
+declare module "intouch-phone-input" {
   import React from "react";
 
   export interface CountryData {
@@ -43,12 +43,14 @@ declare module "react-phone-input-2" {
     ): void;
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
     onEnterKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
-    isValid?: ((
-      value: string,
-      country: object,
-      countries: object[],
-      hiddenAreaCodes: object[],
-    ) => boolean | string) | boolean;
+    isValid?:
+      | ((
+          value: string,
+          country: object,
+          countries: object[],
+          hiddenAreaCodes: object[]
+        ) => boolean | string)
+      | boolean;
     onMount?(
       value: string,
       data: CountryData | {},
