@@ -1,6 +1,6 @@
 {
   "name": "intouch-phone-input",
-  "version": "2.15.1",
+  "version": "2.15.12",
   "description": "A react component to format phone numbers for intouch",
   "main": "lib/lib.js",
   "typings": "index.d.ts",
@@ -47,9 +47,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bl00mber/react-phone-input-2/issues"
+    "url": "https://github.com/PabloGuillermoCV/react-phone-input-2issues"
   },
-  "homepage": "https://github.com/bl00mber/react-phone-input-2",
+  "homepage": "https://github.com/PabloGuillermoCV/react-phone-input-2",
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/test/__mocks__/fileMock.js",
@@ -82,8 +82,8 @@
     "webpack-merge": "^4.2.1"
   },
   "peerDependencies": {
-    "react": "^16.12.0 || ^17.0.0",
-    "react-dom": "^16.12.0 || ^17.0.0"
+    "react": "^16.12.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0",
+    "react-dom": "^16.12.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0"
   },
   "dependencies": {
     "classnames": "^2.2.6",

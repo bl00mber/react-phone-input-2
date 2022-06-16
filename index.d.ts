@@ -56,6 +56,7 @@ declare module "intouch-phone-input" {
       data: CountryData | {},
       formattedValue: string
     ): void;
+    setCountryForParent?(value: React.SetStateAction<object>);
   }
 
   export interface PhoneInputProps extends PhoneInputEventsProps, Style {
