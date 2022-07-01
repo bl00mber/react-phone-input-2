@@ -1,6 +1,6 @@
 {
   "name": "react-phone-input-2",
-  "version": "2.15.0",
+  "version": "2.15.1",
   "description": "A react component to format phone numbers",
   "main": "lib/lib.js",
   "typings": "index.d.ts",
@@ -8,7 +8,7 @@
     "test": "jest",
     "start": "TARGET=dev_js NODE_ENV=development webpack-dev-server --progress",
     "start:css": "TARGET=dev_css NODE_ENV=development webpack-dev-server --progress",
-    "build": "npm run build:js && npm run build:css",
+    "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && npm run build:js && npm run build:css",
     "build:js": "TARGET=build_js NODE_ENV=production webpack -p --progress",
     "build:css": "TARGET=build_css NODE_ENV=production webpack -p --progress && rm ./main.js",
     "prepublishOnly": "npm run build",
@@ -81,8 +81,8 @@
     "webpack-merge": "^4.2.1"
   },
   "peerDependencies": {
-    "react": "^16.12.0 || ^17.0.0",
-    "react-dom": "^16.12.0 || ^17.0.0"
+    "react": "^16.12.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0",
+    "react-dom": "^16.12.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0"
   },
   "dependencies": {
     "classnames": "^2.2.6",
