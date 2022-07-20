@@ -6,6 +6,10 @@ declare module "react-phone-input-2" {
     dialCode: string;
     countryCode: string;
     format: string;
+    iso2?: string;
+    mainCode?: boolean;
+    priority?: number;
+    regions?: string[]
   }
 
   interface Style {
@@ -45,7 +49,7 @@ declare module "react-phone-input-2" {
     onEnterKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
     isValid?: ((
       value: string,
-      country: object,
+      country: CountryData | {},
       countries: object[],
       hiddenAreaCodes: object[],
     ) => boolean | string) | boolean;
