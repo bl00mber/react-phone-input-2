@@ -98,7 +98,7 @@ class PhoneInput extends React.Component {
       PropTypes.bool,
       PropTypes.func,
     ]),
-    defaultErrorMessage: PropTypes.string,
+    defaultErrorMessage: PropTypes.node,
     specialLabel: PropTypes.string,
   }
 
