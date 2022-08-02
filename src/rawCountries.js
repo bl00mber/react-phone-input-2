@@ -535,7 +535,8 @@ const rawCountries = [
     'Honduras',
     ['america', 'central-america'],
     'hn',
-    '504'
+    '504',
+    '....-....'
   ],
   [
     'Hong Kong',
@@ -890,7 +891,8 @@ const rawCountries = [
     'Nicaragua',
     ['america', 'central-america'],
     'ni',
-    '505'
+    '505',
+    '....-....'
   ],
   [
     'Niger',
