@@ -1004,9 +1004,9 @@ class PhoneInput extends React.Component {
               {!disableDropdown && <div className={arrowClasses}></div>}
             </div>
           </div>}
-
-          {showDropdown && this.getCountryDropdownList()}
         </div>
+        
+        {showDropdown && this.getCountryDropdownList()}
       </div>
     );
   }
