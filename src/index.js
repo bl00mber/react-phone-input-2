@@ -986,7 +986,7 @@ class PhoneInput extends React.Component {
         <div
           className={flagViewClasses}
           style={this.props.buttonStyle}
-          ref={el => this.dropdownContainerRef = el}
+          
         >
           {renderStringAsFlag ?
           <div className={selectedFlagClasses}>{renderStringAsFlag}</div>
@@ -1005,8 +1005,10 @@ class PhoneInput extends React.Component {
             </div>
           </div>}
         </div>
-        
-        {showDropdown && this.getCountryDropdownList()}
+
+        <div ref={el => this.dropdownContainerRef = el}>
+          {showDropdown && this.getCountryDropdownList()}
+        </div>
       </div>
     );
   }
