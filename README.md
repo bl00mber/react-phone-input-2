@@ -1,8 +1,4 @@
 # React-Phone-Input-2
-## DONATIONS / FUNDING NEEDED
-<ins>bitcoin</ins> bc1qa7q6gf9e06ssqrc46j5lekq886rlyyk6sdhjj0</br>
-<ins>ethereum</ins> 0x2b9429a7362a9b14f3d84a408d33caab29bdc225</br>
-___
 Highly customizable phone input component with auto formatting.
 
 [![npm version](https://img.shields.io/npm/v/react-phone-input-2.svg?style=flat)](https://www.npmjs.com/package/react-phone-input-2)
