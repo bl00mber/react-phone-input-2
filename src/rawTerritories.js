@@ -78,6 +78,20 @@ const rawTerritories = [
     '299'
   ],
   [
+    'Guernsey',
+    ['europe', 'eu-union'],
+    'gg',
+    '44',
+    '.... ......'
+  ],
+  [
+    'Isle of Man',
+    ['europe', 'eu-union'],
+    'im',
+    '44',
+    '.... ......'
+  ],
+  [
     'Jersey',
     ['europe', 'eu-union'],
     'je',
