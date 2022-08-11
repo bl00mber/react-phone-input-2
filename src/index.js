@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import memoize from 'lodash.memoize';
@@ -8,6 +8,8 @@ import classNames from 'classnames';
 import './utils/prototypes'
 
 import CountryData from './CountryData.js';
+
+const DefaultInput = forwardRef((props, ref) => (<input {...props} ref={ref} />));
 
 class PhoneInput extends React.Component {
   static propTypes = {
@@ -951,6 +953,8 @@ class PhoneInput extends React.Component {
     });
     const inputFlagClasses = `flag ${selectedCountry && selectedCountry.iso2}`;
 
+    const Input = this.props.component ? this.props.component : DefaultInput;
+
     return (
       <div
         className={`${containerClasses} ${this.props.className}`}
@@ -958,8 +962,8 @@ class PhoneInput extends React.Component {
         onKeyDown={this.handleKeydown}>
         {specialLabel && <div className='special-label'>{specialLabel}</div>}
         {errorMessage && <div className='invalid-number-message'>{errorMessage}</div>}
-        <input
-          className={inputClasses}
+        <Input
+          className={!this.props.component && inputClasses}
           style={this.props.inputStyle}
           onChange={this.handleInput}
           onClick={this.handleInputClick}
