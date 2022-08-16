@@ -628,6 +628,9 @@ class PhoneInput extends React.Component {
       formattedNumber,
       searchValue: ''
     }, () => {
+      if (this.numberInputRef) {
+        this.numberInputRef.focus();
+      }
       this.cursorToEnd();
       if (this.props.onChange) this.props.onChange(formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData(), e, formattedNumber);
     });
@@ -730,7 +733,12 @@ class PhoneInput extends React.Component {
       case keys.TAB:
         this.setState({
           showDropdown: false
-        }, this.cursorToEnd);
+        }, () => {
+          if (this.numberInputRef) {
+            this.numberInputRef.focus();
+          }
+          this.cursorToEnd();
+        });
         break;
       default:
         if ((e.which >= keys.A && e.which <= keys.Z) || e.which === keys.SPACE) {
