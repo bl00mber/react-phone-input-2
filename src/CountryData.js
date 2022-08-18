@@ -201,12 +201,14 @@ export default class CountryData {
   }
 
   localizeCountries = (countries, localization, preserveOrder) => {
-    for (let i = 0; i < countries.length; i++) {
-      if (localization[countries[i].iso2] !== undefined) {
-        countries[i].localName = localization[countries[i].iso2];
-      }
-      else if (localization[countries[i].name] !== undefined) {
-        countries[i].localName = localization[countries[i].name];
+    if (localization && typeof localization === 'object') {
+      for (let i = 0; i < countries.length; i++) {
+        if (localization[countries[i].iso2] !== undefined) {
+          countries[i].localName = localization[countries[i].iso2];
+        }
+        else if (localization[countries[i].name] !== undefined) {
+          countries[i].localName = localization[countries[i].name];
+        }
       }
     }
     if (!preserveOrder) {
