@@ -102,7 +102,7 @@ declare module "react-phone-input-2" {
     enableClickOutside?: boolean;
     showDropdown?: boolean;
 
-    defaultErrorMessage?: string;
+    defaultErrorMessage?: React.ReactNode;
     specialLabel?: string;
     disableInitialCountryGuess?: boolean;
     disableCountryGuess?: boolean;
