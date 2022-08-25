@@ -72,8 +72,8 @@ describe('<PhoneInput /> event handlers', () => {
         onChange={mockFn}
       />)
 
-    fireEvent.change(phoneInput.querySelector('.form-control'), {target: {value: '12345'}})
-    expect(mockFn).toHaveBeenCalledWith('12345', {name: 'United States', dialCode: '1', 'format': '+. (...) ...-....', countryCode: 'us'}, expect.any(Object), '+1 (234) 5')
+    fireEvent.change(phoneInput.querySelector('.form-control'), { target: { value: '12345' } })
+    expect(mockFn).toHaveBeenCalledWith('12345', { name: 'United States', dialCode: '1', 'format': '+. (...) ...-....', countryCode: 'us' }, expect.any(Object), '+1 (234) 5')
   })
 })
 
@@ -82,7 +82,7 @@ describe('<PhoneInput /> other props', () => {
   test('pass inputProps into the input', () => {
     const { container: phoneInput } = render(
       <PhoneInput
-        inputProps={{name: 'phone'}}
+        inputProps={{ name: 'phone' }}
       />)
 
     expect(phoneInput.querySelector('.form-control').name).toBe('phone')
@@ -105,7 +105,7 @@ describe('<PhoneInput /> other props', () => {
     const { container: phoneInput } = render(
       <PhoneInput
         onlyCountries={['de', 'es']}
-        localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
+        localization={{ 'Germany': 'Deutschland', 'Spain': 'España' }}
       />)
 
     fireEvent.click(phoneInput.querySelector('.selected-flag'))
@@ -118,7 +118,7 @@ describe('<PhoneInput /> other props', () => {
       <PhoneInput
         country='fr'
         onlyCountries={['fr']}
-        masks={{'fr': '(...) ..-..-..'}}
+        masks={{ 'fr': '(...) ..-..-..' }}
         value='33543773322'
       />)
 
@@ -144,11 +144,11 @@ describe('<PhoneInput /> other props', () => {
       />)
 
     fireEvent.click(phoneInput.querySelector('.selected-flag'))
-    fireEvent.change(phoneInput.querySelector('.search-box'), {target: {value: 'gb'}})
+    fireEvent.change(phoneInput.querySelector('.search-box'), { target: { value: 'gb' } })
     expect(phoneInput.querySelector('.country-list').children.length).toBe(2) // search field & 1 search result
     expect(phoneInput.querySelector('.country-list').children[1].querySelector('.country-name').textContent).toBe('United Kingdom')
   })
-  
+
   test('search "undefined" string returns no non-matching results', () => {
     const { container: phoneInput } = render(
       <PhoneInput
@@ -156,8 +156,17 @@ describe('<PhoneInput /> other props', () => {
       />)
 
     fireEvent.click(phoneInput.querySelector('.selected-flag'))
-    fireEvent.change(phoneInput.querySelector('.search-box'), {target: {value: 'undefined'}})
+    fireEvent.change(phoneInput.querySelector('.search-box'), { target: { value: 'undefined' } })
     expect(phoneInput.querySelector('.no-entries-message')).toBeTruthy()
+  })
+
+  test('testingId renders "data-id" attribute on input for testing', () => {
+    const { container: phoneInput } = render(
+      <PhoneInput
+        data-id="test-phone"
+      />)
+
+    expect(phoneInput.querySelector('.form-control').getAttribute("data-id")).toBe('test-phone')
   })
 })
 

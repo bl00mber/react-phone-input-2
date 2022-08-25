@@ -106,6 +106,7 @@ declare module "react-phone-input-2" {
     specialLabel?: string;
     disableInitialCountryGuess?: boolean;
     disableCountryGuess?: boolean;
+    "data-id"?: string;
   }
   const PhoneInput: React.FC<PhoneInputProps>;
   export default PhoneInput;
