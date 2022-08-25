@@ -271,7 +271,7 @@ const rawCountries = [
     ['america', 'south-america'],
     'co',
     '57',
-    '... ... ....'
+    '.. .. .. .. ..'
   ],
   [
     'Comoros',
