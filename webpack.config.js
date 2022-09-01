@@ -38,6 +38,43 @@ const common = {
   }
 };
 
+if (TARGET === 'dev_js_shadow') {
+  module.exports = merge(common, {
+    mode: 'development',
+    entry: {
+      'demo': path.resolve(ROOT_PATH, 'test/' + TARGET + '/demo.js')
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+      publicPath: 'http://localhost:3000/',
+      port: '3000',
+      host: '0.0.0.0',
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      progress: true,
+      contentBase: ['lib', 'test/index']
+    },
+    module: {
+      rules: [
+        {
+          test: /\.less$/,
+          loader: 'css-loader!less-loader'
+        }
+      ]
+    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('development')
+        },
+        __DEV__: true
+      })
+    ]
+  });
+}
+
 if (TARGET === 'dev_js' || TARGET === 'dev_css') {
   module.exports = merge(common, {
     mode: 'development',
