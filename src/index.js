@@ -333,27 +333,34 @@ class PhoneInput extends React.Component {
         this.state.formattedNumber
       );
     }
-
-    if (this.props.country && this.props.countryCodeNextToFlag) {
-      this.updateCountry(this.props.country);
-      this.setState({
-        formattedNumber: this.correctFormatting(
-          this.props.value,
-          this.state.selectedCountry,
-          this.state.selectedCountry.dialCode
-        ),
-      });
-    } else {
-      if (this.props.value && !this.props.country) {
-        const guessedCountry = this.guessCountryFromValue(
-          this.props.value.substring(1, 6)
-        );
-        guessedCountry !== undefined &&
-          this.updateCountry(guessedCountry.countryCode);
+    if (this.props.countryCodeNextToFlag) {
+      if (this.props.country) {
+        this.updateCountry(this.props.country);
+        this.setState({
+          formattedNumber: this.correctFormatting(
+            this.props.value,
+            this.state.selectedCountry,
+            this.state.selectedCountry.dialCode
+          ),
+        });
       } else {
-        //if no country or value to infer from, let's just assume a country
-        if (this.props.countryCodeNextToFlag && this.props.disableCountryCode)
-          this.updateCountry("us");
+        if (this.props.value && !this.props.country) {
+          const guessedCountry = this.guessCountryFromValue(
+            this.props.value.substring(1, 6)
+          );
+          guessedCountry !== undefined &&
+            this.updateCountry(guessedCountry.countryCode.iso2);
+          this.setState({
+            formattedNumber: this.correctFormatting(
+              this.props.value,
+              this.state.selectedCountry,
+              this.state.selectedCountry.dialCode
+            ),
+          });
+        } else {
+          //if no country or value to infer from, let's just assume a country
+          if (this.props.disableCountryCode) this.updateCountry("us");
+        }
       }
     }
   }
@@ -364,7 +371,7 @@ class PhoneInput extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps) {
     if (
       prevProps.country !== this.props.country &&
       this.props.country !== undefined
@@ -391,7 +398,7 @@ class PhoneInput extends React.Component {
       let mainCode;
       this.state.hiddenAreaCodes.some((country) => {
         if (startsWith(value, country.dialCode)) {
-          onlyCountries.some((o) => {
+          this.state.onlyCountries.some((o) => {
             if (country.iso2 === o.iso2 && o.mainCode) {
               mainCode = o;
               return true;

@@ -1,6 +1,6 @@
 {
   "name": "intouch-phone-input",
-  "version": "2.15.12",
+  "version": "2.15.13",
   "description": "A react component to format phone numbers for intouch",
   "main": "lib/lib.js",
   "typings": "index.d.ts",
