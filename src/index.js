@@ -348,8 +348,11 @@ class PhoneInput extends React.Component {
           const guessedCountry = this.guessCountryFromValue(
             this.props.value.substring(1, 6)
           );
-          guessedCountry !== undefined &&
-            this.updateCountry(guessedCountry.countryCode.iso2);
+          let iso2;
+          if (guessedCountry.countryCode.iso2)
+            iso2 = guessedCountry.countryCode.iso2;
+          else iso2 = guessedCountry.iso2;
+          guessedCountry !== undefined && this.updateCountry(iso2);
           this.setState({
             formattedNumber: this.correctFormatting(
               this.props.value,
