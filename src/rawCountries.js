@@ -421,7 +421,7 @@ const rawCountries = [
     ['europe', 'eu-union', 'baltic'],
     'fi',
     '358',
-    '.. ... .. ..'
+    '.. ... ....'
   ],
   [
     'France',
