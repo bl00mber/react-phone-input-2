@@ -31,7 +31,7 @@ class PhoneInput extends React.Component {
     buttonStyle: PropTypes.object,
     dropdownStyle: PropTypes.object,
     searchStyle: PropTypes.object,
-
+    specialLabelClass: PropTypes.object,
     containerClass: PropTypes.string,
     inputClass: PropTypes.string,
     buttonClass: PropTypes.string,
@@ -121,6 +121,7 @@ class PhoneInput extends React.Component {
     buttonStyle: {},
     dropdownStyle: {},
     searchStyle: {},
+    specialLabelClass:{},
 
     containerClass: '',
     inputClass: '',
@@ -128,7 +129,7 @@ class PhoneInput extends React.Component {
     dropdownClass: '',
     searchClass: '',
     className: '',
-
+    
     autoFormat: true,
     enableAreaCodes: false,
     enableTerritories: false,
@@ -912,7 +913,7 @@ class PhoneInput extends React.Component {
 
   render() {
     const { onlyCountries, selectedCountry, showDropdown, formattedNumber, hiddenAreaCodes } = this.state;
-    const { disableDropdown, renderStringAsFlag, isValid, defaultErrorMessage, specialLabel } = this.props;
+    const { disableDropdown, renderStringAsFlag, isValid, defaultErrorMessage, specialLabel ,specialLabelClass } = this.props;
 
     let isValidValue, errorMessage;
     if (typeof isValid === 'boolean') {
@@ -956,7 +957,7 @@ class PhoneInput extends React.Component {
         className={`${containerClasses} ${this.props.className}`}
         style={this.props.style || this.props.containerStyle}
         onKeyDown={this.handleKeydown}>
-        {specialLabel && <div className='special-label'>{specialLabel}</div>}
+        {specialLabel && <div className='special-label' style={specialLabelClass}>{specialLabel}</div>}
         {errorMessage && <div className='invalid-number-message'>{errorMessage}</div>}
         <input
           className={inputClasses}
