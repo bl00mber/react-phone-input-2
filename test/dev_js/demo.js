@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import PhoneInput from '../../src/index';
-import '../../src/style/style.less';
+import '../../src/style/material.less';
 
 
 class Demo extends React.Component {
@@ -153,6 +153,7 @@ class Demo extends React.Component {
             country='nl'
             enableSearch
             enableAreaCodes={['ca']}
+            style={{border: '0px'}}
           />
           <PhoneInput
             country='it'
