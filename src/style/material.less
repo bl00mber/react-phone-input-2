@@ -179,11 +179,15 @@
     position: absolute;
     z-index: 1;
     top: -7px;
-    left: 25px;
+    left: 10px;
     display: block;
+    color: #6b6b6b;
     background: white;
     padding: 0 5px;
-    font-size: 13px;
+    font-size: 12px;
     white-space: nowrap;
+  }
+  .special-label:has(+ .form-control:focus)  {
+    color: #1976d2
   }
 }
