@@ -523,7 +523,7 @@ class PhoneInput extends React.Component {
         this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.mainCode).dialCode :
         newSelectedCountry.dialCode;
 
-      const updatedInput = prefix+mainCode;
+        const updatedInput = prefix+mainCode;
       if (value.slice(0, updatedInput.length) !== updatedInput) return;
     }
 
@@ -574,31 +574,49 @@ class PhoneInput extends React.Component {
       newSelectedCountry = newSelectedCountry.dialCode ? newSelectedCountry : selectedCountry;
     }
 
-    const oldCaretPosition = e.target.selectionStart;
-    let caretPosition = e.target.selectionStart;
     const oldFormattedText = this.state.formattedNumber;
-    const diff = formattedNumber.length - oldFormattedText.length;
+    const selectionStart = e.target.selectionStart
 
     this.setState({
       formattedNumber,
       freezeSelection,
       selectedCountry: newSelectedCountry,
     }, () => {
-      if (diff > 0) {
-        caretPosition = caretPosition - diff;
+      let shortText, longText, isDel = formattedNumber.length < oldFormattedText.length || formattedNumber === oldFormattedText
+      if (isDel) {
+        shortText = formattedNumber
+        longText = oldFormattedText
+      } else {
+        shortText = oldFormattedText
+        longText = formattedNumber
       }
+      let _firstNumAfter
+      let _lastNumBefore
+      [...longText].forEach((chr, i) => {
+        if (i < selectionStart - 1 && parseInt(chr) >= 0) {
+          _lastNumBefore = i
+        }
+        if (i >= selectionStart - 1 && !_firstNumAfter && parseInt(chr) >= 0) {
+          _firstNumAfter = i
+        }
+      });
 
+      let newPos;
       const lastChar = formattedNumber.charAt(formattedNumber.length - 1);
 
-      if (lastChar == ')') {
-        this.numberInputRef.setSelectionRange(formattedNumber.length - 1, formattedNumber.length - 1);
-      } else if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
-        this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
-      } else if (oldCaretPosition < oldFormattedText.length) {
-        this.numberInputRef.setSelectionRange(oldCaretPosition, oldCaretPosition);
+      if (isDel && formattedNumber.length > 2) {
+        newPos = selectionStart
+      } else if (formattedNumber.length > 2 && _firstNumAfter && longText !== shortText) {
+        newPos = _firstNumAfter + 1
+      } else if (longText === shortText) {
+        newPos = selectionStart + 1
+      } else if (parseInt(lastChar) >= 0) {
+        newPos = formattedNumber.length
+      } else {
+        newPos = formattedNumber.length - 1
       }
-
-      if (onChange) onChange(formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData(), e, formattedNumber);
+      this.numberInputRef.setSelectionRange(newPos, newPos);
+      if (onChange) onChange(formattedNumber.replace(/[^0-9]+/g, ''), this.getCountryData(), e, formattedNumber);
     });
   }
 
