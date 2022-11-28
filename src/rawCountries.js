@@ -946,7 +946,8 @@ const rawCountries = [
     'Panama',
     ['america', 'central-america'],
     'pa',
-    '507'
+    '507',
+    '....-....'
   ],
   [
     'Papua New Guinea',
