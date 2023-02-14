@@ -21,34 +21,40 @@ declare module "react-phone-input-2" {
     dropdownStyle?: React.CSSProperties;
     searchStyle?: React.CSSProperties;
   }
+  interface OnChangeProps {
+    value?: string;
+    data?: CountryData;
+    event?: React.ChangeEvent<HTMLInputElement>;
+    formattedValue?: string;
+  }
+  interface OnFocusProps {
+    event?: React.FocusEvent<HTMLInputElement>;
+    data?: CountryData;
+  }
+  interface OnClickProps {
+    event?: React.MouseEvent<HTMLInputElement>;
+    data?: CountryData;
+  }
+  interface OnBlursProps {
+    event?: React.FocusEvent<HTMLInputElement>;
+    data?: CountryData;
+  }
 
   interface PhoneInputEventsProps {
-    onChange?(
-      value: string,
-      data: CountryData | {},
-      event: React.ChangeEvent<HTMLInputElement>,
-      formattedValue: string
-    ): void;
-    onFocus?(
-      event: React.FocusEvent<HTMLInputElement>,
-      data: CountryData | {}
-    ): void;
-    onBlur?(
-      event: React.FocusEvent<HTMLInputElement>,
-      data: CountryData | {}
-    ): void;
-    onClick?(
-      event: React.MouseEvent<HTMLInputElement>,
-      data: CountryData | {}
-    ): void;
+    onChange?({ value, data, event, formattedValue }: OnChangeProps): void;
+    onFocus?({ event, data }: OnFocusProps): void;
+    onBlur?({ event, data }: OnBlursProps): void;
+    onClick?({ event, data }: OnClickProps): void;
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
     onEnterKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
-    isValid?: ((
-      value: string,
-      country: object,
-      countries: object[],
-      hiddenAreaCodes: object[],
-    ) => boolean | string) | boolean;
+    isValid?:
+      | ((
+          value: string,
+          country: object,
+          countries: object[],
+          hiddenAreaCodes: object[]
+        ) => boolean | string)
+      | boolean;
     onMount?(
       value: string,
       data: CountryData | {},
