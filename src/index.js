@@ -592,6 +592,11 @@ class PhoneInput extends React.Component {
 
       if (lastChar == ')') {
         this.numberInputRef.setSelectionRange(formattedNumber.length - 1, formattedNumber.length - 1);
+      } else if (caretPosition === 1 && !this.props.disableCountryCode) {
+        // https://github.com/bl00mber/react-phone-input-2/issues/618
+        // Solve a case when prefix is active, and a user has selected all text and types to overwrite. In this caret caret should be placed after entered input, so add length of prefix to the caretPosition
+        caretPosition += (prefix ? prefix.length : 0);
+        this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
       } else if (caretPosition > 0 && oldFormattedText.length >= formattedNumber.length) {
         this.numberInputRef.setSelectionRange(caretPosition, caretPosition);
       } else if (oldCaretPosition < oldFormattedText.length) {
