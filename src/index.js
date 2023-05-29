@@ -6,6 +6,7 @@ import reduce from 'lodash.reduce';
 import startsWith from 'lodash.startswith';
 import classNames from 'classnames';
 import './utils/prototypes'
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import CountryData from './CountryData.js';
 
@@ -272,19 +273,19 @@ class PhoneInput extends React.Component {
     // then search and insert main country which has this area code
     // https://github.com/bl00mber/react-phone-input-2/issues/201
     if (this.props.enableAreaCodes === false) {
-      let mainCode;
+      let countryCode;
       hiddenAreaCodes.some(country => {
         if (startsWith(inputNumber, country.dialCode)) {
           onlyCountries.some(o => {
-            if (country.iso2 === o.iso2 && o.mainCode) {
-              mainCode = o;
+            if (country.iso2 === o.iso2 && o.countryCode) {
+              countryCode = o;
               return true;
             }
           })
           return true;
         }
       })
-      if (mainCode) return mainCode;
+      if (countryCode) return countryCode;
     }
 
     const secondBestGuess = onlyCountries.find(o => o.iso2 == country);
@@ -338,8 +339,7 @@ class PhoneInput extends React.Component {
     if (selectedCountry && startsWith(value, prefix + selectedCountry.dialCode)) {
       formattedNumber = this.formatNumber(inputNumber, selectedCountry);
       this.setState({ formattedNumber });
-    }
-    else {
+    } else {
       if (this.props.disableCountryGuess) {newSelectedCountry = selectedCountry;}
       else {
         newSelectedCountry = this.guessSelectedCountry(inputNumber.substring(0, 6), country, onlyCountries, hiddenAreaCodes) || selectedCountry;
@@ -410,6 +410,23 @@ class PhoneInput extends React.Component {
       pattern.shift();
       pattern = pattern.join(' ');
     } else {
+
+      // Add country code to the beginning of the number when not present
+      const rawNumber = text.toString();
+      // Try to parse the number as an international number first
+      let phoneNumber = parsePhoneNumberFromString(rawNumber)
+      if (!phoneNumber || !phoneNumber.isValid()) {
+          // If it's not a valid international number, try parsing it as a national number
+          phoneNumber = parsePhoneNumberFromString(rawNumber, country.iso2.toUpperCase())
+      }
+      if (phoneNumber && phoneNumber.isValid()) {
+        let formattedNumber = phoneNumber.formatNational();
+        let digitsOnly = formattedNumber.replace(/\D/g, ''); // remove all non-digit characters
+        text = phoneNumber.countryCallingCode + digitsOnly;
+      } else {
+          console.log('Invalid number');
+      }
+
       if (enableAreaCodeStretch && country.isAreaCode) {
         pattern = format.split(' ');
         pattern[1] = pattern[1].replace(/\.+/, ''.padEnd(country.areaCodeLength, '.'))
@@ -518,13 +535,13 @@ class PhoneInput extends React.Component {
     let newSelectedCountry = this.state.selectedCountry;
     let freezeSelection = this.state.freezeSelection;
 
+    // If countryCodeEditable is false we should avoid the user to be able to delete the country code
     if (!this.props.countryCodeEditable) {
-      const mainCode = newSelectedCountry.hasAreaCodes ?
-        this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.mainCode).dialCode :
+      const countryCode = newSelectedCountry.hasAreaCodes ?
+        this.state.onlyCountries.find(o => o.iso2 === newSelectedCountry.iso2 && o.countryCode).dialCode :
         newSelectedCountry.dialCode;
 
-      const updatedInput = prefix+mainCode;
-      if (value.slice(0, updatedInput.length) !== updatedInput) return;
+      if (value === prefix+countryCode.slice(0, countryCode.length-1)) return;
     }
 
     if (value === prefix) {
@@ -809,7 +826,7 @@ class PhoneInput extends React.Component {
   getCountryDropdownList = () => {
     const { preferredCountries, highlightCountryIndex, showDropdown, searchValue } = this.state;
     const { disableDropdown, prefix } = this.props
-    const { enableSearch, searchNotFound, disableSearchIcon, searchClass, searchStyle, searchPlaceholder, autocompleteSearch } = this.props;
+    const { enableSearch, searchNotFound, disableSearchIcon, searchClass, searchStyle, searchPlaceholder } = this.props;
 
     const searchedCountries = this.getSearchFilteredCountries()
 
@@ -912,7 +929,7 @@ class PhoneInput extends React.Component {
 
   render() {
     const { onlyCountries, selectedCountry, showDropdown, formattedNumber, hiddenAreaCodes } = this.state;
-    const { disableDropdown, renderStringAsFlag, isValid, defaultErrorMessage, specialLabel } = this.props;
+    const { disableDropdown, renderStringAsFlag, isValid, defaultErrorMessage, specialLabel, autocompleteSearch } = this.props;
 
     let isValidValue, errorMessage;
     if (typeof isValid === 'boolean') {
@@ -971,6 +988,7 @@ class PhoneInput extends React.Component {
           onKeyDown={this.handleInputKeyDown}
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
+          autoComplete={autocompleteSearch ? 'on' : 'off'}
           type='tel'
           {...this.props.inputProps}
           ref={el => {
