@@ -86,6 +86,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "libphonenumber-js": "^1.10.30",
     "lodash.debounce": "^4.0.8",
     "lodash.memoize": "^4.1.2",
     "lodash.reduce": "^4.6.0",

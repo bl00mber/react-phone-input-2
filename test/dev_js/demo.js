@@ -45,7 +45,8 @@ class Demo extends React.Component {
         `}} />
         <p style={{fontWeight: '500'}}>Created by <a style={{color: '#000'}}
           href="https://github.com/bl00mber/react-phone-input-2">Nick Reiley</a></p>
-        <div style={{display: 'inline-block', verticalAlign: 'top'}}>
+        <div style={{display: "flex", flexWrap: "wrap", gap: "20px"}}>
+        <div>
           <p>Exclude countries (usa, canada)</p>
           <PhoneInput
             country='no'
@@ -62,9 +63,24 @@ class Demo extends React.Component {
             country='it'
             preferredCountries={['it', 'se']}
           />
+          <p>Autocomplete</p>
+          <div>
+            <input autoComplete="street-address" type="text" placeholder="Street" />
+            <PhoneInput
+            onlyCountries={['us']}
+            country='us'
+            placeholder='(702) 123-4567'
+            disableDropdown
+            autocompleteSearch={true}
+            inputProps={{
+              id: "phone", // Needed for autocomplete to work properly
+            }}
+            countryCodeEditable={false}
+            />
+          </div>
         </div>
 
-        <div style={{display: 'inline-block', marginLeft: '40px'}}>
+        <div>
           <p>Auto country detect by value</p>
           <PhoneInput
             value='+3802343252'
@@ -105,7 +121,7 @@ class Demo extends React.Component {
           />
         </div>
 
-        <div style={{display: 'inline-block', marginLeft: '40px', verticalAlign: 'top'}}>
+        <div>
           <p>Custom region selected: {`{'europe'}`}</p>
           <PhoneInput
             country='it'
@@ -147,7 +163,8 @@ class Demo extends React.Component {
             country='au'
           />
         </div>
-        <div style={{display: 'inline-block', marginLeft: '40px', verticalAlign: 'top'}}>
+
+        <div>
           <p>Search using iso2 or country name</p>
           <PhoneInput
             country='nl'
@@ -210,6 +227,7 @@ class Demo extends React.Component {
             if (this.state.country == 'br') {this.setState({country: '1205'})}
             else {this.setState({country: 'br'})}
           }}>Change default country</button>
+        </div>
         </div>
 
         <div>
