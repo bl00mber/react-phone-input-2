@@ -1248,7 +1248,7 @@ const rawCountries = [
     '216'
   ],
   [
-    'Turkey',
+    'Turkiye',
     ['europe'],
     'tr',
     '90',
