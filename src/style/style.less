@@ -4,13 +4,13 @@
   .form-control {
     position: relative;
     font-size: 14px;
-    letter-spacing: .01rem;
+    letter-spacing: 0.01rem;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
-    padding-left: 48px;
+    padding-left: 60px;
     margin-left: 0;
-    background: #FFFFFF;
-    border: 1px solid #CACACA;
+    background: #ffffff;
+    border: 1px solid #cacaca;
     border-radius: 5px;
     line-height: 25px;
     height: 35px;
@@ -18,12 +18,12 @@
     outline: none;
     &.invalid-number {
       border: 1px solid #d79f9f;
-      background-color: #FAF0F0;
+      background-color: #faf0f0;
       border-left-color: #cacaca;
       &:focus {
         border: 1px solid #d79f9f;
         border-left-color: #cacaca;
-        background-color: #FAF0F0;
+        background-color: #faf0f0;
       }
     }
   }
@@ -35,7 +35,8 @@
     background-color: #f5f5f5;
     border: 1px solid #cacaca;
     border-radius: 3px 0 0 3px;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       cursor: pointer;
     }
     &.invalid-number {
@@ -52,7 +53,7 @@
     }
   }
   input[disabled] {
-    &+.flag-dropdown {
+    & + .flag-dropdown {
       &:hover {
         cursor: default;
         .selected-flag {
@@ -64,11 +65,20 @@
   .selected-flag {
     outline: none;
     position: relative;
-    width: 38px;
+    width: 50px;
     height: 100%;
-    padding: 0 0 0 8px;
+    padding: 0 10px;
     border-radius: 3px 0 0 3px;
-    &:hover, &:focus {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .country-icon {
+      font-size: 18px;
+    }
+
+    &:hover,
+    &:focus {
       background-color: #fff;
     }
     .flag {
@@ -78,9 +88,7 @@
     }
     .arrow {
       position: relative;
-      top: 50%;
       margin-top: -2px;
-      left: 20px;
       width: 0;
       height: 0;
       border-left: 3px solid transparent;
@@ -115,6 +123,9 @@
     }
     .country {
       padding: 7px 9px;
+      display: flex;
+      align-items: center;
+
       .dial-code {
         color: #6b6b6b;
       }
@@ -128,6 +139,9 @@
     .flag {
       margin-right: 7px;
       margin-top: 2px;
+    }
+    .country-icon {
+      margin-right: 8px;
     }
     .country-name {
       margin-right: 6px;
@@ -152,7 +166,7 @@
     }
     .no-entries-message {
       padding: 7px 10px 11px;
-      opacity: .7;
+      opacity: 0.7;
     }
   }
   .invalid-number-message {
