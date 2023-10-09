@@ -1,12 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
-import PhoneInput from '../../src/index';
+import PhoneInput, { getCountries, getCountryByDialCode } from '../../src/index';
 import '../../src/style/style.less';
 
-
 class Demo extends React.Component {
-  state = { country: 'br', value: '12345',
-    playgroundProps: {country: 'us', enableAreaCodes: true} }
+  state = {
+    country: 'br', value: '12345',
+    playgroundProps: { country: 'us', enableAreaCodes: true }
+  }
 
   playgroundKey = 1
 
@@ -14,7 +15,7 @@ class Demo extends React.Component {
     if (e.which === 13) {
       let playgroundProps;
       try { playgroundProps = JSON.parse(e.target.value) }
-      catch(error) { console.error(error); e.preventDefault(); e.stopPropagation(); }
+      catch (error) { console.error(error); e.preventDefault(); e.stopPropagation(); }
       this.setState({ playgroundProps }, () => ++this.playgroundKey)
       e.preventDefault()
       e.stopPropagation()
@@ -22,9 +23,13 @@ class Demo extends React.Component {
   }
 
   render() {
+    const data = getCountries;
+    const dataDefault = getCountryByDialCode(99);
+    
     return (
-      <div style={{fontFamily: "'Roboto', sans-serif", fontSize: '15px', padding: '10px 25px', margin: '20px auto', maxWidth: '1500px'}}>
-        <style dangerouslySetInnerHTML={{__html: `
+      <div style={{ fontFamily: "'Roboto', sans-serif", fontSize: '15px', padding: '10px 25px', margin: '20px auto', maxWidth: '1500px' }}>
+        <style dangerouslySetInnerHTML={{
+          __html: `
           input[type="tel"].custom-phone-input {
             font-size: 14px;
             border-color: #a0a0a0;
@@ -43,9 +48,9 @@ class Demo extends React.Component {
             margin-top: 15px;
           }
         `}} />
-        <p style={{fontWeight: '500'}}>Created by <a style={{color: '#000'}}
+        <p style={{ fontWeight: '500' }}>Created by <a style={{ color: '#000' }}
           href="https://github.com/bl00mber/react-phone-input-2">Nick Reiley</a></p>
-        <div style={{display: 'inline-block', verticalAlign: 'top'}}>
+        <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
           <p>Exclude countries (usa, canada)</p>
           <PhoneInput
             country='no'
@@ -64,11 +69,11 @@ class Demo extends React.Component {
           />
         </div>
 
-        <div style={{display: 'inline-block', marginLeft: '40px'}}>
+        <div style={{ display: 'inline-block', marginLeft: '40px' }}>
           <p>Auto country detect by value</p>
           <PhoneInput
             value='+3802343252'
-            priority={{ca: 0, us: 1, kz: 0, ru: 1}}
+            priority={{ ca: 0, us: 1, kz: 0, ru: 1 }}
           />
           <p>Local area codes with enableAreaCodes</p>
           <PhoneInput
@@ -105,7 +110,7 @@ class Demo extends React.Component {
           />
         </div>
 
-        <div style={{display: 'inline-block', marginLeft: '40px', verticalAlign: 'top'}}>
+        <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top' }}>
           <p>Custom region selected: {`{'europe'}`}</p>
           <PhoneInput
             country='it'
@@ -131,7 +136,7 @@ class Demo extends React.Component {
           <PhoneInput
             country='de'
             onlyCountries={['de', 'es', 'us']}
-            localization={{'Germany': 'Deutschland', 'Spain': 'España'}}
+            localization={{ 'Germany': 'Deutschland', 'Spain': 'España' }}
             countryCodeEditable={false}
             inputExtraProps={{
               name: 'tel',
@@ -147,7 +152,7 @@ class Demo extends React.Component {
             country='au'
           />
         </div>
-        <div style={{display: 'inline-block', marginLeft: '40px', verticalAlign: 'top'}}>
+        <div style={{ display: 'inline-block', marginLeft: '40px', verticalAlign: 'top' }}>
           <p>Search using iso2 or country name</p>
           <PhoneInput
             country='nl'
@@ -162,7 +167,7 @@ class Demo extends React.Component {
           <PhoneInput
             country='pl'
             searchClass='search-class'
-            searchStyle={{margin: '0', width: '97%', height: '30px'}}
+            searchStyle={{ margin: '0', width: '97%', height: '30px' }}
             enableSearch
             disableSearchIcon
             searchNotFound='Not found'
@@ -172,27 +177,29 @@ class Demo extends React.Component {
           <PhoneInput
             country='at'
             onlyCountries={['fr', 'at', 'gr', 'us']}
-            masks={{fr: '(...) ..-..-..', at: '(....) ...-....', zz: '... ...'}}
-            areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
+            masks={{ fr: '(...) ..-..-..', at: '(....) ...-....', zz: '... ...' }}
+            areaCodes={{ gr: ['2694', '2647'], fr: ['369', '463'], us: ['300'] }}
             enableAreaCodes
           />
           <PhoneInput
             country='eu'
             onlyCountries={['fr', 'at', 'gr', 'us']}
-            masks={{fr: '(...) ..-..-..', at: '(....) ...-....', zz: '... ...'}}
-            areaCodes={{gr: ['2694', '2647'], fr: ['369', '463'], us: ['300']}}
+            masks={{ fr: '(...) ..-..-..', at: '(....) ...-....', zz: '... ...' }}
+            areaCodes={{ gr: ['2694', '2647'], fr: ['369', '463'], us: ['300'] }}
             enableAreaCodes
           />
           <p>State manipulations</p>
           <PhoneInput
             value={this.state.value}
-            onChange={(value, country, e, formattedValue) => {console.log(value, country, e, formattedValue);
-              this.setState({ value })}}
+            onChange={(value, country, e, formattedValue) => {
+              console.log(value, country, e, formattedValue);
+              this.setState({ value })
+            }}
             enableAreaCodes
             defaultErrorMessage='Invalid value'
             isValid={(value, country) => {
               if (value.match(/12345/)) {
-                return 'Invalid value: '+value+', '+country.name
+                return 'Invalid value: ' + value + ', ' + country.name
               } else if (value.match(/1234/)) {
                 return false
               } else {
@@ -201,25 +208,25 @@ class Demo extends React.Component {
             }}
           />
           <PhoneInput
-            containerStyle={{marginBottom: '15px'}}
+            containerStyle={{ marginBottom: '15px' }}
             country={this.state.country}
             prefix=''
             enableAreaCodes
           />
           <button onClick={() => {
-            if (this.state.country == 'br') {this.setState({country: '1205'})}
-            else {this.setState({country: 'br'})}
+            if (this.state.country == 'br') { this.setState({ country: '1205' }) }
+            else { this.setState({ country: 'br' }) }
           }}>Change default country</button>
         </div>
 
         <div>
-          <br/><br/>
+          <br /><br />
           <p>Press enter to render</p>
           <textarea name="" id="" cols="55" rows="3" spellCheck="false"
-            style={{borderRadius: '5px', fontFamily: 'Roboto', fontSize: '14px'}}
+            style={{ borderRadius: '5px', fontFamily: 'Roboto', fontSize: '14px' }}
             onKeyDown={this.renderPlayground} defaultValue={JSON.stringify(this.state.playgroundProps)} />
 
-          <PhoneInput key={this.playgroundKey} {...this.state.playgroundProps}/>
+          <PhoneInput key={this.playgroundKey} {...this.state.playgroundProps} />
         </div>
       </div>
     )
