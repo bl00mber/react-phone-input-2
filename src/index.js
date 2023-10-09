@@ -10,6 +10,11 @@ import './utils/prototypes'
 import CountryData from './CountryData.js';
 import getCountries from './rawCountries';
 
+/**
+ * 
+ * @param {*} dialCode  number
+ * @returns object of country
+ */
 const getCountryByDialCode = (dialCode) => {
   if (!dialCode) return [];
   const dataCountry = getCountries.find(country => country[3] == dialCode);
