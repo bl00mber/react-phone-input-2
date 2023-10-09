@@ -1,5 +1,5 @@
 {
-  "name": "react-phone-input-2",
+  "name": "react-phone-input-kh",
   "version": "2.15.1",
   "description": "A react component to format phone numbers",
   "main": "lib/lib.js",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bl00mber/react-phone-input-2.git"
+    "url": "git+https://github.com/bl00mber/react-phone-input-kh.git"
   },
   "keywords": [
     "react",

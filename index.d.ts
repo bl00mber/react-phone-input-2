@@ -1,4 +1,4 @@
-declare module "react-phone-input-2" {
+declare module "react-phone-input-kh" {
   import React from "react";
 
   export interface CountryData {
@@ -7,6 +7,8 @@ declare module "react-phone-input-2" {
     countryCode: string;
     format: string;
   }
+
+  export function getCountries(): any[];
 
   interface Style {
     containerClass?: string;
