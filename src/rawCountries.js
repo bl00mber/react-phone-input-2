@@ -428,7 +428,7 @@ const rawCountries = [
     ['europe', 'eu-union'],
     'fr',
     '33',
-    '. .. .. .. ..'
+    '.. .. .. .. ..'
   ],
   [
     'French Guiana',
