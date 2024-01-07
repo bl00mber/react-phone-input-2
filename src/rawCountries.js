@@ -609,7 +609,9 @@ const rawCountries = [
     'Jamaica',
     ['america', 'carribean'],
     'jm',
-    '1876'
+    '1',
+    '(...) ...-....',
+    0, ['876', '658']
   ],
   [
     'Japan',
