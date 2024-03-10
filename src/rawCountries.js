@@ -1194,7 +1194,7 @@ const rawCountries = [
     '963'
   ],
   [
-    'Taiwan',
+    'Taiwan, Province of China',
     ['asia'],
     'tw',
     '886'
