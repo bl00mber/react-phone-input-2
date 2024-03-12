@@ -1168,7 +1168,7 @@ const rawCountries = [
     '597'
   ],
   [
-    'Swaziland',
+    'Eswatini',
     ['africa'],
     'sz',
     '268'
@@ -1248,7 +1248,7 @@ const rawCountries = [
     '216'
   ],
   [
-    'Turkey',
+    'Türkiye',
     ['europe'],
     'tr',
     '90',
