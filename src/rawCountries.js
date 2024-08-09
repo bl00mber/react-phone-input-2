@@ -480,6 +480,12 @@ const rawCountries = [
     '30'
   ],
   [
+    'Greenland',
+    ['america', 'north-america'],
+    'gl',
+    '299'
+  ],
+  [
     'Grenada',
     ['america', 'carribean'],
     'gd',
