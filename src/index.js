@@ -958,30 +958,6 @@ class PhoneInput extends React.Component {
         onKeyDown={this.handleKeydown}>
         {specialLabel && <div className='special-label'>{specialLabel}</div>}
         {errorMessage && <div className='invalid-number-message'>{errorMessage}</div>}
-        <input
-          className={inputClasses}
-          style={this.props.inputStyle}
-          onChange={this.handleInput}
-          onClick={this.handleInputClick}
-          onDoubleClick={this.handleDoubleClick}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleInputBlur}
-          onCopy={this.handleInputCopy}
-          value={formattedNumber}
-          onKeyDown={this.handleInputKeyDown}
-          placeholder={this.props.placeholder}
-          disabled={this.props.disabled}
-          type='tel'
-          {...this.props.inputProps}
-          ref={el => {
-            this.numberInputRef = el;
-            if (typeof this.props.inputProps.ref === 'function') {
-              this.props.inputProps.ref(el);
-            } else if (typeof this.props.inputProps.ref === 'object') {
-              this.props.inputProps.ref.current = el;
-            }
-          }}
-        />
 
         <div
           className={flagViewClasses}
@@ -1007,6 +983,30 @@ class PhoneInput extends React.Component {
 
           {showDropdown && this.getCountryDropdownList()}
         </div>
+        <input
+          className={inputClasses}
+          style={this.props.inputStyle}
+          onChange={this.handleInput}
+          onClick={this.handleInputClick}
+          onDoubleClick={this.handleDoubleClick}
+          onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
+          onCopy={this.handleInputCopy}
+          value={formattedNumber}
+          onKeyDown={this.handleInputKeyDown}
+          placeholder={this.props.placeholder}
+          disabled={this.props.disabled}
+          type='tel'
+          {...this.props.inputProps}
+          ref={el => {
+            this.numberInputRef = el;
+            if (typeof this.props.inputProps.ref === 'function') {
+              this.props.inputProps.ref(el);
+            } else if (typeof this.props.inputProps.ref === 'object') {
+              this.props.inputProps.ref.current = el;
+            }
+          }}
+        />
       </div>
     );
   }
