@@ -144,7 +144,7 @@ const rawCountries = [
     'Benin',
     ['africa'],
     'bj',
-    '229'
+    '22901'
   ],
   [
     'Bhutan',
