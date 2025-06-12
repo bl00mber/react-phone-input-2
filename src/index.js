@@ -239,12 +239,15 @@ class PhoneInput extends React.Component {
     if(this.props.onMount){
         this.props.onMount(this.state.formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData(), this.state.formattedNumber)
     }
+    window.addEventListener('resize', this.handleWindowResize);
   }
 
   componentWillUnmount() {
     if (document.removeEventListener && this.props.enableClickOutside) {
       document.removeEventListener('mousedown', this.handleClickOutside);
     }
+    window.removeEventListener('resize', this.handleWindowResize);
+    this.handleOverflowDisposal();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -489,12 +492,102 @@ class PhoneInput extends React.Component {
     }
   }
 
+  handleWindowResize = debounce(() => {
+    if (this.state.showDropdown) {
+      const newModalStyle = this.calculateModalPosition();
+      this.setState({ modalStyle: newModalStyle });
+    }
+  }, 100);
 
+  calculateModalPosition = () => {
+    if (!this.rootRef) return {};
+
+    const root = this.rootRef;
+    const { x, y, height } = root.getBoundingClientRect();
+    const { innerHeight, innerWidth } = window;
+    
+    let dropdownHeight = 200;
+    let mTop = 0;
+    let dropdownWidth = 300;
+    
+    if (this.dropdownRef) {
+      const dropdownRect = this.dropdownRef.getBoundingClientRect();
+      const { marginTop } = window.getComputedStyle(this.dropdownRef);
+      dropdownHeight = dropdownRect.height;
+      dropdownWidth = dropdownRect.width;
+      mTop = parseInt(marginTop)
+    }
+    
+    const spaceBelow = innerHeight - (y + height);
+    const spaceAbove = y;
+    
+    let modalTop = y + height;
+    let modalLeft = x + 1;
+    
+    if (spaceBelow < dropdownHeight + dropdownHeight * 0.1 && spaceAbove >= dropdownHeight + dropdownHeight * 0.1) {
+      modalTop = y - dropdownHeight - mTop * 2;
+    }
+    
+    if (modalLeft + dropdownWidth > innerWidth) {
+      modalLeft = innerWidth - dropdownWidth - 10;
+    }
+    if (modalLeft < 0) {
+      modalLeft = 10;
+    }
+    
+    return {
+      position: 'absolute',
+      left: modalLeft,
+      top: modalTop
+    };
+  }
+
+   /**
+    * ### Create Modal
+    * 
+    * this function will render list insite fixed modal
+    * 
+    * this way it will avoid various issues
+    * that occure on overflows, dialogs and many more
+    */
+  handleCreateModal() {
+    const root = this.rootRef;
+    if(!root) return;
+
+    document.documentElement.style.overflow = 'hidden';
+    
+    const initialModalStyle = this.calculateModalPosition();
+    const modalStyle = this.state.modalStyle.position ? this.state.modalStyle : initialModalStyle;
+    
+    requestAnimationFrame(() => {
+      if (this.dropdownRef) {
+        const refinedStyle = this.calculateModalPosition();
+        this.setState({ modalStyle: refinedStyle });
+      }
+    });
+    
+    return (
+      <div style={modalStyle}>
+        {this.getCountryDropdownList()}
+      </div>
+    );
+  }
+
+   /**
+    * ### Dispose Overflow
+    * 
+    * this function will dispose overflow hidden on HTML
+    */
+  handleOverflowDisposal() {
+    document.documentElement.removeAttribute('style');
+    this.setState({ modalStyle: {} });
+  }
 
   handleFlagDropdownClick = (e) => {
     e.preventDefault();
     if (!this.state.showDropdown && this.props.disabled) return;
     const { preferredCountries, onlyCountries, selectedCountry } = this.state
+
     const allCountries = this.concatPreferredCountries(preferredCountries, onlyCountries);
 
     const highlightCountryIndex = allCountries.findIndex(o =>
@@ -503,6 +596,7 @@ class PhoneInput extends React.Component {
     this.setState({
       showDropdown: !this.state.showDropdown,
       highlightCountryIndex,
+      modalStyle: this.state.showDropdown ? {} : this.calculateModalPosition()
     }, () => {
       if (this.state.showDropdown) {
         this.scrollTo(this.getElement(this.state.highlightCountryIndex));
@@ -628,6 +722,7 @@ class PhoneInput extends React.Component {
       formattedNumber,
       searchValue: ''
     }, () => {
+      this.handleOverflowDisposal();
       this.cursorToEnd();
       if (this.props.onChange) this.props.onChange(formattedNumber.replace(/[^0-9]+/g,''), this.getCountryData(), e, formattedNumber);
     });
@@ -728,9 +823,10 @@ class PhoneInput extends React.Component {
         break;
       case keys.ESC:
       case keys.TAB:
-        this.setState({
-          showDropdown: false
-        }, this.cursorToEnd);
+        this.setState({ showDropdown: false }, () => {
+          this.handleOverflowDisposal();
+          this.cursorToEnd();
+        });
         break;
       default:
         if ((e.which >= keys.A && e.which <= keys.Z) || e.which === keys.SPACE) {
@@ -751,7 +847,11 @@ class PhoneInput extends React.Component {
 
   handleClickOutside = (e) => {
     if (this.dropdownRef && !this.dropdownContainerRef.contains(e.target)) {
-      this.state.showDropdown && this.setState({ showDropdown: false });
+      if (this.state.showDropdown) {
+        this.setState({ showDropdown: false }, () => {
+          this.handleOverflowDisposal();
+        });
+      }
     }
   }
 
@@ -953,6 +1053,7 @@ class PhoneInput extends React.Component {
 
     return (
       <div
+        ref={(el) => this.rootRef = el}
         className={`${containerClasses} ${this.props.className}`}
         style={this.props.style || this.props.containerStyle}
         onKeyDown={this.handleKeydown}>
@@ -999,13 +1100,18 @@ class PhoneInput extends React.Component {
             role='button'
             aria-haspopup="listbox"
             aria-expanded={showDropdown ? true : undefined}
+            aria-controls='modal-root'
           >
             <div className={inputFlagClasses}>
               {!disableDropdown && <div className={arrowClasses}></div>}
             </div>
           </div>}
 
-          {showDropdown && this.getCountryDropdownList()}
+          {showDropdown && (
+            <div className='modal-root' role='presentation' id='modal-root' onClick={() => this.setState({ showDropdown: false, modalStyle: {} }, () => this.handleOverflowDisposal())}>
+              {this.handleCreateModal()}
+            </div>
+          )}
         </div>
       </div>
     );

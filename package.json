@@ -31,7 +31,8 @@
     "localized",
     "material",
     "bootstrap",
-    "i18n"
+    "i18n",
+    "modal"
   ],
   "files": [
     "lang",
