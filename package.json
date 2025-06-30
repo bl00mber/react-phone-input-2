@@ -10,7 +10,7 @@
     "start:css": "TARGET=dev_css NODE_ENV=development webpack-dev-server --progress",
     "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider npm run build:js && npm run build:css",
     "build:js": "cross-env TARGET=build_js NODE_ENV=production webpack -p --progress",
-    "build:css": "cross-env TARGET=build_css NODE_ENV=production webpack -p --progress && del ./main.js",
+    "build:css": "cross-env TARGET=build_css NODE_ENV=production webpack -p --progress && rimraf main.js",
     "prepublishOnly": "npm run build",
     "analyze": "TARGET=analyze NODE_ENV=production webpack -p --progress"
   },
@@ -70,6 +70,7 @@
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.6.5",
     "react-testing-library": "^6.0.4",
+    "rimraf": "^6.0.1",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.5",
