@@ -1,5 +1,5 @@
 {
-  "name": "react-phone-input-2",
+  "name": "react-phone-input-2-gis",
   "version": "2.15.1",
   "description": "A react component to format phone numbers",
   "main": "lib/lib.js",
@@ -8,15 +8,15 @@
     "test": "jest",
     "start": "TARGET=dev_js NODE_ENV=development webpack-dev-server --progress",
     "start:css": "TARGET=dev_css NODE_ENV=development webpack-dev-server --progress",
-    "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && npm run build:js && npm run build:css",
-    "build:js": "TARGET=build_js NODE_ENV=production webpack -p --progress",
-    "build:css": "TARGET=build_css NODE_ENV=production webpack -p --progress && rm ./main.js",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider npm run build:js && npm run build:css",
+    "build:js": "cross-env TARGET=build_js NODE_ENV=production webpack -p --progress",
+    "build:css": "cross-env TARGET=build_css NODE_ENV=production webpack -p --progress && del ./main.js",
     "prepublishOnly": "npm run build",
     "analyze": "TARGET=analyze NODE_ENV=production webpack -p --progress"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bl00mber/react-phone-input-2.git"
+    "url": "git+https://github.com/wolfy-gh/react-phone-input-2"
   },
   "keywords": [
     "react",
@@ -40,15 +40,12 @@
     "README.md",
     "index.d.ts"
   ],
-  "author": "Nick Reiley <bloomber111@gmail.com> (https://github.com/bl00mber)",
-  "contributors": [
-    "Raza Gill <raza.gill@outlook.com> (https://github.com/razagill)"
-  ],
+  "author": "Nick Reiley <bloomber111@gmail.com> (https://github.com/wolfy-gh)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bl00mber/react-phone-input-2/issues"
+    "url": "https://github.com/wolfy-gh/react-phone-input-2/issues"
   },
-  "homepage": "https://github.com/bl00mber/react-phone-input-2",
+  "homepage": "https://github.com/wolfy-gh/react-phone-input-2",
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/test/__mocks__/fileMock.js",
@@ -62,6 +59,7 @@
     "@babel/core": "^7.3.3",
     "babel-loader": "^8.0.5",
     "babel-preset-react-app": "^7.0.1",
+    "cross-env": "^7.0.3",
     "css-loader": "^2.1.0",
     "extract-loader": "^3.1.0",
     "file-loader": "^5.0.2",
