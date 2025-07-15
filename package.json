@@ -1,6 +1,6 @@
 {
   "name": "react-phone-tt",
-  "version": "2.15.1",
+  "version": "2.15.2",
   "description": "A react component to format phone numbers",
   "main": "lib/lib.js",
   "typings": "index.d.ts",

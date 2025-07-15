@@ -184,7 +184,7 @@ const rawCountries = [
     '246'
   ],
   [
-    'Brunei',
+    'Brunei Darussalam',
     ['asia'],
     'bn',
     '673'
@@ -280,13 +280,13 @@ const rawCountries = [
     '269'
   ],
   [
-    'Congo',
+    'Democratic Republic of the Congo',
     ['africa'],
     'cd',
     '243'
   ],
   [
-    'Congo',
+    'Democratic Republic of the Congo',
     ['africa'],
     'cg',
     '242'
@@ -333,7 +333,7 @@ const rawCountries = [
     '.. ......'
   ],
   [
-    'Czech Republic',
+    'Czechia',
     ['europe', 'eu-union'],
     'cz',
     '420',
@@ -806,7 +806,7 @@ const rawCountries = [
     '691'
   ],
   [
-    'Moldova',
+    'Republic of Moldova',
     ['europe'],
     'md',
     '373',
@@ -867,7 +867,7 @@ const rawCountries = [
     '977'
   ],
   [
-    'Netherlands',
+    'Netherlands , kingdom of the',
     ['europe', 'eu-union'],
     'nl',
     '31',
@@ -1206,7 +1206,7 @@ const rawCountries = [
     '992'
   ],
   [
-    'Tanzania',
+    'United Republic of Tanzania',
     ['africa'],
     'tz',
     '255'
@@ -1248,7 +1248,7 @@ const rawCountries = [
     '216'
   ],
   [
-    'Turkey',
+    'Türkiye',
     ['europe'],
     'tr',
     '90',
@@ -1286,14 +1286,14 @@ const rawCountries = [
     '971'
   ],
   [
-    'United Kingdom',
+    'United Kingdom of Great Britain and Northen Ireland',
     ['europe', 'eu-union'],
     'gb',
     '44',
     '.... ......'
   ],
   [
-    'United States',
+    'United States of America',
     ['america', 'north-america'],
     'us',
     '1',
