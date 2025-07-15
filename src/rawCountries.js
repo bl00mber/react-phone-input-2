@@ -286,7 +286,7 @@ const rawCountries = [
     '243'
   ],
   [
-    'Democratic Republic of the Congo',
+    'Congo',
     ['africa'],
     'cg',
     '242'

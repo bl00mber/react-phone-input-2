@@ -1,6 +1,6 @@
 {
   "name": "react-phone-tt",
-  "version": "2.15.2",
+  "version": "2.15.5",
   "description": "A react component to format phone numbers",
   "main": "lib/lib.js",
   "typings": "index.d.ts",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wolfy-gh/react-phone-input-2"
+    "url": "git+https://github.com/wolfy-gh/react-phone-input-2.git"
   },
   "keywords": [
     "react",
