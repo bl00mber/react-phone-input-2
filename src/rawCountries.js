@@ -60,7 +60,7 @@ const rawCountries = [
     '54',
     '(..) ........',
     0,
-    ['11', '221', '223', '261', '264', '2652', '280', '2905', '291', '2920', '2966', '299', '341', '342', '343', '351', '376', '379', '381', '3833', '385', '387', '388' ]
+    ['11', '221', '223', '261', '264', '2652', '280', '2905', '291', '2920', '2966', '299', '341', '342', '343', '351', '376', '379', '381', '3833', '385', '387', '388']
   ],
   [
     'Armenia',
@@ -184,7 +184,7 @@ const rawCountries = [
     '246'
   ],
   [
-    'Brunei',
+    'Brunei Darussalam',
     ['asia'],
     'bn',
     '673'
@@ -280,7 +280,7 @@ const rawCountries = [
     '269'
   ],
   [
-    'Congo',
+    'Democratic Republic of the Congo',
     ['africa'],
     'cd',
     '243'
@@ -333,7 +333,7 @@ const rawCountries = [
     '.. ......'
   ],
   [
-    'Czech Republic',
+    'Czechia',
     ['europe', 'eu-union'],
     'cz',
     '420',
@@ -806,7 +806,7 @@ const rawCountries = [
     '691'
   ],
   [
-    'Moldova',
+    'Republic of Moldova',
     ['europe'],
     'md',
     '373',
@@ -867,7 +867,7 @@ const rawCountries = [
     '977'
   ],
   [
-    'Netherlands',
+    'Netherlands , kingdom of the',
     ['europe', 'eu-union'],
     'nl',
     '31',
@@ -937,7 +937,7 @@ const rawCountries = [
     '680'
   ],
   [
-    'Palestine',
+    'State of Palestine',
     ['middle-east'],
     'ps',
     '970'
@@ -1206,7 +1206,7 @@ const rawCountries = [
     '992'
   ],
   [
-    'Tanzania',
+    'United Republic of Tanzania',
     ['africa'],
     'tz',
     '255'
@@ -1248,7 +1248,7 @@ const rawCountries = [
     '216'
   ],
   [
-    'Turkey',
+    'Türkiye',
     ['europe'],
     'tr',
     '90',
@@ -1286,14 +1286,14 @@ const rawCountries = [
     '971'
   ],
   [
-    'United Kingdom',
+    'United Kingdom of Great Britain and Northen Ireland',
     ['europe', 'eu-union'],
     'gb',
     '44',
     '.... ......'
   ],
   [
-    'United States',
+    'United States of America',
     ['america', 'north-america'],
     'us',
     '1',

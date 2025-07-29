@@ -1,21 +1,23 @@
-import _rawCountries from './rawCountries'
-import _rawTerritories from './rawTerritories'
+import _rawCountries from './rawCountries';
+import _rawTerritories from './rawTerritories';
 
 function getMask(prefix, dialCode, predefinedMask, defaultMask, alwaysDefaultMask) {
   if (!predefinedMask || alwaysDefaultMask) {
-    return prefix+''.padEnd(dialCode.length,'.')+' '+defaultMask;
+    return prefix + ''.padEnd(dialCode.length, '.') + ' ' + defaultMask;
   } else {
-    return prefix+''.padEnd(dialCode.length,'.')+' '+predefinedMask;
+    return prefix + ''.padEnd(dialCode.length, '.') + ' ' + predefinedMask;
   }
 }
 
-// enableAreaCodes: boolean || array of iso2 codes
 function initCountries(countries, enableAreaCodes, prefix, defaultMask, alwaysDefaultMask) {
   let hiddenAreaCodes = [];
 
   let enableAllCodes;
-  if (enableAreaCodes === true) { enableAllCodes = true }
-  else { enableAllCodes = false }
+  if (enableAreaCodes === true) {
+    enableAllCodes = true;
+  } else {
+    enableAllCodes = false;
+  }
 
   const initializedCountries = [].concat(...countries.map((country) => {
     const countryItem = {
@@ -32,7 +34,7 @@ function initCountries(countries, enableAreaCodes, prefix, defaultMask, alwaysDe
 
     country[6] &&
       country[6].map((areaCode) => {
-        const areaItem = {...countryItem};
+        const areaItem = { ...countryItem };
         areaItem.dialCode = country[3] + areaCode;
         areaItem.isAreaCode = true;
         areaItem.areaCodeLength = areaCode.length;
@@ -54,188 +56,158 @@ function initCountries(countries, enableAreaCodes, prefix, defaultMask, alwaysDe
     }
   }));
 
-  return [initializedCountries, hiddenAreaCodes]
+  return [initializedCountries, hiddenAreaCodes];
 }
-
 
 function extendUserContent(userContent, contentItemIndex, extendingObject, firstExtension) {
   if (extendingObject === null) return;
 
-  const keys = Object.keys(extendingObject)
-  const values = Object.values(extendingObject)
+  const keys = Object.keys(extendingObject);
+  const values = Object.values(extendingObject);
 
   keys.forEach((iso2, index) => {
-    if (firstExtension) { // masks
-      return userContent.push([iso2, values[index]])
+    if (firstExtension) {
+      return userContent.push([iso2, values[index]]);
     }
 
     const countryIndex = userContent.findIndex(arr => arr[0] === iso2);
     if (countryIndex === -1) {
-      const newUserContent = [iso2]
-      newUserContent[contentItemIndex] = values[index]
-      userContent.push(newUserContent)
+      const newUserContent = [iso2];
+      newUserContent[contentItemIndex] = values[index];
+      userContent.push(newUserContent);
     } else {
-      userContent[countryIndex][contentItemIndex] = values[index]
+      userContent[countryIndex][contentItemIndex] = values[index];
     }
-  })
+  });
 }
-
 
 function initUserContent(masks, priority, areaCodes) {
   let userContent = [];
-  extendUserContent(userContent, 1, masks, true)
-  extendUserContent(userContent, 3, priority)
-  extendUserContent(userContent, 2, areaCodes)
+  extendUserContent(userContent, 1, masks, true);
+  extendUserContent(userContent, 3, priority);
+  extendUserContent(userContent, 2, areaCodes);
   return userContent;
 }
-
 
 function extendRawCountries(countries, userContent) {
   if (userContent.length === 0) return countries;
 
-  // userContent index -> rawCountries index of country array to extend
-  // [iso2 (0 -> 2), mask (1 -> 4), priority (3 -> 5), areaCodes (2 -> 6)]
-
   return countries.map(o => {
-    const userContentIndex = userContent.findIndex(arr => arr[0] === o[2]); // find by iso2
-    if (userContentIndex === -1) return o; // if iso2 not in userContent, return source country object
+    const userContentIndex = userContent.findIndex(arr => arr[0] === o[2]);
+    if (userContentIndex === -1) return o;
     const userContentCountry = userContent[userContentIndex];
-    if (userContentCountry[1]) o[4] = userContentCountry[1]; // mask
-    if (userContentCountry[3]) o[5] = userContentCountry[3]; // priority
-    if (userContentCountry[2]) o[6] = userContentCountry[2]; // areaCodes
+    if (userContentCountry[1]) o[4] = userContentCountry[1];
+    if (userContentCountry[3]) o[5] = userContentCountry[3];
+    if (userContentCountry[2]) o[6] = userContentCountry[2];
     return o;
-  })
+  });
 }
 
-
 export default class CountryData {
-  constructor (
-    enableAreaCodes, enableTerritories, regions,
-    onlyCountries, preferredCountries, excludeCountries, preserveOrder,
-    masks, priority, areaCodes, localization,
-    prefix, defaultMask, alwaysDefaultMask,
+  constructor(
+    enableAreaCodes,
+    enableTerritories,
+    regions,
+    onlyCountries,
+    preferredCountries,
+    excludeCountries,
+    preserveOrder,
+    masks,
+    priority,
+    areaCodes,
+    localization,
+    prefix,
+    defaultMask,
+    alwaysDefaultMask,
   ) {
-    const userContent = initUserContent(masks, priority, areaCodes)
-    const rawCountries = extendRawCountries(JSON.parse(JSON.stringify(_rawCountries)), userContent)
-    const rawTerritories = extendRawCountries(JSON.parse(JSON.stringify(_rawTerritories)), userContent)
+    const userContent = initUserContent(masks, priority, areaCodes);
+    const rawCountries = extendRawCountries(JSON.parse(JSON.stringify(_rawCountries)), userContent);
+    const rawTerritories = extendRawCountries(JSON.parse(JSON.stringify(_rawTerritories)), userContent);
 
-    let [ initializedCountries, hiddenAreaCodes ] = initCountries(rawCountries, enableAreaCodes, prefix, defaultMask, alwaysDefaultMask);
+    let [initializedCountries, hiddenAreaCodes] = initCountries(rawCountries, enableAreaCodes, prefix, defaultMask, alwaysDefaultMask);
     if (enableTerritories) {
-      let [ initializedTerritories, hiddenAreaCodes ] = initCountries(rawTerritories, enableAreaCodes, prefix, defaultMask, alwaysDefaultMask);
+      let [initializedTerritories, hiddenTerritoryAreaCodes] = initCountries(rawTerritories, enableAreaCodes, prefix, defaultMask, alwaysDefaultMask);
       initializedCountries = this.sortTerritories(initializedTerritories, initializedCountries);
+      hiddenAreaCodes = hiddenAreaCodes.concat(hiddenTerritoryAreaCodes);
     }
     if (regions) initializedCountries = this.filterRegions(regions, initializedCountries);
 
     this.onlyCountries = this.localizeCountries(
-      this.excludeCountries(this.getFilteredCountryList(onlyCountries, initializedCountries, preserveOrder.includes('onlyCountries')),
-        excludeCountries),
+      this.excludeCountries(this.getFilteredCountryList(onlyCountries, initializedCountries, preserveOrder.includes('onlyCountries')), excludeCountries),
       localization,
-      preserveOrder.includes('onlyCountries')
+      preserveOrder.includes('onlyCountries'),
     );
 
-    this.preferredCountries = preferredCountries.length === 0 ? [] :
-      this.localizeCountries(
-        this.getFilteredCountryList(preferredCountries, initializedCountries, preserveOrder.includes('preferredCountries')),
-        localization,
-        preserveOrder.includes('preferredCountries')
-      );
+    this.preferredCountries = preferredCountries.length === 0 ? [] : this.localizeCountries(
+      this.getFilteredCountryList(preferredCountries, initializedCountries, preserveOrder.includes('preferredCountries')),
+      localization,
+      preserveOrder.includes('preferredCountries'),
+    );
 
-    // apply filters to hiddenAreaCodes
     this.hiddenAreaCodes = this.excludeCountries(
       this.getFilteredCountryList(onlyCountries, hiddenAreaCodes),
-      excludeCountries
+      excludeCountries,
     );
   }
 
   filterRegions = (regions, countries) => {
     if (typeof regions === 'string') {
       const region = regions;
-      return countries.filter((country) => {
-        return country.regions.some((element) => {
-          return element === region;
-        });
-      });
+      return countries.filter((country) => country.regions.some((element) => element === region));
     }
 
     return countries.filter((country) => {
-      const matches = regions.map((region) => {
-        return country.regions.some((element) => {
-          return element === region;
-        });
-      });
+      const matches = regions.map((region) => country.regions.some((element) => element === region));
       return matches.some(el => el);
     });
-  }
+  };
 
   sortTerritories = (initializedTerritories, initializedCountries) => {
     const fullCountryList = [...initializedTerritories, ...initializedCountries];
-    fullCountryList.sort(function(a, b){
-      if(a.name < b.name) { return -1; }
-      if(a.name > b.name) { return 1; }
-      return 0;
-    });
+    // Sort alphabetically by name
+    fullCountryList.sort((a, b) => a.name.localeCompare(b.name));
     return fullCountryList;
-  }
+  };
 
   getFilteredCountryList = (countryCodes, sourceCountryList, preserveOrder) => {
     if (countryCodes.length === 0) return sourceCountryList;
 
     let filteredCountries;
     if (preserveOrder) {
-      // filter using iso2 user-defined order
       filteredCountries = countryCodes.map(countryCode => {
         const country = sourceCountryList.find(country => country.iso2 === countryCode);
         if (country) return country;
-      }).filter(country => country); // remove any not found
-    }
-    else {
-      // filter using alphabetical order
-      filteredCountries = sourceCountryList.filter((country) => {
-        return countryCodes.some((element) => {
-          return element === country.iso2;
-        });
-      });
+      }).filter(country => country);
+    } else {
+      filteredCountries = sourceCountryList.filter((country) => countryCodes.some((element) => element === country.iso2));
     }
 
     return filteredCountries;
-  }
+  };
 
   localizeCountries = (countries, localization, preserveOrder) => {
     for (let i = 0; i < countries.length; i++) {
       if (localization[countries[i].iso2] !== undefined) {
         countries[i].localName = localization[countries[i].iso2];
-      }
-      else if (localization[countries[i].name] !== undefined) {
+      } else if (localization[countries[i].name] !== undefined) {
         countries[i].localName = localization[countries[i].name];
+      } else {
+        countries[i].localName = countries[i].name;
       }
     }
-    if (!preserveOrder) {
-      countries.sort(function(a, b){
-        if(a.localName < b.localName) { return -1; }
-        if(a.localName > b.localName) { return 1; }
-        return 0;
-      });
-    }
-    return countries;
-  }
 
-  getCustomAreas = (country, areaCodes) => {
-    let customAreas = [];
-    for (let i = 0; i < areaCodes.length; i++) {
-      let newCountry = JSON.parse(JSON.stringify(country));
-      newCountry.dialCode += areaCodes[i];
-      customAreas.push(newCountry);
+    if (!preserveOrder) {
+      countries.sort((a, b) => a.localName.localeCompare(b.localName));
     }
-    return customAreas;
-  }
+
+    return countries;
+  };
 
   excludeCountries = (onlyCountries, excludedCountries) => {
     if (excludedCountries.length === 0) {
       return onlyCountries;
     } else {
-      return onlyCountries.filter((country) => {
-        return !excludedCountries.includes(country.iso2);
-      });
+      return onlyCountries.filter((country) => !excludedCountries.includes(country.iso2));
     }
-  }
+  };
 }
