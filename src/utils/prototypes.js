@@ -19,3 +19,5 @@ if (!String.prototype.padEnd) {
     }
   };
 }
+
+// Qloq mio
